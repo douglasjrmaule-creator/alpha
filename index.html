@@ -299,7 +299,7 @@ async function testToken(cid){
   if(!t){if(pill){pill.className='pill pill-err';pill.innerHTML='<i class="ti ti-x"></i> Vazio';}return;}
   if(pill){pill.className='pill pill-warn';pill.innerHTML='Testando...';}
   try{
-    const r=await fetch('https://api.mercadolibre.com/users/me',{headers:{Authorization:'Bearer '+t}});
+    const r=await fetch('https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy/users/me',{headers:{Authorization:'Bearer '+t}});
     const d=await r.json();
     if(d.id){
       tokens[cid]=t;userids[cid]=d.id;
@@ -339,7 +339,7 @@ async function sincronizarAnuncios(){
       // Buscar todos IDs de itens ativos (paginado)
       let allIds=[], offset=0, limit=100;
       while(true){
-        const r=await fetch(`https://api.mercadolibre.com/users/${uid}/items/search?status=active&offset=${offset}&limit=${limit}`,{headers:{Authorization:'Bearer '+token}});
+        const r=await fetch(`https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy/users/${uid}/items/search?status=active&offset=${offset}&limit=${limit}`,{headers:{Authorization:'Bearer '+token}});
         const d=await r.json();
         const ids=d.results||[];
         allIds=[...allIds,...ids];
@@ -351,7 +351,7 @@ async function sincronizarAnuncios(){
       // Buscar detalhes em lotes de 20
       for(let i=0;i<allIds.length;i+=20){
         const batch=allIds.slice(i,i+20);
-        const r=await fetch(`https://api.mercadolibre.com/items?ids=${batch.join(',')}&attributes=id,title,price,sale_terms,shipping`,{headers:{Authorization:'Bearer '+token}});
+        const r=await fetch(`https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy/items?ids=${batch.join(',')}&attributes=id,title,price,sale_terms,shipping`,{headers:{Authorization:'Bearer '+token}});
         const d=await r.json();
         for(const item of d){
           if(item.code!==200&&item.body?.error)continue;
@@ -499,7 +499,7 @@ async function buscarVendas(){
     if(!token||!uid){addLog('vendas-log',`${contaNames[c.id]}: sem token/uid`,'err');continue;}
     addLog('vendas-log',`${contaNames[c.id]}: buscando vendas...`,'info');
     try{
-      const r=await fetch(`https://api.mercadolibre.com/orders/search?seller=${uid}&order.status=paid&order.date_created.from=${encodeURIComponent(from)}&order.date_created.to=${encodeURIComponent(to)}&limit=50`,{headers:{Authorization:'Bearer '+token}});
+      const r=await fetch(`https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy/orders/search?seller=${uid}&order.status=paid&order.date_created.from=${encodeURIComponent(from)}&order.date_created.to=${encodeURIComponent(to)}&limit=50`,{headers:{Authorization:'Bearer '+token}});
       const d=await r.json();
       const orders=d.results||[];
       addLog('vendas-log',`${contaNames[c.id]}: ${orders.length} pedidos`,'ok');
@@ -523,7 +523,7 @@ async function buscarCustosML(){
     if(!token){addLog('custos-log',`${contaNames[c.id]}: sem token`,'err');continue;}
     addLog('custos-log',`${contaNames[c.id]}: buscando custos...`,'info');
     try{
-      const r=await fetch(`https://api.mercadolibre.com/billing/integration/periods/key/${key}/summary?group=ML`,{headers:{Authorization:'Bearer '+token}});
+      const r=await fetch(`https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy/billing/integration/periods/key/${key}/summary?group=ML`,{headers:{Authorization:'Bearer '+token}});
       const d=await r.json();
       const charges=d?.bill_includes?.charges||[];
       let ads=0,full=0,dev=0;
