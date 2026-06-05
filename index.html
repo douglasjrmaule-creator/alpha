@@ -455,12 +455,13 @@ async function sincronizarAnuncios(){
     const par=novos.find(x=>x.mlb===relMLB);
     if(!par)return;
 
-    // Define quem é principal (orgânico) e quem é secundário (catálogo)
+    // Catálogo é sempre o principal (onde as vendas acontecem)
+    // Orgânico é o secundário (herda custo/imposto do catálogo)
     let principal, secundario;
-    if(a.isCatalog&&!par.isCatalog){principal=par;secundario=a;}
-    else if(!a.isCatalog&&par.isCatalog){principal=a;secundario=par;}
+    if(a.isCatalog&&!par.isCatalog){principal=a;secundario=par;}
+    else if(!a.isCatalog&&par.isCatalog){principal=par;secundario=a;}
     else{
-      // Ambos catálogo ou ambos orgânico — o de ID numérico menor é o principal
+      // Ambos do mesmo tipo — o de ID numérico menor é o principal
       const numA=parseInt(a.mlb.replace('MLB',''));
       const numB=parseInt(par.mlb.replace('MLB',''));
       principal=numA<numB?a:par;
@@ -537,7 +538,6 @@ function renderAnuncios(){
           </div>
         </div>
         <div class="anuncio-inputs">
-          ${!isSecundario?`
           <div class="fg" style="min-width:0;width:105px;margin-bottom:0">
             <label>Custo (R$)</label>
             <div class="pw"><span>R$</span><input type="number" min="0" step="0.01" value="${a.custo||''}" placeholder="0,00"
@@ -547,7 +547,7 @@ function renderAnuncios(){
             <label>Imposto (%)</label>
             <div class="pw"><span>%</span><input type="number" min="0" step="0.1" value="${a.impPct||''}" placeholder="0"
               oninput="updateAnuncio('${a.mlb}','impPct',this.value)"/></div>
-          </div>`:''}
+          </div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
           <div class="anuncio-mc">
@@ -603,10 +603,12 @@ function updateAnuncio(mlb,field,val){
   const a=anuncios.find(x=>x.mlb===mlb);if(!a)return;
   a[field]=parseFloat(val)||0;
   calcMCAnu(a);
-  // propagar para vinculados
-  Object.entries(vinculos).forEach(([sec,pri])=>{
-    if(pri===mlb){const s=anuncios.find(x=>x.mlb===sec);if(s){s[field]=a[field];calcMCAnu(s);}}
-  });
+  // Propagar para o par vinculado (em qualquer direção — principal ou secundário)
+  const parMlb = vinculos[mlb] || Object.entries(vinculos).find(([s,p])=>p===mlb)?.[0];
+  if(parMlb){
+    const par=anuncios.find(x=>x.mlb===parMlb);
+    if(par){par[field]=a[field];calcMCAnu(par);}
+  }
   const mcEl=document.getElementById('mc_'+mlb);
   const mcpEl=document.getElementById('mcp_'+mlb);
   if(mcEl){mcEl.textContent=fR(a.mc);mcEl.className='mc-val '+(a.mc>=0?'td-pos':'td-neg');}
