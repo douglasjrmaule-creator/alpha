@@ -85,6 +85,19 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}.td-pos{color:var(--gr
 .anuncio-mc .mc-pct{font-size:11px;color:var(--text3)}
 .progress{height:3px;background:var(--border);border-radius:2px;margin:10px 0;overflow:hidden}
 .progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s}
+.anuncio-row.vinculado-secundario{border-left:3px solid var(--accent);background:#f8fbff}
+.anuncio-row.vinculado-secundario .anuncio-inputs{opacity:.5;pointer-events:none}
+.vinculo-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;background:var(--accent-bg);color:var(--accent);padding:2px 7px;border-radius:10px;margin-left:6px}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:999}
+.modal{background:var(--surface);border-radius:var(--rl);padding:24px;width:440px;max-width:95vw;max-height:80vh;overflow-y:auto}
+.modal h3{font-size:16px;font-weight:600;margin-bottom:6px}
+.modal-sub{font-size:13px;color:var(--text2);margin-bottom:16px}
+.modal-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;cursor:pointer;font-size:13px;border:.5px solid var(--border);margin-bottom:6px;transition:border .15s}
+.modal-item:hover{border-color:var(--accent);background:var(--accent-bg)}
+.modal-item.selected{border-color:var(--accent);background:var(--accent-bg)}
+.modal-item .mi-nome{flex:1;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.modal-item .mi-id{font-size:11px;color:var(--text3);font-family:var(--mono)}
+.modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
 @media(max-width:700px){.sidebar{display:none}.main{padding:14px}}
 </style>
 </head>
@@ -219,18 +232,32 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}.td-pos{color:var(--gr
 
 </main>
 </div>
+<div id="modal-vincular" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <h3>Vincular anúncio</h3>
+    <div class="modal-sub" id="modal-vincular-sub">Selecione o anúncio principal que fornecerá o custo e imposto.</div>
+    <div id="modal-lista"></div>
+    <div class="modal-btns">
+      <button class="btn btn-sm" onclick="fecharModal()">Cancelar</button>
+      <button class="btn btn-primary btn-sm" id="modal-confirmar" onclick="confirmarVinculo()">Vincular</button>
+    </div>
+  </div>
+</div>
 
 <script>
 const CONTAS = [{id:'c1',label:'Conta 1'},{id:'c2',label:'Conta 2'},{id:'c3',label:'Conta 3'}];
 let tokens = {}, userids = {}, contaNames = {c1:'Conta 1',c2:'Conta 2',c3:'Conta 3'};
 let anuncios = []; // {mlb, nome, conta, preco, comPct, comVal, frete, custo, impPct, mc, mcp}
+let vinculos = {}; // {mlb_secundario: mlb_principal}
 let fechData = {c1:{mc:0,receita:0,ads:0,full:0,dev:0},c2:{mc:0,receita:0,ads:0,full:0,dev:0},c3:{mc:0,receita:0,ads:0,full:0,dev:0}};
+let modalMlbAtual = null, modalSelecionado = null;
 
 function save(){
   localStorage.setItem('ml_anuncios',JSON.stringify(anuncios));
   localStorage.setItem('ml_names',JSON.stringify(contaNames));
   localStorage.setItem('ml_tokens',JSON.stringify(tokens));
   localStorage.setItem('ml_uids',JSON.stringify(userids));
+  localStorage.setItem('ml_vinculos',JSON.stringify(vinculos));
   const op={};
   ['op_folha','op_aluguel','op_embalagens','op_sistemas','op_outros','op_r1','op_r2','op_r3'].forEach(id=>{const e=document.getElementById(id);if(e)op[id]=e.value;});
   localStorage.setItem('ml_op',JSON.stringify(op));
@@ -241,6 +268,7 @@ function load(){
     const n=localStorage.getItem('ml_names');if(n)contaNames=JSON.parse(n);
     const t=localStorage.getItem('ml_tokens');if(t)tokens=JSON.parse(t);
     const u=localStorage.getItem('ml_uids');if(u)userids=JSON.parse(u);
+    const v=localStorage.getItem('ml_vinculos');if(v)vinculos=JSON.parse(v);
     const op=localStorage.getItem('ml_op');if(op){const o=JSON.parse(op);Object.entries(o).forEach(([k,v])=>{const e=document.getElementById(k);if(e)e.value=v;});}
   }catch(e){}
 }
@@ -324,6 +352,7 @@ async function sincronizarAnuncios(){
   addLog('sync-log','Iniciando sincronização das 3 contas...','info');
 
   const novos=[];
+  const novosVinculos={};
   const contasComToken=CONTAS.filter(c=>tokens[c.id]&&userids[c.id]);
   if(!contasComToken.length){
     addLog('sync-log','Nenhuma conta configurada. Configure os tokens na aba Contas ML.','err');
@@ -336,7 +365,7 @@ async function sincronizarAnuncios(){
     const token=tokens[c.id], uid=userids[c.id];
     addLog('sync-log',`${contaNames[c.id]}: buscando anúncios ativos...`,'info');
     try{
-      // Buscar todos IDs de itens ativos (paginado)
+      // Buscar todos IDs ativos (paginado)
       let allIds=[], offset=0, limit=100;
       while(true){
         const r=await fetch(`https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy/users/${uid}/items/search?status=active&offset=${offset}&limit=${limit}`,{headers:{Authorization:'Bearer '+token}});
@@ -346,12 +375,12 @@ async function sincronizarAnuncios(){
         if(ids.length<limit)break;
         offset+=limit;
       }
-      addLog('sync-log',`${contaNames[c.id]}: ${allIds.length} anúncios encontrados. Buscando detalhes...`,'ok');
+      addLog('sync-log',`${contaNames[c.id]}: ${allIds.length} anúncios. Buscando detalhes e vínculos de catálogo...`,'ok');
 
-      // Buscar detalhes em lotes de 20
+      // Buscar detalhes em lotes de 20 — inclui catalog_listing e catalog_product_id
       for(let i=0;i<allIds.length;i+=20){
         const batch=allIds.slice(i,i+20);
-        const r=await fetch(`https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy/items?ids=${batch.join(',')}&attributes=id,title,price,sale_terms,shipping`,{headers:{Authorization:'Bearer '+token}});
+        const r=await fetch(`https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy/items?ids=${batch.join(',')}&attributes=id,title,price,sale_terms,shipping,catalog_listing,catalog_product_id`,{headers:{Authorization:'Bearer '+token}});
         const d=await r.json();
         for(const item of d){
           if(item.code!==200&&item.body?.error)continue;
@@ -361,29 +390,66 @@ async function sincronizarAnuncios(){
           const comPct=comTerm?.value_struct?.number||0;
           const preco=body.price||0;
           const comVal=preco*(comPct/100);
-          // frete: tenta pegar custo do free_shipping ou 0
-          const frete=body.shipping?.free_shipping?0:0; // será buscado individualmente se necessário
+          const frete=0;
           const custo=existing?.custo||0;
           const impPct=existing?.impPct||0;
           const impVal=preco*(impPct/100);
           const mc=preco-custo-comVal-frete-impVal;
           const mcp=preco>0?mc/preco*100:0;
-          novos.push({mlb:body.id,nome:body.title||body.id,conta:c.id,preco,comPct,comVal,frete,custo,impPct,impVal,mc,mcp});
+          const isCatalog=body.catalog_listing===true;
+          const catalogProductId=body.catalog_product_id||null;
+          novos.push({mlb:body.id,nome:body.title||body.id,conta:c.id,preco,comPct,comVal,frete,custo,impPct,impVal,mc,mcp,isCatalog,catalogProductId});
         }
         fill.style.width=Math.round(((contasDone/totalContas)+((i+20)/(allIds.length*totalContas)))*100)+'%';
       }
-      addLog('sync-log',`${contaNames[c.id]}: OK — ${allIds.length} anúncios sincronizados.`,'ok');
+      addLog('sync-log',`${contaNames[c.id]}: OK.`,'ok');
     }catch(e){addLog('sync-log',`${contaNames[c.id]}: erro — ${e.message}`,'err');}
     contasDone++;
     fill.style.width=Math.round(contasDone/totalContas*100)+'%';
   }
 
+  // Detectar pares catálogo + orgânico pelo catalog_product_id
+  // Para cada catalog_product_id, o anúncio com catalog_listing=true é o secundário
+  // e o anúncio com catalog_listing=false (orgânico) é o principal
+  const porCatalogId = {};
+  novos.forEach(a=>{
+    if(a.catalogProductId){
+      if(!porCatalogId[a.catalogProductId]) porCatalogId[a.catalogProductId]=[];
+      porCatalogId[a.catalogProductId].push(a);
+    }
+  });
+
+  let paresDetectados=0;
+  Object.values(porCatalogId).forEach(grupo=>{
+    if(grupo.length<2)return;
+    const organico=grupo.find(a=>!a.isCatalog);
+    const catalogos=grupo.filter(a=>a.isCatalog);
+    if(organico&&catalogos.length){
+      catalogos.forEach(cat=>{
+        novosVinculos[cat.mlb]=organico.mlb;
+        // herdar custo existente do orgânico se houver
+        if(organico.custo>0){cat.custo=organico.custo;cat.impPct=organico.impPct;calcMCAnu(cat);}
+        paresDetectados++;
+      });
+    }
+  });
+
+  if(paresDetectados>0){
+    addLog('sync-log',`${paresDetectados} par(es) catálogo+orgânico detectado(s) automaticamente pela API.`,'ok');
+  }
+
+  // Preservar vínculos manuais existentes que não foram detectados automaticamente
+  Object.entries(vinculos).forEach(([sec,pri])=>{
+    if(!novosVinculos[sec]) novosVinculos[sec]=pri;
+  });
+
   anuncios=novos;
+  vinculos=novosVinculos;
   save();
   renderAnuncios();
   buildVendasLista();
   buildCustosAdicionais();
-  status.textContent=`${anuncios.length} anúncios sincronizados`;
+  status.textContent=`${anuncios.length} anúncios · ${paresDetectados} par(es) catálogo detectado(s)`;
   btn.disabled=false;
   document.getElementById('badge-anuncios').textContent=anuncios.length;
 }
@@ -399,26 +465,38 @@ function renderAnuncios(){
   const el=document.getElementById('anuncios-por-conta');if(!el)return;
   document.getElementById('badge-anuncios').textContent=anuncios.length;
   if(!anuncios.length){el.innerHTML='<p style="font-size:13px;color:var(--text3)">Nenhum anúncio sincronizado ainda. Clique em Sincronizar.</p>';return;}
-  const semCusto=anuncios.filter(a=>!a.custo).length;
+  const secundarios=new Set(Object.keys(vinculos));
+  const semCusto=anuncios.filter(a=>!a.custo&&!secundarios.has(a.mlb)).length;
   let html='';
-  if(semCusto>0) html+=`<div class="wbox"><i class="ti ti-alert-triangle"></i><span>${semCusto} anúncio(s) sem custo preenchido. Preencha o custo e o imposto para calcular a margem corretamente.</span></div>`;
+  if(semCusto>0) html+=`<div class="wbox"><i class="ti ti-alert-triangle"></i><span>${semCusto} anúncio(s) sem custo preenchido.</span></div>`;
   CONTAS.forEach(c=>{
     const lista=anuncios.filter(a=>a.conta===c.id);
     if(!lista.length)return;
     html+=`<div class="slabel">${contaNames[c.id]} — ${lista.length} anúncio(s)</div>`;
     lista.forEach(a=>{
-      const ok=a.custo>0;
-      html+=`<div class="anuncio-row ${ok?'completo':'sem-custo'}" id="arow_${a.mlb}">
+      const isSecundario=secundarios.has(a.mlb);
+      const principalMlb=vinculos[a.mlb];
+      const principal=principalMlb?anuncios.find(x=>x.mlb===principalMlb):null;
+      const custoEfetivo=isSecundario?(principal?.custo||0):a.custo;
+      const impEfetivo=isSecundario?(principal?.impPct||0):a.impPct;
+      const ok=custoEfetivo>0;
+      const rowClass=isSecundario?'anuncio-row vinculado-secundario':`anuncio-row ${ok?'completo':'sem-custo'}`;
+      html+=`<div class="${rowClass}" id="arow_${a.mlb}">
         <div class="anuncio-info">
-          <div class="anuncio-nome" title="${a.nome}">${a.nome}</div>
+          <div class="anuncio-nome" title="${a.nome}">
+            ${a.nome}
+            ${isSecundario?`<span class="vinculo-badge"><i class="ti ti-link"></i> vinculado a ${principalMlb}</span>`:''}
+          </div>
           <div class="anuncio-meta">
             <span><i class="ti ti-tag"></i> ${a.mlb}</span>
             <span><i class="ti ti-coin"></i> ${fR(a.preco)}</span>
             <span><i class="ti ti-percent"></i> Comissão ${f2(a.comPct)}%</span>
             <span><i class="ti ti-truck"></i> Frete ${fR(a.frete)}</span>
+            ${isSecundario?`<span style="color:var(--accent)"><i class="ti ti-copy"></i> Custo herdado: ${fR(custoEfetivo)} · Imp: ${f2(impEfetivo)}%</span>`:''}
           </div>
         </div>
         <div class="anuncio-inputs">
+          ${!isSecundario?`
           <div class="fg" style="min-width:0;width:105px;margin-bottom:0">
             <label>Custo (R$)</label>
             <div class="pw"><span>R$</span><input type="number" min="0" step="0.01" value="${a.custo||''}" placeholder="0,00"
@@ -428,11 +506,17 @@ function renderAnuncios(){
             <label>Imposto (%)</label>
             <div class="pw"><span>%</span><input type="number" min="0" step="0.1" value="${a.impPct||''}" placeholder="0"
               oninput="updateAnuncio('${a.mlb}','impPct',this.value)"/></div>
-          </div>
+          </div>`:''}
         </div>
-        <div class="anuncio-mc">
-          <div class="mc-val ${a.mc>=0?'td-pos':'td-neg'}" id="mc_${a.mlb}">${fR(a.mc)}</div>
-          <div class="mc-pct" id="mcp_${a.mlb}">${fP(a.mcp)}</div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
+          <div class="anuncio-mc">
+            <div class="mc-val ${a.mc>=0?'td-pos':'td-neg'}" id="mc_${a.mlb}">${fR(a.mc)}</div>
+            <div class="mc-pct" id="mcp_${a.mlb}">${fP(a.mcp)}</div>
+          </div>
+          ${isSecundario
+            ?`<button class="btn btn-sm btn-danger" style="font-size:11px;padding:3px 8px" onclick="desvincular('${a.mlb}')"><i class="ti ti-unlink"></i> Desvincular</button>`
+            :`<button class="btn btn-sm" style="font-size:11px;padding:3px 8px;color:var(--accent)" onclick="abrirModalVincular('${a.mlb}')"><i class="ti ti-link"></i> Vincular</button>`
+          }
         </div>
       </div>`;
     });
@@ -440,10 +524,48 @@ function renderAnuncios(){
   el.innerHTML=html;
 }
 
+function abrirModalVincular(mlb){
+  modalMlbAtual=mlb;modalSelecionado=null;
+  const a=anuncios.find(x=>x.mlb===mlb);
+  document.getElementById('modal-vincular-sub').textContent=`Secundário: ${a?.nome||mlb}. Selecione o principal que tem o custo preenchido.`;
+  const lista=anuncios.filter(x=>x.mlb!==mlb&&!Object.keys(vinculos).includes(x.mlb));
+  document.getElementById('modal-lista').innerHTML=lista.map(x=>`
+    <div class="modal-item" id="mi_${x.mlb}" onclick="selecionarModalItem('${x.mlb}')">
+      <div style="flex:1;min-width:0">
+        <div class="mi-nome">${x.nome}</div>
+        <div class="mi-id">${x.mlb} · ${contaNames[x.conta]||x.conta} · Custo: ${fR(x.custo)}</div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('modal-vincular').style.display='flex';
+}
+
+function selecionarModalItem(mlb){
+  document.querySelectorAll('.modal-item').forEach(el=>el.classList.remove('selected'));
+  document.getElementById('mi_'+mlb)?.classList.add('selected');
+  modalSelecionado=mlb;
+}
+
+function confirmarVinculo(){
+  if(!modalSelecionado||!modalMlbAtual)return;
+  vinculos[modalMlbAtual]=modalSelecionado;
+  const principal=anuncios.find(x=>x.mlb===modalSelecionado);
+  const secundario=anuncios.find(x=>x.mlb===modalMlbAtual);
+  if(secundario&&principal){secundario.custo=principal.custo;secundario.impPct=principal.impPct;calcMCAnu(secundario);}
+  save();renderAnuncios();buildVendasLista();fecharModal();
+}
+
+function desvincular(mlb){delete vinculos[mlb];save();renderAnuncios();buildVendasLista();}
+function fecharModal(){document.getElementById('modal-vincular').style.display='none';modalMlbAtual=null;modalSelecionado=null;}
+
 function updateAnuncio(mlb,field,val){
   const a=anuncios.find(x=>x.mlb===mlb);if(!a)return;
   a[field]=parseFloat(val)||0;
   calcMCAnu(a);
+  // propagar para vinculados
+  Object.entries(vinculos).forEach(([sec,pri])=>{
+    if(pri===mlb){const s=anuncios.find(x=>x.mlb===sec);if(s){s[field]=a[field];calcMCAnu(s);}}
+  });
   const mcEl=document.getElementById('mc_'+mlb);
   const mcpEl=document.getElementById('mcp_'+mlb);
   if(mcEl){mcEl.textContent=fR(a.mc);mcEl.className='mc-val '+(a.mc>=0?'td-pos':'td-neg');}
