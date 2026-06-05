@@ -526,6 +526,9 @@ async function testToken(cid){
 function updateRatioLabels(){CONTAS.forEach((c,i)=>{const el=document.getElementById("lbl_r"+(i+1));if(el)el.textContent="% "+contaNames[c.id];});}
 
 // ---- SYNC ----
+// CEP padrão para cálculo de frete (São Paulo capital)
+const CEP_PADRAO = "01310100";
+
 async function sincronizar(){
   const btn=document.getElementById("btn-sync");
   const fill=document.getElementById("sync-fill");
@@ -534,46 +537,94 @@ async function sincronizar(){
   addLog("sync-log","Iniciando sincronização...","info");
   const novos=[],novosVinc={};
   const contsOk=CONTAS.filter(c=>tokens[c.id]&&userids[c.id]);
-  if(!contsOk.length){addLog("sync-log","Nenhuma conta configurada.","err");btn.disabled=false;return;}
+  if(!contsOk.length){addLog("sync-log","Nenhuma conta configurada. Conecte na aba Contas ML.","err");btn.disabled=false;return;}
   let cDone=0;
   for(const c of contsOk){
-    const token=await getToken(c.id);if(!token){addLog("sync-log",`${contaNames[c.id]}: sem token — conecte na aba Contas ML`,"err");cDone++;continue;}
+    const token=await getToken(c.id);
+    if(!token){addLog("sync-log",`${contaNames[c.id]}: sem token — conecte na aba Contas ML`,"err");cDone++;continue;}
     const hdr={headers:{Authorization:"Bearer "+token}};
-    addLog("sync-log",`${contaNames[c.id]}: buscando anúncios...`,"info");
+    addLog("sync-log",`${contaNames[c.id]}: buscando anúncios ativos...`,"info");
     try{
       let allIds=[],off=0;
-      while(true){const r=await fetch(`${PROXY}/users/${userids[c.id]}/items/search?status=active&offset=${off}&limit=100`,hdr);const d=await r.json();const ids=d.results||[];allIds=[...allIds,...ids];if(ids.length<100)break;off+=100;}
+      while(true){
+        const r=await fetch(`${PROXY}/users/${userids[c.id]}/items/search?status=active&offset=${off}&limit=100`,hdr);
+        const d=await r.json();const ids=d.results||[];
+        allIds=[...allIds,...ids];if(ids.length<100)break;off+=100;
+      }
       addLog("sync-log",`${contaNames[c.id]}: ${allIds.length} anúncios. Buscando detalhes...`,"ok");
       for(let i=0;i<allIds.length;i++){
         const mlbId=allIds[i];
         try{
+          // 1. Dados principais do item
           const r1=await fetch(`${PROXY}/items/${mlbId}`,hdr);
-          const body=await r1.json();if(body.error)continue;
+          const body=await r1.json();
+          if(body.error)continue;
           const preco=body.price||0;
           const isCatalog=body.catalog_listing===true;
           const skuField=(body.seller_custom_field||"").trim();
-          let comPct=0;
-          try{const r2=await fetch(`${PROXY}/items/${mlbId}/sale_terms`,hdr);const terms=await r2.json();const ct=(terms||[]).find(t=>t.id==="SALE_FEE");comPct=ct?.value_struct?.number||0;}catch(e){}
+          const catId=body.category_id||"";
+          const listType=body.listing_type_id||"gold_special";
+          const tags=body.tags||[];
+          const isFull=tags.includes("fulfillment")||body.shipping?.logistic_type==="fulfillment";
+          const freeFrete=body.shipping?.free_shipping===true;
+
+          // 2. Comissão via /listing_prices (endpoint correto — retorna % real por categoria)
+          let comPct=0, comVal=0, fixedFee=0;
+          try{
+            const r2=await fetch(`${PROXY}/sites/MLB/listing_prices?price=${preco}&category_id=${catId}&listing_type_id=${listType}`,hdr);
+            const lp=await r2.json();
+            // Pode retornar array ou objeto único
+            const entry=Array.isArray(lp)?lp.find(x=>x.listing_type_id===listType)||lp[0]:lp;
+            comPct=entry?.sale_fee_details?.percentage_fee||entry?.percentage_fee||0;
+            fixedFee=entry?.sale_fee_details?.fixed_fee||entry?.fixed_fee||0;
+            comVal=preco*(comPct/100)+fixedFee;
+          }catch(e){}
+
+          // 3. Frete — usa /shipping_options com CEP destino padrão
           let frete=0;
-          if(!body.shipping?.free_shipping){try{const r3=await fetch(`${PROXY}/items/${mlbId}/shipping_options`,hdr);const so=await r3.json();frete=(so?.options||[])[0]?.cost||0;}catch(e){}}
+          if(!freeFrete){
+            try{
+              const r3=await fetch(`${PROXY}/items/${mlbId}/shipping_options?zip_code=${CEP_PADRAO}`,hdr);
+              const so=await r3.json();
+              // Pega a opção recomendada (list_cost = custo para o vendedor)
+              const opt=(so?.options||[]).find(o=>o.display==="recommended")||(so?.options||[])[0];
+              frete=opt?.list_cost||opt?.cost||0;
+            }catch(e){}
+          }
+
+          // 4. Vínculo catálogo+orgânico via buybox/sync
           let relatedId=null;
-          try{const r4=await fetch(`${PROXY}/public/buybox/sync/${mlbId}`,hdr);const sy=await r4.json();if(sy?.relations?.length)relatedId=sy.relations[0];}catch(e){}
-          const comVal=preco*(comPct/100);
+          try{
+            const r4=await fetch(`${PROXY}/public/buybox/sync/${mlbId}`,hdr);
+            const sy=await r4.json();
+            if(sy?.relations?.length)relatedId=sy.relations[0];
+          }catch(e){}
+
+          // 5. Resolver SKU
           const skuCode=skuField&&skus[skuField]?skuField:(anuncios.find(a=>a.mlb===mlbId)?.sku||null);
           const s=skuCode?skus[skuCode]:null;
           const iv=s?preco*(s.impPct/100):0;
           const mc=s?preco-s.custo-comVal-frete-iv:0;
           const mcp=preco>0&&s?mc/preco*100:0;
-          novos.push({mlb:mlbId,nome:body.title||mlbId,conta:c.id,preco,comPct,comVal,frete,sku:skuCode,isCatalog,relatedId,mc,mcp});
-        }catch(e){}
+
+          novos.push({
+            mlb:mlbId, nome:body.title||mlbId, conta:c.id,
+            preco, comPct, comVal, fixedFee, frete, freeFrete,
+            sku:skuCode, isCatalog, isFull, relatedId,
+            catId, listType, mc, mcp
+          });
+        }catch(e){addLog("sync-log",`${mlbId}: erro — ${e.message}`,"err");}
+
         fill.style.width=Math.min(Math.round(((cDone/contsOk.length)+(i+1)/(allIds.length*contsOk.length))*100),99)+"%";
-        if(i>0&&i%5===0)await new Promise(r=>setTimeout(r,250));
+        // Pausa a cada 5 para não estourar rate limit
+        if(i>0&&i%5===0)await new Promise(r=>setTimeout(r,300));
       }
       addLog("sync-log",`${contaNames[c.id]}: concluído.`,"ok");
     }catch(e){addLog("sync-log",`${contaNames[c.id]}: erro — ${e.message}`,"err");}
     cDone++;
   }
-  // Pares pelo buybox/sync — catálogo é sempre o principal
+
+  // Detectar pares catálogo+orgânico via buybox/sync
   const mlbSet=new Set(novos.map(a=>a.mlb));
   const jaVinc=new Set();
   novos.forEach(a=>{
@@ -581,22 +632,24 @@ async function sincronizar(){
     const parMlb=a.relatedId.startsWith("MLB")?a.relatedId:"MLB"+a.relatedId;
     if(!mlbSet.has(parMlb)||jaVinc.has(a.mlb))return;
     const par=novos.find(x=>x.mlb===parMlb);if(!par)return;
+    // Catálogo é sempre principal
     let prin,sec;
     if(a.isCatalog&&!par.isCatalog){prin=a;sec=par;}
     else if(!a.isCatalog&&par.isCatalog){prin=par;sec=a;}
     else{const nA=parseInt(a.mlb.replace("MLB",""));const nB=parseInt(par.mlb.replace("MLB",""));prin=nA<nB?a:par;sec=nA<nB?par:a;}
     novosVinc[sec.mlb]=prin.mlb;
-    // Secundário herda SKU do principal (nos dois sentidos)
+    // Propagar SKU nos dois sentidos
     if(!sec.sku&&prin.sku){sec.sku=prin.sku;calcMCAnuncio(sec);}
     else if(!prin.sku&&sec.sku){prin.sku=sec.sku;calcMCAnuncio(prin);}
     jaVinc.add(a.mlb);jaVinc.add(parMlb);
   });
   Object.entries(vinculos).forEach(([s,p])=>{if(!novosVinc[s])novosVinc[s]=p;});
+
   anuncios=novos;vinculos=novosVinc;
   fill.style.width="100%";
   const semSku=anuncios.filter(a=>!a.sku).length;
   const pares=Object.keys(novosVinc).length;
-  addLog("sync-log",`Concluído: ${anuncios.length} anúncios · ${pares} pares · ${semSku} sem SKU`,"ok");
+  addLog("sync-log",`Concluído: ${anuncios.length} anúncios · ${pares} pares catálogo+orgânico · ${semSku} sem SKU`,"ok");
   document.getElementById("sync-status").textContent=`${anuncios.length} anúncios · ${pares} pares · ${semSku} sem SKU`;
   setText("bdg-anuncios",anuncios.length);
   save();renderAnuncios();buildVendasLista();buildCustosAdicionais();
@@ -610,36 +663,80 @@ function renderAnuncios(){
   const secs=new Set(Object.keys(vinculos));
   const semSku=anuncios.filter(a=>!a.sku).length;
   let html="";
-  if(semSku>0)html+=`<div class="wbox"><i class="ti ti-alert-triangle"></i><span>${semSku} anúncio(s) sem SKU — clique em "Vincular SKU" para associar.</span></div>`;
+  if(semSku>0)html+=`<div class="wbox" style="margin-bottom:12px"><i class="ti ti-alert-triangle"></i><span>${semSku} anúncio(s) sem SKU — clique em "Vincular SKU" para associar.</span></div>`;
+
   CONTAS.forEach(c=>{
     const lista=anuncios.filter(a=>a.conta===c.id);
     if(!lista.length)return;
     html+=`<div class="slabel">${contaNames[c.id]} — ${lista.length} anúncio(s)</div>`;
     lista.forEach(a=>{
       const isSec=secs.has(a.mlb);
+      const prinMlb=vinculos[a.mlb];
       const s=a.sku?skus[a.sku]:null;
-      const rowCls=!a.sku?"arow sem-sku":isSec?"arow vinc-sec":"arow completo";
-      const vincInfo=isSec?`<span class="vinc-badge"><i class="ti ti-link"></i> org. vinculado a ${vinculos[a.mlb]}</span>`:
-                     a.isCatalog?'<span class="pill pill-info" style="font-size:10px;margin-left:6px">catálogo</span>':'<span class="pill pill-gray" style="font-size:10px;margin-left:6px">orgânico</span>';
-      html+=`<div class="${rowCls}">
-        <div class="ai">
-          <div class="anome">${a.nome}${vincInfo}</div>
-          <div class="ameta">
-            <span><i class="ti ti-tag"></i> ${a.mlb}</span>
-            <span><i class="ti ti-coin"></i> ${fR(a.preco)}</span>
-            <span><i class="ti ti-percent"></i> Com. ${f2(a.comPct)}%</span>
-            <span><i class="ti ti-truck"></i> ${fR(a.frete)}</span>
-            ${s?`<span style="color:var(--gr)"><i class="ti ti-package"></i> ${a.sku} · Custo: ${fR(s.custo)} · Imp: ${s.impPct}%</span>`:
-               '<span style="color:var(--yw)"><i class="ti ti-alert-triangle"></i> Sem SKU vinculado</span>'}
+      const border=!a.sku?"3px solid #f59e0b":isSec?"3px solid var(--ac)":"3px solid var(--gr)";
+      
+      // Badges
+      let badges="";
+      if(a.isFull) badges+='<span style="background:#6d28d9;color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;margin-right:4px">Full</span>';
+      if(a.isCatalog) badges+='<span style="background:#0ea5e9;color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;margin-right:4px">Catálogo</span>';
+      else badges+='<span style="background:#10b981;color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;margin-right:4px">Orgânico</span>';
+      if(isSec) badges+=`<span style="background:var(--ac-bg);color:var(--ac);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;margin-right:4px"><i class="ti ti-link"></i> vinculado → ${prinMlb}</span>`;
+
+      // MC breakdown
+      const mcColor=a.mc>=0?"var(--gr)":"var(--rd)";
+      const skuInfo=s?
+        `<span style="color:var(--gr);font-size:11px"><i class="ti ti-package"></i> SKU: <b>${a.sku}</b> · Custo: ${fR(s.custo)} · Imp: ${s.impPct}%</span>`:
+        '<span style="color:var(--yw);font-size:11px"><i class="ti ti-alert-triangle"></i> Sem SKU — vincule para calcular MC</span>';
+
+      html+=`<div style="background:var(--sur);border:1px solid var(--bor);border-left:${border};border-radius:8px;padding:12px 14px;margin-bottom:8px">
+        <!-- Linha 1: nome + badges -->
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px">${a.nome}</div>
+            <div>${badges}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0">
+            <div style="font-size:18px;font-weight:700;color:${mcColor}">${fR(a.mc)}</div>
+            <div style="font-size:12px;color:${mcColor};font-weight:600">${fP(a.mcp)}</div>
+            <div style="font-size:10px;color:var(--tx3)">MC unitária</div>
           </div>
         </div>
-        <div class="amc">
-          <div class="mv ${a.mc>=0?"td-pos":"td-neg"}">${fR(a.mc)}</div>
-          <div class="mp">${fP(a.mcp)}</div>
+        <!-- Linha 2: métricas -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px;margin-bottom:8px">
+          <div style="background:var(--sur2);border-radius:6px;padding:6px 9px">
+            <div style="font-size:10px;color:var(--tx3)">MLB ID</div>
+            <div style="font-size:12px;font-weight:500;font-family:var(--mono)">${a.mlb}</div>
+          </div>
+          <div style="background:var(--sur2);border-radius:6px;padding:6px 9px">
+            <div style="font-size:10px;color:var(--tx3)">Preço de venda</div>
+            <div style="font-size:13px;font-weight:600">${fR(a.preco)}</div>
+          </div>
+          <div style="background:var(--sur2);border-radius:6px;padding:6px 9px">
+            <div style="font-size:10px;color:var(--tx3)">Tarifa ML</div>
+            <div style="font-size:13px;font-weight:600;color:var(--rd)">- ${fR(a.comVal)}</div>
+            <div style="font-size:10px;color:var(--tx3)">${f2(a.comPct)}%${a.fixedFee>0?" + R$"+f2(a.fixedFee):""}</div>
+          </div>
+          <div style="background:var(--sur2);border-radius:6px;padding:6px 9px">
+            <div style="font-size:10px;color:var(--tx3)">Frete vendedor</div>
+            <div style="font-size:13px;font-weight:600;color:${a.freeFrete?"var(--gr)":"var(--rd)"}">${a.freeFrete?"Grátis":"- "+fR(a.frete)}</div>
+          </div>
+          ${s?`<div style="background:var(--sur2);border-radius:6px;padding:6px 9px">
+            <div style="font-size:10px;color:var(--tx3)">Custo produto</div>
+            <div style="font-size:13px;font-weight:600;color:var(--rd)">- ${fR(s.custo)}</div>
+          </div>
+          <div style="background:var(--sur2);border-radius:6px;padding:6px 9px">
+            <div style="font-size:10px;color:var(--tx3)">Imposto</div>
+            <div style="font-size:13px;font-weight:600;color:var(--rd)">- ${fR(a.preco*s.impPct/100)}</div>
+            <div style="font-size:10px;color:var(--tx3)">${s.impPct}%</div>
+          </div>`:""}
         </div>
-        <button class="btn btn-sm" style="font-size:11px;padding:3px 8px" onclick="abrirModalSku('${a.mlb}')">
-          <i class="ti ti-${a.sku?"edit":"link"}"></i> ${a.sku?"Editar SKU":"Vincular SKU"}
-        </button>
+        <!-- Linha 3: SKU + ação -->
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          ${skuInfo}
+          <button class="btn btn-sm" style="font-size:11px;padding:4px 10px" onclick="abrirModalSku('${a.mlb}')">
+            <i class="ti ti-${a.sku?"edit":"link"}"></i> ${a.sku?"Editar SKU":"Vincular SKU"}
+          </button>
+        </div>
       </div>`;
     });
   });
