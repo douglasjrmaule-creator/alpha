@@ -400,35 +400,127 @@ function exportSkusCSV(){
 }
 
 // ---- CONTAS ----
+const WORKER="https://aged-hill-7a5e.douglasjrmaule.workers.dev";
+const APP_ID="2687755540742427";
+
+// Obter token válido — renova automaticamente se necessário
+async function getToken(cid){
+  try{
+    const r=await fetch(`${WORKER}/tokens/${cid}`);
+    if(!r.ok) return tokens[cid]||null;
+    const d=await r.json();
+    if(d.accessToken){
+      if(d.renewed){tokens[cid]=d.accessToken;if(d.userId)userids[cid]=d.userId;save();}
+      return d.accessToken;
+    }
+  }catch(e){}
+  return tokens[cid]||null;
+}
+
 function buildContas(){
   const el=document.getElementById("contas-cards");if(!el)return;
   el.innerHTML=CONTAS.map(c=>`
     <div class="card" style="margin-bottom:11px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px">
-        <div class="fg" style="max-width:190px;margin-bottom:0"><label>Nome</label><input id="${c.id}_name" value="${contaNames[c.id]}" onchange="contaNames['${c.id}']=this.value;updateRatioLabels();save()"/></div>
-        <div id="${c.id}_pill" class="pill ${tokens[c.id]?"pill-info":"pill-warn"}">${tokens[c.id]?"<i class=\"ti ti-check\"></i> Salvo":"<i class=\"ti ti-clock\"></i> Pendente"}</div>
+        <div class="fg" style="max-width:190px;margin-bottom:0"><label>Nome</label>
+          <input id="${c.id}_name" value="${contaNames[c.id]}" onchange="contaNames['${c.id}']=this.value;updateRatioLabels();save()"/></div>
+        <div id="${c.id}_pill" class="pill ${tokens[c.id]?"pill-ok":"pill-warn"}">${tokens[c.id]?"<i class=\"ti ti-check\"></i> Conectado":"<i class=\"ti ti-clock\"></i> Pendente"}</div>
       </div>
-      <div class="frow">
-        <div class="fg"><label>Access Token</label><input type="password" id="${c.id}_token" placeholder="APP_USR-..." value="${tokens[c.id]||""}"/></div>
-        <div class="fg" style="max-width:160px"><label>User ID</label><input id="${c.id}_uid" placeholder="123456789" value="${userids[c.id]||""}"/></div>
+      <div class="ibox" style="margin-bottom:10px"><i class="ti ti-info-circle"></i>
+        <span>Clique em <b>Conectar</b> para autorizar via Mercado Livre. O token é renovado automaticamente — você só faz isso uma vez por conta.</span>
       </div>
-      <div class="brow">
-        <button class="btn btn-sm" onclick="saveToken('${c.id}')"><i class="ti ti-device-floppy"></i> Salvar</button>
+      <div class="brow" style="margin-bottom:10px">
+        <button class="btn btn-primary btn-sm" onclick="iniciarOAuth('${c.id}')"><i class="ti ti-brand-oauth"></i> Conectar conta ${contaNames[c.id]}</button>
         <button class="btn btn-sm" onclick="testToken('${c.id}')"><i class="ti ti-plug"></i> Testar conexão</button>
       </div>
+      <div id="${c.id}_oauth_area" style="display:${tokens[c.id]?"none":"block"}">
+        <div class="frow">
+          <div class="fg"><label>Ou cole o code manualmente (após autorizar)</label>
+            <input id="${c.id}_code" placeholder="TG-..." /></div>
+        </div>
+        <div class="brow">
+          <button class="btn btn-sm" onclick="trocarCode('${c.id}')"><i class="ti ti-key"></i> Trocar code por token</button>
+        </div>
+      </div>
+      <div id="${c.id}_info" style="font-size:12px;color:var(--tx3);margin-top:6px">${userids[c.id]?"User ID: "+userids[c.id]:""}</div>
+      <div class="log" id="${c.id}_log"></div>
     </div>`).join("");
 }
-function saveToken(cid){tokens[cid]=document.getElementById(cid+"_token").value.trim();userids[cid]=document.getElementById(cid+"_uid").value.trim();save();const pill=document.getElementById(cid+"_pill");if(pill){pill.className="pill pill-info";pill.innerHTML="<i class=\"ti ti-check\"></i> Salvo";}}
-async function testToken(cid){
-  const t=tokens[cid]||document.getElementById(cid+"_token").value.trim();
+
+function iniciarOAuth(cid){
+  const authUrl=`https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${APP_ID}&redirect_uri=https://httpbin.org/get`;
+  window.open(authUrl,"_blank");
+  // Mostra área de cole do code
+  const area=document.getElementById(cid+"_oauth_area");
+  if(area) area.style.display="block";
+  addLog(cid+"_log","Janela de autorização aberta. Após autorizar, copie o code que aparece em httpbin.org e cole abaixo.","info");
+}
+
+async function trocarCode(cid){
+  const code=document.getElementById(cid+"_code")?.value.trim();
+  if(!code){alert("Cole o code primeiro.");return;}
   const pill=document.getElementById(cid+"_pill");
-  if(!t){if(pill){pill.className="pill pill-err";pill.innerHTML="Vazio";}return;}
+  if(pill){pill.className="pill pill-warn";pill.innerHTML="Trocando code...";}
+  addLog(cid+"_log","Trocando code por token via Worker...","info");
+  try{
+    const r=await fetch(`${WORKER}/auth/exchange`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({code, redirectUri:"https://httpbin.org/get"})
+    });
+    const d=await r.json();
+    if(d.access_token){
+      tokens[cid]=d.access_token;
+      if(d.user_id) userids[cid]=String(d.user_id);
+      const expiresAt=Date.now()+(d.expires_in*1000);
+      // Salva refresh token no Worker KV para renovação automática
+      await fetch(`${WORKER}/tokens/save`,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          accountId:cid,
+          accessToken:d.access_token,
+          refreshToken:d.refresh_token,
+          expiresAt,
+          userId:String(d.user_id||"")
+        })
+      });
+      save();
+      if(pill){pill.className="pill pill-ok";pill.innerHTML="<i class=\"ti ti-check\"></i> Conectado";}
+      const info=document.getElementById(cid+"_info");
+      if(info) info.textContent="User ID: "+userids[cid];
+      const area=document.getElementById(cid+"_oauth_area");
+      if(area) area.style.display="none";
+      addLog(cid+"_log","Token salvo! Renovação automática ativada.","ok");
+      // Busca nickname
+      const r2=await fetch(PROXY+"/users/me",{headers:{Authorization:"Bearer "+d.access_token}});
+      const u=await r2.json();
+      if(u.nickname&&pill) pill.innerHTML="<i class=\"ti ti-check\"></i> "+u.nickname;
+    }else{
+      if(pill){pill.className="pill pill-err";pill.innerHTML="Erro";}
+      addLog(cid+"_log","Erro: "+(d.message||d.error||JSON.stringify(d)),"err");
+    }
+  }catch(e){
+    if(pill){pill.className="pill pill-err";pill.innerHTML="Erro";}
+    addLog(cid+"_log","Erro: "+e.message,"err");
+  }
+}
+
+async function testToken(cid){
+  const t=await getToken(cid);
+  const pill=document.getElementById(cid+"_pill");
+  if(!t){if(pill){pill.className="pill pill-warn";pill.innerHTML="Sem token";}return;}
   if(pill){pill.className="pill pill-warn";pill.innerHTML="Testando...";}
   try{
     const r=await fetch(PROXY+"/users/me",{headers:{Authorization:"Bearer "+t}});
     const d=await r.json();
-    if(d.id){tokens[cid]=t;userids[cid]=d.id;document.getElementById(cid+"_uid").value=d.id;if(pill){pill.className="pill pill-ok";pill.innerHTML="<i class=\"ti ti-check\"></i> "+d.nickname;}save();}
-    else{if(pill){pill.className="pill pill-err";pill.innerHTML="Inválido";}}
+    if(d.id){
+      tokens[cid]=t;userids[cid]=String(d.id);
+      const info=document.getElementById(cid+"_info");
+      if(info) info.textContent="User ID: "+d.id;
+      if(pill){pill.className="pill pill-ok";pill.innerHTML="<i class=\"ti ti-check\"></i> "+d.nickname;}
+      save();
+    }else{if(pill){pill.className="pill pill-err";pill.innerHTML="Inválido";}}
   }catch(e){if(pill){pill.className="pill pill-err";pill.innerHTML="Erro";}}
 }
 function updateRatioLabels(){CONTAS.forEach((c,i)=>{const el=document.getElementById("lbl_r"+(i+1));if(el)el.textContent="% "+contaNames[c.id];});}
@@ -445,7 +537,8 @@ async function sincronizar(){
   if(!contsOk.length){addLog("sync-log","Nenhuma conta configurada.","err");btn.disabled=false;return;}
   let cDone=0;
   for(const c of contsOk){
-    const hdr={headers:{Authorization:"Bearer "+tokens[c.id]}};
+    const token=await getToken(c.id);if(!token){addLog("sync-log",`${contaNames[c.id]}: sem token — conecte na aba Contas ML`,"err");cDone++;continue;}
+    const hdr={headers:{Authorization:"Bearer "+token}};
     addLog("sync-log",`${contaNames[c.id]}: buscando anúncios...`,"info");
     try{
       let allIds=[],off=0;
@@ -624,8 +717,8 @@ async function buscarVendas(){
   const lastDay=new Date(ano,mes,0).getDate();
   const to=`${ano}-${String(mes).padStart(2,"0")}-${lastDay}T23:59:59.000-03:00`;
   for(const c of CONTAS){
-    const token=tokens[c.id],uid=userids[c.id];
-    if(!token||!uid){addLog("vendas-log",`${contaNames[c.id]}: sem token`,"err");continue;}
+    const token=await getToken(c.id),uid=userids[c.id];
+    if(!token||!uid){addLog("vendas-log",`${contaNames[c.id]}: sem token — conecte na aba Contas ML`,"err");continue;}
     addLog("vendas-log",`${contaNames[c.id]}: buscando...`,"info");
     try{
       let allOrders=[],off=0;
@@ -652,7 +745,7 @@ async function buscarCustosML(){
   const key=`${ano}-${String(mes).padStart(2,"0")}-01`;
   clearLog("custos-log");
   for(const c of CONTAS){
-    const token=tokens[c.id];if(!token){addLog("custos-log",`${contaNames[c.id]}: sem token`,"err");continue;}
+    const token=await getToken(c.id);if(!token){addLog("custos-log",`${contaNames[c.id]}: sem token — conecte na aba Contas ML`,"err");continue;}
     addLog("custos-log",`${contaNames[c.id]}: buscando...`,"info");
     try{
       const r=await fetch(`${PROXY}/billing/integration/periods/key/${key}/summary?group=ML`,{headers:{Authorization:"Bearer "+token}});
