@@ -383,15 +383,13 @@ async function sincronizarAnuncios(){
       for(let i=0;i<total;i++){
         const mlbId=allIds[i];
         try{
-          // Busca completa do item individual — traz catalog_listing, catalog_product_id, price, shipping
+          // Busca detalhes do item
           const r1=await fetch(`${PROXY}/items/${mlbId}`,hdr);
           const body=await r1.json();
           if(body.error)continue;
 
           const preco=body.price||0;
           const isCatalog=body.catalog_listing===true;
-          const catalogProductId=body.catalog_product_id||null;
-          const freteFree=body.shipping?.free_shipping===true;
 
           // Buscar comissão via sale_terms
           let comPct=0;
@@ -402,9 +400,9 @@ async function sincronizarAnuncios(){
             comPct=comTerm?.value_struct?.number||0;
           }catch(e){}
 
-          // Buscar frete real via shipping_options se não for free
+          // Buscar frete
           let frete=0;
-          if(!freteFree){
+          if(!body.shipping?.free_shipping){
             try{
               const r3=await fetch(`${PROXY}/items/${mlbId}/shipping_options`,hdr);
               const so=await r3.json();
@@ -412,6 +410,14 @@ async function sincronizarAnuncios(){
               frete=opt?.cost||0;
             }catch(e){}
           }
+
+          // Buscar relação catálogo via buybox/sync
+          let relatedId=null;
+          try{
+            const r4=await fetch(`${PROXY}/public/buybox/sync/${mlbId}`,hdr);
+            const sync=await r4.json();
+            if(sync?.relations?.length>0) relatedId=sync.relations[0];
+          }catch(e){}
 
           const comVal=preco*(comPct/100);
           const existing=anuncios.find(a=>a.mlb===mlbId);
@@ -421,52 +427,60 @@ async function sincronizarAnuncios(){
           const mc=preco-custo-comVal-frete-impVal;
           const mcp=preco>0?mc/preco*100:0;
 
-          novos.push({mlb:mlbId,nome:body.title||mlbId,conta:c.id,preco,comPct,comVal,frete,custo,impPct,impVal,mc,mcp,isCatalog,catalogProductId});
+          novos.push({mlb:mlbId,nome:body.title||mlbId,conta:c.id,preco,comPct,comVal,frete,custo,impPct,impVal,mc,mcp,isCatalog,relatedId});
         }catch(e){addLog('sync-log',`${mlbId}: erro — ${e.message}`,'err');}
 
-        // Progresso por item
         const pct=Math.round(((contasDone/totalContas)+(i+1)/(total*totalContas))*100);
         fill.style.width=Math.min(pct,99)+'%';
-
-        // Pequena pausa a cada 5 itens para não sobrecarregar a API
         if(i>0&&i%5===0) await new Promise(r=>setTimeout(r,300));
       }
-
       addLog('sync-log',`${contaNames[c.id]}: detalhes concluídos.`,'ok');
     }catch(e){addLog('sync-log',`${contaNames[c.id]}: erro — ${e.message}`,'err');}
     contasDone++;
-    fill.style.width=Math.round(contasDone/totalContas*100)+'%';
   }
 
-  // Detectar pares catálogo + orgânico pelo catalog_product_id
-  const porCatalogId={};
+  // Montar vínculos: para cada par (A <-> B),
+  // o catálogo (isCatalog=true) é o secundário, o orgânico é o principal
+  // Se ambos forem catálogo ou nenhum, o de ID menor é o principal
+  const mlbSet=new Set(novos.map(a=>a.mlb));
+  const jaVinculado=new Set();
+
   novos.forEach(a=>{
-    if(a.catalogProductId){
-      if(!porCatalogId[a.catalogProductId]) porCatalogId[a.catalogProductId]=[];
-      porCatalogId[a.catalogProductId].push(a);
+    if(!a.relatedId)return;
+    // Só processa se o par também está na lista e ainda não foi vinculado
+    const relId=a.relatedId.replace('MLB','');
+    const relMLB='MLB'+relId;
+    if(!mlbSet.has(relMLB)||jaVinculado.has(a.mlb))return;
+
+    const par=novos.find(x=>x.mlb===relMLB);
+    if(!par)return;
+
+    // Define quem é principal (orgânico) e quem é secundário (catálogo)
+    let principal, secundario;
+    if(a.isCatalog&&!par.isCatalog){principal=par;secundario=a;}
+    else if(!a.isCatalog&&par.isCatalog){principal=a;secundario=par;}
+    else{
+      // Ambos catálogo ou ambos orgânico — o de ID numérico menor é o principal
+      const numA=parseInt(a.mlb.replace('MLB',''));
+      const numB=parseInt(par.mlb.replace('MLB',''));
+      principal=numA<numB?a:par;
+      secundario=numA<numB?par:a;
     }
+
+    novosVinculos[secundario.mlb]=principal.mlb;
+    jaVinculado.add(a.mlb);jaVinculado.add(par.mlb);
+
+    // Herdar custo do principal se preenchido
+    if(principal.custo>0){secundario.custo=principal.custo;secundario.impPct=principal.impPct;calcMCAnu(secundario);}
   });
 
-  let paresDetectados=0;
-  Object.values(porCatalogId).forEach(grupo=>{
-    if(grupo.length<2)return;
-    const organico=grupo.find(a=>!a.isCatalog);
-    const catalogos=grupo.filter(a=>a.isCatalog);
-    if(organico&&catalogos.length){
-      catalogos.forEach(cat=>{
-        novosVinculos[cat.mlb]=organico.mlb;
-        if(organico.custo>0){cat.custo=organico.custo;cat.impPct=organico.impPct;calcMCAnu(cat);}
-        paresDetectados++;
-      });
-    }
-  });
-
+  const paresDetectados=Object.keys(novosVinculos).length;
   if(paresDetectados>0)
-    addLog('sync-log',`${paresDetectados} par(es) catálogo+orgânico detectado(s) automaticamente.`,'ok');
+    addLog('sync-log',`${paresDetectados} par(es) vinculado(s) via buybox/sync.`,'ok');
   else
-    addLog('sync-log','Nenhum par catálogo+orgânico detectado. Se esperava pares, verifique se os itens têm catalog_product_id no ML.','info');
+    addLog('sync-log','Nenhum par detectado. Use o botão Vincular manualmente se necessário.','info');
 
-  // Preservar vínculos manuais existentes
+  // Preservar vínculos manuais
   Object.entries(vinculos).forEach(([sec,pri])=>{if(!novosVinculos[sec])novosVinculos[sec]=pri;});
 
   anuncios=novos;
