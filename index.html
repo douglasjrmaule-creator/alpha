@@ -359,59 +359,87 @@ async function sincronizarAnuncios(){
     btn.disabled=false;prog.style.display='none';return;
   }
 
+  const PROXY='https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy';
   let totalContas=contasComToken.length, contasDone=0;
 
   for(const c of contasComToken){
     const token=tokens[c.id], uid=userids[c.id];
+    const hdr={headers:{Authorization:'Bearer '+token}};
     addLog('sync-log',`${contaNames[c.id]}: buscando anúncios ativos...`,'info');
     try{
-      // Buscar todos IDs ativos (paginado)
+      // 1. Buscar todos IDs ativos (paginado)
       let allIds=[], offset=0, limit=100;
       while(true){
-        const r=await fetch(`https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy/users/${uid}/items/search?status=active&offset=${offset}&limit=${limit}`,{headers:{Authorization:'Bearer '+token}});
+        const r=await fetch(`${PROXY}/users/${uid}/items/search?status=active&offset=${offset}&limit=${limit}`,hdr);
         const d=await r.json();
         const ids=d.results||[];
         allIds=[...allIds,...ids];
         if(ids.length<limit)break;
         offset+=limit;
       }
-      addLog('sync-log',`${contaNames[c.id]}: ${allIds.length} anúncios. Buscando detalhes e vínculos de catálogo...`,'ok');
+      addLog('sync-log',`${contaNames[c.id]}: ${allIds.length} anúncios. Buscando detalhes...`,'ok');
 
-      // Buscar detalhes em lotes de 20 — inclui catalog_listing e catalog_product_id
-      for(let i=0;i<allIds.length;i+=20){
-        const batch=allIds.slice(i,i+20);
-        const r=await fetch(`https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy/items?ids=${batch.join(',')}&attributes=id,title,price,sale_terms,shipping,catalog_listing,catalog_product_id`,{headers:{Authorization:'Bearer '+token}});
-        const d=await r.json();
-        for(const item of d){
-          if(item.code!==200&&item.body?.error)continue;
-          const body=item.body||item;
-          const existing=anuncios.find(a=>a.mlb===body.id);
-          const comTerm=(body.sale_terms||[]).find(t=>t.id==='SALE_FEE');
-          const comPct=comTerm?.value_struct?.number||0;
+      const total=allIds.length;
+      for(let i=0;i<total;i++){
+        const mlbId=allIds[i];
+        try{
+          // Busca completa do item individual — traz catalog_listing, catalog_product_id, price, shipping
+          const r1=await fetch(`${PROXY}/items/${mlbId}`,hdr);
+          const body=await r1.json();
+          if(body.error)continue;
+
           const preco=body.price||0;
+          const isCatalog=body.catalog_listing===true;
+          const catalogProductId=body.catalog_product_id||null;
+          const freteFree=body.shipping?.free_shipping===true;
+
+          // Buscar comissão via sale_terms
+          let comPct=0;
+          try{
+            const r2=await fetch(`${PROXY}/items/${mlbId}/sale_terms`,hdr);
+            const terms=await r2.json();
+            const comTerm=(terms||[]).find(t=>t.id==='SALE_FEE');
+            comPct=comTerm?.value_struct?.number||0;
+          }catch(e){}
+
+          // Buscar frete real via shipping_options se não for free
+          let frete=0;
+          if(!freteFree){
+            try{
+              const r3=await fetch(`${PROXY}/items/${mlbId}/shipping_options`,hdr);
+              const so=await r3.json();
+              const opt=(so?.options||[])[0];
+              frete=opt?.cost||0;
+            }catch(e){}
+          }
+
           const comVal=preco*(comPct/100);
-          const frete=0;
+          const existing=anuncios.find(a=>a.mlb===mlbId);
           const custo=existing?.custo||0;
           const impPct=existing?.impPct||0;
           const impVal=preco*(impPct/100);
           const mc=preco-custo-comVal-frete-impVal;
           const mcp=preco>0?mc/preco*100:0;
-          const isCatalog=body.catalog_listing===true;
-          const catalogProductId=body.catalog_product_id||null;
-          novos.push({mlb:body.id,nome:body.title||body.id,conta:c.id,preco,comPct,comVal,frete,custo,impPct,impVal,mc,mcp,isCatalog,catalogProductId});
-        }
-        fill.style.width=Math.round(((contasDone/totalContas)+((i+20)/(allIds.length*totalContas)))*100)+'%';
+
+          novos.push({mlb:mlbId,nome:body.title||mlbId,conta:c.id,preco,comPct,comVal,frete,custo,impPct,impVal,mc,mcp,isCatalog,catalogProductId});
+        }catch(e){addLog('sync-log',`${mlbId}: erro — ${e.message}`,'err');}
+
+        // Progresso por item
+        const pct=Math.round(((contasDone/totalContas)+(i+1)/(total*totalContas))*100);
+        fill.style.width=Math.min(pct,99)+'%';
+
+        // Pequena pausa a cada 5 itens para não sobrecarregar a API
+        if(i>0&&i%5===0) await new Promise(r=>setTimeout(r,300));
       }
-      addLog('sync-log',`${contaNames[c.id]}: OK.`,'ok');
+
+      addLog('sync-log',`${contaNames[c.id]}: detalhes concluídos.`,'ok');
     }catch(e){addLog('sync-log',`${contaNames[c.id]}: erro — ${e.message}`,'err');}
     contasDone++;
     fill.style.width=Math.round(contasDone/totalContas*100)+'%';
   }
 
   // Detectar pares catálogo + orgânico pelo catalog_product_id
-  // Para cada catalog_product_id, o anúncio com catalog_listing=true é o secundário
-  // e o anúncio com catalog_listing=false (orgânico) é o principal
-  const porCatalogId = {};
+  const porCatalogId={};
   novos.forEach(a=>{
     if(a.catalogProductId){
       if(!porCatalogId[a.catalogProductId]) porCatalogId[a.catalogProductId]=[];
@@ -427,29 +455,28 @@ async function sincronizarAnuncios(){
     if(organico&&catalogos.length){
       catalogos.forEach(cat=>{
         novosVinculos[cat.mlb]=organico.mlb;
-        // herdar custo existente do orgânico se houver
         if(organico.custo>0){cat.custo=organico.custo;cat.impPct=organico.impPct;calcMCAnu(cat);}
         paresDetectados++;
       });
     }
   });
 
-  if(paresDetectados>0){
-    addLog('sync-log',`${paresDetectados} par(es) catálogo+orgânico detectado(s) automaticamente pela API.`,'ok');
-  }
+  if(paresDetectados>0)
+    addLog('sync-log',`${paresDetectados} par(es) catálogo+orgânico detectado(s) automaticamente.`,'ok');
+  else
+    addLog('sync-log','Nenhum par catálogo+orgânico detectado. Se esperava pares, verifique se os itens têm catalog_product_id no ML.','info');
 
-  // Preservar vínculos manuais existentes que não foram detectados automaticamente
-  Object.entries(vinculos).forEach(([sec,pri])=>{
-    if(!novosVinculos[sec]) novosVinculos[sec]=pri;
-  });
+  // Preservar vínculos manuais existentes
+  Object.entries(vinculos).forEach(([sec,pri])=>{if(!novosVinculos[sec])novosVinculos[sec]=pri;});
 
   anuncios=novos;
   vinculos=novosVinculos;
+  fill.style.width='100%';
   save();
   renderAnuncios();
   buildVendasLista();
   buildCustosAdicionais();
-  status.textContent=`${anuncios.length} anúncios · ${paresDetectados} par(es) catálogo detectado(s)`;
+  status.textContent=`${anuncios.length} anúncios · ${paresDetectados} par(es) detectado(s)`;
   btn.disabled=false;
   document.getElementById('badge-anuncios').textContent=anuncios.length;
 }
