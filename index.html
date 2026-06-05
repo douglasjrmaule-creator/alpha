@@ -96,6 +96,13 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 /* Progress */
 .prog{height:3px;background:var(--bor);border-radius:2px;margin:10px 0;overflow:hidden}
 .prog-fill{height:100%;background:var(--ac);border-radius:2px;transition:width .3s}
+/* Dashboard */
+.db-card{background:var(--sur);border:1px solid var(--bor);border-radius:var(--r);padding:14px 16px}
+.db-card .dc-label{font-size:11px;color:var(--tx3);margin-bottom:4px}
+.db-card .dc-val{font-size:20px;font-weight:700}
+.db-card .dc-sub{font-size:12px;color:var(--tx3);margin-top:2px}
+#db-chart-row{flex-wrap:wrap}
+@media(max-width:800px){#db-chart-row{grid-template-columns:1fr!important}}
 @media(max-width:700px){.sidebar{display:none}.main{padding:14px}}
 </style>
 </head>
@@ -114,7 +121,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
   <button class="ni" onclick="sw('fechamento')"><i class="ti ti-cloud-download"></i> Coletar dados</button>
   <button class="ni" onclick="sw('operacional')"><i class="ti ti-building"></i> Operacional</button>
   <div class="sg">Análise</div>
-  <button class="ni" onclick="sw('resultado')"><i class="ti ti-chart-bar"></i> Resultado</button>
+  <button class="ni" onclick="sw('dashboard')"><i class="ti ti-dashboard"></i> Resumo financeiro</button>
+  <button class="ni" onclick="sw('resultado')"><i class="ti ti-chart-bar"></i> Resultado mensal</button>
   <div class="sg">Config</div>
   <button class="ni" onclick="sw('contas')"><i class="ti ti-key"></i> Contas ML</button>
 </nav>
@@ -229,6 +237,88 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
   </div>
 </div>
 
+<!-- DASHBOARD -->
+<div id="pane-dashboard" class="pane">
+  <div class="ptitle">Resumo Financeiro</div>
+  <div class="psub">Vendas diárias com margem de contribuição real por operação.</div>
+
+  <!-- Filtros -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="frow">
+      <div class="fg" style="max-width:160px"><label>Data início</label><input type="date" id="db_from"/></div>
+      <div class="fg" style="max-width:160px"><label>Data fim</label><input type="date" id="db_to"/></div>
+      <div class="fg" style="max-width:150px"><label>Conta</label>
+        <select id="db_conta">
+          <option value="">Todas as contas</option>
+        </select>
+      </div>
+      <div class="fg" style="max-width:150px"><label>SKU</label><input id="db_sku" placeholder="Ex: KIT100ENV"/></div>
+      <div class="fg" style="max-width:160px"><label>Título ou MLB</label><input id="db_mlb" placeholder="Ex: MLB123..."/></div>
+    </div>
+    <div class="brow">
+      <button class="btn btn-primary" onclick="buscarDashboard()"><i class="ti ti-search"></i> Buscar</button>
+      <button class="btn btn-sm" onclick="exportDashCSV()"><i class="ti ti-download"></i> Exportar CSV</button>
+      <span id="db_status" style="font-size:12px;color:var(--tx3)"></span>
+    </div>
+  </div>
+  <div class="log" id="db-log"></div>
+
+  <!-- Cards de totais -->
+  <div id="db-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px"></div>
+
+  <!-- Gráfico + tabela -->
+  <div style="display:grid;grid-template-columns:280px 1fr;gap:16px;margin-bottom:16px;align-items:start" id="db-chart-row">
+    <div class="card" style="margin-bottom:0">
+      <div style="font-size:12px;font-weight:600;color:var(--tx3);margin-bottom:12px">DISTRIBUIÇÃO</div>
+      <canvas id="db-donut" width="240" height="240"></canvas>
+      <div id="db-legend" style="margin-top:12px;font-size:12px"></div>
+    </div>
+    <div class="card" style="margin-bottom:0">
+      <div style="font-size:12px;font-weight:600;color:var(--tx3);margin-bottom:12px">VENDAS DIÁRIAS</div>
+      <canvas id="db-line" height="220"></canvas>
+    </div>
+  </div>
+
+  <!-- Tabela de vendas -->
+  <div class="card" style="margin-bottom:0">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="font-size:12px;font-weight:600;color:var(--tx3)">DETALHAMENTO POR VENDA <span id="db-count" style="color:var(--ac)"></span></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="font-size:12px;color:var(--tx3)">Mostrar</span>
+        <select id="db_pagesize" onchange="renderDashTable()" style="font-size:12px;padding:4px 8px;border:1px solid var(--bor);border-radius:6px">
+          <option value="25">25</option><option value="50" selected>50</option><option value="100">100</option>
+        </select>
+      </div>
+    </div>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:12px" id="db-table">
+        <thead>
+          <tr style="background:var(--sur2);border-bottom:1px solid var(--bor)">
+            <th style="text-align:left;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap">Anúncio</th>
+            <th style="text-align:left;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap">Conta</th>
+            <th style="text-align:left;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap">SKU</th>
+            <th style="text-align:left;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap">Data</th>
+            <th style="text-align:left;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap">Frete</th>
+            <th style="text-align:right;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap">Valor Unit.</th>
+            <th style="text-align:right;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap">Qtd.</th>
+            <th style="text-align:right;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap">Faturamento</th>
+            <th style="text-align:right;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap;color:#e85d04">Custo</th>
+            <th style="text-align:right;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap;color:#e85d04">Imposto</th>
+            <th style="text-align:right;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap;color:#f59e0b">Tarifa ML</th>
+            <th style="text-align:right;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap;color:#0284c7">Frete Vend.</th>
+            <th style="text-align:right;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap;color:var(--gr)">MC</th>
+            <th style="text-align:right;padding:7px 8px;font-weight:600;color:var(--tx3);white-space:nowrap;color:var(--gr)">MC %</th>
+          </tr>
+        </thead>
+        <tbody id="db-tbody">
+          <tr><td colspan="14" style="text-align:center;padding:24px;color:var(--tx3)">Selecione um período e clique em Buscar.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="db-pagination" style="display:flex;justify-content:center;gap:6px;margin-top:12px"></div>
+  </div>
+</div>
+
 <!-- RESULTADO -->
 <div id="pane-resultado" class="pane">
   <div class="ptitle">Resultado do mês</div>
@@ -339,7 +429,7 @@ function sw(name){
   document.querySelectorAll(".pane").forEach(p=>p.classList.remove("on"));
   document.querySelectorAll(".ni").forEach(b=>b.classList.remove("on"));
   document.getElementById("pane-"+name)?.classList.add("on");
-  const ord=["skus","anuncios","fechamento","operacional","resultado","contas"];
+  const ord=["skus","anuncios","fechamento","operacional","dashboard","resultado","contas"];
   document.querySelectorAll(".ni")[ord.indexOf(name)]?.classList.add("on");
 }
 
@@ -891,6 +981,249 @@ const now=new Date();
 const cm=document.getElementById("f_mes");if(cm)cm.value=now.getMonth()+1;
 const cy=document.getElementById("f_ano");if(cy)cy.value=now.getFullYear();
 checkQueue();setInterval(checkQueue,60000);
+
+// ---- DASHBOARD ----
+let dbRows=[]; // todas as linhas de vendas carregadas
+let dbPage=1;
+
+function initDashboard(){
+  // Preencher select de contas
+  const sel=document.getElementById("db_conta");
+  if(sel){sel.innerHTML='<option value="">Todas as contas</option>'+CONTAS.map(c=>`<option value="${c.id}">${contaNames[c.id]||c.label}</option>`).join("");}
+  // Data padrão: hoje
+  const today=new Date();
+  const fmt=d=>d.toISOString().split("T")[0];
+  const dbFrom=document.getElementById("db_from");
+  const dbTo=document.getElementById("db_to");
+  if(dbFrom)dbFrom.value=fmt(new Date(today.getFullYear(),today.getMonth(),1));
+  if(dbTo)dbTo.value=fmt(today);
+}
+
+async function buscarDashboard(){
+  const from=document.getElementById("db_from")?.value;
+  const to=document.getElementById("db_to")?.value;
+  if(!from||!to){alert("Selecione o período.");return;}
+  clearLog("db-log");
+  document.getElementById("db_status").textContent="Buscando...";
+  document.getElementById("db-cards").innerHTML="";
+  document.getElementById("db-tbody").innerHTML='<tr><td colspan="14" style="text-align:center;padding:24px;color:var(--tx3)">Carregando...</td></tr>';
+  
+  const fromDt=new Date(from+"T00:00:00.000-03:00");
+  const toDt=new Date(to+"T23:59:59.000-03:00");
+  const contaFil=document.getElementById("db_conta")?.value;
+  const skuFil=(document.getElementById("db_sku")?.value||"").trim().toLowerCase();
+  const mlbFil=(document.getElementById("db_mlb")?.value||"").trim().toLowerCase();
+  
+  dbRows=[];
+  const contsOk=CONTAS.filter(c=>(!contaFil||c.id===contaFil)&&tokens[c.id]&&userids[c.id]);
+  
+  for(const c of contsOk){
+    const token=await getToken(c.id);if(!token)continue;
+    const hdr={headers:{Authorization:"Bearer "+token}};
+    addLog("db-log",`${contaNames[c.id]||c.label}: buscando ordens...`,"info");
+    try{
+      let off=0,total=0;
+      while(true){
+        const r=await fetch(`${PROXY}/orders/search?seller=${userids[c.id]}&order.status=paid&order.date_created.from=${encodeURIComponent(fromDt.toISOString())}&order.date_created.to=${encodeURIComponent(toDt.toISOString())}&offset=${off}&limit=50`,hdr);
+        const d=await r.json();
+        const orders=d.results||[];
+        for(const order of orders){
+          // Frete real via shipment
+          let freteVend=0;
+          if(order.shipping?.id){
+            try{const sr=await fetch(`${PROXY}/shipments/${order.shipping.id}`,hdr);const sd=await sr.json();freteVend=sd.base_cost||0;}catch(e){}
+          }
+          const dataVenda=order.date_created?.split("T")[0]||"";
+          for(const oi of order.order_items||[]){
+            const mlbId=oi.item?.id||"";
+            const anu=anuncios.find(a=>a.mlb===mlbId);
+            const skuCode=anu?.sku||"";
+            const nomeAnu=anu?.nome||oi.item?.title||mlbId;
+            const isFull=anu?.isFull||false;
+            const unitPrice=oi.unit_price||0;
+            const qty=oi.quantity||1;
+            const fat=unitPrice*qty;
+            const tarifa=oi.sale_fee||0;
+            const custoObj=getCustoAnuncio(mlbId,skuCode);
+            const custo=custoObj?(custoObj.custo*qty):0;
+            const imposto=custoObj?(fat*(custoObj.impPct/100)):0;
+            const mc=fat-tarifa-freteVend-custo-imposto;
+            const mcp=fat>0?mc/fat*100:0;
+            // Filtros
+            if(skuFil&&!skuCode.toLowerCase().includes(skuFil))continue;
+            if(mlbFil&&!mlbId.toLowerCase().includes(mlbFil)&&!nomeAnu.toLowerCase().includes(mlbFil))continue;
+            dbRows.push({conta:c.id,contaNome:contaNames[c.id]||c.label,mlb:mlbId,nome:nomeAnu,sku:skuCode,data:dataVenda,freteTipo:isFull?"Full":"ME2",unitPrice,qty,fat,tarifa,freteVend,custo,imposto,mc,mcp});
+          }
+        }
+        total+=orders.length;
+        if(orders.length<50)break;off+=50;
+      }
+      addLog("db-log",`${contaNames[c.id]||c.label}: ${total} pedidos`,"ok");
+    }catch(e){addLog("db-log",`${c.id}: ${e.message}`,"err");}
+  }
+  
+  document.getElementById("db_status").textContent=`${dbRows.length} linhas`;
+  dbPage=1;
+  renderDashCards();
+  renderDashChart();
+  renderDashTable();
+}
+
+function renderDashCards(){
+  const totFat=dbRows.reduce((s,r)=>s+r.fat,0);
+  const totCusto=dbRows.reduce((s,r)=>s+r.custo,0);
+  const totImp=dbRows.reduce((s,r)=>s+r.imposto,0);
+  const totTarifa=dbRows.reduce((s,r)=>s+r.tarifa,0);
+  const totFrete=dbRows.reduce((s,r)=>s+r.freteVend,0);
+  const totMC=dbRows.reduce((s,r)=>s+r.mc,0);
+  const totMCP=totFat>0?totMC/totFat*100:0;
+  const totQtd=dbRows.reduce((s,r)=>s+r.qty,0);
+  const cards=[
+    {label:"Vendas Aprovadas",val:fR(totFat),sub:`${dbRows.length} pedidos · ${totQtd} unid.`,color:"var(--tx)"},
+    {label:"Custo & Imposto",val:fR(totCusto+totImp),sub:`Custo ${fR(totCusto)} · Imp ${fR(totImp)}`,color:"#e85d04"},
+    {label:"Tarifa de Venda",val:fR(totTarifa),sub:`${totFat>0?(totTarifa/totFat*100).toFixed(1):0}% do faturamento`,color:"#f59e0b"},
+    {label:"Frete Vendedor",val:fR(totFrete),sub:"cobrado do vendedor",color:"#0284c7"},
+    {label:"Margem de Contribuição",val:fR(totMC),sub:`${fP(totMCP)} do faturamento`,color:totMC>=0?"var(--gr)":"var(--rd)"},
+  ];
+  document.getElementById("db-cards").innerHTML=cards.map(c=>`
+    <div class="db-card">
+      <div class="dc-label">${c.label}</div>
+      <div class="dc-val" style="color:${c.color}">${c.val}</div>
+      <div class="dc-sub">${c.sub}</div>
+    </div>`).join("");
+}
+
+function renderDashChart(){
+  const totCusto=dbRows.reduce((s,r)=>s+r.custo,0);
+  const totImp=dbRows.reduce((s,r)=>s+r.imposto,0);
+  const totTarifa=dbRows.reduce((s,r)=>s+r.tarifa,0);
+  const totFrete=dbRows.reduce((s,r)=>s+r.freteVend,0);
+  const totMC=Math.max(0,dbRows.reduce((s,r)=>s+r.mc,0));
+  const total=totCusto+totImp+totTarifa+totFrete+totMC;
+
+  // Donut manual via canvas
+  const canvas=document.getElementById("db-donut");if(!canvas)return;
+  const ctx=canvas.getContext("2d");
+  canvas.width=240;canvas.height=240;
+  const cx=120,cy=120,r=100,ri=60;
+  const slices=[
+    {val:totCusto,color:"#e85d04",label:"Custo"},
+    {val:totImp,color:"#dc2626",label:"Imposto"},
+    {val:totTarifa,color:"#f59e0b",label:"Tarifa"},
+    {val:totFrete,color:"#0284c7",label:"Frete"},
+    {val:totMC,color:"#059669",label:"MC"},
+  ].filter(s=>s.val>0);
+  
+  ctx.clearRect(0,0,240,240);
+  let angle=-Math.PI/2;
+  slices.forEach(s=>{
+    const sweep=(s.val/total)*Math.PI*2;
+    ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,angle,angle+sweep);
+    ctx.closePath();ctx.fillStyle=s.color;ctx.fill();
+    // Inner circle hole
+    ctx.beginPath();ctx.arc(cx,cy,ri,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
+    angle+=sweep;
+  });
+  // Center text
+  ctx.fillStyle="var(--tx)";ctx.font="bold 13px DM Sans, sans-serif";ctx.textAlign="center";
+  ctx.fillText("MC",cx,cy-4);
+  const mcp=total>0?totMC/total*100:0;
+  ctx.font="12px DM Sans, sans-serif";ctx.fillStyle=totMC>=0?"#059669":"#dc2626";
+  ctx.fillText(fP(mcp),cx,cy+14);
+
+  // Legend
+  document.getElementById("db-legend").innerHTML=slices.map(s=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:2px;background:${s.color};display:inline-block"></span>${s.label}</span>
+      <span style="font-weight:600">${total>0?fP(s.val/total*100):"0%"}</span>
+    </div>`).join("");
+
+  // Line chart - vendas por dia
+  const byDay={};
+  dbRows.forEach(r=>{
+    if(!byDay[r.data])byDay[r.data]={fat:0,mc:0};
+    byDay[r.data].fat+=r.fat;byDay[r.data].mc+=r.mc;
+  });
+  const dias=Object.keys(byDay).sort();
+  const lineCanvas=document.getElementById("db-line");if(!lineCanvas)return;
+  const lctx=lineCanvas.getContext("2d");
+  const W=lineCanvas.offsetWidth||500,H=220;
+  lineCanvas.width=W;lineCanvas.height=H;
+  lctx.clearRect(0,0,W,H);
+  if(!dias.length)return;
+  const maxVal=Math.max(...dias.map(d=>byDay[d].fat));
+  const pad={t:20,r:20,b:40,l:60};
+  const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b;
+  const xStep=dias.length>1?cw/(dias.length-1):cw;
+  // Grid lines
+  lctx.strokeStyle="#e2ddd8";lctx.lineWidth=1;
+  [0,.25,.5,.75,1].forEach(f=>{const y=pad.t+ch*(1-f);lctx.beginPath();lctx.moveTo(pad.l,y);lctx.lineTo(pad.l+cw,y);lctx.stroke();lctx.fillStyle="#a09a94";lctx.font="10px DM Sans";lctx.textAlign="right";lctx.fillText(fR(maxVal*f),pad.l-4,y+4);});
+  // X labels
+  const step=Math.ceil(dias.length/8);
+  dias.forEach((d,i)=>{if(i%step===0){const x=pad.l+i*xStep;lctx.fillStyle="#a09a94";lctx.font="10px DM Sans";lctx.textAlign="center";lctx.fillText(d.slice(5),x,H-pad.b+14);}});
+  // Draw lines
+  [[dias.map(d=>byDay[d].fat),"#3483FA","Receita"],[dias.map(d=>byDay[d].mc),"#059669","MC"]].forEach(([vals,color])=>{
+    lctx.beginPath();lctx.strokeStyle=color;lctx.lineWidth=2;
+    vals.forEach((v,i)=>{const x=pad.l+i*xStep,y=pad.t+ch*(1-Math.max(0,v)/maxVal);i===0?lctx.moveTo(x,y):lctx.lineTo(x,y);});
+    lctx.stroke();
+  });
+}
+
+function renderDashTable(){
+  const pageSize=parseInt(document.getElementById("db_pagesize")?.value||50);
+  const total=dbRows.length;
+  const pages=Math.ceil(total/pageSize);
+  if(dbPage>pages)dbPage=1;
+  const start=(dbPage-1)*pageSize;
+  const slice=dbRows.slice(start,start+pageSize);
+  document.getElementById("db-count").textContent=`(${total} registros)`;
+  const tb=document.getElementById("db-tbody");if(!tb)return;
+  if(!slice.length){tb.innerHTML='<tr><td colspan="14" style="text-align:center;padding:24px;color:var(--tx3)">Nenhuma venda encontrada.</td></tr>';return;}
+  tb.innerHTML=slice.map(r=>{
+    const mcColor=r.mc>=0?"var(--gr)":"var(--rd)";
+    return `<tr style="border-bottom:1px solid var(--bor)">
+      <td style="padding:7px 8px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.nome}"><a href="https://www.mercadolivre.com.br/anuncio/${r.mlb}" target="_blank" style="color:var(--ac);text-decoration:none">${r.nome.substring(0,40)}${r.nome.length>40?"...":""}</a></td>
+      <td style="padding:7px 8px;white-space:nowrap">${r.contaNome}</td>
+      <td style="padding:7px 8px;font-family:var(--mono);font-size:11px">${r.sku||"—"}</td>
+      <td style="padding:7px 8px;white-space:nowrap">${r.data}</td>
+      <td style="padding:7px 8px"><span style="background:${r.freteTipo==="Full"?"#7c3aed":"#0284c7"};color:#fff;font-size:10px;padding:2px 6px;border-radius:3px">${r.freteTipo}</span></td>
+      <td style="padding:7px 8px;text-align:right">${fR(r.unitPrice)}</td>
+      <td style="padding:7px 8px;text-align:right">${r.qty}</td>
+      <td style="padding:7px 8px;text-align:right;font-weight:600">${fR(r.fat)}</td>
+      <td style="padding:7px 8px;text-align:right;color:#e85d04">${r.custo>0?fR(r.custo):"—"}</td>
+      <td style="padding:7px 8px;text-align:right;color:#dc2626">${r.imposto>0?fR(r.imposto):"—"}</td>
+      <td style="padding:7px 8px;text-align:right;color:#f59e0b">- ${fR(r.tarifa)}</td>
+      <td style="padding:7px 8px;text-align:right;color:#0284c7">${r.freteVend>0?"- "+fR(r.freteVend):"—"}</td>
+      <td style="padding:7px 8px;text-align:right;font-weight:700;color:${mcColor}">${fR(r.mc)}</td>
+      <td style="padding:7px 8px;text-align:right;font-weight:700;color:${mcColor}">${fP(r.mcp)}</td>
+    </tr>`;
+  }).join("");
+  // Pagination
+  const pg=document.getElementById("db-pagination");if(!pg)return;
+  if(pages<=1){pg.innerHTML="";return;}
+  let btns='<button class="btn btn-sm" onclick="dbGoPage('+(dbPage-1)+')" ' +(dbPage<=1?"disabled":"")+'>‹</button>';
+  for(let i=1;i<=Math.min(pages,10);i++){btns+=`<button class="btn btn-sm ${i===dbPage?"btn-primary":""}" onclick="dbGoPage(${i})">${i}</button>`;}
+  if(pages>10)btns+=`<span style="font-size:12px;color:var(--tx3);padding:5px">... ${pages}</span>`;
+  btns+='<button class="btn btn-sm" onclick="dbGoPage('+(dbPage+1)+')" '+(dbPage>=pages?"disabled":"")+'>›</button>';
+  pg.innerHTML=btns;
+}
+
+function dbGoPage(p){const pages=Math.ceil(dbRows.length/(parseInt(document.getElementById("db_pagesize")?.value||50)));if(p<1||p>pages)return;dbPage=p;renderDashTable();}
+
+function exportDashCSV(){
+  if(!dbRows.length){alert("Nenhum dado para exportar.");return;}
+  let csv="Anúncio,MLB,Conta,SKU,Data,Frete,Valor Unit.,Qtd,Faturamento,Custo,Imposto,Tarifa,Frete Vend.,MC,MC%\n";
+  dbRows.forEach(r=>{csv+=[`"${r.nome}"`,r.mlb,r.contaNome,r.sku||"",r.data,r.freteTipo,r.unitPrice.toFixed(2),r.qty,r.fat.toFixed(2),r.custo.toFixed(2),r.imposto.toFixed(2),r.tarifa.toFixed(2),r.freteVend.toFixed(2),r.mc.toFixed(2),r.mcp.toFixed(2)+"%"].join(",")+"\n";});
+  const a=document.createElement("a");a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);a.download="resumo_financeiro.csv";a.click();
+}
+
+// Init dashboard on tab switch
+const origSw=sw;
+function sw(name){
+  origSw(name);
+  if(name==="dashboard"){initDashboard();}
+}
 </script>
 </body>
 </html>
