@@ -8,96 +8,78 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
-:root{--bg:#f5f4f0;--surface:#fff;--surface2:#f0ede8;--border:#e2ddd8;--border2:#ccc8c2;--text:#1a1816;--text2:#6b6560;--text3:#a09a94;--accent:#3483FA;--accent-bg:#eef4ff;--green:#1a7a4a;--green-bg:#e8f7ef;--red:#c0392b;--red-bg:#fdecea;--yellow:#7a6000;--yellow-bg:#fff8e1;--r:10px;--rl:14px;--mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif}
+:root{--bg:#f5f4f0;--sur:#fff;--sur2:#f0ede8;--bor:#e2ddd8;--bor2:#ccc8c2;--tx:#1a1816;--tx2:#6b6560;--tx3:#a09a94;--ac:#3483FA;--ac-bg:#eef4ff;--gr:#1a7a4a;--gr-bg:#e8f7ef;--rd:#c0392b;--rd-bg:#fdecea;--yw:#7a6000;--yw-bg:#fff8e1;--r:10px;--rl:14px;--mono:"DM Mono",monospace;--sans:"DM Sans",sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14px;min-height:100vh}
-.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:14px;height:54px;position:sticky;top:0;z-index:100}
-.logo{width:30px;height:30px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center}
-.logo i{color:#fff;font-size:17px}
-.ttl{font-size:15px;font-weight:600}.tsub{font-size:12px;color:var(--text3);margin-left:2px}
+body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px;min-height:100vh}
+.topbar{background:var(--sur);border-bottom:1px solid var(--bor);padding:0 28px;display:flex;align-items:center;gap:14px;height:54px;position:sticky;top:0;z-index:100}
+.logo{width:30px;height:30px;background:var(--ac);border-radius:7px;display:flex;align-items:center;justify-content:center}.logo i{color:#fff;font-size:17px}
+.ttl{font-size:15px;font-weight:600}.tsub{font-size:12px;color:var(--tx3);margin-left:2px}
 .layout{display:flex;min-height:calc(100vh - 54px)}
-.sidebar{width:210px;background:var(--surface);border-right:1px solid var(--border);padding:18px 10px;flex-shrink:0;position:sticky;top:54px;height:calc(100vh - 54px);overflow-y:auto}
-.sg{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;padding:0 8px;margin:14px 0 5px}
-.sg:first-child{margin-top:0}
-.ni{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text2);border:none;background:none;width:100%;text-align:left;transition:all .15s}
-.ni:hover{background:var(--surface2);color:var(--text)}
-.ni.on{background:var(--accent-bg);color:var(--accent);font-weight:500}
-.ni i{font-size:16px;flex-shrink:0}
-.ni .badge{margin-left:auto;background:var(--accent);color:#fff;font-size:10px;font-weight:600;padding:1px 6px;border-radius:10px;min-width:18px;text-align:center}
-.main{flex:1;padding:26px 30px;max-width:960px}
+.sidebar{width:210px;background:var(--sur);border-right:1px solid var(--bor);padding:18px 10px;flex-shrink:0;position:sticky;top:54px;height:calc(100vh - 54px);overflow-y:auto}
+.sg{font-size:10px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;padding:0 8px;margin:14px 0 5px}.sg:first-child{margin-top:0}
+.ni{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--tx2);border:none;background:none;width:100%;text-align:left;transition:all .15s}
+.ni:hover{background:var(--sur2);color:var(--tx)}.ni.on{background:var(--ac-bg);color:var(--ac);font-weight:500}.ni i{font-size:16px;flex-shrink:0}
+.ni .bdg{margin-left:auto;background:var(--ac);color:#fff;font-size:10px;font-weight:600;padding:1px 6px;border-radius:10px;min-width:18px;text-align:center}
+.main{flex:1;padding:26px 30px;max-width:980px}
 .pane{display:none}.pane.on{display:block}
-.ptitle{font-size:20px;font-weight:600;margin-bottom:4px}
-.psub{font-size:13px;color:var(--text2);margin-bottom:22px}
-.slabel{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin:22px 0 9px}
-.slabel:first-child{margin-top:0}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:16px 18px;margin-bottom:12px}
-.frow{display:flex;gap:11px;flex-wrap:wrap;margin-bottom:11px}
-.frow:last-child{margin-bottom:0}
+.ptitle{font-size:20px;font-weight:600;margin-bottom:4px}.psub{font-size:13px;color:var(--tx2);margin-bottom:22px}
+.slabel{font-size:11px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;margin:22px 0 9px}.slabel:first-child{margin-top:0}
+.card{background:var(--sur);border:1px solid var(--bor);border-radius:var(--rl);padding:16px 18px;margin-bottom:12px}
+.frow{display:flex;gap:11px;flex-wrap:wrap;margin-bottom:11px}.frow:last-child{margin-bottom:0}
 .fg{display:flex;flex-direction:column;gap:4px;flex:1;min-width:110px}
-.fg label{font-size:11px;font-weight:500;color:var(--text2)}
-.fg input,.fg select{font-family:var(--sans);font-size:13px;padding:7px 10px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--text);transition:border .15s;width:100%}
-.fg input:focus,.fg select:focus{outline:none;border-color:var(--accent)}
-.fg .pw{position:relative}.fg .pw span{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text3);pointer-events:none}.fg .pw input{padding-left:22px}
-.btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:13px;font-weight:500;padding:7px 13px;border-radius:7px;border:1px solid var(--border2);background:var(--surface);color:var(--text);cursor:pointer;transition:all .15s}
-.btn:hover{background:var(--surface2)}.btn:disabled{opacity:.45;cursor:not-allowed}
-.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff}.btn-primary:hover{background:#2266d0}
-.btn-sm{font-size:12px;padding:5px 10px}
-.btn-danger{border-color:#f5c6c3;color:var(--red)}
+.fg label{font-size:11px;font-weight:500;color:var(--tx2)}
+.fg input,.fg select{font-family:var(--sans);font-size:13px;padding:7px 10px;border:1px solid var(--bor);border-radius:7px;background:var(--sur);color:var(--tx);width:100%}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--ac)}
+.fg .pw{position:relative}.fg .pw span{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--tx3);pointer-events:none}.fg .pw input{padding-left:22px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:13px;font-weight:500;padding:7px 13px;border-radius:7px;border:1px solid var(--bor2);background:var(--sur);color:var(--tx);cursor:pointer;transition:all .15s}
+.btn:hover{background:var(--sur2)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-primary{background:var(--ac);border-color:var(--ac);color:#fff}.btn-primary:hover{background:#2266d0}
+.btn-sm{font-size:12px;padding:5px 10px}.btn-danger{border-color:#f5c6c3;color:var(--rd)}
 .brow{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
 .pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 8px;border-radius:20px}
-.pill-ok{background:var(--green-bg);color:var(--green)}.pill-warn{background:var(--yellow-bg);color:var(--yellow)}.pill-err{background:var(--red-bg);color:var(--red)}.pill-info{background:var(--accent-bg);color:var(--accent)}.pill-gray{background:var(--surface2);color:var(--text2)}
-.mc-prev{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:7px;margin:12px 0}
-.mci{background:var(--surface2);border-radius:7px;padding:9px 11px}.mci .ml{font-size:10px;color:var(--text3);margin-bottom:2px}.mci .mv{font-size:13px;font-weight:600;color:var(--text)}.mci .mv.pos{color:var(--green)}.mci .mv.neg{color:var(--red)}.mci .mv.info{color:var(--accent)}
-.tw{overflow-x:auto;margin-bottom:10px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{text-align:left;padding:7px 9px;font-size:11px;font-weight:600;color:var(--text3);border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap}
-td{padding:8px 9px;border-bottom:1px solid var(--border);color:var(--text);white-space:nowrap}
-tr:last-child td{border-bottom:none}
-td.num{text-align:right;font-variant-numeric:tabular-nums}.td-pos{color:var(--green)}.td-neg{color:var(--red)}.td-muted{color:var(--text3)}
-.ibox{background:var(--accent-bg);border:1px solid #c8ddfb;border-radius:7px;padding:9px 13px;font-size:13px;color:#1a4a8a;margin-bottom:14px;display:flex;gap:8px;line-height:1.5}
-.wbox{background:var(--yellow-bg);border:1px solid #f0d080;border-radius:7px;padding:9px 13px;font-size:13px;color:var(--yellow);margin-bottom:14px;display:flex;gap:8px;line-height:1.5}
+.pill-ok{background:var(--gr-bg);color:var(--gr)}.pill-warn{background:var(--yw-bg);color:var(--yw)}.pill-err{background:var(--rd-bg);color:var(--rd)}.pill-info{background:var(--ac-bg);color:var(--ac)}.pill-gray{background:var(--sur2);color:var(--tx2)}
+.ibox{background:var(--ac-bg);border:1px solid #c8ddfb;border-radius:7px;padding:9px 13px;font-size:13px;color:#1a4a8a;margin-bottom:14px;display:flex;gap:8px;line-height:1.5}
+.wbox{background:var(--yw-bg);border:1px solid #f0d080;border-radius:7px;padding:9px 13px;font-size:13px;color:var(--yw);margin-bottom:14px;display:flex;gap:8px;line-height:1.5}
 .log{background:#1a1816;border-radius:7px;padding:10px 13px;font-family:var(--mono);font-size:11px;max-height:130px;overflow-y:auto;margin-top:9px;line-height:1.8;display:none}
 .log-ok{color:#4ade80}.log-err{color:#f87171}.log-info{color:#93c5fd}
 .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:18px}
-.rc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px}
-.rc .rl{font-size:11px;color:var(--text3);margin-bottom:4px}.rc .rv{font-size:19px;font-weight:600}.rc .rv.pos{color:var(--green)}.rc .rv.neg{color:var(--red)}.rc .rv.info{color:var(--accent)}.rc .rsub{font-size:11px;color:var(--text3);margin-top:2px}
-.ab{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:15px 17px;margin-bottom:10px}
+.rc{background:var(--sur);border:1px solid var(--bor);border-radius:var(--r);padding:13px 15px}
+.rc .rl{font-size:11px;color:var(--tx3);margin-bottom:4px}.rc .rv{font-size:19px;font-weight:600}
+.rc .rv.pos{color:var(--gr)}.rc .rv.neg{color:var(--rd)}.rc .rv.info{color:var(--ac)}.rc .rsub{font-size:11px;color:var(--tx3);margin-top:2px}
+.ab{background:var(--sur);border:1px solid var(--bor);border-radius:var(--rl);padding:15px 17px;margin-bottom:10px}
 .ah{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}.an{font-size:14px;font-weight:600}.ap{font-size:17px;font-weight:600}
-.ar{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;color:var(--text2);border-bottom:1px solid var(--border)}.ar:last-child{border-bottom:none}.ar span:last-child{color:var(--text);font-weight:500}
+.ar{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;color:var(--tx2);border-bottom:1px solid var(--bor)}.ar:last-child{border-bottom:none}.ar span:last-child{color:var(--tx);font-weight:500}
 .atr{display:flex;justify-content:space-between;font-size:13px;padding:5px 0 0;margin-top:3px;font-weight:600}
-.div{height:1px;background:var(--border);margin:18px 0}
+.div{height:1px;background:var(--bor);margin:18px 0}
 .opg{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:11px}
-.sub{display:flex;justify-content:space-between;align-items:center;background:var(--surface2);border-radius:7px;padding:10px 13px;margin-top:13px}
-.sub .sl{font-size:13px;color:var(--text2)}.sub .sv{font-size:15px;font-weight:600;color:var(--red)}
-
-/* Anúncios sync */
-.sync-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px}
-.anuncio-row{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:8px;flex-wrap:wrap;transition:border .15s}
-.anuncio-row:hover{border-color:var(--border2)}
-.anuncio-row.sem-custo{border-left:3px solid #f59e0b}
-.anuncio-row.completo{border-left:3px solid var(--green)}
-.anuncio-info{flex:1;min-width:0}
-.anuncio-nome{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.anuncio-meta{font-size:11px;color:var(--text3);margin-top:2px;display:flex;gap:10px;flex-wrap:wrap}
-.anuncio-inputs{display:flex;gap:8px;align-items:flex-end;flex-shrink:0}
-.anuncio-mc{min-width:100px;text-align:right;flex-shrink:0}
-.anuncio-mc .mc-val{font-size:14px;font-weight:600}
-.anuncio-mc .mc-pct{font-size:11px;color:var(--text3)}
-.progress{height:3px;background:var(--border);border-radius:2px;margin:10px 0;overflow:hidden}
-.progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s}
-.anuncio-row.vinculado-secundario{border-left:3px solid var(--accent);background:#f8fbff}
-.anuncio-row.vinculado-secundario .anuncio-inputs{opacity:.5;pointer-events:none}
-.vinculo-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;background:var(--accent-bg);color:var(--accent);padding:2px 7px;border-radius:10px;margin-left:6px}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:999}
-.modal{background:var(--surface);border-radius:var(--rl);padding:24px;width:440px;max-width:95vw;max-height:80vh;overflow-y:auto}
-.modal h3{font-size:16px;font-weight:600;margin-bottom:6px}
-.modal-sub{font-size:13px;color:var(--text2);margin-bottom:16px}
-.modal-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;cursor:pointer;font-size:13px;border:.5px solid var(--border);margin-bottom:6px;transition:border .15s}
-.modal-item:hover{border-color:var(--accent);background:var(--accent-bg)}
-.modal-item.selected{border-color:var(--accent);background:var(--accent-bg)}
-.modal-item .mi-nome{flex:1;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.modal-item .mi-id{font-size:11px;color:var(--text3);font-family:var(--mono)}
-.modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+.sub{display:flex;justify-content:space-between;align-items:center;background:var(--sur2);border-radius:7px;padding:10px 13px;margin-top:13px}
+.sub .sl{font-size:13px;color:var(--tx2)}.sub .sv{font-size:15px;font-weight:600;color:var(--rd)}
+.stw{overflow-x:auto}
+.stbl{width:100%;border-collapse:collapse;font-size:13px}
+.stbl th{text-align:left;padding:7px 9px;font-size:11px;font-weight:600;color:var(--tx3);border-bottom:1px solid var(--bor);background:var(--sur2);white-space:nowrap}
+.stbl td{padding:7px 9px;border-bottom:1px solid var(--bor);color:var(--tx)}
+.stbl tr:last-child td{border-bottom:none}.stbl tr:hover td{background:var(--sur2)}
+.stbl td.num{text-align:right;font-variant-numeric:tabular-nums}
+.td-pos{color:var(--gr)}.td-neg{color:var(--rd)}.td-mut{color:var(--tx3);font-size:12px}
+.sku-search{width:100%;padding:8px 12px;font-size:13px;border:1px solid var(--bor);border-radius:7px;background:var(--sur);color:var(--tx);margin-bottom:12px}
+.sku-search:focus{outline:none;border-color:var(--ac)}
+.arow{display:flex;align-items:center;gap:10px;background:var(--sur);border:1px solid var(--bor);border-radius:8px;padding:10px 14px;margin-bottom:7px;transition:border .15s;flex-wrap:wrap}
+.arow:hover{border-color:var(--bor2)}.arow.sem-sku{border-left:3px solid #f59e0b}.arow.completo{border-left:3px solid var(--gr)}.arow.vinc-sec{border-left:3px solid var(--ac);background:#f8fbff}
+.arow .ai{flex:1;min-width:0}.arow .anome{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.arow .ameta{font-size:11px;color:var(--tx3);margin-top:2px;display:flex;gap:10px;flex-wrap:wrap}
+.arow .amc{min-width:100px;text-align:right;flex-shrink:0}
+.arow .amc .mv{font-size:14px;font-weight:600}.arow .amc .mp{font-size:11px;color:var(--tx3)}
+.vinc-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;background:var(--ac-bg);color:var(--ac);padding:2px 7px;border-radius:10px;margin-left:6px}
+.prog{height:3px;background:var(--bor);border-radius:2px;margin:10px 0;overflow:hidden}
+.prog-fill{height:100%;background:var(--ac);border-radius:2px;transition:width .3s}
+.moverlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:999}
+.modal{background:var(--sur);border-radius:var(--rl);padding:24px;width:460px;max-width:95vw;max-height:80vh;overflow-y:auto}
+.modal h3{font-size:16px;font-weight:600;margin-bottom:6px}.modal-sub{font-size:13px;color:var(--tx2);margin-bottom:16px}
+.mitem{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;cursor:pointer;font-size:13px;border:.5px solid var(--bor);margin-bottom:6px;transition:border .15s}
+.mitem:hover{border-color:var(--ac);background:var(--ac-bg)}.mitem.sel{border-color:var(--ac);background:var(--ac-bg)}
+.mbtns{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+.msearch{width:100%;padding:7px 10px;font-size:13px;border:1px solid var(--bor);border-radius:7px;margin-bottom:10px}
+.msearch:focus{outline:none;border-color:var(--ac)}
 @media(max-width:700px){.sidebar{display:none}.main{padding:14px}}
 </style>
 </head>
@@ -105,12 +87,13 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}.td-pos{color:var(--gr
 <div class="topbar">
   <div class="logo"><i class="ti ti-chart-line"></i></div>
   <span class="ttl">Fechamento ML</span>
-  <span class="tsub">Margem de contribuição · 3 contas</span>
+  <span class="tsub">Gestão de margem · 3 contas</span>
 </div>
 <div class="layout">
 <nav class="sidebar">
   <div class="sg">Produtos</div>
-  <button class="ni on" onclick="sw('anuncios')"><i class="ti ti-refresh"></i> Sincronizar anúncios <span class="badge" id="badge-anuncios">0</span></button>
+  <button class="ni on" onclick="sw('skus')"><i class="ti ti-database"></i> Tabela de SKUs <span class="bdg" id="bdg-skus">0</span></button>
+  <button class="ni" onclick="sw('anuncios')"><i class="ti ti-refresh"></i> Anúncios ML <span class="bdg" id="bdg-anuncios">0</span></button>
   <div class="sg">Fechamento</div>
   <button class="ni" onclick="sw('fechamento')"><i class="ti ti-cloud-download"></i> Coletar dados</button>
   <button class="ni" onclick="sw('operacional')"><i class="ti ti-building"></i> Operacional</button>
@@ -121,61 +104,87 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}.td-pos{color:var(--gr
 </nav>
 <main class="main">
 
-<!-- ANÚNCIOS -->
-<div id="pane-anuncios" class="pane on">
-  <div class="ptitle">Sincronizar anúncios</div>
-  <div class="psub">Busca todos os anúncios ativos das 3 contas. Preencha apenas custo e imposto — preço, comissão e frete vêm da API.</div>
-
-  <div class="ibox"><i class="ti ti-info-circle"></i><span>Configure os tokens na aba <b>Contas ML</b> antes de sincronizar. Após a sincronização, informe o custo e o imposto de cada produto.</span></div>
-
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center">
-    <button class="btn btn-primary" id="btn-sync" onclick="sincronizarAnuncios()"><i class="ti ti-refresh"></i> Sincronizar anúncios das 3 contas</button>
-    <button class="btn btn-sm" onclick="salvarCustos()"><i class="ti ti-device-floppy"></i> Salvar custos preenchidos</button>
-    <span id="sync-status" style="font-size:12px;color:var(--text3)"></span>
+<div id="pane-skus" class="pane on">
+  <div class="ptitle">Tabela de SKUs</div>
+  <div class="psub">Gerencie seus produtos com custo e imposto. Os anúncios ML herdam automaticamente pelo seller_custom_field.</div>
+  <div class="slabel">Adicionar / Editar SKU</div>
+  <div class="card">
+    <div class="frow">
+      <div class="fg" style="max-width:180px"><label>Código SKU</label><input id="ns_sku" placeholder="Ex: KP517"/></div>
+      <div class="fg"><label>Nome do produto</label><input id="ns_nome" placeholder="Ex: Suporte notebook"/></div>
+      <div class="fg" style="max-width:150px"><label>Categoria</label><input id="ns_cat" placeholder="Opcional"/></div>
+    </div>
+    <div class="frow">
+      <div class="fg" style="max-width:150px"><label>Custo (R$)</label><div class="pw"><span>R$</span><input type="number" id="ns_custo" min="0" step="0.01" placeholder="0,00"/></div></div>
+      <div class="fg" style="max-width:130px"><label>Imposto (%)</label><div class="pw"><span>%</span><input type="number" id="ns_imp" min="0" step="0.01" placeholder="2,0"/></div></div>
+    </div>
+    <div class="brow">
+      <button class="btn btn-primary" onclick="addSKU()"><i class="ti ti-plus"></i> Salvar SKU</button>
+      <button class="btn btn-sm" onclick="importCSV()"><i class="ti ti-upload"></i> Importar CSV</button>
+      <button class="btn btn-sm" onclick="exportSkusCSV()"><i class="ti ti-download"></i> Exportar CSV</button>
+      <input type="file" id="csv-input" accept=".csv" style="display:none" onchange="handleCSV(event)">
+    </div>
   </div>
-  <div class="progress" id="sync-progress" style="display:none"><div class="progress-fill" id="sync-fill" style="width:0%"></div></div>
-  <div class="log" id="sync-log"></div>
-
-  <div id="anuncios-por-conta"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">
+    <div class="slabel" style="margin:0">SKUs cadastrados (<span id="sku-count">0</span>)</div>
+    <span id="sku-semcusto-warn" style="font-size:12px;color:var(--yw);display:none"><i class="ti ti-alert-triangle"></i> <span id="sku-semcusto-n">0</span> sem custo</span>
+  </div>
+  <input class="sku-search" id="sku-search" placeholder="Buscar por SKU ou nome..." oninput="renderSKUTable()">
+  <div class="stw">
+    <table class="stbl">
+      <thead><tr>
+        <th style="width:140px">SKU</th><th>Nome</th><th style="width:110px;text-align:right">Custo</th>
+        <th style="width:80px;text-align:right">Imposto</th><th style="width:110px">Categoria</th>
+        <th style="width:90px">Anúncios</th><th style="width:36px"></th>
+      </tr></thead>
+      <tbody id="sku-tbody"></tbody>
+    </table>
+  </div>
 </div>
 
-<!-- FECHAMENTO -->
+<div id="pane-anuncios" class="pane">
+  <div class="ptitle">Anúncios ML</div>
+  <div class="psub">Sincroniza anúncios ativos das 3 contas e vincula ao SKU pelo seller_custom_field.</div>
+  <div class="ibox"><i class="ti ti-info-circle"></i><span>Anúncios em amarelo não têm SKU reconhecido. Clique em "Vincular SKU" para associar manualmente.</span></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:center">
+    <button class="btn btn-primary" id="btn-sync" onclick="sincronizar()"><i class="ti ti-refresh"></i> Sincronizar anúncios das 3 contas</button>
+    <span id="sync-status" style="font-size:12px;color:var(--tx3)"></span>
+  </div>
+  <div class="prog" id="sync-prog" style="display:none"><div class="prog-fill" id="sync-fill" style="width:0%"></div></div>
+  <div class="log" id="sync-log"></div>
+  <div id="anuncios-list" style="margin-top:14px"></div>
+</div>
+
 <div id="pane-fechamento" class="pane">
   <div class="ptitle">Coletar dados do mês</div>
-  <div class="psub">Busca quantidades vendidas por anúncio e custos de ADS, Full e devoluções.</div>
+  <div class="psub">Busca quantidades vendidas e custos adicionais via API.</div>
   <div style="display:flex;gap:11px;flex-wrap:wrap;margin-bottom:18px;align-items:flex-end">
     <div class="fg" style="max-width:150px"><label>Mês</label>
-      <select id="f_month">
+      <select id="f_mes">
         <option value="1">Janeiro</option><option value="2">Fevereiro</option><option value="3">Março</option>
         <option value="4">Abril</option><option value="5">Maio</option><option value="6">Junho</option>
         <option value="7">Julho</option><option value="8">Agosto</option><option value="9">Setembro</option>
         <option value="10">Outubro</option><option value="11">Novembro</option><option value="12">Dezembro</option>
       </select>
     </div>
-    <div class="fg" style="max-width:90px"><label>Ano</label><input type="number" id="f_year" value="2025" min="2020" max="2030"/></div>
+    <div class="fg" style="max-width:90px"><label>Ano</label><input type="number" id="f_ano" value="2025" min="2020" max="2030"/></div>
   </div>
-
   <div class="slabel">Vendas por anúncio</div>
-  <div id="vendas-lista"><p style="color:var(--text3);font-size:13px">Sincronize os anúncios primeiro.</p></div>
-  <div class="brow">
-    <button class="btn btn-sm" onclick="buscarVendas()"><i class="ti ti-cloud-download"></i> Buscar vendas na API ML</button>
-  </div>
+  <div id="vendas-lista"><p style="color:var(--tx3);font-size:13px">Sincronize os anúncios primeiro.</p></div>
+  <div class="brow"><button class="btn btn-sm" onclick="buscarVendas()"><i class="ti ti-cloud-download"></i> Buscar vendas na API ML</button></div>
   <div class="log" id="vendas-log"></div>
-
-  <div class="slabel" style="margin-top:22px">Custos adicionais ML por conta</div>
+  <div class="slabel" style="margin-top:22px">Custos adicionais por conta</div>
   <div id="custos-adicionais"></div>
   <div class="brow">
-    <button class="btn btn-sm" onclick="buscarCustosML()"><i class="ti ti-cloud-download"></i> Buscar ADS, Full e devoluções na API</button>
+    <button class="btn btn-sm" onclick="buscarCustosML()"><i class="ti ti-cloud-download"></i> Buscar ADS, Full e devoluções</button>
     <button class="btn btn-primary" onclick="calcFechamento();sw('resultado')"><i class="ti ti-calculator"></i> Calcular resultado</button>
   </div>
   <div class="log" id="custos-log"></div>
 </div>
 
-<!-- OPERACIONAL -->
 <div id="pane-operacional" class="pane">
   <div class="ptitle">Custos Operacionais</div>
-  <div class="psub">Fixos compartilhados entre as 3 contas, rateados por percentual.</div>
-  <div class="slabel">Lançamentos</div>
+  <div class="psub">Fixos compartilhados, rateados entre as 3 contas.</div>
   <div class="card">
     <div class="opg">
       <div class="fg"><label>Folha / Funcionários</label><div class="pw"><span>R$</span><input type="number" id="op_folha" min="0" placeholder="0,00" oninput="recalc()"/></div></div>
@@ -192,14 +201,13 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}.td-pos{color:var(--gr
       <div class="fg"><label id="lbl_r2">% Conta 2</label><input type="number" id="op_r2" value="33.3" min="0" max="100" step="0.1" oninput="recalc()"/></div>
       <div class="fg"><label id="lbl_r3">% Conta 3</label><input type="number" id="op_r3" value="33.4" min="0" max="100" step="0.1" oninput="recalc()"/></div>
     </div>
-    <div class="sub"><span class="sl"><i class="ti ti-calculator"></i> Total operacional</span><span class="sv" id="op_total">R$ 0,00</span></div>
+    <div class="sub"><span class="sl">Total operacional</span><span class="sv" id="op_total">R$ 0,00</span></div>
   </div>
 </div>
 
-<!-- RESULTADO -->
 <div id="pane-resultado" class="pane">
   <div class="ptitle">Resultado do mês</div>
-  <div class="psub" id="res-periodo">Calcule o fechamento para ver o resultado.</div>
+  <div class="psub" id="res-per">Calcule o fechamento para ver o resultado.</div>
   <div class="rgrid">
     <div class="rc"><div class="rl">Receita bruta</div><div class="rv info" id="d_rec">R$ 0</div></div>
     <div class="rc"><div class="rl">Margem de contribuição</div><div class="rv" id="d_mc">R$ 0</div><div class="rsub" id="d_mcp"></div></div>
@@ -209,578 +217,513 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}.td-pos{color:var(--gr
   </div>
   <div class="div"></div>
   <div class="slabel">Por conta</div>
-  <div id="result-contas"></div>
-  <div class="brow" style="margin-top:14px">
-    <button class="btn btn-sm" onclick="exportCSV()"><i class="ti ti-download"></i> Exportar CSV</button>
-  </div>
+  <div id="res-contas"></div>
+  <div class="brow" style="margin-top:14px"><button class="btn btn-sm" onclick="exportCSVRes()"><i class="ti ti-download"></i> Exportar CSV</button></div>
 </div>
 
-<!-- CONTAS -->
 <div id="pane-contas" class="pane">
   <div class="ptitle">Contas ML</div>
-  <div class="psub">Configure o Access Token de cada conta para busca automática via API.</div>
-  <div class="ibox"><i class="ti ti-shield-lock"></i><span>Tokens salvos localmente no seu navegador (localStorage). Nunca enviados a servidores externos.</span></div>
+  <div class="psub">Configure o Access Token de cada conta.</div>
+  <div class="ibox"><i class="ti ti-shield-lock"></i><span>Tokens salvos localmente no navegador. Nunca enviados a servidores externos.</span></div>
   <div id="contas-cards"></div>
-  <div class="slabel" style="margin-top:22px">Como gerar o Access Token</div>
-  <div class="card" style="font-size:13px;line-height:1.8;color:var(--text2)">
-    <b style="color:var(--text)">1.</b> Acesse o link de autorização (com seu App ID):<br>
-    <code style="font-family:var(--mono);font-size:11px;background:var(--surface2);padding:3px 8px;border-radius:5px;display:block;margin:5px 0;word-break:break-all">https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=SEU_APP_ID&redirect_uri=https://httpbin.org/get</code>
-    <b style="color:var(--text)">2.</b> Copie o <code style="font-family:var(--mono);font-size:11px;background:var(--surface2);padding:2px 6px;border-radius:4px">code</code> retornado e troque pelo token via curl no CMD.<br>
-    <b style="color:var(--text)">3.</b> Cole o <code style="font-family:var(--mono);font-size:11px;background:var(--surface2);padding:2px 6px;border-radius:4px">access_token</code> acima e clique em Testar.
-  </div>
 </div>
 
 </main>
 </div>
-<div id="modal-vincular" class="modal-overlay" style="display:none">
+
+<div id="modal-sku" class="moverlay" style="display:none">
   <div class="modal">
-    <h3>Vincular anúncio</h3>
-    <div class="modal-sub" id="modal-vincular-sub">Selecione o anúncio principal que fornecerá o custo e imposto.</div>
-    <div id="modal-lista"></div>
-    <div class="modal-btns">
+    <h3>Vincular SKU ao anúncio</h3>
+    <div class="modal-sub" id="modal-sku-sub"></div>
+    <input class="msearch" id="modal-search" placeholder="Buscar SKU ou nome..." oninput="renderModalLista()">
+    <div id="modal-lista" style="max-height:280px;overflow-y:auto"></div>
+    <div class="mbtns">
       <button class="btn btn-sm" onclick="fecharModal()">Cancelar</button>
-      <button class="btn btn-primary btn-sm" id="modal-confirmar" onclick="confirmarVinculo()">Vincular</button>
+      <button class="btn btn-primary btn-sm" onclick="confirmarSkuVinculo()">Vincular</button>
     </div>
   </div>
 </div>
 
 <script>
-const CONTAS = [{id:'c1',label:'Conta 1'},{id:'c2',label:'Conta 2'},{id:'c3',label:'Conta 3'}];
-let tokens = {}, userids = {}, contaNames = {c1:'Conta 1',c2:'Conta 2',c3:'Conta 3'};
-let anuncios = []; // {mlb, nome, conta, preco, comPct, comVal, frete, custo, impPct, mc, mcp}
-let vinculos = {}; // {mlb_secundario: mlb_principal}
-let fechData = {c1:{mc:0,receita:0,ads:0,full:0,dev:0},c2:{mc:0,receita:0,ads:0,full:0,dev:0},c3:{mc:0,receita:0,ads:0,full:0,dev:0}};
-let modalMlbAtual = null, modalSelecionado = null;
+const PROXY="https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy";
+const CONTAS=[{id:"c1",label:"Conta 1"},{id:"c2",label:"Conta 2"},{id:"c3",label:"Conta 3"}];
+const SEED_SKUS=[{"sku": "LATA2026", "custo": 1.0, "impPct": 1.0}, {"sku": "KITESPECIAL1050", "custo": 1600.0, "impPct": 1.0}, {"sku": "KIT350+LATA", "custo": 275.0, "impPct": 1.0}, {"sku": "KIT700+LATA", "custo": 545.0, "impPct": 1.0}, {"sku": "KITLATA+30ENV", "custo": 225.0, "impPct": 1.0}, {"sku": "KITLATA+50ENV", "custo": 340.0, "impPct": 1.0}, {"sku": "KITLATA+10ENV", "custo": 110.0, "impPct": 1.0}, {"sku": "CAPAMOLE+10ENV", "custo": 73.5, "impPct": 1.0}, {"sku": "CAPADURA+20ENV", "custo": 164.0, "impPct": 1.0}, {"sku": "CAPAPRATA+20ENV", "custo": 168.0, "impPct": 1.0}, {"sku": "CAPAOURO+20ENV", "custo": 174.0, "impPct": 0.01}, {"sku": "CAPAOURO10ENV", "custo": 120.0, "impPct": 0.01}, {"sku": "CAPAPRATA10ENV", "custo": 109.9, "impPct": 2.0}, {"sku": "BROCHURA10ENV", "custo": 74.0, "impPct": 2.0}, {"sku": "CAPAMOLE15ENV", "custo": 101.0, "impPct": 2.0}, {"sku": "CAPAMOLEFIGURINHA140E", "custo": 755.0, "impPct": 1.0}, {"sku": "BROCHURA", "custo": 20.0, "impPct": 2.0}, {"sku": "ALB-CAPADURA", "custo": 60.0, "impPct": 1.0}, {"sku": "ALB-PRATA", "custo": 60.0, "impPct": 1.0}, {"sku": "ALB-BROCHURA", "custo": 20.0, "impPct": 1.0}, {"sku": "ALB-OURO", "custo": 70.0, "impPct": 0.01}, {"sku": "FIGURINHA100E", "custo": 511.0, "impPct": 2.0}, {"sku": "KIT1000ENVELOPES", "custo": 5110.0, "impPct": 2.0}, {"sku": "ENVELOPE5", "custo": 25.55, "impPct": 2.0}, {"sku": "ENVELOPE50", "custo": 255.5, "impPct": 2.0}, {"sku": "ENVELOPE10", "custo": 51.1, "impPct": 2.0}, {"sku": "ENVELOPE140", "custo": 715.4, "impPct": 2.0}, {"sku": "ENVELOPE100", "custo": 511.0, "impPct": 2.0}, {"sku": "AsentPiso", "custo": 152.5, "impPct": 3.0}, {"sku": "KIT100ENVELOPES", "custo": 535.0, "impPct": 1.0}, {"sku": "KIT10ENVELOPES", "custo": 51.1, "impPct": 2.0}, {"sku": "KIT48ENVELOPES", "custo": 256.9, "impPct": 1.0}, {"sku": "KIT36ENVELOPES", "custo": 189.9, "impPct": 1.0}, {"sku": "CopaAlbumCapaDura", "custo": 54.68, "impPct": 0.0}, {"sku": "CAPDUR36ENV", "custo": 238.64, "impPct": 2.0}, {"sku": "CAPDUR24ENV", "custo": 177.32, "impPct": 2.0}, {"sku": "ALBUM-CAPADURA", "custo": 55.0, "impPct": 2.0}, {"sku": "FIGURINHA5E", "custo": 25.55, "impPct": 2.0}, {"sku": "FIGURINHA10E", "custo": 51.1, "impPct": 2.0}, {"sku": "CAPADURA15ENV", "custo": 131.33, "impPct": 2.0}, {"sku": "FIGURINHA1E", "custo": 5.11, "impPct": 2.0}, {"sku": "CAPADURA140ENV", "custo": 770.08, "impPct": 2.0}, {"sku": "CAPADURA5ENV", "custo": 80.23, "impPct": 2.0}, {"sku": "FIGURINHA140E", "custo": 715.4, "impPct": 2.0}, {"sku": "CAPADURA", "custo": 55.0, "impPct": 2.0}, {"sku": "CAPADURA10ENV", "custo": 107.0, "impPct": 2.0}, {"sku": "CamLamKIT4", "custo": 150.22, "impPct": 2.0}, {"sku": "PistolaDePintura", "custo": 112.0, "impPct": 4.0}, {"sku": "ChaveDeImpacto", "custo": 178.0, "impPct": 2.0}, {"sku": "BMF1275", "custo": 5.55, "impPct": 1.11}, {"sku": "SUP_HY320", "custo": 4.0, "impPct": 4.0}, {"sku": "SUP_HY300", "custo": 4.0, "impPct": 4.0}, {"sku": "MS_PRETO4", "custo": 22.5, "impPct": 4.0}, {"sku": "GStick01", "custo": 96.58, "impPct": 4.0}, {"sku": "Fone_CAP", "custo": 28.0, "impPct": 4.0}, {"sku": "2KIT_A28", "custo": 188.0, "impPct": 2.0}, {"sku": "KIT2_A28", "custo": 166.5, "impPct": 4.0}, {"sku": "FECH01", "custo": 220.0, "impPct": 4.0}, {"sku": "MED_BRA\u00c7O", "custo": 28.0, "impPct": 4.0}, {"sku": "MED_PULSO", "custo": 32.0, "impPct": 4.0}, {"sku": "BikeErg", "custo": 420.0, "impPct": 1.0}, {"sku": "CamRobo", "custo": 120.0, "impPct": 2.0}, {"sku": "H3002", "custo": 130.0, "impPct": 2.0}, {"sku": "LavaJato", "custo": 70.0, "impPct": 2.0}, {"sku": "Parafusadeira01", "custo": 88.0, "impPct": 2.0}, {"sku": "MS_PRETO3", "custo": 22.5, "impPct": 2.0}, {"sku": "H3001", "custo": 135.0, "impPct": 2.0}, {"sku": "CordaDePular", "custo": 6.5, "impPct": 2.0}, {"sku": "CamRe1", "custo": 11.73, "impPct": 2.0}, {"sku": "MS_PRETO2", "custo": 23.0, "impPct": 2.0}, {"sku": "BM-B557AZUL", "custo": 21.31, "impPct": 2.0}, {"sku": "BM-F1065CINZA", "custo": 25.67, "impPct": 2.0}, {"sku": "BM-B557PRETO", "custo": 21.31, "impPct": 2.0}, {"sku": "BM-B557CINZA", "custo": 21.31, "impPct": 2.0}, {"sku": "BM-F1065PRETO", "custo": 25.67, "impPct": 2.0}, {"sku": "BM-F1065AZUL", "custo": 25.67, "impPct": 2.0}, {"sku": "BMG-71", "custo": 64.26, "impPct": 2.0}, {"sku": "BM-F1080A", "custo": 54.3, "impPct": 2.0}, {"sku": "BM-F1003", "custo": 27.54, "impPct": 2.0}, {"sku": "BM-F1080B", "custo": 54.3, "impPct": 2.0}, {"sku": "PS4-2", "custo": 35.0, "impPct": 2.0}, {"sku": "CT_PS4KIT_2", "custo": 69.5, "impPct": 2.0}, {"sku": "KIT3CAMLPD1", "custo": 116.0, "impPct": 2.0}, {"sku": "KitFerramenta", "custo": 17.5, "impPct": 2.0}, {"sku": "PS4", "custo": 34.7, "impPct": 2.0}, {"sku": "MS_VERDE1", "custo": 23.0, "impPct": 2.0}, {"sku": "MS_PRATA1", "custo": 23.0, "impPct": 2.0}, {"sku": "MS_VERMELHO1", "custo": 23.0, "impPct": 2.0}, {"sku": "MS_DOURADO1", "custo": 23.0, "impPct": 2.0}, {"sku": "MS_PRETO1", "custo": 23.0, "impPct": 2.0}, {"sku": "DataFull", "custo": 38.8, "impPct": 2.0}, {"sku": "CT_PS4KIT2", "custo": 69.5, "impPct": 2.0}, {"sku": "FONE_IT1ROSA", "custo": 31.5, "impPct": 2.0}, {"sku": "FONE_IT1BRANCO", "custo": 31.5, "impPct": 2.0}, {"sku": "FONE_IT1", "custo": 31.5, "impPct": 2.0}, {"sku": "FONE_IT2", "custo": 31.5, "impPct": 2.0}, {"sku": "CT_PS4", "custo": 35.5, "impPct": 2.0}, {"sku": "CamA8", "custo": 68.0, "impPct": 2.0}, {"sku": "SUP_PRETO", "custo": 11.22, "impPct": 2.0}, {"sku": "SUP_PRATEADO", "custo": 11.22, "impPct": 2.0}, {"sku": "a28_KIT2", "custo": 178.64, "impPct": 2.0}, {"sku": "CamA8Kit2", "custo": 137.0, "impPct": 2.0}, {"sku": "CamLamKIT2", "custo": 79.0, "impPct": 2.0}, {"sku": "ACV00267ALPHA", "custo": 120.0, "impPct": 2.0}, {"sku": "MASS_DOURADO", "custo": 23.0, "impPct": 2.0}, {"sku": "CarMag1", "custo": 9.5, "impPct": 2.0}, {"sku": "TURIN_100", "custo": 82.0, "impPct": 2.0}, {"sku": "TURIN_120", "custo": 98.0, "impPct": 2.0}, {"sku": "TURIN_36", "custo": 29.37, "impPct": 2.0}, {"sku": "TURIN_168", "custo": 137.0, "impPct": 2.0}, {"sku": "TURIN_42", "custo": 34.28, "impPct": 2.0}, {"sku": "TURIN_60", "custo": 48.96, "impPct": 2.0}, {"sku": "TURIN_24", "custo": 19.58, "impPct": 2.0}, {"sku": "MASS_PRATA", "custo": 23.0, "impPct": 2.0}, {"sku": "MASS_VERMELHO", "custo": 23.0, "impPct": 2.0}, {"sku": "MASS_VERDE", "custo": 23.0, "impPct": 2.0}, {"sku": "MASS_PRETO", "custo": 23.0, "impPct": 2.0}, {"sku": "a28_Kit3", "custo": 283.9, "impPct": 2.0}, {"sku": "a28_Kit4", "custo": 379.9, "impPct": 2.0}, {"sku": "KIT3CAMLPD", "custo": 117.0, "impPct": 2.0}, {"sku": "POWERBANKPRETO50000", "custo": 119.89, "impPct": 2.0}, {"sku": "POWERBANKBRANCO50000", "custo": 119.89, "impPct": 2.0}, {"sku": "POWERBANKBRANCO30000", "custo": 89.62, "impPct": 2.0}, {"sku": "POWERBANKPRETO30000", "custo": 89.62, "impPct": 2.0}, {"sku": "CX_01", "custo": 76.5, "impPct": 2.0}, {"sku": "KIT2CAMLPD", "custo": 78.0, "impPct": 2.0}, {"sku": "KIT5PANELAS", "custo": 177.75, "impPct": 2.0}, {"sku": "BL\u00c71", "custo": 8.25, "impPct": 2.0}, {"sku": "A28_UN", "custo": 93.0, "impPct": 2.0}, {"sku": "LE-7674-2", "custo": 25.5, "impPct": 2.0}, {"sku": "BL\u00c7", "custo": 12.5, "impPct": 2.0}, {"sku": "WEBC", "custo": 22.44, "impPct": 2.0}, {"sku": "HY300", "custo": 157.0, "impPct": 2.0}, {"sku": "LE-7674", "custo": 25.5, "impPct": 2.0}, {"sku": "TWS35", "custo": 38.0, "impPct": 2.0}, {"sku": "KIT8+PRESSAO", "custo": 271.93, "impPct": 2.0}, {"sku": "KIT9PANELAS", "custo": 256.87, "impPct": 2.0}, {"sku": "KIT10+WOK", "custo": 364.51, "impPct": 2.0}, {"sku": "KIT_2_LE7045", "custo": 8.0, "impPct": 2.0}, {"sku": "Ear101", "custo": 22.5, "impPct": 2.0}, {"sku": "CARV1", "custo": 14.01, "impPct": 2.0}, {"sku": "KA2812-LE7045", "custo": 4.5, "impPct": 2.0}, {"sku": "KA2807-LE7028", "custo": 11.0, "impPct": 2.0}, {"sku": "KA2950-LE7250", "custo": 9.0, "impPct": 2.0}, {"sku": "KA3806-LE7068", "custo": 11.5, "impPct": 2.0}, {"sku": "KA2955-LE74101", "custo": 9.6, "impPct": 2.0}, {"sku": "UN-LE7045", "custo": 4.0, "impPct": 2.0}, {"sku": "LE7438", "custo": 9.5, "impPct": 2.0}, {"sku": "LE7699", "custo": 6.5, "impPct": 2.0}, {"sku": "LE7045", "custo": 8.0, "impPct": 2.0}, {"sku": "KA3807-FBG9103", "custo": 12.0, "impPct": 2.0}, {"sku": "CT5", "custo": 8.0, "impPct": 2.0}, {"sku": "CarMag3", "custo": 18.0, "impPct": 2.0}, {"sku": "CT1", "custo": 4.5, "impPct": 2.0}, {"sku": "CT2", "custo": 10.5, "impPct": 2.0}, {"sku": "CT4", "custo": 10.5, "impPct": 2.0}, {"sku": "CT3", "custo": 12.5, "impPct": 2.0}, {"sku": "Ear10", "custo": 22.5, "impPct": 2.0}, {"sku": "EarCap", "custo": 50.0, "impPct": 2.0}, {"sku": "CarCel", "custo": 10.0, "impPct": 2.0}, {"sku": "Ear11", "custo": 22.5, "impPct": 2.0}, {"sku": "Ear6", "custo": 42.84, "impPct": 2.0}, {"sku": "Ear5", "custo": 42.84, "impPct": 2.0}, {"sku": "Ear4", "custo": 42.84, "impPct": 2.0}, {"sku": "Ear7", "custo": 40.0, "impPct": 2.0}, {"sku": "CarMag2", "custo": 16.84, "impPct": 2.0}, {"sku": "Ear3", "custo": 37.0, "impPct": 2.0}, {"sku": "Ear8", "custo": 40.0, "impPct": 2.0}, {"sku": "Ear9", "custo": 40.5, "impPct": 2.0}, {"sku": "Ear2", "custo": 37.0, "impPct": 2.0}, {"sku": "GRX1", "custo": 12.5, "impPct": 2.0}, {"sku": "CARV", "custo": 14.04, "impPct": 2.0}, {"sku": "CarMag", "custo": 16.09, "impPct": 2.0}, {"sku": "Ear1", "custo": 20.0, "impPct": 2.0}, {"sku": "CAM4", "custo": 42.0, "impPct": 2.0}, {"sku": "CAM3", "custo": 35.0, "impPct": 2.0}, {"sku": "D3203", "custo": 80.96, "impPct": 2.0}, {"sku": "KP517", "custo": 32.86, "impPct": 2.0}, {"sku": "KPAD140", "custo": 25.15, "impPct": 2.0}, {"sku": "KP8015", "custo": 82.13, "impPct": 2.0}, {"sku": "KPHD013", "custo": 16.24, "impPct": 2.0}, {"sku": "T89", "custo": 38.64, "impPct": 2.0}, {"sku": "KP600", "custo": 11.56, "impPct": 2.0}, {"sku": "KP532", "custo": 78.3, "impPct": 2.0}, {"sku": "KP533", "custo": 91.8, "impPct": 2.0}, {"sku": "KP526", "custo": 41.58, "impPct": 2.0}, {"sku": "HD821", "custo": 16.24, "impPct": 2.0}, {"sku": "A320", "custo": 266.12, "impPct": 2.0}, {"sku": "DH004", "custo": 48.1, "impPct": 2.0}, {"sku": "KP3466", "custo": 12.39, "impPct": 2.0}, {"sku": "KPC29", "custo": 63.34, "impPct": 2.0}, {"sku": "KP6037", "custo": 260.25, "impPct": 2.0}, {"sku": "KP6032", "custo": 280.26, "impPct": 2.0}, {"sku": "GT730", "custo": 197.37, "impPct": 2.0}, {"sku": "KP522", "custo": 61.5, "impPct": 2.0}, {"sku": "KPDH004", "custo": 45.71, "impPct": 2.0}, {"sku": "KPC29BH", "custo": 63.34, "impPct": 2.0}, {"sku": "KP6037BH", "custo": 260.25, "impPct": 2.0}, {"sku": "KP6032BH", "custo": 266.22, "impPct": 2.0}, {"sku": "LB521", "custo": 123.93, "impPct": 2.0}, {"sku": "TY003", "custo": 7.34, "impPct": 2.0}, {"sku": "BL714", "custo": 12.85, "impPct": 2.0}, {"sku": "BL715", "custo": 14.96, "impPct": 2.0}, {"sku": "GGT730", "custo": 197.37, "impPct": 2.0}, {"sku": "KP488AZUL", "custo": 60.22, "impPct": 2.0}, {"sku": "KP4040VERMELHO", "custo": 28.01, "impPct": 2.0}, {"sku": "KP4040AZUL", "custo": 28.01, "impPct": 2.0}, {"sku": "KP4040AMARELO", "custo": 28.01, "impPct": 2.0}, {"sku": "KP4040VERDE", "custo": 28.01, "impPct": 2.0}, {"sku": "QRPET2508", "custo": 77.29, "impPct": 2.0}, {"sku": "KP2060", "custo": 36.72, "impPct": 2.0}, {"sku": "GGT6102G", "custo": 104.1, "impPct": 2.0}, {"sku": "GVR337", "custo": 6.7, "impPct": 2.0}, {"sku": "GVR302", "custo": 12.11, "impPct": 2.0}, {"sku": "KPC31AN1", "custo": 265.76, "impPct": 2.0}, {"sku": "KP916", "custo": 22.64, "impPct": 2.0}, {"sku": "KPC31AN", "custo": 252.45, "impPct": 2.0}, {"sku": "RO827", "custo": 46.75, "impPct": 2.0}, {"sku": "KP455A", "custo": 64.09, "impPct": 2.0}, {"sku": "KPGM034", "custo": 67.65, "impPct": 2.0}, {"sku": "KP2064", "custo": 43.51, "impPct": 2.0}, {"sku": "KP2003A", "custo": 13.02, "impPct": 2.0}, {"sku": "KPRO800", "custo": 21.75, "impPct": 2.0}, {"sku": "KP488", "custo": 61.4, "impPct": 2.0}, {"sku": "KP4040", "custo": 27.54, "impPct": 2.0}, {"sku": "KP917", "custo": 19.53, "impPct": 2.0}, {"sku": "KPAD109", "custo": 10.01, "impPct": 2.0}, {"sku": "KPRO827", "custo": 45.9, "impPct": 2.0}, {"sku": "KPMU007", "custo": 35.71, "impPct": 2.0}, {"sku": "KPT102", "custo": 31.23, "impPct": 2.0}, {"sku": "KP2059", "custo": 41.58, "impPct": 2.0}, {"sku": "KPTE120", "custo": 30.36, "impPct": 2.0}, {"sku": "D3204", "custo": 75.27, "impPct": 2.0}, {"sku": "D3142", "custo": 37.65, "impPct": 2.0}, {"sku": "KP401", "custo": 45.88, "impPct": 2.0}, {"sku": "KPTE115", "custo": 34.79, "impPct": 2.0}, {"sku": "PJ004", "custo": 328.55, "impPct": 2.0}, {"sku": "KP2008", "custo": 16.0, "impPct": 2.0}, {"sku": "CN700", "custo": 34.87, "impPct": 2.0}, {"sku": "HM55", "custo": 99.0, "impPct": 2.0}, {"sku": "KP1018", "custo": 87.0, "impPct": 2.0}, {"sku": "KP2012", "custo": 39.0, "impPct": 2.0}, {"sku": "KP237", "custo": 58.0, "impPct": 2.0}, {"sku": "CAM2", "custo": 38.5, "impPct": 2.0}, {"sku": "EXT5BRANCO", "custo": 30.0, "impPct": 2.0}, {"sku": "EXT5", "custo": 29.0, "impPct": 2.0}, {"sku": "MC", "custo": 22.0, "impPct": 2.0}, {"sku": "Airpods2", "custo": 684.0, "impPct": 2.0}, {"sku": "Aws9", "custo": 2210.0, "impPct": 2.0}, {"sku": "SD32GB", "custo": 23.0, "impPct": 2.0}, {"sku": "SD128GB", "custo": 47.0, "impPct": 2.0}, {"sku": "SD64gb", "custo": 25.0, "impPct": 2.0}, {"sku": "9999999", "custo": 99.0, "impPct": 2.0}, {"sku": "006N", "custo": 100.0, "impPct": 2.0}, {"sku": "006-210", "custo": 246.0, "impPct": 2.0}, {"sku": "MOD 001 150", "custo": 101.0, "impPct": 2.0}, {"sku": "012-150", "custo": 117.0, "impPct": 2.0}, {"sku": "001-120", "custo": 70.0, "impPct": 2.0}, {"sku": "C002", "custo": 45.0, "impPct": 2.0}, {"sku": "arvorenatal4", "custo": 130.0, "impPct": 2.0}, {"sku": "arvoreled", "custo": 166.66, "impPct": 2.0}, {"sku": "arvorenatal", "custo": 166.66, "impPct": 2.0}, {"sku": "arvorenatal1", "custo": 166.0, "impPct": 2.0}, {"sku": "arvorenatal3", "custo": 166.0, "impPct": 2.0}, {"sku": "CarameloMetal", "custo": 4.0, "impPct": 2.0}, {"sku": "VerdeMetal", "custo": 4.0, "impPct": 2.0}, {"sku": "PretoMetal", "custo": 4.0, "impPct": 2.0}, {"sku": "CAM", "custo": 38.0, "impPct": 2.0}, {"sku": "arvorenatal5", "custo": 170.0, "impPct": 2.0}, {"sku": "BLRosa", "custo": 45.0, "impPct": 2.0}, {"sku": "BLBranco", "custo": 45.0, "impPct": 2.0}, {"sku": "BLPreta", "custo": 45.0, "impPct": 2.0}, {"sku": "CAMBranca", "custo": 56.0, "impPct": 2.0}, {"sku": "FN PRO2", "custo": 15.0, "impPct": 2.0}, {"sku": "FN", "custo": 10.0, "impPct": 2.0}, {"sku": "FNPRO", "custo": 24.5, "impPct": 2.0}, {"sku": "TWS", "custo": 32.0, "impPct": 2.0}, {"sku": "LANT.SOL", "custo": 45.0, "impPct": 2.0}, {"sku": "LANT.TIT", "custo": 42.0, "impPct": 2.0}, {"sku": "Ear", "custo": 15.0, "impPct": 2.0}, {"sku": "Kit2CAM8", "custo": 234.0, "impPct": 2.0}, {"sku": "BABTRONIC", "custo": 65.0, "impPct": 2.0}, {"sku": "MQNDRAG", "custo": 19.0, "impPct": 2.0}, {"sku": "SD32", "custo": 12.5, "impPct": 2.0}, {"sku": "CAM8", "custo": 74.5, "impPct": 2.0}, {"sku": "C004", "custo": 23.0, "impPct": 2.0}, {"sku": "C001", "custo": 12.0, "impPct": 2.0}, {"sku": "C018", "custo": 21.0, "impPct": 2.0}, {"sku": "C020", "custo": 14.5, "impPct": 2.0}, {"sku": "C013", "custo": 25.0, "impPct": 2.0}, {"sku": "c042", "custo": 20.0, "impPct": 2.0}, {"sku": "C040", "custo": 145.0, "impPct": 2.0}, {"sku": "c027", "custo": 19.0, "impPct": 2.0}];
+
+let skus={},anuncios=[],vinculos={};
+let tokens={},userids={},contaNames={c1:"Conta 1",c2:"Conta 2",c3:"Conta 3"};
+let fechData={c1:{mc:0,rec:0,ads:0,full:0,dev:0},c2:{mc:0,rec:0,ads:0,full:0,dev:0},c3:{mc:0,rec:0,ads:0,full:0,dev:0}};
+let modalMlb=null,modalSkuSel=null;
 
 function save(){
-  localStorage.setItem('ml_anuncios',JSON.stringify(anuncios));
-  localStorage.setItem('ml_names',JSON.stringify(contaNames));
-  localStorage.setItem('ml_tokens',JSON.stringify(tokens));
-  localStorage.setItem('ml_uids',JSON.stringify(userids));
-  localStorage.setItem('ml_vinculos',JSON.stringify(vinculos));
-  const op={};
-  ['op_folha','op_aluguel','op_embalagens','op_sistemas','op_outros','op_r1','op_r2','op_r3'].forEach(id=>{const e=document.getElementById(id);if(e)op[id]=e.value;});
-  localStorage.setItem('ml_op',JSON.stringify(op));
+  localStorage.setItem("ml_skus3",JSON.stringify(skus));
+  localStorage.setItem("ml_anu3",JSON.stringify(anuncios));
+  localStorage.setItem("ml_vinc3",JSON.stringify(vinculos));
+  localStorage.setItem("ml_names3",JSON.stringify(contaNames));
+  localStorage.setItem("ml_tok3",JSON.stringify(tokens));
+  localStorage.setItem("ml_uid3",JSON.stringify(userids));
+  const op={};["op_folha","op_aluguel","op_embalagens","op_sistemas","op_outros","op_r1","op_r2","op_r3"].forEach(id=>{const e=document.getElementById(id);if(e)op[id]=e.value;});
+  localStorage.setItem("ml_op3",JSON.stringify(op));
 }
 function load(){
   try{
-    const a=localStorage.getItem('ml_anuncios');if(a)anuncios=JSON.parse(a);
-    const n=localStorage.getItem('ml_names');if(n)contaNames=JSON.parse(n);
-    const t=localStorage.getItem('ml_tokens');if(t)tokens=JSON.parse(t);
-    const u=localStorage.getItem('ml_uids');if(u)userids=JSON.parse(u);
-    const v=localStorage.getItem('ml_vinculos');if(v)vinculos=JSON.parse(v);
-    const op=localStorage.getItem('ml_op');if(op){const o=JSON.parse(op);Object.entries(o).forEach(([k,v])=>{const e=document.getElementById(k);if(e)e.value=v;});}
+    const s=localStorage.getItem("ml_skus3");
+    if(s) skus=JSON.parse(s);
+    else{ SEED_SKUS.forEach(x=>{skus[x.sku]={sku:x.sku,nome:x.sku,custo:x.custo,impPct:x.impPct,cat:""};});}
+    const a=localStorage.getItem("ml_anu3");if(a)anuncios=JSON.parse(a);
+    const v=localStorage.getItem("ml_vinc3");if(v)vinculos=JSON.parse(v);
+    const n=localStorage.getItem("ml_names3");if(n)contaNames=JSON.parse(n);
+    const t=localStorage.getItem("ml_tok3");if(t)tokens=JSON.parse(t);
+    const u=localStorage.getItem("ml_uid3");if(u)userids=JSON.parse(u);
+    const op=localStorage.getItem("ml_op3");if(op){const o=JSON.parse(op);Object.entries(o).forEach(([k,v])=>{const e=document.getElementById(k);if(e)e.value=v;});}
   }catch(e){}
 }
 
-const f2=v=>(Math.round(v*100)/100).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const fR=v=>'R$ '+f2(v);
-const fP=v=>(Math.round(v*10)/10).toFixed(1)+'%';
-const n=id=>parseFloat(document.getElementById(id)?.value)||0;
+const f2=v=>(Math.round(v*100)/100).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+const fR=v=>"R$ "+f2(v);
+const fP=v=>(Math.round(v*10)/10).toFixed(1)+"%";
+const nv=id=>parseFloat(document.getElementById(id)?.value)||0;
 const setText=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
-function addLog(logId,msg,type='info'){
-  const el=document.getElementById(logId);if(!el)return;
-  el.style.display='block';
-  el.innerHTML+=`<div class="log-${type}">[${new Date().toLocaleTimeString()}] ${msg}</div>`;
-  el.scrollTop=el.scrollHeight;
-}
-function clearLog(id){const el=document.getElementById(id);if(el){el.innerHTML='';el.style.display='none';}}
+function addLog(lid,msg,t="info"){const el=document.getElementById(lid);if(!el)return;el.style.display="block";el.innerHTML+=`<div class="log-${t}">[${new Date().toLocaleTimeString()}] ${msg}</div>`;el.scrollTop=el.scrollHeight;}
+function clearLog(id){const el=document.getElementById(id);if(el){el.innerHTML="";el.style.display="none";}}
 
 function sw(name){
-  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.ni').forEach(b=>b.classList.remove('on'));
-  document.getElementById('pane-'+name)?.classList.add('on');
-  const order=['anuncios','fechamento','operacional','resultado','contas'];
-  document.querySelectorAll('.ni')[order.indexOf(name)]?.classList.add('on');
+  document.querySelectorAll(".pane").forEach(p=>p.classList.remove("on"));
+  document.querySelectorAll(".ni").forEach(b=>b.classList.remove("on"));
+  document.getElementById("pane-"+name)?.classList.add("on");
+  const ord=["skus","anuncios","fechamento","operacional","resultado","contas"];
+  document.querySelectorAll(".ni")[ord.indexOf(name)]?.classList.add("on");
+}
+
+function calcMCAnuncio(a){
+  const s=a.sku?skus[a.sku]:null;
+  if(!s||!a.preco)return;
+  const cv=a.preco*(a.comPct/100),iv=a.preco*(s.impPct/100);
+  a.mc=a.preco-s.custo-cv-a.frete-iv;
+  a.mcp=a.preco>0?a.mc/a.preco*100:0;
+}
+
+// ---- SKUS ----
+function addSKU(){
+  const sku=document.getElementById("ns_sku").value.trim();
+  if(!sku){alert("Informe o código SKU.");return;}
+  const nome=document.getElementById("ns_nome").value.trim();
+  const custo=parseFloat(document.getElementById("ns_custo").value)||0;
+  const impPct=parseFloat(document.getElementById("ns_imp").value)||0;
+  const cat=document.getElementById("ns_cat").value.trim();
+  skus[sku]={sku,nome:nome||sku,custo,impPct,cat};
+  anuncios.filter(a=>a.sku===sku).forEach(a=>calcMCAnuncio(a));
+  save();renderSKUTable();renderAnuncios();
+  ["ns_sku","ns_nome","ns_custo","ns_imp","ns_cat"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";});
+}
+
+function editSKU(sku){
+  const s=skus[sku];if(!s)return;
+  document.getElementById("ns_sku").value=s.sku;
+  document.getElementById("ns_nome").value=s.nome;
+  document.getElementById("ns_custo").value=s.custo;
+  document.getElementById("ns_imp").value=s.impPct;
+  document.getElementById("ns_cat").value=s.cat||"";
+  window.scrollTo(0,0);
+}
+
+function removeSKU(sku){
+  if(!confirm("Remover SKU "+sku+"?"))return;
+  delete skus[sku];
+  anuncios.filter(a=>a.sku===sku).forEach(a=>{a.sku=null;a.mc=0;a.mcp=0;});
+  save();renderSKUTable();renderAnuncios();
+}
+
+function renderSKUTable(){
+  const q=(document.getElementById("sku-search")?.value||"").toLowerCase();
+  const list=Object.values(skus).filter(s=>!q||s.sku.toLowerCase().includes(q)||s.nome.toLowerCase().includes(q));
+  setText("sku-count",Object.keys(skus).length);
+  setText("bdg-skus",Object.keys(skus).length);
+  const semC=Object.values(skus).filter(s=>!s.custo).length;
+  const w=document.getElementById("sku-semcusto-warn");
+  if(w){w.style.display=semC>0?"":"none";setText("sku-semcusto-n",semC);}
+  const tb=document.getElementById("sku-tbody");if(!tb)return;
+  if(!list.length){tb.innerHTML='<tr><td colspan="7" class="td-mut" style="text-align:center;padding:20px">Nenhum SKU encontrado</td></tr>';return;}
+  tb.innerHTML=list.map(s=>{
+    const linked=anuncios.filter(a=>a.sku===s.sku).length;
+    return `<tr>
+      <td><code style="font-family:var(--mono);font-size:12px">${s.sku}</code></td>
+      <td>${s.nome||"—"}</td>
+      <td class="num">${s.custo>0?fR(s.custo):`<span style="color:var(--yw)">sem custo</span>`}</td>
+      <td class="num">${s.impPct}%</td>
+      <td class="td-mut">${s.cat||"—"}</td>
+      <td style="text-align:center">${linked>0?`<span class="pill pill-ok">${linked}</span>`:`<span class="pill pill-gray">0</span>`}</td>
+      <td style="display:flex;gap:4px">
+        <button class="btn btn-sm" onclick="editSKU('${s.sku}')" style="padding:3px 7px"><i class="ti ti-edit" style="font-size:12px"></i></button>
+        <button class="btn btn-sm btn-danger" onclick="removeSKU('${s.sku}')" style="padding:3px 7px"><i class="ti ti-trash" style="font-size:12px"></i></button>
+      </td>
+    </tr>`;
+  }).join("");
+}
+
+function importCSV(){document.getElementById("csv-input").click();}
+function handleCSV(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    const lines=ev.target.result.split("\n");
+    let imported=0,updated=0;
+    lines.forEach((line,i)=>{
+      if(i===0)return;
+      const parts=line.split(";");
+      if(parts.length<3)return;
+      const custo=parseFloat(parts[0])||0;
+      const imp=parseFloat(parts[1])||0;
+      const sku=(parts[2]||"").trim().replace(/\r/g,"");
+      const nome=(parts[3]||"").trim().replace(/\r/g,"")||sku;
+      const cat=(parts[4]||"").trim().replace(/\r/g,"");
+      if(!sku)return;
+      const isNew=!skus[sku];
+      skus[sku]={sku,nome,custo,impPct:imp,cat};
+      if(isNew)imported++;else updated++;
+    });
+    anuncios.forEach(a=>{if(a.sku&&skus[a.sku])calcMCAnuncio(a);});
+    save();renderSKUTable();renderAnuncios();
+    alert(imported+" novos SKUs importados, "+updated+" atualizados!");
+  };
+  reader.readAsText(file,"utf-8");
+  e.target.value="";
+}
+
+function exportSkusCSV(){
+  let csv="CUSTO;IMPOSTO;SKU;NOME;CATEGORIA\n";
+  Object.values(skus).forEach(s=>{csv+=`${s.custo};${s.impPct};${s.sku};${s.nome||""};${s.cat||""}\n`;});
+  const a=document.createElement("a");a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);a.download="skus_fechamento_ml.csv";a.click();
 }
 
 // ---- CONTAS ----
 function buildContas(){
-  const el=document.getElementById('contas-cards');if(!el)return;
+  const el=document.getElementById("contas-cards");if(!el)return;
   el.innerHTML=CONTAS.map(c=>`
     <div class="card" style="margin-bottom:11px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px">
         <div class="fg" style="max-width:190px;margin-bottom:0"><label>Nome</label><input id="${c.id}_name" value="${contaNames[c.id]}" onchange="contaNames['${c.id}']=this.value;updateRatioLabels();save()"/></div>
-        <div id="${c.id}_pill" class="pill ${tokens[c.id]?'pill-info':'pill-warn'}">${tokens[c.id]?'<i class="ti ti-check"></i> Salvo':'<i class="ti ti-clock"></i> Pendente'}</div>
+        <div id="${c.id}_pill" class="pill ${tokens[c.id]?"pill-info":"pill-warn"}">${tokens[c.id]?"<i class=\"ti ti-check\"></i> Salvo":"<i class=\"ti ti-clock\"></i> Pendente"}</div>
       </div>
       <div class="frow">
-        <div class="fg"><label>Access Token</label><input type="password" id="${c.id}_token" placeholder="APP_USR-..." value="${tokens[c.id]||''}"/></div>
-        <div class="fg" style="max-width:160px"><label>User ID</label><input id="${c.id}_uid" placeholder="123456789" value="${userids[c.id]||''}"/></div>
+        <div class="fg"><label>Access Token</label><input type="password" id="${c.id}_token" placeholder="APP_USR-..." value="${tokens[c.id]||""}"/></div>
+        <div class="fg" style="max-width:160px"><label>User ID</label><input id="${c.id}_uid" placeholder="123456789" value="${userids[c.id]||""}"/></div>
       </div>
       <div class="brow">
         <button class="btn btn-sm" onclick="saveToken('${c.id}')"><i class="ti ti-device-floppy"></i> Salvar</button>
         <button class="btn btn-sm" onclick="testToken('${c.id}')"><i class="ti ti-plug"></i> Testar conexão</button>
       </div>
-    </div>
-  `).join('');
+    </div>`).join("");
 }
-function saveToken(cid){
-  tokens[cid]=document.getElementById(cid+'_token').value.trim();
-  userids[cid]=document.getElementById(cid+'_uid').value.trim();
-  save();
-  const pill=document.getElementById(cid+'_pill');
-  if(pill){pill.className='pill pill-info';pill.innerHTML='<i class="ti ti-check"></i> Salvo';}
-}
+function saveToken(cid){tokens[cid]=document.getElementById(cid+"_token").value.trim();userids[cid]=document.getElementById(cid+"_uid").value.trim();save();const pill=document.getElementById(cid+"_pill");if(pill){pill.className="pill pill-info";pill.innerHTML="<i class=\"ti ti-check\"></i> Salvo";}}
 async function testToken(cid){
-  const t=tokens[cid]||document.getElementById(cid+'_token').value.trim();
-  const pill=document.getElementById(cid+'_pill');
-  if(!t){if(pill){pill.className='pill pill-err';pill.innerHTML='<i class="ti ti-x"></i> Vazio';}return;}
-  if(pill){pill.className='pill pill-warn';pill.innerHTML='Testando...';}
+  const t=tokens[cid]||document.getElementById(cid+"_token").value.trim();
+  const pill=document.getElementById(cid+"_pill");
+  if(!t){if(pill){pill.className="pill pill-err";pill.innerHTML="Vazio";}return;}
+  if(pill){pill.className="pill pill-warn";pill.innerHTML="Testando...";}
   try{
-    const r=await fetch('https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy/users/me',{headers:{Authorization:'Bearer '+t}});
+    const r=await fetch(PROXY+"/users/me",{headers:{Authorization:"Bearer "+t}});
     const d=await r.json();
-    if(d.id){
-      tokens[cid]=t;userids[cid]=d.id;
-      document.getElementById(cid+'_uid').value=d.id;
-      if(pill){pill.className='pill pill-ok';pill.innerHTML='<i class="ti ti-check"></i> '+d.nickname;}
-      save();
-    } else {if(pill){pill.className='pill pill-err';pill.innerHTML='<i class="ti ti-x"></i> Inválido';}}
-  }catch(e){if(pill){pill.className='pill pill-err';pill.innerHTML='Erro de rede';}}
+    if(d.id){tokens[cid]=t;userids[cid]=d.id;document.getElementById(cid+"_uid").value=d.id;if(pill){pill.className="pill pill-ok";pill.innerHTML="<i class=\"ti ti-check\"></i> "+d.nickname;}save();}
+    else{if(pill){pill.className="pill pill-err";pill.innerHTML="Inválido";}}
+  }catch(e){if(pill){pill.className="pill pill-err";pill.innerHTML="Erro";}}
 }
-function updateRatioLabels(){
-  CONTAS.forEach((c,i)=>{const el=document.getElementById('lbl_r'+(i+1));if(el)el.textContent='% '+contaNames[c.id];});
-}
+function updateRatioLabels(){CONTAS.forEach((c,i)=>{const el=document.getElementById("lbl_r"+(i+1));if(el)el.textContent="% "+contaNames[c.id];});}
 
-// ---- SINCRONIZAR ANÚNCIOS ----
-async function sincronizarAnuncios(){
-  const btn=document.getElementById('btn-sync');
-  const prog=document.getElementById('sync-progress');
-  const fill=document.getElementById('sync-fill');
-  const status=document.getElementById('sync-status');
-  btn.disabled=true;clearLog('sync-log');
-  prog.style.display='block';fill.style.width='0%';
-  addLog('sync-log','Iniciando sincronização das 3 contas...','info');
-
-  const novos=[];
-  const novosVinculos={};
-  const contasComToken=CONTAS.filter(c=>tokens[c.id]&&userids[c.id]);
-  if(!contasComToken.length){
-    addLog('sync-log','Nenhuma conta configurada. Configure os tokens na aba Contas ML.','err');
-    btn.disabled=false;prog.style.display='none';return;
-  }
-
-  const PROXY='https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy';
-  let totalContas=contasComToken.length, contasDone=0;
-
-  for(const c of contasComToken){
-    const token=tokens[c.id], uid=userids[c.id];
-    const hdr={headers:{Authorization:'Bearer '+token}};
-    addLog('sync-log',`${contaNames[c.id]}: buscando anúncios ativos...`,'info');
+// ---- SYNC ----
+async function sincronizar(){
+  const btn=document.getElementById("btn-sync");
+  const fill=document.getElementById("sync-fill");
+  btn.disabled=true;clearLog("sync-log");
+  document.getElementById("sync-prog").style.display="block";fill.style.width="0%";
+  addLog("sync-log","Iniciando sincronização...","info");
+  const novos=[],novosVinc={};
+  const contsOk=CONTAS.filter(c=>tokens[c.id]&&userids[c.id]);
+  if(!contsOk.length){addLog("sync-log","Nenhuma conta configurada.","err");btn.disabled=false;return;}
+  let cDone=0;
+  for(const c of contsOk){
+    const hdr={headers:{Authorization:"Bearer "+tokens[c.id]}};
+    addLog("sync-log",`${contaNames[c.id]}: buscando anúncios...`,"info");
     try{
-      // 1. Buscar todos IDs ativos (paginado)
-      let allIds=[], offset=0, limit=100;
-      while(true){
-        const r=await fetch(`${PROXY}/users/${uid}/items/search?status=active&offset=${offset}&limit=${limit}`,hdr);
-        const d=await r.json();
-        const ids=d.results||[];
-        allIds=[...allIds,...ids];
-        if(ids.length<limit)break;
-        offset+=limit;
-      }
-      addLog('sync-log',`${contaNames[c.id]}: ${allIds.length} anúncios. Buscando detalhes...`,'ok');
-
-      const total=allIds.length;
-      for(let i=0;i<total;i++){
+      let allIds=[],off=0;
+      while(true){const r=await fetch(`${PROXY}/users/${userids[c.id]}/items/search?status=active&offset=${off}&limit=100`,hdr);const d=await r.json();const ids=d.results||[];allIds=[...allIds,...ids];if(ids.length<100)break;off+=100;}
+      addLog("sync-log",`${contaNames[c.id]}: ${allIds.length} anúncios. Buscando detalhes...`,"ok");
+      for(let i=0;i<allIds.length;i++){
         const mlbId=allIds[i];
         try{
-          // Busca detalhes do item
           const r1=await fetch(`${PROXY}/items/${mlbId}`,hdr);
-          const body=await r1.json();
-          if(body.error)continue;
-
+          const body=await r1.json();if(body.error)continue;
           const preco=body.price||0;
           const isCatalog=body.catalog_listing===true;
-
-          // Buscar comissão via sale_terms
+          const skuField=(body.seller_custom_field||"").trim();
           let comPct=0;
-          try{
-            const r2=await fetch(`${PROXY}/items/${mlbId}/sale_terms`,hdr);
-            const terms=await r2.json();
-            const comTerm=(terms||[]).find(t=>t.id==='SALE_FEE');
-            comPct=comTerm?.value_struct?.number||0;
-          }catch(e){}
-
-          // Buscar frete
+          try{const r2=await fetch(`${PROXY}/items/${mlbId}/sale_terms`,hdr);const terms=await r2.json();const ct=(terms||[]).find(t=>t.id==="SALE_FEE");comPct=ct?.value_struct?.number||0;}catch(e){}
           let frete=0;
-          if(!body.shipping?.free_shipping){
-            try{
-              const r3=await fetch(`${PROXY}/items/${mlbId}/shipping_options`,hdr);
-              const so=await r3.json();
-              const opt=(so?.options||[])[0];
-              frete=opt?.cost||0;
-            }catch(e){}
-          }
-
-          // Buscar relação catálogo via buybox/sync
+          if(!body.shipping?.free_shipping){try{const r3=await fetch(`${PROXY}/items/${mlbId}/shipping_options`,hdr);const so=await r3.json();frete=(so?.options||[])[0]?.cost||0;}catch(e){}}
           let relatedId=null;
-          try{
-            const r4=await fetch(`${PROXY}/public/buybox/sync/${mlbId}`,hdr);
-            const sync=await r4.json();
-            if(sync?.relations?.length>0) relatedId=sync.relations[0];
-          }catch(e){}
-
+          try{const r4=await fetch(`${PROXY}/public/buybox/sync/${mlbId}`,hdr);const sy=await r4.json();if(sy?.relations?.length)relatedId=sy.relations[0];}catch(e){}
           const comVal=preco*(comPct/100);
-          const existing=anuncios.find(a=>a.mlb===mlbId);
-          const custo=existing?.custo||0;
-          const impPct=existing?.impPct||0;
-          const impVal=preco*(impPct/100);
-          const mc=preco-custo-comVal-frete-impVal;
-          const mcp=preco>0?mc/preco*100:0;
-
-          novos.push({mlb:mlbId,nome:body.title||mlbId,conta:c.id,preco,comPct,comVal,frete,custo,impPct,impVal,mc,mcp,isCatalog,relatedId});
-        }catch(e){addLog('sync-log',`${mlbId}: erro — ${e.message}`,'err');}
-
-        const pct=Math.round(((contasDone/totalContas)+(i+1)/(total*totalContas))*100);
-        fill.style.width=Math.min(pct,99)+'%';
-        if(i>0&&i%5===0) await new Promise(r=>setTimeout(r,300));
+          const skuCode=skuField&&skus[skuField]?skuField:(anuncios.find(a=>a.mlb===mlbId)?.sku||null);
+          const s=skuCode?skus[skuCode]:null;
+          const iv=s?preco*(s.impPct/100):0;
+          const mc=s?preco-s.custo-comVal-frete-iv:0;
+          const mcp=preco>0&&s?mc/preco*100:0;
+          novos.push({mlb:mlbId,nome:body.title||mlbId,conta:c.id,preco,comPct,comVal,frete,sku:skuCode,isCatalog,relatedId,mc,mcp});
+        }catch(e){}
+        fill.style.width=Math.min(Math.round(((cDone/contsOk.length)+(i+1)/(allIds.length*contsOk.length))*100),99)+"%";
+        if(i>0&&i%5===0)await new Promise(r=>setTimeout(r,250));
       }
-      addLog('sync-log',`${contaNames[c.id]}: detalhes concluídos.`,'ok');
-    }catch(e){addLog('sync-log',`${contaNames[c.id]}: erro — ${e.message}`,'err');}
-    contasDone++;
+      addLog("sync-log",`${contaNames[c.id]}: concluído.`,"ok");
+    }catch(e){addLog("sync-log",`${contaNames[c.id]}: erro — ${e.message}`,"err");}
+    cDone++;
   }
-
-  // Montar vínculos: para cada par (A <-> B),
-  // o catálogo (isCatalog=true) é o secundário, o orgânico é o principal
-  // Se ambos forem catálogo ou nenhum, o de ID menor é o principal
+  // Pares pelo buybox/sync — catálogo é sempre o principal
   const mlbSet=new Set(novos.map(a=>a.mlb));
-  const jaVinculado=new Set();
-
+  const jaVinc=new Set();
   novos.forEach(a=>{
     if(!a.relatedId)return;
-    // Só processa se o par também está na lista e ainda não foi vinculado
-    const relId=a.relatedId.replace('MLB','');
-    const relMLB='MLB'+relId;
-    if(!mlbSet.has(relMLB)||jaVinculado.has(a.mlb))return;
-
-    const par=novos.find(x=>x.mlb===relMLB);
-    if(!par)return;
-
-    // Catálogo é sempre o principal (onde as vendas acontecem)
-    // Orgânico é o secundário (herda custo/imposto do catálogo)
-    let principal, secundario;
-    if(a.isCatalog&&!par.isCatalog){principal=a;secundario=par;}
-    else if(!a.isCatalog&&par.isCatalog){principal=par;secundario=a;}
-    else{
-      // Ambos do mesmo tipo — o de ID numérico menor é o principal
-      const numA=parseInt(a.mlb.replace('MLB',''));
-      const numB=parseInt(par.mlb.replace('MLB',''));
-      principal=numA<numB?a:par;
-      secundario=numA<numB?par:a;
-    }
-
-    novosVinculos[secundario.mlb]=principal.mlb;
-    jaVinculado.add(a.mlb);jaVinculado.add(par.mlb);
-
-    // Herdar custo do principal se preenchido
-    if(principal.custo>0){secundario.custo=principal.custo;secundario.impPct=principal.impPct;calcMCAnu(secundario);}
+    const parMlb=a.relatedId.startsWith("MLB")?a.relatedId:"MLB"+a.relatedId;
+    if(!mlbSet.has(parMlb)||jaVinc.has(a.mlb))return;
+    const par=novos.find(x=>x.mlb===parMlb);if(!par)return;
+    let prin,sec;
+    if(a.isCatalog&&!par.isCatalog){prin=a;sec=par;}
+    else if(!a.isCatalog&&par.isCatalog){prin=par;sec=a;}
+    else{const nA=parseInt(a.mlb.replace("MLB",""));const nB=parseInt(par.mlb.replace("MLB",""));prin=nA<nB?a:par;sec=nA<nB?par:a;}
+    novosVinc[sec.mlb]=prin.mlb;
+    // Secundário herda SKU do principal (nos dois sentidos)
+    if(!sec.sku&&prin.sku){sec.sku=prin.sku;calcMCAnuncio(sec);}
+    else if(!prin.sku&&sec.sku){prin.sku=sec.sku;calcMCAnuncio(prin);}
+    jaVinc.add(a.mlb);jaVinc.add(parMlb);
   });
-
-  const paresDetectados=Object.keys(novosVinculos).length;
-  if(paresDetectados>0)
-    addLog('sync-log',`${paresDetectados} par(es) vinculado(s) via buybox/sync.`,'ok');
-  else
-    addLog('sync-log','Nenhum par detectado. Use o botão Vincular manualmente se necessário.','info');
-
-  // Preservar vínculos manuais
-  Object.entries(vinculos).forEach(([sec,pri])=>{if(!novosVinculos[sec])novosVinculos[sec]=pri;});
-
-  anuncios=novos;
-  vinculos=novosVinculos;
-  fill.style.width='100%';
-  save();
-  renderAnuncios();
-  buildVendasLista();
-  buildCustosAdicionais();
-  status.textContent=`${anuncios.length} anúncios · ${paresDetectados} par(es) detectado(s)`;
+  Object.entries(vinculos).forEach(([s,p])=>{if(!novosVinc[s])novosVinc[s]=p;});
+  anuncios=novos;vinculos=novosVinc;
+  fill.style.width="100%";
+  const semSku=anuncios.filter(a=>!a.sku).length;
+  const pares=Object.keys(novosVinc).length;
+  addLog("sync-log",`Concluído: ${anuncios.length} anúncios · ${pares} pares · ${semSku} sem SKU`,"ok");
+  document.getElementById("sync-status").textContent=`${anuncios.length} anúncios · ${pares} pares · ${semSku} sem SKU`;
+  setText("bdg-anuncios",anuncios.length);
+  save();renderAnuncios();buildVendasLista();buildCustosAdicionais();
   btn.disabled=false;
-  document.getElementById('badge-anuncios').textContent=anuncios.length;
 }
 
-function calcMCAnu(a){
-  const impVal=a.preco*(a.impPct/100);
-  a.impVal=impVal;
-  a.mc=a.preco-a.custo-a.comVal-a.frete-impVal;
-  a.mcp=a.preco>0?a.mc/a.preco*100:0;
-}
-
+// ---- RENDER ANÚNCIOS ----
 function renderAnuncios(){
-  const el=document.getElementById('anuncios-por-conta');if(!el)return;
-  document.getElementById('badge-anuncios').textContent=anuncios.length;
-  if(!anuncios.length){el.innerHTML='<p style="font-size:13px;color:var(--text3)">Nenhum anúncio sincronizado ainda. Clique em Sincronizar.</p>';return;}
-  const secundarios=new Set(Object.keys(vinculos));
-  const semCusto=anuncios.filter(a=>!a.custo&&!secundarios.has(a.mlb)).length;
-  let html='';
-  if(semCusto>0) html+=`<div class="wbox"><i class="ti ti-alert-triangle"></i><span>${semCusto} anúncio(s) sem custo preenchido.</span></div>`;
+  const el=document.getElementById("anuncios-list");if(!el)return;
+  if(!anuncios.length){el.innerHTML='<p style="font-size:13px;color:var(--tx3)">Nenhum anúncio sincronizado. Clique em Sincronizar.</p>';return;}
+  const secs=new Set(Object.keys(vinculos));
+  const semSku=anuncios.filter(a=>!a.sku).length;
+  let html="";
+  if(semSku>0)html+=`<div class="wbox"><i class="ti ti-alert-triangle"></i><span>${semSku} anúncio(s) sem SKU — clique em "Vincular SKU" para associar.</span></div>`;
   CONTAS.forEach(c=>{
     const lista=anuncios.filter(a=>a.conta===c.id);
     if(!lista.length)return;
     html+=`<div class="slabel">${contaNames[c.id]} — ${lista.length} anúncio(s)</div>`;
     lista.forEach(a=>{
-      const isSecundario=secundarios.has(a.mlb);
-      const principalMlb=vinculos[a.mlb];
-      const principal=principalMlb?anuncios.find(x=>x.mlb===principalMlb):null;
-      const custoEfetivo=isSecundario?(principal?.custo||0):a.custo;
-      const impEfetivo=isSecundario?(principal?.impPct||0):a.impPct;
-      const ok=custoEfetivo>0;
-      const rowClass=isSecundario?'anuncio-row vinculado-secundario':`anuncio-row ${ok?'completo':'sem-custo'}`;
-      html+=`<div class="${rowClass}" id="arow_${a.mlb}">
-        <div class="anuncio-info">
-          <div class="anuncio-nome" title="${a.nome}">
-            ${a.nome}
-            ${isSecundario?`<span class="vinculo-badge"><i class="ti ti-link"></i> vinculado a ${principalMlb}</span>`:''}
-          </div>
-          <div class="anuncio-meta">
+      const isSec=secs.has(a.mlb);
+      const s=a.sku?skus[a.sku]:null;
+      const rowCls=!a.sku?"arow sem-sku":isSec?"arow vinc-sec":"arow completo";
+      const vincInfo=isSec?`<span class="vinc-badge"><i class="ti ti-link"></i> org. vinculado a ${vinculos[a.mlb]}</span>`:
+                     a.isCatalog?'<span class="pill pill-info" style="font-size:10px;margin-left:6px">catálogo</span>':'<span class="pill pill-gray" style="font-size:10px;margin-left:6px">orgânico</span>';
+      html+=`<div class="${rowCls}">
+        <div class="ai">
+          <div class="anome">${a.nome}${vincInfo}</div>
+          <div class="ameta">
             <span><i class="ti ti-tag"></i> ${a.mlb}</span>
             <span><i class="ti ti-coin"></i> ${fR(a.preco)}</span>
-            <span><i class="ti ti-percent"></i> Comissão ${f2(a.comPct)}%</span>
-            <span><i class="ti ti-truck"></i> Frete ${fR(a.frete)}</span>
-            ${isSecundario?`<span style="color:var(--accent)"><i class="ti ti-copy"></i> Custo herdado: ${fR(custoEfetivo)} · Imp: ${f2(impEfetivo)}%</span>`:''}
+            <span><i class="ti ti-percent"></i> Com. ${f2(a.comPct)}%</span>
+            <span><i class="ti ti-truck"></i> ${fR(a.frete)}</span>
+            ${s?`<span style="color:var(--gr)"><i class="ti ti-package"></i> ${a.sku} · Custo: ${fR(s.custo)} · Imp: ${s.impPct}%</span>`:
+               '<span style="color:var(--yw)"><i class="ti ti-alert-triangle"></i> Sem SKU vinculado</span>'}
           </div>
         </div>
-        <div class="anuncio-inputs">
-          <div class="fg" style="min-width:0;width:105px;margin-bottom:0">
-            <label>Custo (R$)</label>
-            <div class="pw"><span>R$</span><input type="number" min="0" step="0.01" value="${a.custo||''}" placeholder="0,00"
-              oninput="updateAnuncio('${a.mlb}','custo',this.value)"/></div>
-          </div>
-          <div class="fg" style="min-width:0;width:90px;margin-bottom:0">
-            <label>Imposto (%)</label>
-            <div class="pw"><span>%</span><input type="number" min="0" step="0.1" value="${a.impPct||''}" placeholder="0"
-              oninput="updateAnuncio('${a.mlb}','impPct',this.value)"/></div>
-          </div>
+        <div class="amc">
+          <div class="mv ${a.mc>=0?"td-pos":"td-neg"}">${fR(a.mc)}</div>
+          <div class="mp">${fP(a.mcp)}</div>
         </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
-          <div class="anuncio-mc">
-            <div class="mc-val ${a.mc>=0?'td-pos':'td-neg'}" id="mc_${a.mlb}">${fR(a.mc)}</div>
-            <div class="mc-pct" id="mcp_${a.mlb}">${fP(a.mcp)}</div>
-          </div>
-          ${isSecundario
-            ?`<button class="btn btn-sm btn-danger" style="font-size:11px;padding:3px 8px" onclick="desvincular('${a.mlb}')"><i class="ti ti-unlink"></i> Desvincular</button>`
-            :`<button class="btn btn-sm" style="font-size:11px;padding:3px 8px;color:var(--accent)" onclick="abrirModalVincular('${a.mlb}')"><i class="ti ti-link"></i> Vincular</button>`
-          }
-        </div>
+        <button class="btn btn-sm" style="font-size:11px;padding:3px 8px" onclick="abrirModalSku('${a.mlb}')">
+          <i class="ti ti-${a.sku?"edit":"link"}"></i> ${a.sku?"Editar SKU":"Vincular SKU"}
+        </button>
       </div>`;
     });
   });
   el.innerHTML=html;
 }
 
-function abrirModalVincular(mlb){
-  modalMlbAtual=mlb;modalSelecionado=null;
+// ---- MODAL SKU ----
+function abrirModalSku(mlb){
+  modalMlb=mlb;modalSkuSel=null;
   const a=anuncios.find(x=>x.mlb===mlb);
-  document.getElementById('modal-vincular-sub').textContent=`Secundário: ${a?.nome||mlb}. Selecione o principal que tem o custo preenchido.`;
-  const lista=anuncios.filter(x=>x.mlb!==mlb&&!Object.keys(vinculos).includes(x.mlb));
-  document.getElementById('modal-lista').innerHTML=lista.map(x=>`
-    <div class="modal-item" id="mi_${x.mlb}" onclick="selecionarModalItem('${x.mlb}')">
+  document.getElementById("modal-sku-sub").textContent=`Anúncio: ${a?.nome||mlb}. SKU atual: ${a?.sku||"nenhum"}`;
+  document.getElementById("modal-search").value="";
+  renderModalLista();
+  document.getElementById("modal-sku").style.display="flex";
+}
+function renderModalLista(){
+  const q=(document.getElementById("modal-search")?.value||"").toLowerCase();
+  const list=Object.values(skus).filter(s=>!q||s.sku.toLowerCase().includes(q)||s.nome.toLowerCase().includes(q));
+  document.getElementById("modal-lista").innerHTML=list.slice(0,100).map(s=>`
+    <div class="mitem ${modalSkuSel===s.sku?"sel":""}" onclick="selModalSku('${s.sku}')">
       <div style="flex:1;min-width:0">
-        <div class="mi-nome">${x.nome}</div>
-        <div class="mi-id">${x.mlb} · ${contaNames[x.conta]||x.conta} · Custo: ${fR(x.custo)}</div>
+        <div style="font-weight:500">${s.sku}</div>
+        <div style="font-size:11px;color:var(--tx3)">${s.nome} · Custo: ${fR(s.custo)} · Imp: ${s.impPct}%</div>
       </div>
-    </div>
-  `).join('');
-  document.getElementById('modal-vincular').style.display='flex';
+    </div>`).join("");
 }
-
-function selecionarModalItem(mlb){
-  document.querySelectorAll('.modal-item').forEach(el=>el.classList.remove('selected'));
-  document.getElementById('mi_'+mlb)?.classList.add('selected');
-  modalSelecionado=mlb;
+function selModalSku(sku){document.querySelectorAll(".mitem").forEach(el=>el.classList.remove("sel"));document.querySelector(`[onclick="selModalSku('${sku}')"]`)?.classList.add("sel");modalSkuSel=sku;}
+function confirmarSkuVinculo(){
+  if(!modalSkuSel||!modalMlb)return;
+  const a=anuncios.find(x=>x.mlb===modalMlb);if(!a)return;
+  a.sku=modalSkuSel;calcMCAnuncio(a);
+  // Propagar para par vinculado (ambas as direções)
+  const parMlb=vinculos[modalMlb]||Object.entries(vinculos).find(([s,p])=>p===modalMlb)?.[0];
+  if(parMlb){const par=anuncios.find(x=>x.mlb===parMlb);if(par){par.sku=modalSkuSel;calcMCAnuncio(par);}}
+  save();renderAnuncios();renderSKUTable();fecharModal();
 }
-
-function confirmarVinculo(){
-  if(!modalSelecionado||!modalMlbAtual)return;
-  vinculos[modalMlbAtual]=modalSelecionado;
-  const principal=anuncios.find(x=>x.mlb===modalSelecionado);
-  const secundario=anuncios.find(x=>x.mlb===modalMlbAtual);
-  if(secundario&&principal){secundario.custo=principal.custo;secundario.impPct=principal.impPct;calcMCAnu(secundario);}
-  save();renderAnuncios();buildVendasLista();fecharModal();
-}
-
-function desvincular(mlb){delete vinculos[mlb];save();renderAnuncios();buildVendasLista();}
-function fecharModal(){document.getElementById('modal-vincular').style.display='none';modalMlbAtual=null;modalSelecionado=null;}
-
-function updateAnuncio(mlb,field,val){
-  const a=anuncios.find(x=>x.mlb===mlb);if(!a)return;
-  a[field]=parseFloat(val)||0;
-  calcMCAnu(a);
-  // Propagar para o par vinculado (em qualquer direção — principal ou secundário)
-  const parMlb = vinculos[mlb] || Object.entries(vinculos).find(([s,p])=>p===mlb)?.[0];
-  if(parMlb){
-    const par=anuncios.find(x=>x.mlb===parMlb);
-    if(par){par[field]=a[field];calcMCAnu(par);}
-  }
-  const mcEl=document.getElementById('mc_'+mlb);
-  const mcpEl=document.getElementById('mcp_'+mlb);
-  if(mcEl){mcEl.textContent=fR(a.mc);mcEl.className='mc-val '+(a.mc>=0?'td-pos':'td-neg');}
-  if(mcpEl)mcpEl.textContent=fP(a.mcp);
-  const row=document.getElementById('arow_'+mlb);
-  if(row){row.className='anuncio-row '+(a.custo>0?'completo':'sem-custo');}
-}
-
-function salvarCustos(){save();alert('Custos salvos!');}
+function fecharModal(){document.getElementById("modal-sku").style.display="none";modalMlb=null;modalSkuSel=null;}
 
 // ---- FECHAMENTO ----
 function buildVendasLista(){
-  const el=document.getElementById('vendas-lista');if(!el)return;
-  if(!anuncios.length){el.innerHTML='<p style="font-size:13px;color:var(--text3)">Sincronize os anúncios primeiro.</p>';return;}
+  const el=document.getElementById("vendas-lista");if(!el)return;
+  if(!anuncios.length){el.innerHTML='<p style="color:var(--tx3);font-size:13px">Sincronize os anúncios primeiro.</p>';return;}
   el.innerHTML=anuncios.map(a=>`
-    <div style="display:flex;align-items:center;gap:11px;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:9px 13px;margin-bottom:7px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:11px;background:var(--sur);border:1px solid var(--bor);border-radius:7px;padding:9px 13px;margin-bottom:7px;flex-wrap:wrap">
       <div style="flex:1;min-width:0">
-        <div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${a.nome}</div>
-        <div style="font-size:11px;color:var(--text3)">${contaNames[a.conta]||a.conta} · MC unit.: ${fR(a.mc)} (${fP(a.mcp)})</div>
+        <div style="font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.nome}</div>
+        <div style="font-size:11px;color:var(--tx3)">${contaNames[a.conta]} · ${a.sku||"sem SKU"} · MC: ${fR(a.mc)} (${fP(a.mcp)})</div>
       </div>
       <div class="fg" style="max-width:120px;margin-bottom:0"><label>Qtd. vendida</label><input type="number" id="qtd_${a.mlb}" min="0" value="0" oninput="calcFechamento()"/></div>
       <div style="min-width:100px;text-align:right">
-        <div style="font-size:10px;color:var(--text3)">MC total</div>
+        <div style="font-size:10px;color:var(--tx3)">MC total</div>
         <div style="font-size:14px;font-weight:600" id="mctot_${a.mlb}">${fR(0)}</div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join("");
 }
 
 function buildCustosAdicionais(){
-  const el=document.getElementById('custos-adicionais');if(!el)return;
+  const el=document.getElementById("custos-adicionais");if(!el)return;
   el.innerHTML=CONTAS.map(c=>`
     <div class="card" style="margin-bottom:10px">
-      <div style="font-size:13px;font-weight:600;margin-bottom:11px">${contaNames[c.id]||c.label}</div>
+      <div style="font-size:13px;font-weight:600;margin-bottom:11px">${contaNames[c.id]}</div>
       <div class="frow">
-        <div class="fg"><label>ADS / Publicidade (R$)</label><div class="pw"><span>R$</span><input type="number" id="${c.id}_ads" min="0" placeholder="0,00" oninput="calcFechamento()"/></div></div>
+        <div class="fg"><label>ADS (R$)</label><div class="pw"><span>R$</span><input type="number" id="${c.id}_ads" min="0" placeholder="0,00" oninput="calcFechamento()"/></div></div>
         <div class="fg"><label>Armazenamento Full (R$)</label><div class="pw"><span>R$</span><input type="number" id="${c.id}_full" min="0" placeholder="0,00" oninput="calcFechamento()"/></div></div>
         <div class="fg"><label>Devoluções (R$)</label><div class="pw"><span>R$</span><input type="number" id="${c.id}_dev" min="0" placeholder="0,00" oninput="calcFechamento()"/></div></div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join("");
 }
 
 async function buscarVendas(){
-  const month=parseInt(document.getElementById('f_month').value);
-  const year=parseInt(document.getElementById('f_year').value);
-  clearLog('vendas-log');
-  const from=`${year}-${String(month).padStart(2,'0')}-01T00:00:00.000-03:00`;
-  const lastDay=new Date(year,month,0).getDate();
-  const to=`${year}-${String(month).padStart(2,'0')}-${lastDay}T23:59:59.000-03:00`;
+  const mes=parseInt(document.getElementById("f_mes").value);
+  const ano=parseInt(document.getElementById("f_ano").value);
+  clearLog("vendas-log");
+  const from=`${ano}-${String(mes).padStart(2,"0")}-01T00:00:00.000-03:00`;
+  const lastDay=new Date(ano,mes,0).getDate();
+  const to=`${ano}-${String(mes).padStart(2,"0")}-${lastDay}T23:59:59.000-03:00`;
   for(const c of CONTAS){
     const token=tokens[c.id],uid=userids[c.id];
-    if(!token||!uid){addLog('vendas-log',`${contaNames[c.id]}: sem token/uid`,'err');continue;}
-    addLog('vendas-log',`${contaNames[c.id]}: buscando vendas...`,'info');
+    if(!token||!uid){addLog("vendas-log",`${contaNames[c.id]}: sem token`,"err");continue;}
+    addLog("vendas-log",`${contaNames[c.id]}: buscando...`,"info");
     try{
-      const r=await fetch(`https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy/orders/search?seller=${uid}&order.status=paid&order.date_created.from=${encodeURIComponent(from)}&order.date_created.to=${encodeURIComponent(to)}&limit=50`,{headers:{Authorization:'Bearer '+token}});
-      const d=await r.json();
-      const orders=d.results||[];
-      addLog('vendas-log',`${contaNames[c.id]}: ${orders.length} pedidos`,'ok');
+      let allOrders=[],off=0;
+      while(true){
+        const r=await fetch(`${PROXY}/orders/search?seller=${uid}&order.status=paid&order.date_created.from=${encodeURIComponent(from)}&order.date_created.to=${encodeURIComponent(to)}&offset=${off}&limit=50`,{headers:{Authorization:"Bearer "+token}});
+        const d=await r.json();const orders=d.results||[];
+        allOrders=[...allOrders,...orders];
+        if(orders.length<50)break;off+=50;
+      }
+      addLog("vendas-log",`${contaNames[c.id]}: ${allOrders.length} pedidos`,"ok");
       anuncios.filter(a=>a.conta===c.id).forEach(a=>{
         let qtd=0;
-        orders.forEach(o=>(o.order_items||[]).forEach(oi=>{if(oi.item?.id===a.mlb)qtd+=oi.quantity||0;}));
-        const el=document.getElementById('qtd_'+a.mlb);if(el)el.value=qtd;
+        allOrders.forEach(o=>(o.order_items||[]).forEach(oi=>{if(oi.item?.id===a.mlb)qtd+=oi.quantity||0;}));
+        const el=document.getElementById("qtd_"+a.mlb);if(el)el.value=qtd;
       });
-    }catch(e){addLog('vendas-log',`${contaNames[c.id]}: ${e.message}`,'err');}
+    }catch(e){addLog("vendas-log",`${contaNames[c.id]}: ${e.message}`,"err");}
   }
   calcFechamento();
 }
 
 async function buscarCustosML(){
-  const month=parseInt(document.getElementById('f_month').value);
-  const year=parseInt(document.getElementById('f_year').value);
-  const key=`${year}-${String(month).padStart(2,'0')}-01`;
-  clearLog('custos-log');
+  const mes=parseInt(document.getElementById("f_mes").value);
+  const ano=parseInt(document.getElementById("f_ano").value);
+  const key=`${ano}-${String(mes).padStart(2,"0")}-01`;
+  clearLog("custos-log");
   for(const c of CONTAS){
-    const token=tokens[c.id];
-    if(!token){addLog('custos-log',`${contaNames[c.id]}: sem token`,'err');continue;}
-    addLog('custos-log',`${contaNames[c.id]}: buscando custos...`,'info');
+    const token=tokens[c.id];if(!token){addLog("custos-log",`${contaNames[c.id]}: sem token`,"err");continue;}
+    addLog("custos-log",`${contaNames[c.id]}: buscando...`,"info");
     try{
-      const r=await fetch(`https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy/billing/integration/periods/key/${key}/summary?group=ML`,{headers:{Authorization:'Bearer '+token}});
-      const d=await r.json();
-      const charges=d?.bill_includes?.charges||[];
+      const r=await fetch(`${PROXY}/billing/integration/periods/key/${key}/summary?group=ML`,{headers:{Authorization:"Bearer "+token}});
+      const d=await r.json();const charges=d?.bill_includes?.charges||[];
       let ads=0,full=0,dev=0;
-      charges.forEach(ch=>{
-        if(ch.type==='PADS')ads+=Math.abs(ch.amount);
-        else if(ch.type==='SRV'||ch.label?.toLowerCase().includes('full'))full+=Math.abs(ch.amount);
-        else if(ch.type==='DEV'||ch.label?.toLowerCase().includes('devolu'))dev+=Math.abs(ch.amount);
-      });
+      charges.forEach(ch=>{if(ch.type==="PADS")ads+=Math.abs(ch.amount);else if(ch.type==="SRV"||ch.label?.toLowerCase().includes("full"))full+=Math.abs(ch.amount);else if(ch.type==="DEV"||ch.label?.toLowerCase().includes("devolu"))dev+=Math.abs(ch.amount);});
       const sf=(id,v)=>{const e=document.getElementById(id);if(e)e.value=v.toFixed(2);};
-      sf(c.id+'_ads',ads);sf(c.id+'_full',full);sf(c.id+'_dev',dev);
-      addLog('custos-log',`${contaNames[c.id]}: ADS ${fR(ads)} · Full ${fR(full)} · Dev ${fR(dev)}`,'ok');
-    }catch(e){addLog('custos-log',`${contaNames[c.id]}: ${e.message}`,'err');}
+      sf(c.id+"_ads",ads);sf(c.id+"_full",full);sf(c.id+"_dev",dev);
+      addLog("custos-log",`${contaNames[c.id]}: ADS ${fR(ads)} · Full ${fR(full)} · Dev ${fR(dev)}`,"ok");
+    }catch(e){addLog("custos-log",`${contaNames[c.id]}: ${e.message}`,"err");}
   }
   calcFechamento();
 }
 
 function calcFechamento(){
-  CONTAS.forEach(c=>{fechData[c.id]={mc:0,receita:0,ads:n(c.id+'_ads'),full:n(c.id+'_full'),dev:n(c.id+'_dev')};});
+  CONTAS.forEach(c=>{fechData[c.id]={mc:0,rec:0,ads:nv(c.id+"_ads"),full:nv(c.id+"_full"),dev:nv(c.id+"_dev")};});
   anuncios.forEach(a=>{
-    const qtd=parseInt(document.getElementById('qtd_'+a.mlb)?.value)||0;
-    const mcTot=a.mc*qtd,recTot=a.preco*qtd;
-    const el=document.getElementById('mctot_'+a.mlb);
-    if(el){el.textContent=fR(mcTot);el.style.color=mcTot>=0?'var(--green)':'var(--red)';}
-    fechData[a.conta].mc+=mcTot;
-    fechData[a.conta].receita+=recTot;
+    const qtd=parseInt(document.getElementById("qtd_"+a.mlb)?.value)||0;
+    const mcT=a.mc*qtd,recT=a.preco*qtd;
+    const el=document.getElementById("mctot_"+a.mlb);
+    if(el){el.textContent=fR(mcT);el.style.color=mcT>=0?"var(--gr)":"var(--rd)";}
+    fechData[a.conta].mc+=mcT;fechData[a.conta].rec+=recT;
   });
   recalc();
 }
 
 function recalc(){
-  const opTotal=n('op_folha')+n('op_aluguel')+n('op_embalagens')+n('op_sistemas')+n('op_outros');
-  setText('op_total','- '+fR(opTotal));
-  const rateios=[n('op_r1')/100,n('op_r2')/100,n('op_r3')/100];
+  const opT=nv("op_folha")+nv("op_aluguel")+nv("op_embalagens")+nv("op_sistemas")+nv("op_outros");
+  setText("op_total","- "+fR(opT));
+  const rat=[nv("op_r1")/100,nv("op_r2")/100,nv("op_r3")/100];
   let totRec=0,totMC=0,totML=0;
   const res=CONTAS.map((c,i)=>{
-    const d=fechData[c.id];
-    const ml=d.ads+d.full+d.dev,op=opTotal*rateios[i],lucro=d.mc-ml-op;
-    const mcp=d.receita>0?d.mc/d.receita*100:0,margem=d.receita>0?lucro/d.receita*100:0;
-    totRec+=d.receita;totMC+=d.mc;totML+=ml;
-    return {name:contaNames[c.id]||c.label,receita:d.receita,mc:d.mc,mcp,ml,op,lucro,margem};
+    const d=fechData[c.id];const ml=d.ads+d.full+d.dev,op=opT*rat[i],liq=d.mc-ml-op;
+    const mcp=d.rec>0?d.mc/d.rec*100:0,marg=d.rec>0?liq/d.rec*100:0;
+    totRec+=d.rec;totMC+=d.mc;totML+=ml;
+    return {name:contaNames[c.id],rec:d.rec,mc:d.mc,mcp,ml,op,liq,marg};
   });
-  const totLucro=totMC-totML-opTotal;
-  const totMarg=totRec>0?totLucro/totRec*100:0,totMCP=totRec>0?totMC/totRec*100:0;
-  setText('d_rec',fR(totRec));
-  setText('d_mc',fR(totMC));setText('d_mcp','MC: '+fP(totMCP));
-  setText('d_ml','- '+fR(totML));setText('d_op','- '+fR(opTotal));
-  const dl=document.getElementById('d_liq');
-  if(dl){dl.textContent=(totLucro<0?'- ':'')+fR(Math.abs(totLucro));dl.className='rv '+(totLucro>=0?'pos':'neg');}
-  setText('d_marg','Margem: '+fP(totMarg));
-  const mc_el=document.getElementById('d_mc');if(mc_el)mc_el.className='rv '+(totMC>=0?'pos':'neg');
-  const ar=document.getElementById('result-contas');
+  const totLiq=totMC-totML-opT;
+  const totMarg=totRec>0?totLiq/totRec*100:0,totMCP=totRec>0?totMC/totRec*100:0;
+  setText("d_rec",fR(totRec));setText("d_mc",fR(totMC));setText("d_mcp","MC: "+fP(totMCP));
+  setText("d_ml","- "+fR(totML));setText("d_op","- "+fR(opT));
+  const dl=document.getElementById("d_liq");
+  if(dl){dl.textContent=(totLiq<0?"- ":"")+fR(Math.abs(totLiq));dl.className="rv "+(totLiq>=0?"pos":"neg");}
+  setText("d_marg","Margem: "+fP(totMarg));
+  const mcel=document.getElementById("d_mc");if(mcel)mcel.className="rv "+(totMC>=0?"pos":"neg");
+  const mnames=["","Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+  const m=parseInt(document.getElementById("f_mes")?.value)||new Date().getMonth()+1;
+  const y=document.getElementById("f_ano")?.value||new Date().getFullYear();
+  setText("res-per","Fechamento de "+mnames[m]+"/"+y);
+  const ar=document.getElementById("res-contas");
   if(ar)ar.innerHTML=res.map(d=>`
     <div class="ab">
-      <div class="ah">
-        <span class="an"><i class="ti ti-store"></i> ${d.name}</span>
-        <span class="ap" style="color:${d.lucro>=0?'var(--green)':'var(--red)'}">${(d.lucro<0?'- ':'')}${fR(Math.abs(d.lucro))}</span>
-      </div>
-      <div class="ar"><span>Receita bruta</span><span>${fR(d.receita)}</span></div>
-      <div class="ar"><span>Margem de contribuição</span><span style="color:${d.mc>=0?'var(--green)':'var(--red)'}">${fR(d.mc)} <span style="font-size:11px;color:var(--text3)">(${fP(d.mcp)})</span></span></div>
-      <div class="ar"><span>ADS + Full + Devoluções</span><span style="color:var(--red)">- ${fR(d.ml)}</span></div>
-      <div class="ar"><span>Rateio operacional</span><span style="color:var(--red)">- ${fR(d.op)}</span></div>
-      <div class="atr"><span>Margem líquida</span><span style="color:${d.margem>=0?'var(--green)':'var(--red)'}">${fP(d.margem)}</span></div>
-    </div>
-  `).join('');
-  const mnames=['','Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-  const m=parseInt(document.getElementById('f_month')?.value)||new Date().getMonth()+1;
-  const y=document.getElementById('f_year')?.value||new Date().getFullYear();
-  setText('res-periodo','Fechamento de '+mnames[m]+'/'+y);
+      <div class="ah"><span class="an"><i class="ti ti-store"></i> ${d.name}</span>
+        <span class="ap" style="color:${d.liq>=0?"var(--gr)":"var(--rd)"}">${(d.liq<0?"- ":"")}${fR(Math.abs(d.liq))}</span></div>
+      <div class="ar"><span>Receita bruta</span><span>${fR(d.rec)}</span></div>
+      <div class="ar"><span>Margem de contribuição</span><span style="color:${d.mc>=0?"var(--gr)":"var(--rd)"}">${fR(d.mc)} <span style="font-size:11px;color:var(--tx3)">(${fP(d.mcp)})</span></span></div>
+      <div class="ar"><span>ADS + Full + Devoluções</span><span style="color:var(--rd)">- ${fR(d.ml)}</span></div>
+      <div class="ar"><span>Rateio operacional</span><span style="color:var(--rd)">- ${fR(d.op)}</span></div>
+      <div class="atr"><span>Margem líquida</span><span style="color:${d.marg>=0?"var(--gr)":"var(--rd)"}">${fP(d.marg)}</span></div>
+    </div>`).join("");
 }
 
-function exportCSV(){
-  const opTotal=n('op_folha')+n('op_aluguel')+n('op_embalagens')+n('op_sistemas')+n('op_outros');
-  const rateios=[n('op_r1')/100,n('op_r2')/100,n('op_r3')/100];
-  let csv='Conta,Receita,MC,MC%,ADS,Full,Devoluções,Rateio Op.,Resultado\n';
-  CONTAS.forEach((c,i)=>{
-    const d=fechData[c.id],ml=d.ads+d.full+d.dev,op=opTotal*rateios[i],liq=d.mc-ml-op;
-    csv+=[contaNames[c.id]||c.label,d.receita.toFixed(2),d.mc.toFixed(2),(d.receita>0?d.mc/d.receita*100:0).toFixed(1)+'%',d.ads.toFixed(2),d.full.toFixed(2),d.dev.toFixed(2),op.toFixed(2),liq.toFixed(2)].join(',')+'\n';
-  });
-  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='fechamento_ml.csv';a.click();
+function exportCSVRes(){
+  const opT=nv("op_folha")+nv("op_aluguel")+nv("op_embalagens")+nv("op_sistemas")+nv("op_outros");
+  const rat=[nv("op_r1")/100,nv("op_r2")/100,nv("op_r3")/100];
+  let csv="Conta,Receita,MC,MC%,ADS,Full,Dev,Rateio Op,Resultado\n";
+  CONTAS.forEach((c,i)=>{const d=fechData[c.id];const ml=d.ads+d.full+d.dev;const op=opT*rat[i];const liq=d.mc-ml-op;csv+=[contaNames[c.id],d.rec.toFixed(2),d.mc.toFixed(2),(d.rec>0?d.mc/d.rec*100:0).toFixed(1)+"%",d.ads.toFixed(2),d.full.toFixed(2),d.dev.toFixed(2),op.toFixed(2),liq.toFixed(2)].join(",")+"\n";});
+  const a=document.createElement("a");a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);a.download="fechamento_ml.csv";a.click();
 }
 
-// Init
-load();
-buildContas();
-updateRatioLabels();
-renderAnuncios();
-buildVendasLista();
-buildCustosAdicionais();
-recalc();
+// INIT
+load();buildContas();updateRatioLabels();renderSKUTable();renderAnuncios();buildVendasLista();buildCustosAdicionais();recalc();
 const now=new Date();
-const cm=document.getElementById('f_month');if(cm)cm.value=now.getMonth()+1;
-const cy=document.getElementById('f_year');if(cy)cy.value=now.getFullYear();
+const cm=document.getElementById("f_mes");if(cm)cm.value=now.getMonth()+1;
+const cy=document.getElementById("f_ano");if(cy)cy.value=now.getFullYear();
 </script>
 </body>
 </html>
