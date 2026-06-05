@@ -431,6 +431,7 @@ function sw(name){
   document.getElementById("pane-"+name)?.classList.add("on");
   const ord=["skus","anuncios","fechamento","operacional","dashboard","resultado","contas"];
   document.querySelectorAll(".ni")[ord.indexOf(name)]?.classList.add("on");
+  if(name==="dashboard") initDashboard();
 }
 
 // ---- TOKEN ----
@@ -1218,12 +1219,13 @@ function exportDashCSV(){
   const a=document.createElement("a");a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);a.download="resumo_financeiro.csv";a.click();
 }
 
-// Init dashboard on tab switch
-const origSw=sw;
-function sw(name){
-  origSw(name);
-  if(name==="dashboard"){initDashboard();}
-}
+// Init dashboard when switching to it
+document.querySelectorAll(".ni").forEach(btn=>{
+  const orig=btn.getAttribute("onclick");
+  if(orig&&orig.includes("dashboard")){
+    btn.setAttribute("onclick","sw('dashboard')");
+  }
+});
 </script>
 </body>
 </html>
