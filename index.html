@@ -20,7 +20,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .ni{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--tx2);border:none;background:none;width:100%;text-align:left;transition:all .15s}
 .ni:hover{background:var(--sur2);color:var(--tx)}.ni.on{background:var(--ac-bg);color:var(--ac);font-weight:500}.ni i{font-size:16px;flex-shrink:0}
 .ni .bdg{margin-left:auto;background:var(--ac);color:#fff;font-size:10px;font-weight:600;padding:1px 6px;border-radius:10px;min-width:18px;text-align:center}
-.main{flex:1;padding:26px 30px;max-width:980px}
+.main{flex:1;padding:26px 30px;max-width:1000px}
 .pane{display:none}.pane.on{display:block}
 .ptitle{font-size:20px;font-weight:600;margin-bottom:4px}.psub{font-size:13px;color:var(--tx2);margin-bottom:22px}
 .slabel{font-size:11px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;margin:22px 0 9px}.slabel:first-child{margin-top:0}
@@ -54,32 +54,48 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 .opg{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:11px}
 .sub{display:flex;justify-content:space-between;align-items:center;background:var(--sur2);border-radius:7px;padding:10px 13px;margin-top:13px}
 .sub .sl{font-size:13px;color:var(--tx2)}.sub .sv{font-size:15px;font-weight:600;color:var(--rd)}
-.stw{overflow-x:auto}
-.stbl{width:100%;border-collapse:collapse;font-size:13px}
+/* SKU Table */
+.stw{overflow-x:auto}.stbl{width:100%;border-collapse:collapse;font-size:13px}
 .stbl th{text-align:left;padding:7px 9px;font-size:11px;font-weight:600;color:var(--tx3);border-bottom:1px solid var(--bor);background:var(--sur2);white-space:nowrap}
 .stbl td{padding:7px 9px;border-bottom:1px solid var(--bor);color:var(--tx)}
 .stbl tr:last-child td{border-bottom:none}.stbl tr:hover td{background:var(--sur2)}
-.stbl td.num{text-align:right;font-variant-numeric:tabular-nums}
-.td-pos{color:var(--gr)}.td-neg{color:var(--rd)}.td-mut{color:var(--tx3);font-size:12px}
+.stbl td.num{text-align:right}.td-pos{color:var(--gr)}.td-neg{color:var(--rd)}.td-mut{color:var(--tx3);font-size:12px}
 .sku-search{width:100%;padding:8px 12px;font-size:13px;border:1px solid var(--bor);border-radius:7px;background:var(--sur);color:var(--tx);margin-bottom:12px}
 .sku-search:focus{outline:none;border-color:var(--ac)}
-.arow{display:flex;align-items:center;gap:10px;background:var(--sur);border:1px solid var(--bor);border-radius:8px;padding:10px 14px;margin-bottom:7px;transition:border .15s;flex-wrap:wrap}
-.arow:hover{border-color:var(--bor2)}.arow.sem-sku{border-left:3px solid #f59e0b}.arow.completo{border-left:3px solid var(--gr)}.arow.vinc-sec{border-left:3px solid var(--ac);background:#f8fbff}
-.arow .ai{flex:1;min-width:0}.arow .anome{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.arow .ameta{font-size:11px;color:var(--tx3);margin-top:2px;display:flex;gap:10px;flex-wrap:wrap}
-.arow .amc{min-width:100px;text-align:right;flex-shrink:0}
-.arow .amc .mv{font-size:14px;font-weight:600}.arow .amc .mp{font-size:11px;color:var(--tx3)}
-.vinc-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;background:var(--ac-bg);color:var(--ac);padding:2px 7px;border-radius:10px;margin-left:6px}
+/* Anúncio card */
+.anu-card{background:var(--sur);border:1px solid var(--bor);border-radius:var(--rl);margin-bottom:10px;overflow:hidden;transition:border .15s}
+.anu-card:hover{border-color:var(--bor2)}
+.anu-card.sem-custo{border-left:4px solid #f59e0b}
+.anu-card.com-custo{border-left:4px solid var(--gr)}
+.anu-card.vinculado{border-left:4px solid var(--ac)}
+.anu-main{display:flex;gap:12px;padding:12px 14px;align-items:flex-start}
+.anu-img{width:64px;height:64px;border-radius:6px;object-fit:cover;background:var(--sur2);flex-shrink:0;border:1px solid var(--bor)}
+.anu-img-placeholder{width:64px;height:64px;border-radius:6px;background:var(--sur2);flex-shrink:0;border:1px solid var(--bor);display:flex;align-items:center;justify-content:center;color:var(--tx3)}
+.anu-info{flex:1;min-width:0}
+.anu-nome{font-size:13px;font-weight:600;margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.anu-badges{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px}
+.badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;display:inline-flex;align-items:center;gap:3px}
+.badge-full{background:#7c3aed;color:#fff}
+.badge-cat{background:#0284c7;color:#fff}
+.badge-org{background:#059669;color:#fff}
+.badge-vinc{background:var(--ac-bg);color:var(--ac)}
+.anu-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--tx2)}
+.anu-meta span{display:flex;align-items:center;gap:3px}
+.anu-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;padding:0 14px 12px}
+.met{background:var(--sur2);border-radius:6px;padding:7px 9px}
+.met .ml{font-size:10px;color:var(--tx3);margin-bottom:2px}
+.met .mv{font-size:13px;font-weight:600}
+.met .mv.neg{color:var(--rd)}.met .mv.pos{color:var(--gr)}.met .mv.info{color:var(--ac)}
+.anu-footer{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--sur2);border-top:1px solid var(--bor);flex-wrap:wrap;gap:8px}
+/* Custo modal */
+.moverlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:999}
+.modal{background:var(--sur);border-radius:var(--rl);padding:24px;width:420px;max-width:95vw}
+.modal h3{font-size:16px;font-weight:600;margin-bottom:4px}
+.modal-sub{font-size:13px;color:var(--tx2);margin-bottom:16px}
+.mbtns{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+/* Progress */
 .prog{height:3px;background:var(--bor);border-radius:2px;margin:10px 0;overflow:hidden}
 .prog-fill{height:100%;background:var(--ac);border-radius:2px;transition:width .3s}
-.moverlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:999}
-.modal{background:var(--sur);border-radius:var(--rl);padding:24px;width:460px;max-width:95vw;max-height:80vh;overflow-y:auto}
-.modal h3{font-size:16px;font-weight:600;margin-bottom:6px}.modal-sub{font-size:13px;color:var(--tx2);margin-bottom:16px}
-.mitem{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;cursor:pointer;font-size:13px;border:.5px solid var(--bor);margin-bottom:6px;transition:border .15s}
-.mitem:hover{border-color:var(--ac);background:var(--ac-bg)}.mitem.sel{border-color:var(--ac);background:var(--ac-bg)}
-.mbtns{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
-.msearch{width:100%;padding:7px 10px;font-size:13px;border:1px solid var(--bor);border-radius:7px;margin-bottom:10px}
-.msearch:focus{outline:none;border-color:var(--ac)}
 @media(max-width:700px){.sidebar{display:none}.main{padding:14px}}
 </style>
 </head>
@@ -104,15 +120,15 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
 </nav>
 <main class="main">
 
+<!-- TABELA DE SKUs -->
 <div id="pane-skus" class="pane on">
   <div class="ptitle">Tabela de SKUs</div>
-  <div class="psub">Gerencie seus produtos com custo e imposto. Os anúncios ML herdam automaticamente pelo seller_custom_field.</div>
-  <div class="slabel">Adicionar / Editar SKU</div>
+  <div class="psub">Gerencie produtos com custo e imposto. Os anúncios herdam pelo seller_custom_field automaticamente.</div>
   <div class="card">
     <div class="frow">
       <div class="fg" style="max-width:180px"><label>Código SKU</label><input id="ns_sku" placeholder="Ex: KP517"/></div>
-      <div class="fg"><label>Nome do produto</label><input id="ns_nome" placeholder="Ex: Suporte notebook"/></div>
-      <div class="fg" style="max-width:150px"><label>Categoria</label><input id="ns_cat" placeholder="Opcional"/></div>
+      <div class="fg"><label>Nome</label><input id="ns_nome" placeholder="Ex: Suporte notebook"/></div>
+      <div class="fg" style="max-width:130px"><label>Categoria</label><input id="ns_cat" placeholder="Opcional"/></div>
     </div>
     <div class="frow">
       <div class="fg" style="max-width:150px"><label>Custo (R$)</label><div class="pw"><span>R$</span><input type="number" id="ns_custo" min="0" step="0.01" placeholder="0,00"/></div></div>
@@ -126,30 +142,33 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
     </div>
   </div>
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">
-    <div class="slabel" style="margin:0">SKUs cadastrados (<span id="sku-count">0</span>)</div>
+    <div class="slabel" style="margin:0">SKUs (<span id="sku-count">0</span>)</div>
     <span id="sku-semcusto-warn" style="font-size:12px;color:var(--yw);display:none"><i class="ti ti-alert-triangle"></i> <span id="sku-semcusto-n">0</span> sem custo</span>
   </div>
   <input class="sku-search" id="sku-search" placeholder="Buscar por SKU ou nome..." oninput="renderSKUTable()">
   <div class="stw">
     <table class="stbl">
       <thead><tr>
-        <th style="width:140px">SKU</th><th>Nome</th><th style="width:110px;text-align:right">Custo</th>
-        <th style="width:80px;text-align:right">Imposto</th><th style="width:110px">Categoria</th>
-        <th style="width:90px">Anúncios</th><th style="width:36px"></th>
+        <th style="width:130px">SKU</th><th>Nome</th>
+        <th style="width:110px;text-align:right">Custo</th>
+        <th style="width:80px;text-align:right">Imposto</th>
+        <th style="width:100px">Categoria</th>
+        <th style="width:80px">Anúncios</th>
+        <th style="width:60px"></th>
       </tr></thead>
       <tbody id="sku-tbody"></tbody>
     </table>
   </div>
 </div>
 
+<!-- ANÚNCIOS -->
 <div id="pane-anuncios" class="pane">
   <div class="ptitle">Anúncios ML</div>
-  <div class="psub">Sincroniza anúncios ativos das 3 contas e vincula ao SKU pelo seller_custom_field.</div>
+  <div class="psub">Anúncios ativos sincronizados. Dados reais de tarifa e frete via API.</div>
   <div id="queue-banner" class="wbox" style="display:none;justify-content:space-between;align-items:center;gap:12px">
-    <span style="display:flex;align-items:center;gap:8px"><i class="ti ti-bell-ringing"></i><span>0 anúncio(s) novo(s) detectado(s).</span></span>
+    <span><i class="ti ti-bell-ringing"></i> <span id="queue-txt">0 anúncio(s) novo(s) detectado(s).</span></span>
     <button class="btn btn-sm btn-primary" onclick="syncQueue()"><i class="ti ti-cloud-download"></i> Sincronizar agora</button>
   </div>
-  <div class="ibox"><i class="ti ti-info-circle"></i><span>Anúncios em amarelo não têm SKU reconhecido. Clique em "Vincular SKU" para associar manualmente.</span></div>
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:center">
     <button class="btn btn-primary" id="btn-sync" onclick="sincronizar()"><i class="ti ti-refresh"></i> Sincronizar todos</button>
     <span id="sync-status" style="font-size:12px;color:var(--tx3)"></span>
@@ -159,9 +178,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
   <div id="anuncios-list" style="margin-top:14px"></div>
 </div>
 
+<!-- FECHAMENTO -->
 <div id="pane-fechamento" class="pane">
   <div class="ptitle">Coletar dados do mês</div>
-  <div class="psub">Busca quantidades vendidas e custos adicionais via API.</div>
+  <div class="psub">Busca ordens reais com tarifa, frete e preço efetivo de cada venda.</div>
   <div style="display:flex;gap:11px;flex-wrap:wrap;margin-bottom:18px;align-items:flex-end">
     <div class="fg" style="max-width:150px"><label>Mês</label>
       <select id="f_mes">
@@ -172,12 +192,11 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
       </select>
     </div>
     <div class="fg" style="max-width:90px"><label>Ano</label><input type="number" id="f_ano" value="2025" min="2020" max="2030"/></div>
+    <button class="btn btn-primary" onclick="coletarDados()"><i class="ti ti-cloud-download"></i> Coletar ordens reais</button>
   </div>
-  <div class="slabel">Vendas por anúncio</div>
-  <div id="vendas-lista"><p style="color:var(--tx3);font-size:13px">Sincronize os anúncios primeiro.</p></div>
-  <div class="brow"><button class="btn btn-sm" onclick="buscarVendas()"><i class="ti ti-cloud-download"></i> Buscar vendas na API ML</button></div>
-  <div class="log" id="vendas-log"></div>
-  <div class="slabel" style="margin-top:22px">Custos adicionais por conta</div>
+  <div class="log" id="coleta-log"></div>
+  <div id="coleta-resultado" style="margin-top:14px"></div>
+  <div class="slabel" style="margin-top:22px">Custos adicionais por conta (ADS, Full, Devoluções)</div>
   <div id="custos-adicionais"></div>
   <div class="brow">
     <button class="btn btn-sm" onclick="buscarCustosML()"><i class="ti ti-cloud-download"></i> Buscar ADS, Full e devoluções</button>
@@ -186,6 +205,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
   <div class="log" id="custos-log"></div>
 </div>
 
+<!-- OPERACIONAL -->
 <div id="pane-operacional" class="pane">
   <div class="ptitle">Custos Operacionais</div>
   <div class="psub">Fixos compartilhados, rateados entre as 3 contas.</div>
@@ -209,6 +229,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
   </div>
 </div>
 
+<!-- RESULTADO -->
 <div id="pane-resultado" class="pane">
   <div class="ptitle">Resultado do mês</div>
   <div class="psub" id="res-per">Calcule o fechamento para ver o resultado.</div>
@@ -222,63 +243,80 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px
   <div class="div"></div>
   <div class="slabel">Por conta</div>
   <div id="res-contas"></div>
-  <div class="brow" style="margin-top:14px"><button class="btn btn-sm" onclick="exportCSVRes()"><i class="ti ti-download"></i> Exportar CSV</button></div>
+  <div class="brow" style="margin-top:14px">
+    <button class="btn btn-sm" onclick="exportCSVRes()"><i class="ti ti-download"></i> Exportar CSV</button>
+  </div>
 </div>
 
+<!-- CONTAS -->
 <div id="pane-contas" class="pane">
   <div class="ptitle">Contas ML</div>
-  <div class="psub">Configure o Access Token de cada conta.</div>
-  <div class="ibox"><i class="ti ti-shield-lock"></i><span>Tokens salvos localmente no navegador. Nunca enviados a servidores externos.</span></div>
+  <div class="psub">Configure o Access Token de cada conta. Renovação automática ativada.</div>
+  <div class="ibox"><i class="ti ti-shield-lock"></i><span>Tokens salvos localmente. Nunca enviados a servidores externos além do Worker próprio.</span></div>
   <div id="contas-cards"></div>
 </div>
 
 </main>
 </div>
 
-<div id="modal-sku" class="moverlay" style="display:none">
+<!-- Modal custo/imposto por anúncio -->
+<div id="modal-custo" class="moverlay" style="display:none">
   <div class="modal">
-    <h3>Vincular SKU ao anúncio</h3>
-    <div class="modal-sub" id="modal-sku-sub"></div>
-    <input class="msearch" id="modal-search" placeholder="Buscar SKU ou nome..." oninput="renderModalLista()">
-    <div id="modal-lista" style="max-height:280px;overflow-y:auto"></div>
+    <h3>Custo e imposto do anúncio</h3>
+    <div class="modal-sub" id="modal-custo-sub"></div>
+    <div class="frow">
+      <div class="fg"><label>Custo do produto (R$)</label><div class="pw"><span>R$</span><input type="number" id="mc_custo" min="0" step="0.01" placeholder="0,00"/></div></div>
+      <div class="fg" style="max-width:130px"><label>Imposto (%)</label><div class="pw"><span>%</span><input type="number" id="mc_imp" min="0" step="0.01" placeholder="2,0"/></div></div>
+    </div>
+    <div class="fg" style="margin-top:10px"><label>Ou vincular a SKU existente</label>
+      <select id="mc_sku_sel" onchange="preencherDeSKU()">
+        <option value="">— selecione um SKU —</option>
+      </select>
+    </div>
     <div class="mbtns">
-      <button class="btn btn-sm" onclick="fecharModal()">Cancelar</button>
-      <button class="btn btn-primary btn-sm" onclick="confirmarSkuVinculo()">Vincular</button>
+      <button class="btn btn-sm" onclick="fecharModalCusto()">Cancelar</button>
+      <button class="btn btn-primary btn-sm" onclick="salvarCustoAnuncio()"><i class="ti ti-device-floppy"></i> Salvar</button>
     </div>
   </div>
 </div>
 
 <script>
 const PROXY="https://aged-hill-7a5e.douglasjrmaule.workers.dev/proxy";
+const WORKER="https://aged-hill-7a5e.douglasjrmaule.workers.dev";
+const APP_ID="2687755540742427";
 const CONTAS=[{id:"c1",label:"Conta 1"},{id:"c2",label:"Conta 2"},{id:"c3",label:"Conta 3"}];
 const SEED_SKUS=[{"sku": "LATA2026", "custo": 1.0, "impPct": 1.0}, {"sku": "KITESPECIAL1050", "custo": 1600.0, "impPct": 1.0}, {"sku": "KIT350+LATA", "custo": 275.0, "impPct": 1.0}, {"sku": "KIT700+LATA", "custo": 545.0, "impPct": 1.0}, {"sku": "KITLATA+30ENV", "custo": 225.0, "impPct": 1.0}, {"sku": "KITLATA+50ENV", "custo": 340.0, "impPct": 1.0}, {"sku": "KITLATA+10ENV", "custo": 110.0, "impPct": 1.0}, {"sku": "CAPAMOLE+10ENV", "custo": 73.5, "impPct": 1.0}, {"sku": "CAPADURA+20ENV", "custo": 164.0, "impPct": 1.0}, {"sku": "CAPAPRATA+20ENV", "custo": 168.0, "impPct": 1.0}, {"sku": "CAPAOURO+20ENV", "custo": 174.0, "impPct": 0.01}, {"sku": "CAPAOURO10ENV", "custo": 120.0, "impPct": 0.01}, {"sku": "CAPAPRATA10ENV", "custo": 109.9, "impPct": 2.0}, {"sku": "BROCHURA10ENV", "custo": 74.0, "impPct": 2.0}, {"sku": "CAPAMOLE15ENV", "custo": 101.0, "impPct": 2.0}, {"sku": "CAPAMOLEFIGURINHA140E", "custo": 755.0, "impPct": 1.0}, {"sku": "BROCHURA", "custo": 20.0, "impPct": 2.0}, {"sku": "ALB-CAPADURA", "custo": 60.0, "impPct": 1.0}, {"sku": "ALB-PRATA", "custo": 60.0, "impPct": 1.0}, {"sku": "ALB-BROCHURA", "custo": 20.0, "impPct": 1.0}, {"sku": "ALB-OURO", "custo": 70.0, "impPct": 0.01}, {"sku": "FIGURINHA100E", "custo": 511.0, "impPct": 2.0}, {"sku": "KIT1000ENVELOPES", "custo": 5110.0, "impPct": 2.0}, {"sku": "ENVELOPE5", "custo": 25.55, "impPct": 2.0}, {"sku": "ENVELOPE50", "custo": 255.5, "impPct": 2.0}, {"sku": "ENVELOPE10", "custo": 51.1, "impPct": 2.0}, {"sku": "ENVELOPE140", "custo": 715.4, "impPct": 2.0}, {"sku": "ENVELOPE100", "custo": 511.0, "impPct": 2.0}, {"sku": "AsentPiso", "custo": 152.5, "impPct": 3.0}, {"sku": "KIT100ENVELOPES", "custo": 535.0, "impPct": 1.0}, {"sku": "KIT10ENVELOPES", "custo": 51.1, "impPct": 2.0}, {"sku": "KIT48ENVELOPES", "custo": 256.9, "impPct": 1.0}, {"sku": "KIT36ENVELOPES", "custo": 189.9, "impPct": 1.0}, {"sku": "CopaAlbumCapaDura", "custo": 54.68, "impPct": 0.0}, {"sku": "CAPDUR36ENV", "custo": 238.64, "impPct": 2.0}, {"sku": "CAPDUR24ENV", "custo": 177.32, "impPct": 2.0}, {"sku": "ALBUM-CAPADURA", "custo": 55.0, "impPct": 2.0}, {"sku": "FIGURINHA5E", "custo": 25.55, "impPct": 2.0}, {"sku": "FIGURINHA10E", "custo": 51.1, "impPct": 2.0}, {"sku": "CAPADURA15ENV", "custo": 131.33, "impPct": 2.0}, {"sku": "FIGURINHA1E", "custo": 5.11, "impPct": 2.0}, {"sku": "CAPADURA140ENV", "custo": 770.08, "impPct": 2.0}, {"sku": "CAPADURA5ENV", "custo": 80.23, "impPct": 2.0}, {"sku": "FIGURINHA140E", "custo": 715.4, "impPct": 2.0}, {"sku": "CAPADURA", "custo": 55.0, "impPct": 2.0}, {"sku": "CAPADURA10ENV", "custo": 107.0, "impPct": 2.0}, {"sku": "CamLamKIT4", "custo": 150.22, "impPct": 2.0}, {"sku": "PistolaDePintura", "custo": 112.0, "impPct": 4.0}, {"sku": "ChaveDeImpacto", "custo": 178.0, "impPct": 2.0}, {"sku": "BMF1275", "custo": 5.55, "impPct": 1.11}, {"sku": "SUP_HY320", "custo": 4.0, "impPct": 4.0}, {"sku": "SUP_HY300", "custo": 4.0, "impPct": 4.0}, {"sku": "MS_PRETO4", "custo": 22.5, "impPct": 4.0}, {"sku": "GStick01", "custo": 96.58, "impPct": 4.0}, {"sku": "Fone_CAP", "custo": 28.0, "impPct": 4.0}, {"sku": "2KIT_A28", "custo": 188.0, "impPct": 2.0}, {"sku": "KIT2_A28", "custo": 166.5, "impPct": 4.0}, {"sku": "FECH01", "custo": 220.0, "impPct": 4.0}, {"sku": "MED_BRA\u00c7O", "custo": 28.0, "impPct": 4.0}, {"sku": "MED_PULSO", "custo": 32.0, "impPct": 4.0}, {"sku": "BikeErg", "custo": 420.0, "impPct": 1.0}, {"sku": "CamRobo", "custo": 120.0, "impPct": 2.0}, {"sku": "H3002", "custo": 130.0, "impPct": 2.0}, {"sku": "LavaJato", "custo": 70.0, "impPct": 2.0}, {"sku": "Parafusadeira01", "custo": 88.0, "impPct": 2.0}, {"sku": "MS_PRETO3", "custo": 22.5, "impPct": 2.0}, {"sku": "H3001", "custo": 135.0, "impPct": 2.0}, {"sku": "CordaDePular", "custo": 6.5, "impPct": 2.0}, {"sku": "CamRe1", "custo": 11.73, "impPct": 2.0}, {"sku": "MS_PRETO2", "custo": 23.0, "impPct": 2.0}, {"sku": "BM-B557AZUL", "custo": 21.31, "impPct": 2.0}, {"sku": "BM-F1065CINZA", "custo": 25.67, "impPct": 2.0}, {"sku": "BM-B557PRETO", "custo": 21.31, "impPct": 2.0}, {"sku": "BM-B557CINZA", "custo": 21.31, "impPct": 2.0}, {"sku": "BM-F1065PRETO", "custo": 25.67, "impPct": 2.0}, {"sku": "BM-F1065AZUL", "custo": 25.67, "impPct": 2.0}, {"sku": "BMG-71", "custo": 64.26, "impPct": 2.0}, {"sku": "BM-F1080A", "custo": 54.3, "impPct": 2.0}, {"sku": "BM-F1003", "custo": 27.54, "impPct": 2.0}, {"sku": "BM-F1080B", "custo": 54.3, "impPct": 2.0}, {"sku": "PS4-2", "custo": 35.0, "impPct": 2.0}, {"sku": "CT_PS4KIT_2", "custo": 69.5, "impPct": 2.0}, {"sku": "KIT3CAMLPD1", "custo": 116.0, "impPct": 2.0}, {"sku": "KitFerramenta", "custo": 17.5, "impPct": 2.0}, {"sku": "PS4", "custo": 34.7, "impPct": 2.0}, {"sku": "MS_VERDE1", "custo": 23.0, "impPct": 2.0}, {"sku": "MS_PRATA1", "custo": 23.0, "impPct": 2.0}, {"sku": "MS_VERMELHO1", "custo": 23.0, "impPct": 2.0}, {"sku": "MS_DOURADO1", "custo": 23.0, "impPct": 2.0}, {"sku": "MS_PRETO1", "custo": 23.0, "impPct": 2.0}, {"sku": "DataFull", "custo": 38.8, "impPct": 2.0}, {"sku": "CT_PS4KIT2", "custo": 69.5, "impPct": 2.0}, {"sku": "FONE_IT1ROSA", "custo": 31.5, "impPct": 2.0}, {"sku": "FONE_IT1BRANCO", "custo": 31.5, "impPct": 2.0}, {"sku": "FONE_IT1", "custo": 31.5, "impPct": 2.0}, {"sku": "FONE_IT2", "custo": 31.5, "impPct": 2.0}, {"sku": "CT_PS4", "custo": 35.5, "impPct": 2.0}, {"sku": "CamA8", "custo": 68.0, "impPct": 2.0}, {"sku": "SUP_PRETO", "custo": 11.22, "impPct": 2.0}, {"sku": "SUP_PRATEADO", "custo": 11.22, "impPct": 2.0}, {"sku": "a28_KIT2", "custo": 178.64, "impPct": 2.0}, {"sku": "CamA8Kit2", "custo": 137.0, "impPct": 2.0}, {"sku": "CamLamKIT2", "custo": 79.0, "impPct": 2.0}, {"sku": "ACV00267ALPHA", "custo": 120.0, "impPct": 2.0}, {"sku": "MASS_DOURADO", "custo": 23.0, "impPct": 2.0}, {"sku": "CarMag1", "custo": 9.5, "impPct": 2.0}, {"sku": "TURIN_100", "custo": 82.0, "impPct": 2.0}, {"sku": "TURIN_120", "custo": 98.0, "impPct": 2.0}, {"sku": "TURIN_36", "custo": 29.37, "impPct": 2.0}, {"sku": "TURIN_168", "custo": 137.0, "impPct": 2.0}, {"sku": "TURIN_42", "custo": 34.28, "impPct": 2.0}, {"sku": "TURIN_60", "custo": 48.96, "impPct": 2.0}, {"sku": "TURIN_24", "custo": 19.58, "impPct": 2.0}, {"sku": "MASS_PRATA", "custo": 23.0, "impPct": 2.0}, {"sku": "MASS_VERMELHO", "custo": 23.0, "impPct": 2.0}, {"sku": "MASS_VERDE", "custo": 23.0, "impPct": 2.0}, {"sku": "MASS_PRETO", "custo": 23.0, "impPct": 2.0}, {"sku": "a28_Kit3", "custo": 283.9, "impPct": 2.0}, {"sku": "a28_Kit4", "custo": 379.9, "impPct": 2.0}, {"sku": "KIT3CAMLPD", "custo": 117.0, "impPct": 2.0}, {"sku": "POWERBANKPRETO50000", "custo": 119.89, "impPct": 2.0}, {"sku": "POWERBANKBRANCO50000", "custo": 119.89, "impPct": 2.0}, {"sku": "POWERBANKBRANCO30000", "custo": 89.62, "impPct": 2.0}, {"sku": "POWERBANKPRETO30000", "custo": 89.62, "impPct": 2.0}, {"sku": "CX_01", "custo": 76.5, "impPct": 2.0}, {"sku": "KIT2CAMLPD", "custo": 78.0, "impPct": 2.0}, {"sku": "KIT5PANELAS", "custo": 177.75, "impPct": 2.0}, {"sku": "BL\u00c71", "custo": 8.25, "impPct": 2.0}, {"sku": "A28_UN", "custo": 93.0, "impPct": 2.0}, {"sku": "LE-7674-2", "custo": 25.5, "impPct": 2.0}, {"sku": "BL\u00c7", "custo": 12.5, "impPct": 2.0}, {"sku": "WEBC", "custo": 22.44, "impPct": 2.0}, {"sku": "HY300", "custo": 157.0, "impPct": 2.0}, {"sku": "LE-7674", "custo": 25.5, "impPct": 2.0}, {"sku": "TWS35", "custo": 38.0, "impPct": 2.0}, {"sku": "KIT8+PRESSAO", "custo": 271.93, "impPct": 2.0}, {"sku": "KIT9PANELAS", "custo": 256.87, "impPct": 2.0}, {"sku": "KIT10+WOK", "custo": 364.51, "impPct": 2.0}, {"sku": "KIT_2_LE7045", "custo": 8.0, "impPct": 2.0}, {"sku": "Ear101", "custo": 22.5, "impPct": 2.0}, {"sku": "CARV1", "custo": 14.01, "impPct": 2.0}, {"sku": "KA2812-LE7045", "custo": 4.5, "impPct": 2.0}, {"sku": "KA2807-LE7028", "custo": 11.0, "impPct": 2.0}, {"sku": "KA2950-LE7250", "custo": 9.0, "impPct": 2.0}, {"sku": "KA3806-LE7068", "custo": 11.5, "impPct": 2.0}, {"sku": "KA2955-LE74101", "custo": 9.6, "impPct": 2.0}, {"sku": "UN-LE7045", "custo": 4.0, "impPct": 2.0}, {"sku": "LE7438", "custo": 9.5, "impPct": 2.0}, {"sku": "LE7699", "custo": 6.5, "impPct": 2.0}, {"sku": "LE7045", "custo": 8.0, "impPct": 2.0}, {"sku": "KA3807-FBG9103", "custo": 12.0, "impPct": 2.0}, {"sku": "CT5", "custo": 8.0, "impPct": 2.0}, {"sku": "CarMag3", "custo": 18.0, "impPct": 2.0}, {"sku": "CT1", "custo": 4.5, "impPct": 2.0}, {"sku": "CT2", "custo": 10.5, "impPct": 2.0}, {"sku": "CT4", "custo": 10.5, "impPct": 2.0}, {"sku": "CT3", "custo": 12.5, "impPct": 2.0}, {"sku": "Ear10", "custo": 22.5, "impPct": 2.0}, {"sku": "EarCap", "custo": 50.0, "impPct": 2.0}, {"sku": "CarCel", "custo": 10.0, "impPct": 2.0}, {"sku": "Ear11", "custo": 22.5, "impPct": 2.0}, {"sku": "Ear6", "custo": 42.84, "impPct": 2.0}, {"sku": "Ear5", "custo": 42.84, "impPct": 2.0}, {"sku": "Ear4", "custo": 42.84, "impPct": 2.0}, {"sku": "Ear7", "custo": 40.0, "impPct": 2.0}, {"sku": "CarMag2", "custo": 16.84, "impPct": 2.0}, {"sku": "Ear3", "custo": 37.0, "impPct": 2.0}, {"sku": "Ear8", "custo": 40.0, "impPct": 2.0}, {"sku": "Ear9", "custo": 40.5, "impPct": 2.0}, {"sku": "Ear2", "custo": 37.0, "impPct": 2.0}, {"sku": "GRX1", "custo": 12.5, "impPct": 2.0}, {"sku": "CARV", "custo": 14.04, "impPct": 2.0}, {"sku": "CarMag", "custo": 16.09, "impPct": 2.0}, {"sku": "Ear1", "custo": 20.0, "impPct": 2.0}, {"sku": "CAM4", "custo": 42.0, "impPct": 2.0}, {"sku": "CAM3", "custo": 35.0, "impPct": 2.0}, {"sku": "D3203", "custo": 80.96, "impPct": 2.0}, {"sku": "KP517", "custo": 32.86, "impPct": 2.0}, {"sku": "KPAD140", "custo": 25.15, "impPct": 2.0}, {"sku": "KP8015", "custo": 82.13, "impPct": 2.0}, {"sku": "KPHD013", "custo": 16.24, "impPct": 2.0}, {"sku": "T89", "custo": 38.64, "impPct": 2.0}, {"sku": "KP600", "custo": 11.56, "impPct": 2.0}, {"sku": "KP532", "custo": 78.3, "impPct": 2.0}, {"sku": "KP533", "custo": 91.8, "impPct": 2.0}, {"sku": "KP526", "custo": 41.58, "impPct": 2.0}, {"sku": "HD821", "custo": 16.24, "impPct": 2.0}, {"sku": "A320", "custo": 266.12, "impPct": 2.0}, {"sku": "DH004", "custo": 48.1, "impPct": 2.0}, {"sku": "KP3466", "custo": 12.39, "impPct": 2.0}, {"sku": "KPC29", "custo": 63.34, "impPct": 2.0}, {"sku": "KP6037", "custo": 260.25, "impPct": 2.0}, {"sku": "KP6032", "custo": 280.26, "impPct": 2.0}, {"sku": "GT730", "custo": 197.37, "impPct": 2.0}, {"sku": "KP522", "custo": 61.5, "impPct": 2.0}, {"sku": "KPDH004", "custo": 45.71, "impPct": 2.0}, {"sku": "KPC29BH", "custo": 63.34, "impPct": 2.0}, {"sku": "KP6037BH", "custo": 260.25, "impPct": 2.0}, {"sku": "KP6032BH", "custo": 266.22, "impPct": 2.0}, {"sku": "LB521", "custo": 123.93, "impPct": 2.0}, {"sku": "TY003", "custo": 7.34, "impPct": 2.0}, {"sku": "BL714", "custo": 12.85, "impPct": 2.0}, {"sku": "BL715", "custo": 14.96, "impPct": 2.0}, {"sku": "GGT730", "custo": 197.37, "impPct": 2.0}, {"sku": "KP488AZUL", "custo": 60.22, "impPct": 2.0}, {"sku": "KP4040VERMELHO", "custo": 28.01, "impPct": 2.0}, {"sku": "KP4040AZUL", "custo": 28.01, "impPct": 2.0}, {"sku": "KP4040AMARELO", "custo": 28.01, "impPct": 2.0}, {"sku": "KP4040VERDE", "custo": 28.01, "impPct": 2.0}, {"sku": "QRPET2508", "custo": 77.29, "impPct": 2.0}, {"sku": "KP2060", "custo": 36.72, "impPct": 2.0}, {"sku": "GGT6102G", "custo": 104.1, "impPct": 2.0}, {"sku": "GVR337", "custo": 6.7, "impPct": 2.0}, {"sku": "GVR302", "custo": 12.11, "impPct": 2.0}, {"sku": "KPC31AN1", "custo": 265.76, "impPct": 2.0}, {"sku": "KP916", "custo": 22.64, "impPct": 2.0}, {"sku": "KPC31AN", "custo": 252.45, "impPct": 2.0}, {"sku": "RO827", "custo": 46.75, "impPct": 2.0}, {"sku": "KP455A", "custo": 64.09, "impPct": 2.0}, {"sku": "KPGM034", "custo": 67.65, "impPct": 2.0}, {"sku": "KP2064", "custo": 43.51, "impPct": 2.0}, {"sku": "KP2003A", "custo": 13.02, "impPct": 2.0}, {"sku": "KPRO800", "custo": 21.75, "impPct": 2.0}, {"sku": "KP488", "custo": 61.4, "impPct": 2.0}, {"sku": "KP4040", "custo": 27.54, "impPct": 2.0}, {"sku": "KP917", "custo": 19.53, "impPct": 2.0}, {"sku": "KPAD109", "custo": 10.01, "impPct": 2.0}, {"sku": "KPRO827", "custo": 45.9, "impPct": 2.0}, {"sku": "KPMU007", "custo": 35.71, "impPct": 2.0}, {"sku": "KPT102", "custo": 31.23, "impPct": 2.0}, {"sku": "KP2059", "custo": 41.58, "impPct": 2.0}, {"sku": "KPTE120", "custo": 30.36, "impPct": 2.0}, {"sku": "D3204", "custo": 75.27, "impPct": 2.0}, {"sku": "D3142", "custo": 37.65, "impPct": 2.0}, {"sku": "KP401", "custo": 45.88, "impPct": 2.0}, {"sku": "KPTE115", "custo": 34.79, "impPct": 2.0}, {"sku": "PJ004", "custo": 328.55, "impPct": 2.0}, {"sku": "KP2008", "custo": 16.0, "impPct": 2.0}, {"sku": "CN700", "custo": 34.87, "impPct": 2.0}, {"sku": "HM55", "custo": 99.0, "impPct": 2.0}, {"sku": "KP1018", "custo": 87.0, "impPct": 2.0}, {"sku": "KP2012", "custo": 39.0, "impPct": 2.0}, {"sku": "KP237", "custo": 58.0, "impPct": 2.0}, {"sku": "CAM2", "custo": 38.5, "impPct": 2.0}, {"sku": "EXT5BRANCO", "custo": 30.0, "impPct": 2.0}, {"sku": "EXT5", "custo": 29.0, "impPct": 2.0}, {"sku": "MC", "custo": 22.0, "impPct": 2.0}, {"sku": "Airpods2", "custo": 684.0, "impPct": 2.0}, {"sku": "Aws9", "custo": 2210.0, "impPct": 2.0}, {"sku": "SD32GB", "custo": 23.0, "impPct": 2.0}, {"sku": "SD128GB", "custo": 47.0, "impPct": 2.0}, {"sku": "SD64gb", "custo": 25.0, "impPct": 2.0}, {"sku": "9999999", "custo": 99.0, "impPct": 2.0}, {"sku": "006N", "custo": 100.0, "impPct": 2.0}, {"sku": "006-210", "custo": 246.0, "impPct": 2.0}, {"sku": "MOD 001 150", "custo": 101.0, "impPct": 2.0}, {"sku": "012-150", "custo": 117.0, "impPct": 2.0}, {"sku": "001-120", "custo": 70.0, "impPct": 2.0}, {"sku": "C002", "custo": 45.0, "impPct": 2.0}, {"sku": "arvorenatal4", "custo": 130.0, "impPct": 2.0}, {"sku": "arvoreled", "custo": 166.66, "impPct": 2.0}, {"sku": "arvorenatal", "custo": 166.66, "impPct": 2.0}, {"sku": "arvorenatal1", "custo": 166.0, "impPct": 2.0}, {"sku": "arvorenatal3", "custo": 166.0, "impPct": 2.0}, {"sku": "CarameloMetal", "custo": 4.0, "impPct": 2.0}, {"sku": "VerdeMetal", "custo": 4.0, "impPct": 2.0}, {"sku": "PretoMetal", "custo": 4.0, "impPct": 2.0}, {"sku": "CAM", "custo": 38.0, "impPct": 2.0}, {"sku": "arvorenatal5", "custo": 170.0, "impPct": 2.0}, {"sku": "BLRosa", "custo": 45.0, "impPct": 2.0}, {"sku": "BLBranco", "custo": 45.0, "impPct": 2.0}, {"sku": "BLPreta", "custo": 45.0, "impPct": 2.0}, {"sku": "CAMBranca", "custo": 56.0, "impPct": 2.0}, {"sku": "FN PRO2", "custo": 15.0, "impPct": 2.0}, {"sku": "FN", "custo": 10.0, "impPct": 2.0}, {"sku": "FNPRO", "custo": 24.5, "impPct": 2.0}, {"sku": "TWS", "custo": 32.0, "impPct": 2.0}, {"sku": "LANT.SOL", "custo": 45.0, "impPct": 2.0}, {"sku": "LANT.TIT", "custo": 42.0, "impPct": 2.0}, {"sku": "Ear", "custo": 15.0, "impPct": 2.0}, {"sku": "Kit2CAM8", "custo": 234.0, "impPct": 2.0}, {"sku": "BABTRONIC", "custo": 65.0, "impPct": 2.0}, {"sku": "MQNDRAG", "custo": 19.0, "impPct": 2.0}, {"sku": "SD32", "custo": 12.5, "impPct": 2.0}, {"sku": "CAM8", "custo": 74.5, "impPct": 2.0}, {"sku": "C004", "custo": 23.0, "impPct": 2.0}, {"sku": "C001", "custo": 12.0, "impPct": 2.0}, {"sku": "C018", "custo": 21.0, "impPct": 2.0}, {"sku": "C020", "custo": 14.5, "impPct": 2.0}, {"sku": "C013", "custo": 25.0, "impPct": 2.0}, {"sku": "c042", "custo": 20.0, "impPct": 2.0}, {"sku": "C040", "custo": 145.0, "impPct": 2.0}, {"sku": "c027", "custo": 19.0, "impPct": 2.0}];
 
 let skus={},anuncios=[],vinculos={};
 let tokens={},userids={},contaNames={c1:"Conta 1",c2:"Conta 2",c3:"Conta 3"};
+// custosAnuncio: custo e imposto definidos por anúncio (override do SKU)
+let custosAnuncio={}; // {mlb: {custo, impPct}}
 let fechData={c1:{mc:0,rec:0,ads:0,full:0,dev:0},c2:{mc:0,rec:0,ads:0,full:0,dev:0},c3:{mc:0,rec:0,ads:0,full:0,dev:0}};
-let modalMlb=null,modalSkuSel=null;
+let modalCustoMlb=null;
 
 function save(){
-  localStorage.setItem("ml_skus3",JSON.stringify(skus));
-  localStorage.setItem("ml_anu3",JSON.stringify(anuncios));
-  localStorage.setItem("ml_vinc3",JSON.stringify(vinculos));
-  localStorage.setItem("ml_names3",JSON.stringify(contaNames));
-  localStorage.setItem("ml_tok3",JSON.stringify(tokens));
-  localStorage.setItem("ml_uid3",JSON.stringify(userids));
+  localStorage.setItem("ml_skus4",JSON.stringify(skus));
+  localStorage.setItem("ml_anu4",JSON.stringify(anuncios));
+  localStorage.setItem("ml_vinc4",JSON.stringify(vinculos));
+  localStorage.setItem("ml_custo4",JSON.stringify(custosAnuncio));
+  localStorage.setItem("ml_names4",JSON.stringify(contaNames));
+  localStorage.setItem("ml_tok4",JSON.stringify(tokens));
+  localStorage.setItem("ml_uid4",JSON.stringify(userids));
   const op={};["op_folha","op_aluguel","op_embalagens","op_sistemas","op_outros","op_r1","op_r2","op_r3"].forEach(id=>{const e=document.getElementById(id);if(e)op[id]=e.value;});
-  localStorage.setItem("ml_op3",JSON.stringify(op));
+  localStorage.setItem("ml_op4",JSON.stringify(op));
 }
 function load(){
   try{
-    const s=localStorage.getItem("ml_skus3");
-    if(s) skus=JSON.parse(s);
-    else{ SEED_SKUS.forEach(x=>{skus[x.sku]={sku:x.sku,nome:x.sku,custo:x.custo,impPct:x.impPct,cat:""};});}
-    const a=localStorage.getItem("ml_anu3");if(a)anuncios=JSON.parse(a);
-    const v=localStorage.getItem("ml_vinc3");if(v)vinculos=JSON.parse(v);
-    const n=localStorage.getItem("ml_names3");if(n)contaNames=JSON.parse(n);
-    const t=localStorage.getItem("ml_tok3");if(t)tokens=JSON.parse(t);
-    const u=localStorage.getItem("ml_uid3");if(u)userids=JSON.parse(u);
-    const op=localStorage.getItem("ml_op3");if(op){const o=JSON.parse(op);Object.entries(o).forEach(([k,v])=>{const e=document.getElementById(k);if(e)e.value=v;});}
+    const s=localStorage.getItem("ml_skus4");
+    if(s)skus=JSON.parse(s);
+    else{SEED_SKUS.forEach(x=>{skus[x.sku]={sku:x.sku,nome:x.sku,custo:x.custo,impPct:x.impPct,cat:""};});}
+    const a=localStorage.getItem("ml_anu4");if(a)anuncios=JSON.parse(a);
+    const v=localStorage.getItem("ml_vinc4");if(v)vinculos=JSON.parse(v);
+    const cu=localStorage.getItem("ml_custo4");if(cu)custosAnuncio=JSON.parse(cu);
+    const n=localStorage.getItem("ml_names4");if(n)contaNames=JSON.parse(n);
+    const t=localStorage.getItem("ml_tok4");if(t)tokens=JSON.parse(t);
+    const u=localStorage.getItem("ml_uid4");if(u)userids=JSON.parse(u);
+    const op=localStorage.getItem("ml_op4");if(op){const o=JSON.parse(op);Object.entries(o).forEach(([k,v])=>{const e=document.getElementById(k);if(e)e.value=v;});}
   }catch(e){}
 }
 
@@ -290,6 +328,13 @@ const setText=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;
 function addLog(lid,msg,t="info"){const el=document.getElementById(lid);if(!el)return;el.style.display="block";el.innerHTML+=`<div class="log-${t}">[${new Date().toLocaleTimeString()}] ${msg}</div>`;el.scrollTop=el.scrollHeight;}
 function clearLog(id){const el=document.getElementById(id);if(el){el.innerHTML="";el.style.display="none";}}
 
+// Obter custo efetivo de um anúncio (custosAnuncio tem prioridade sobre SKU)
+function getCustoAnuncio(mlb, skuCode){
+  if(custosAnuncio[mlb]) return custosAnuncio[mlb];
+  if(skuCode&&skus[skuCode]) return {custo:skus[skuCode].custo, impPct:skus[skuCode].impPct};
+  return null;
+}
+
 function sw(name){
   document.querySelectorAll(".pane").forEach(p=>p.classList.remove("on"));
   document.querySelectorAll(".ni").forEach(b=>b.classList.remove("on"));
@@ -298,125 +343,75 @@ function sw(name){
   document.querySelectorAll(".ni")[ord.indexOf(name)]?.classList.add("on");
 }
 
-function calcMCAnuncio(a){
-  const s=a.sku?skus[a.sku]:null;
-  if(!s||!a.preco)return;
-  const cv=a.preco*(a.comPct/100),iv=a.preco*(s.impPct/100);
-  a.mc=a.preco-s.custo-cv-a.frete-iv;
-  a.mcp=a.preco>0?a.mc/a.preco*100:0;
+// ---- TOKEN ----
+const WORKER_URL="https://aged-hill-7a5e.douglasjrmaule.workers.dev";
+async function getToken(cid){
+  try{
+    const r=await fetch(`${WORKER_URL}/tokens/${cid}`);
+    if(!r.ok)return tokens[cid]||null;
+    const d=await r.json();
+    if(d.accessToken){if(d.renewed){tokens[cid]=d.accessToken;if(d.userId)userids[cid]=d.userId;save();}return d.accessToken;}
+  }catch(e){}
+  return tokens[cid]||null;
 }
 
 // ---- SKUS ----
 function addSKU(){
   const sku=document.getElementById("ns_sku").value.trim();
-  if(!sku){alert("Informe o código SKU.");return;}
-  const nome=document.getElementById("ns_nome").value.trim();
-  const custo=parseFloat(document.getElementById("ns_custo").value)||0;
-  const impPct=parseFloat(document.getElementById("ns_imp").value)||0;
-  const cat=document.getElementById("ns_cat").value.trim();
-  skus[sku]={sku,nome:nome||sku,custo,impPct,cat};
-  anuncios.filter(a=>a.sku===sku).forEach(a=>calcMCAnuncio(a));
+  if(!sku){alert("Informe o SKU.");return;}
+  skus[sku]={sku,nome:document.getElementById("ns_nome").value.trim()||sku,custo:parseFloat(document.getElementById("ns_custo").value)||0,impPct:parseFloat(document.getElementById("ns_imp").value)||0,cat:document.getElementById("ns_cat").value.trim()};
   save();renderSKUTable();renderAnuncios();
   ["ns_sku","ns_nome","ns_custo","ns_imp","ns_cat"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";});
 }
-
-function editSKU(sku){
-  const s=skus[sku];if(!s)return;
-  document.getElementById("ns_sku").value=s.sku;
-  document.getElementById("ns_nome").value=s.nome;
-  document.getElementById("ns_custo").value=s.custo;
-  document.getElementById("ns_imp").value=s.impPct;
-  document.getElementById("ns_cat").value=s.cat||"";
-  window.scrollTo(0,0);
-}
-
-function removeSKU(sku){
-  if(!confirm("Remover SKU "+sku+"?"))return;
-  delete skus[sku];
-  anuncios.filter(a=>a.sku===sku).forEach(a=>{a.sku=null;a.mc=0;a.mcp=0;});
-  save();renderSKUTable();renderAnuncios();
-}
-
+function editSKU(sku){const s=skus[sku];if(!s)return;document.getElementById("ns_sku").value=s.sku;document.getElementById("ns_nome").value=s.nome;document.getElementById("ns_custo").value=s.custo;document.getElementById("ns_imp").value=s.impPct;document.getElementById("ns_cat").value=s.cat||"";window.scrollTo(0,0);}
+function removeSKU(sku){if(!confirm("Remover "+sku+"?"))return;delete skus[sku];save();renderSKUTable();renderAnuncios();}
 function renderSKUTable(){
   const q=(document.getElementById("sku-search")?.value||"").toLowerCase();
   const list=Object.values(skus).filter(s=>!q||s.sku.toLowerCase().includes(q)||s.nome.toLowerCase().includes(q));
-  setText("sku-count",Object.keys(skus).length);
-  setText("bdg-skus",Object.keys(skus).length);
-  const semC=Object.values(skus).filter(s=>!s.custo).length;
-  const w=document.getElementById("sku-semcusto-warn");
-  if(w){w.style.display=semC>0?"":"none";setText("sku-semcusto-n",semC);}
+  setText("sku-count",Object.keys(skus).length);setText("bdg-skus",Object.keys(skus).length);
+  const sc=Object.values(skus).filter(s=>!s.custo).length;
+  const w=document.getElementById("sku-semcusto-warn");if(w){w.style.display=sc>0?"":"none";setText("sku-semcusto-n",sc);}
   const tb=document.getElementById("sku-tbody");if(!tb)return;
   if(!list.length){tb.innerHTML='<tr><td colspan="7" class="td-mut" style="text-align:center;padding:20px">Nenhum SKU encontrado</td></tr>';return;}
   tb.innerHTML=list.map(s=>{
-    const linked=anuncios.filter(a=>a.sku===s.sku).length;
-    return `<tr>
-      <td><code style="font-family:var(--mono);font-size:12px">${s.sku}</code></td>
-      <td>${s.nome||"—"}</td>
-      <td class="num">${s.custo>0?fR(s.custo):`<span style="color:var(--yw)">sem custo</span>`}</td>
-      <td class="num">${s.impPct}%</td>
-      <td class="td-mut">${s.cat||"—"}</td>
-      <td style="text-align:center">${linked>0?`<span class="pill pill-ok">${linked}</span>`:`<span class="pill pill-gray">0</span>`}</td>
-      <td style="display:flex;gap:4px">
-        <button class="btn btn-sm" onclick="editSKU('${s.sku}')" style="padding:3px 7px"><i class="ti ti-edit" style="font-size:12px"></i></button>
-        <button class="btn btn-sm btn-danger" onclick="removeSKU('${s.sku}')" style="padding:3px 7px"><i class="ti ti-trash" style="font-size:12px"></i></button>
-      </td>
-    </tr>`;
+    const ln=anuncios.filter(a=>a.sku===s.sku).length;
+    return `<tr><td><code style="font-family:var(--mono);font-size:12px">${s.sku}</code></td><td>${s.nome||"—"}</td>
+    <td class="num">${s.custo>0?fR(s.custo):`<span style="color:var(--yw)">sem custo</span>`}</td>
+    <td class="num">${s.impPct}%</td><td class="td-mut">${s.cat||"—"}</td>
+    <td style="text-align:center">${ln>0?`<span class="pill pill-ok">${ln}</span>`:`<span class="pill pill-gray">0</span>`}</td>
+    <td style="display:flex;gap:4px">
+      <button class="btn btn-sm" onclick="editSKU('${s.sku}')" style="padding:3px 7px"><i class="ti ti-edit" style="font-size:12px"></i></button>
+      <button class="btn btn-sm btn-danger" onclick="removeSKU('${s.sku}')" style="padding:3px 7px"><i class="ti ti-trash" style="font-size:12px"></i></button>
+    </td></tr>`;
   }).join("");
 }
-
 function importCSV(){document.getElementById("csv-input").click();}
 function handleCSV(e){
   const file=e.target.files[0];if(!file)return;
   const reader=new FileReader();
   reader.onload=ev=>{
-    const lines=ev.target.result.split("\n");
-    let imported=0,updated=0;
+    const lines=ev.target.result.split("\n");let imp=0,upd=0;
     lines.forEach((line,i)=>{
-      if(i===0)return;
-      const parts=line.split(";");
-      if(parts.length<3)return;
-      const custo=parseFloat(parts[0])||0;
-      const imp=parseFloat(parts[1])||0;
+      if(i===0)return;const parts=line.split(";");if(parts.length<3)return;
+      const custo=parseFloat(parts[0])||0,imp_=parseFloat(parts[1])||0;
       const sku=(parts[2]||"").trim().replace(/\r/g,"");
       const nome=(parts[3]||"").trim().replace(/\r/g,"")||sku;
       const cat=(parts[4]||"").trim().replace(/\r/g,"");
       if(!sku)return;
-      const isNew=!skus[sku];
-      skus[sku]={sku,nome,custo,impPct:imp,cat};
-      if(isNew)imported++;else updated++;
+      const isNew=!skus[sku];skus[sku]={sku,nome,custo,impPct:imp_,cat};
+      if(isNew)imp++;else upd++;
     });
-    anuncios.forEach(a=>{if(a.sku&&skus[a.sku])calcMCAnuncio(a);});
-    save();renderSKUTable();renderAnuncios();
-    alert(imported+" novos SKUs importados, "+updated+" atualizados!");
+    save();renderSKUTable();renderAnuncios();alert(imp+" novos, "+upd+" atualizados!");
   };
-  reader.readAsText(file,"utf-8");
-  e.target.value="";
+  reader.readAsText(file,"utf-8");e.target.value="";
 }
-
 function exportSkusCSV(){
   let csv="CUSTO;IMPOSTO;SKU;NOME;CATEGORIA\n";
   Object.values(skus).forEach(s=>{csv+=`${s.custo};${s.impPct};${s.sku};${s.nome||""};${s.cat||""}\n`;});
-  const a=document.createElement("a");a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);a.download="skus_fechamento_ml.csv";a.click();
+  const a=document.createElement("a");a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);a.download="skus.csv";a.click();
 }
 
 // ---- CONTAS ----
-const WORKER="https://aged-hill-7a5e.douglasjrmaule.workers.dev";
-const APP_ID="2687755540742427";
-
-// Obter token válido — renova automaticamente se necessário
-async function getToken(cid){
-  try{
-    const r=await fetch(`${WORKER}/tokens/${cid}`);
-    if(!r.ok) return tokens[cid]||null;
-    const d=await r.json();
-    if(d.accessToken){
-      if(d.renewed){tokens[cid]=d.accessToken;if(d.userId)userids[cid]=d.userId;save();}
-      return d.accessToken;
-    }
-  }catch(e){}
-  return tokens[cid]||null;
-}
-
 function buildContas(){
   const el=document.getElementById("contas-cards");if(!el)return;
   el.innerHTML=CONTAS.map(c=>`
@@ -427,108 +422,56 @@ function buildContas(){
         <div id="${c.id}_pill" class="pill ${tokens[c.id]?"pill-ok":"pill-warn"}">${tokens[c.id]?"<i class=\"ti ti-check\"></i> Conectado":"<i class=\"ti ti-clock\"></i> Pendente"}</div>
       </div>
       <div class="ibox" style="margin-bottom:10px"><i class="ti ti-info-circle"></i>
-        <span>Clique em <b>Conectar</b> para autorizar via Mercado Livre. O token é renovado automaticamente — você só faz isso uma vez por conta.</span>
-      </div>
+        <span>Clique em <b>Conectar</b> para autorizar. O token é renovado automaticamente.</span></div>
       <div class="brow" style="margin-bottom:10px">
-        <button class="btn btn-primary btn-sm" onclick="iniciarOAuth('${c.id}')"><i class="ti ti-brand-oauth"></i> Conectar conta ${contaNames[c.id]}</button>
-        <button class="btn btn-sm" onclick="testToken('${c.id}')"><i class="ti ti-plug"></i> Testar conexão</button>
+        <button class="btn btn-primary btn-sm" onclick="iniciarOAuth('${c.id}')"><i class="ti ti-brand-oauth"></i> Conectar ${contaNames[c.id]}</button>
+        <button class="btn btn-sm" onclick="testToken('${c.id}')"><i class="ti ti-plug"></i> Testar</button>
       </div>
       <div id="${c.id}_oauth_area" style="display:${tokens[c.id]?"none":"block"}">
-        <div class="frow">
-          <div class="fg"><label>Ou cole o code manualmente (após autorizar)</label>
-            <input id="${c.id}_code" placeholder="TG-..." /></div>
-        </div>
-        <div class="brow">
-          <button class="btn btn-sm" onclick="trocarCode('${c.id}')"><i class="ti ti-key"></i> Trocar code por token</button>
-        </div>
+        <div class="frow"><div class="fg"><label>Cole o code após autorizar</label>
+          <input id="${c.id}_code" placeholder="TG-..."/></div></div>
+        <div class="brow"><button class="btn btn-sm" onclick="trocarCode('${c.id}')"><i class="ti ti-key"></i> Trocar code por token</button></div>
       </div>
       <div id="${c.id}_info" style="font-size:12px;color:var(--tx3);margin-top:6px">${userids[c.id]?"User ID: "+userids[c.id]:""}</div>
       <div class="log" id="${c.id}_log"></div>
     </div>`).join("");
 }
-
-function iniciarOAuth(cid){
-  const authUrl=`https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${APP_ID}&redirect_uri=https://httpbin.org/get`;
-  window.open(authUrl,"_blank");
-  // Mostra área de cole do code
-  const area=document.getElementById(cid+"_oauth_area");
-  if(area) area.style.display="block";
-  addLog(cid+"_log","Janela de autorização aberta. Após autorizar, copie o code que aparece em httpbin.org e cole abaixo.","info");
-}
-
+function iniciarOAuth(cid){window.open(`https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=${APP_ID}&redirect_uri=https://httpbin.org/get`,"_blank");const a=document.getElementById(cid+"_oauth_area");if(a)a.style.display="block";addLog(cid+"_log","Janela aberta. Cole o code abaixo.","info");}
 async function trocarCode(cid){
   const code=document.getElementById(cid+"_code")?.value.trim();
   if(!code){alert("Cole o code primeiro.");return;}
   const pill=document.getElementById(cid+"_pill");
-  if(pill){pill.className="pill pill-warn";pill.innerHTML="Trocando code...";}
-  addLog(cid+"_log","Trocando code por token via Worker...","info");
+  if(pill){pill.className="pill pill-warn";pill.innerHTML="Trocando...";}
   try{
-    const r=await fetch(`${WORKER}/auth/exchange`,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({code, redirectUri:"https://httpbin.org/get"})
-    });
+    const r=await fetch(`${WORKER_URL}/auth/exchange`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code,redirectUri:"https://httpbin.org/get"})});
     const d=await r.json();
     if(d.access_token){
-      tokens[cid]=d.access_token;
-      if(d.user_id) userids[cid]=String(d.user_id);
-      const expiresAt=Date.now()+(d.expires_in*1000);
-      // Salva refresh token no Worker KV para renovação automática
-      await fetch(`${WORKER}/tokens/save`,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-          accountId:cid,
-          accessToken:d.access_token,
-          refreshToken:d.refresh_token,
-          expiresAt,
-          userId:String(d.user_id||"")
-        })
-      });
+      tokens[cid]=d.access_token;if(d.user_id)userids[cid]=String(d.user_id);
+      const exp=Date.now()+(d.expires_in*1000);
+      await fetch(`${WORKER_URL}/tokens/save`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({accountId:cid,accessToken:d.access_token,refreshToken:d.refresh_token,expiresAt:exp,userId:String(d.user_id||"")})});
       save();
-      if(pill){pill.className="pill pill-ok";pill.innerHTML="<i class=\"ti ti-check\"></i> Conectado";}
-      const info=document.getElementById(cid+"_info");
-      if(info) info.textContent="User ID: "+userids[cid];
-      const area=document.getElementById(cid+"_oauth_area");
-      if(area) area.style.display="none";
-      addLog(cid+"_log","Token salvo! Renovação automática ativada.","ok");
-      // Busca nickname
       const r2=await fetch(PROXY+"/users/me",{headers:{Authorization:"Bearer "+d.access_token}});
       const u=await r2.json();
-      if(u.nickname&&pill) pill.innerHTML="<i class=\"ti ti-check\"></i> "+u.nickname;
-    }else{
-      if(pill){pill.className="pill pill-err";pill.innerHTML="Erro";}
-      addLog(cid+"_log","Erro: "+(d.message||d.error||JSON.stringify(d)),"err");
-    }
-  }catch(e){
-    if(pill){pill.className="pill pill-err";pill.innerHTML="Erro";}
-    addLog(cid+"_log","Erro: "+e.message,"err");
-  }
+      if(pill){pill.className="pill pill-ok";pill.innerHTML="<i class=\"ti ti-check\"></i> "+(u.nickname||"Conectado");}
+      const info=document.getElementById(cid+"_info");if(info)info.textContent="User ID: "+userids[cid];
+      document.getElementById(cid+"_oauth_area").style.display="none";
+      addLog(cid+"_log","Token salvo! Renovação automática ativada.","ok");
+    }else{if(pill){pill.className="pill pill-err";pill.innerHTML="Erro";}addLog(cid+"_log","Erro: "+(d.message||d.error),"err");}
+  }catch(e){if(pill){pill.className="pill pill-err";pill.innerHTML="Erro";}addLog(cid+"_log",e.message,"err");}
 }
-
 async function testToken(cid){
-  const t=await getToken(cid);
-  const pill=document.getElementById(cid+"_pill");
+  const t=await getToken(cid);const pill=document.getElementById(cid+"_pill");
   if(!t){if(pill){pill.className="pill pill-warn";pill.innerHTML="Sem token";}return;}
   if(pill){pill.className="pill pill-warn";pill.innerHTML="Testando...";}
   try{
-    const r=await fetch(PROXY+"/users/me",{headers:{Authorization:"Bearer "+t}});
-    const d=await r.json();
-    if(d.id){
-      tokens[cid]=t;userids[cid]=String(d.id);
-      const info=document.getElementById(cid+"_info");
-      if(info) info.textContent="User ID: "+d.id;
-      if(pill){pill.className="pill pill-ok";pill.innerHTML="<i class=\"ti ti-check\"></i> "+d.nickname;}
-      save();
-    }else{if(pill){pill.className="pill pill-err";pill.innerHTML="Inválido";}}
+    const r=await fetch(PROXY+"/users/me",{headers:{Authorization:"Bearer "+t}});const d=await r.json();
+    if(d.id){tokens[cid]=t;userids[cid]=String(d.id);const info=document.getElementById(cid+"_info");if(info)info.textContent="User ID: "+d.id;if(pill){pill.className="pill pill-ok";pill.innerHTML="<i class=\"ti ti-check\"></i> "+d.nickname;}save();}
+    else{if(pill){pill.className="pill pill-err";pill.innerHTML="Inválido";}}
   }catch(e){if(pill){pill.className="pill pill-err";pill.innerHTML="Erro";}}
 }
 function updateRatioLabels(){CONTAS.forEach((c,i)=>{const el=document.getElementById("lbl_r"+(i+1));if(el)el.textContent="% "+contaNames[c.id];});}
 
-// ---- SYNC ----
-// CEP padrão para cálculo de frete (São Paulo capital)
-const CEP_PADRAO = "01310100";
-
+// ---- SINCRONIZAR ----
 async function sincronizar(){
   const btn=document.getElementById("btn-sync");
   const fill=document.getElementById("sync-fill");
@@ -541,24 +484,18 @@ async function sincronizar(){
   let cDone=0;
   for(const c of contsOk){
     const token=await getToken(c.id);
-    if(!token){addLog("sync-log",`${contaNames[c.id]}: sem token — conecte na aba Contas ML`,"err");cDone++;continue;}
+    if(!token){addLog("sync-log",`${contaNames[c.id]}: sem token`,"err");cDone++;continue;}
     const hdr={headers:{Authorization:"Bearer "+token}};
-    addLog("sync-log",`${contaNames[c.id]}: buscando anúncios ativos...`,"info");
+    addLog("sync-log",`${contaNames[c.id]}: buscando anúncios...`,"info");
     try{
       let allIds=[],off=0;
-      while(true){
-        const r=await fetch(`${PROXY}/users/${userids[c.id]}/items/search?status=active&offset=${off}&limit=100`,hdr);
-        const d=await r.json();const ids=d.results||[];
-        allIds=[...allIds,...ids];if(ids.length<100)break;off+=100;
-      }
-      addLog("sync-log",`${contaNames[c.id]}: ${allIds.length} anúncios. Buscando detalhes...`,"ok");
+      while(true){const r=await fetch(`${PROXY}/users/${userids[c.id]}/items/search?status=active&offset=${off}&limit=100`,hdr);const d=await r.json();const ids=d.results||[];allIds=[...allIds,...ids];if(ids.length<100)break;off+=100;}
+      addLog("sync-log",`${contaNames[c.id]}: ${allIds.length} anúncios.`,"ok");
       for(let i=0;i<allIds.length;i++){
         const mlbId=allIds[i];
         try{
-          // 1. Dados principais do item
           const r1=await fetch(`${PROXY}/items/${mlbId}`,hdr);
-          const body=await r1.json();
-          if(body.error)continue;
+          const body=await r1.json();if(body.error)continue;
           const preco=body.price||0;
           const isCatalog=body.catalog_listing===true;
           const skuField=(body.seller_custom_field||"").trim();
@@ -567,174 +504,133 @@ async function sincronizar(){
           const tags=body.tags||[];
           const isFull=tags.includes("fulfillment")||body.shipping?.logistic_type==="fulfillment";
           const freeFrete=body.shipping?.free_shipping===true;
-
-          // 2. Comissão via /listing_prices (endpoint correto — retorna % real por categoria)
-          let comPct=0, comVal=0, fixedFee=0;
+          // Imagem principal
+          const imgUrl=body.pictures?.[0]?.url||body.thumbnail||null;
+          // Comissão via listing_prices
+          let comPct=0,comVal=0,fixedFee=0;
           try{
             const r2=await fetch(`${PROXY}/sites/MLB/listing_prices?price=${preco}&category_id=${catId}&listing_type_id=${listType}`,hdr);
             const lp=await r2.json();
-            // Pode retornar array ou objeto único
             const entry=Array.isArray(lp)?lp.find(x=>x.listing_type_id===listType)||lp[0]:lp;
             comPct=entry?.sale_fee_details?.percentage_fee||entry?.percentage_fee||0;
             fixedFee=entry?.sale_fee_details?.fixed_fee||entry?.fixed_fee||0;
             comVal=preco*(comPct/100)+fixedFee;
           }catch(e){}
-
-          // 3. Frete — usa /shipping_options com CEP destino padrão
-          let frete=0;
+          // Frete estimado via shipping_options com CEP SP
+          let freteEst=0;
           if(!freeFrete){
-            try{
-              const r3=await fetch(`${PROXY}/items/${mlbId}/shipping_options?zip_code=${CEP_PADRAO}`,hdr);
-              const so=await r3.json();
-              // Pega a opção recomendada (list_cost = custo para o vendedor)
-              const opt=(so?.options||[]).find(o=>o.display==="recommended")||(so?.options||[])[0];
-              frete=opt?.list_cost||opt?.cost||0;
-            }catch(e){}
+            try{const r3=await fetch(`${PROXY}/items/${mlbId}/shipping_options?zip_code=01310100`,hdr);const so=await r3.json();const opt=(so?.options||[]).find(o=>o.display==="recommended")||(so?.options||[])[0];freteEst=opt?.list_cost||opt?.cost||0;}catch(e){}
           }
-
-          // 4. Vínculo catálogo+orgânico via buybox/sync
+          // Vínculo buybox
           let relatedId=null;
-          try{
-            const r4=await fetch(`${PROXY}/public/buybox/sync/${mlbId}`,hdr);
-            const sy=await r4.json();
-            if(sy?.relations?.length)relatedId=sy.relations[0];
-          }catch(e){}
-
-          // 5. Resolver SKU
+          try{const r4=await fetch(`${PROXY}/public/buybox/sync/${mlbId}`,hdr);const sy=await r4.json();if(sy?.relations?.length)relatedId=sy.relations[0];}catch(e){}
           const skuCode=skuField&&skus[skuField]?skuField:(anuncios.find(a=>a.mlb===mlbId)?.sku||null);
-          const s=skuCode?skus[skuCode]:null;
-          const iv=s?preco*(s.impPct/100):0;
-          const mc=s?preco-s.custo-comVal-frete-iv:0;
-          const mcp=preco>0&&s?mc/preco*100:0;
-
-          novos.push({
-            mlb:mlbId, nome:body.title||mlbId, conta:c.id,
-            preco, comPct, comVal, fixedFee, frete, freeFrete,
-            sku:skuCode, isCatalog, isFull, relatedId,
-            catId, listType, mc, mcp
-          });
-        }catch(e){addLog("sync-log",`${mlbId}: erro — ${e.message}`,"err");}
-
+          novos.push({mlb:mlbId,nome:body.title||mlbId,conta:c.id,preco,comPct,comVal,fixedFee,freteEst,freeFrete,sku:skuCode,isCatalog,isFull,relatedId,catId,listType,imgUrl});
+        }catch(e){}
         fill.style.width=Math.min(Math.round(((cDone/contsOk.length)+(i+1)/(allIds.length*contsOk.length))*100),99)+"%";
-        // Pausa a cada 5 para não estourar rate limit
         if(i>0&&i%5===0)await new Promise(r=>setTimeout(r,300));
       }
-      addLog("sync-log",`${contaNames[c.id]}: concluído.`,"ok");
     }catch(e){addLog("sync-log",`${contaNames[c.id]}: erro — ${e.message}`,"err");}
     cDone++;
   }
-
-  // Detectar pares catálogo+orgânico via buybox/sync
-  const mlbSet=new Set(novos.map(a=>a.mlb));
-  const jaVinc=new Set();
+  // Pares buybox
+  const mlbSet=new Set(novos.map(a=>a.mlb));const jaVinc=new Set();
   novos.forEach(a=>{
     if(!a.relatedId)return;
     const parMlb=a.relatedId.startsWith("MLB")?a.relatedId:"MLB"+a.relatedId;
     if(!mlbSet.has(parMlb)||jaVinc.has(a.mlb))return;
     const par=novos.find(x=>x.mlb===parMlb);if(!par)return;
-    // Catálogo é sempre principal
     let prin,sec;
     if(a.isCatalog&&!par.isCatalog){prin=a;sec=par;}
     else if(!a.isCatalog&&par.isCatalog){prin=par;sec=a;}
     else{const nA=parseInt(a.mlb.replace("MLB",""));const nB=parseInt(par.mlb.replace("MLB",""));prin=nA<nB?a:par;sec=nA<nB?par:a;}
     novosVinc[sec.mlb]=prin.mlb;
-    // Propagar SKU nos dois sentidos
-    if(!sec.sku&&prin.sku){sec.sku=prin.sku;calcMCAnuncio(sec);}
-    else if(!prin.sku&&sec.sku){prin.sku=sec.sku;calcMCAnuncio(prin);}
+    if(!sec.sku&&prin.sku)sec.sku=prin.sku;
+    else if(!prin.sku&&sec.sku)prin.sku=sec.sku;
+    // Propagar custosAnuncio
+    if(custosAnuncio[prin.mlb]&&!custosAnuncio[sec.mlb])custosAnuncio[sec.mlb]={...custosAnuncio[prin.mlb]};
     jaVinc.add(a.mlb);jaVinc.add(parMlb);
   });
   Object.entries(vinculos).forEach(([s,p])=>{if(!novosVinc[s])novosVinc[s]=p;});
-
-  anuncios=novos;vinculos=novosVinc;
-  fill.style.width="100%";
-  const semSku=anuncios.filter(a=>!a.sku).length;
+  anuncios=novos;vinculos=novosVinc;fill.style.width="100%";
+  const semCusto=anuncios.filter(a=>!getCustoAnuncio(a.mlb,a.sku)).length;
   const pares=Object.keys(novosVinc).length;
-  addLog("sync-log",`Concluído: ${anuncios.length} anúncios · ${pares} pares catálogo+orgânico · ${semSku} sem SKU`,"ok");
-  document.getElementById("sync-status").textContent=`${anuncios.length} anúncios · ${pares} pares · ${semSku} sem SKU`;
+  addLog("sync-log",`Concluído: ${anuncios.length} anúncios · ${pares} pares · ${semCusto} sem custo`,"ok");
+  document.getElementById("sync-status").textContent=`${anuncios.length} anúncios · ${pares} pares`;
   setText("bdg-anuncios",anuncios.length);
-  save();renderAnuncios();buildVendasLista();buildCustosAdicionais();
-  btn.disabled=false;
+  save();renderAnuncios();buildCustosAdicionais();btn.disabled=false;
 }
 
 // ---- RENDER ANÚNCIOS ----
 function renderAnuncios(){
   const el=document.getElementById("anuncios-list");if(!el)return;
-  if(!anuncios.length){el.innerHTML='<p style="font-size:13px;color:var(--tx3)">Nenhum anúncio sincronizado. Clique em Sincronizar.</p>';return;}
+  if(!anuncios.length){el.innerHTML='<p style="font-size:13px;color:var(--tx3)">Nenhum anúncio sincronizado.</p>';return;}
   const secs=new Set(Object.keys(vinculos));
-  const semSku=anuncios.filter(a=>!a.sku).length;
+  const semCusto=anuncios.filter(a=>!getCustoAnuncio(a.mlb,a.sku)).length;
   let html="";
-  if(semSku>0)html+=`<div class="wbox" style="margin-bottom:12px"><i class="ti ti-alert-triangle"></i><span>${semSku} anúncio(s) sem SKU — clique em "Vincular SKU" para associar.</span></div>`;
-
+  if(semCusto>0)html+=`<div class="wbox" style="margin-bottom:12px"><i class="ti ti-alert-triangle"></i><span>${semCusto} anúncio(s) sem custo definido.</span></div>`;
   CONTAS.forEach(c=>{
     const lista=anuncios.filter(a=>a.conta===c.id);
     if(!lista.length)return;
     html+=`<div class="slabel">${contaNames[c.id]} — ${lista.length} anúncio(s)</div>`;
     lista.forEach(a=>{
       const isSec=secs.has(a.mlb);
-      const prinMlb=vinculos[a.mlb];
-      const s=a.sku?skus[a.sku]:null;
-      const border=!a.sku?"3px solid #f59e0b":isSec?"3px solid var(--ac)":"3px solid var(--gr)";
-      
+      const custoObj=getCustoAnuncio(a.mlb,a.sku);
+      const temCusto=!!custoObj;
+      const cardCls=isSec?"anu-card vinculado":temCusto?"anu-card com-custo":"anu-card sem-custo";
       // Badges
       let badges="";
-      if(a.isFull) badges+='<span style="background:#6d28d9;color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;margin-right:4px">Full</span>';
-      if(a.isCatalog) badges+='<span style="background:#0ea5e9;color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;margin-right:4px">Catálogo</span>';
-      else badges+='<span style="background:#10b981;color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;margin-right:4px">Orgânico</span>';
-      if(isSec) badges+=`<span style="background:var(--ac-bg);color:var(--ac);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;margin-right:4px"><i class="ti ti-link"></i> vinculado → ${prinMlb}</span>`;
-
-      // MC breakdown
-      const mcColor=a.mc>=0?"var(--gr)":"var(--rd)";
-      const skuInfo=s?
-        `<span style="color:var(--gr);font-size:11px"><i class="ti ti-package"></i> SKU: <b>${a.sku}</b> · Custo: ${fR(s.custo)} · Imp: ${s.impPct}%</span>`:
-        '<span style="color:var(--yw);font-size:11px"><i class="ti ti-alert-triangle"></i> Sem SKU — vincule para calcular MC</span>';
-
-      html+=`<div style="background:var(--sur);border:1px solid var(--bor);border-left:${border};border-radius:8px;padding:12px 14px;margin-bottom:8px">
-        <!-- Linha 1: nome + badges -->
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;flex-wrap:wrap">
-          <div style="flex:1;min-width:0">
-            <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px">${a.nome}</div>
-            <div>${badges}</div>
+      if(a.isFull)badges+='<span class="badge badge-full"><i class="ti ti-bolt"></i>Full</span>';
+      if(a.isCatalog)badges+='<span class="badge badge-cat"><i class="ti ti-tag"></i>Catálogo</span>';
+      else badges+='<span class="badge badge-org"><i class="ti ti-tag"></i>Orgânico</span>';
+      if(isSec)badges+=`<span class="badge badge-vinc"><i class="ti ti-link"></i>vinculado → ${vinculos[a.mlb]}</span>`;
+      // MC estimada se tiver custo
+      let mcEst=0,mcPct=0;
+      if(custoObj&&a.preco>0){
+        const impV=a.preco*(custoObj.impPct/100);
+        mcEst=a.preco-a.comVal-a.freteEst-custoObj.custo-impV;
+        mcPct=a.preco>0?mcEst/a.preco*100:0;
+      }
+      const mcColor=mcEst>=0?"var(--gr)":"var(--rd)";
+      html+=`<div class="${cardCls}">
+        <div class="anu-main">
+          ${a.imgUrl?`<img class="anu-img" src="${a.imgUrl}" alt="" loading="lazy" onerror="this.style.display='none'">`:
+            `<div class="anu-img-placeholder"><i class="ti ti-photo" style="font-size:24px"></i></div>`}
+          <div class="anu-info">
+            <div class="anu-nome" title="${a.nome}">${a.nome}</div>
+            <div class="anu-badges">${badges}</div>
+            <div class="anu-meta">
+              <span><i class="ti ti-tag"></i><b>${a.mlb}</b></span>
+              ${a.sku?`<span style="color:var(--gr)"><i class="ti ti-package"></i>${a.sku}</span>`:""}
+            </div>
           </div>
-          <div style="text-align:right;flex-shrink:0">
-            <div style="font-size:18px;font-weight:700;color:${mcColor}">${fR(a.mc)}</div>
-            <div style="font-size:12px;color:${mcColor};font-weight:600">${fP(a.mcp)}</div>
-            <div style="font-size:10px;color:var(--tx3)">MC unitária</div>
+          <div style="text-align:right;flex-shrink:0;min-width:90px">
+            <div style="font-size:16px;font-weight:700;color:var(--ac)">${fR(a.preco)}</div>
+            <div style="font-size:11px;color:var(--tx3)">preço anúncio</div>
+            ${temCusto?`<div style="font-size:15px;font-weight:700;color:${mcColor};margin-top:4px">${fR(mcEst)}</div>
+            <div style="font-size:11px;color:${mcColor};font-weight:600">${fP(mcPct)} MC est.</div>`:""}
           </div>
         </div>
-        <!-- Linha 2: métricas -->
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px;margin-bottom:8px">
-          <div style="background:var(--sur2);border-radius:6px;padding:6px 9px">
-            <div style="font-size:10px;color:var(--tx3)">MLB ID</div>
-            <div style="font-size:12px;font-weight:500;font-family:var(--mono)">${a.mlb}</div>
-          </div>
-          <div style="background:var(--sur2);border-radius:6px;padding:6px 9px">
-            <div style="font-size:10px;color:var(--tx3)">Preço de venda</div>
-            <div style="font-size:13px;font-weight:600">${fR(a.preco)}</div>
-          </div>
-          <div style="background:var(--sur2);border-radius:6px;padding:6px 9px">
-            <div style="font-size:10px;color:var(--tx3)">Tarifa ML</div>
-            <div style="font-size:13px;font-weight:600;color:var(--rd)">- ${fR(a.comVal)}</div>
+        <div class="anu-metrics">
+          <div class="met"><div class="ml">Tarifa ML</div>
+            <div class="mv neg">- ${fR(a.comVal)}</div>
             <div style="font-size:10px;color:var(--tx3)">${f2(a.comPct)}%${a.fixedFee>0?" + R$"+f2(a.fixedFee):""}</div>
           </div>
-          <div style="background:var(--sur2);border-radius:6px;padding:6px 9px">
-            <div style="font-size:10px;color:var(--tx3)">Frete vendedor</div>
-            <div style="font-size:13px;font-weight:600;color:${a.freeFrete?"var(--gr)":"var(--rd)"}">${a.freeFrete?"Grátis":"- "+fR(a.frete)}</div>
+          <div class="met"><div class="ml">Frete vendedor</div>
+            <div class="mv ${a.freeFrete?"pos":"neg"}">${a.freeFrete?"Grátis":"- "+fR(a.freteEst)}</div>
+            <div style="font-size:10px;color:var(--tx3)">estimativa</div>
           </div>
-          ${s?`<div style="background:var(--sur2);border-radius:6px;padding:6px 9px">
-            <div style="font-size:10px;color:var(--tx3)">Custo produto</div>
-            <div style="font-size:13px;font-weight:600;color:var(--rd)">- ${fR(s.custo)}</div>
-          </div>
-          <div style="background:var(--sur2);border-radius:6px;padding:6px 9px">
-            <div style="font-size:10px;color:var(--tx3)">Imposto</div>
-            <div style="font-size:13px;font-weight:600;color:var(--rd)">- ${fR(a.preco*s.impPct/100)}</div>
-            <div style="font-size:10px;color:var(--tx3)">${s.impPct}%</div>
+          ${custoObj?`<div class="met"><div class="ml">Custo produto</div>
+            <div class="mv neg">- ${fR(custoObj.custo)}</div></div>
+          <div class="met"><div class="ml">Imposto</div>
+            <div class="mv neg">- ${fR(a.preco*custoObj.impPct/100)}</div>
+            <div style="font-size:10px;color:var(--tx3)">${custoObj.impPct}%</div>
           </div>`:""}
         </div>
-        <!-- Linha 3: SKU + ação -->
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-          ${skuInfo}
-          <button class="btn btn-sm" style="font-size:11px;padding:4px 10px" onclick="abrirModalSku('${a.mlb}')">
-            <i class="ti ti-${a.sku?"edit":"link"}"></i> ${a.sku?"Editar SKU":"Vincular SKU"}
+        <div class="anu-footer">
+          <span style="font-size:12px;color:var(--tx3)">${a.listType} · ${a.catId}</span>
+          <button class="btn btn-sm ${temCusto?"":"btn-primary"}" onclick="abrirModalCusto('${a.mlb}')">
+            <i class="ti ti-coin"></i> ${temCusto?"Editar custo/imposto":"Definir custo/imposto"}
           </button>
         </div>
       </div>`;
@@ -743,55 +639,123 @@ function renderAnuncios(){
   el.innerHTML=html;
 }
 
-// ---- MODAL SKU ----
-function abrirModalSku(mlb){
-  modalMlb=mlb;modalSkuSel=null;
+// ---- MODAL CUSTO ----
+function abrirModalCusto(mlb){
+  modalCustoMlb=mlb;
   const a=anuncios.find(x=>x.mlb===mlb);
-  document.getElementById("modal-sku-sub").textContent=`Anúncio: ${a?.nome||mlb}. SKU atual: ${a?.sku||"nenhum"}`;
-  document.getElementById("modal-search").value="";
-  renderModalLista();
-  document.getElementById("modal-sku").style.display="flex";
+  document.getElementById("modal-custo-sub").textContent=a?.nome||mlb;
+  const c=getCustoAnuncio(mlb,a?.sku);
+  document.getElementById("mc_custo").value=c?.custo||"";
+  document.getElementById("mc_imp").value=c?.impPct||"";
+  // Preencher select de SKUs
+  const sel=document.getElementById("mc_sku_sel");
+  sel.innerHTML='<option value="">— selecione um SKU —</option>'+Object.values(skus).map(s=>`<option value="${s.sku}" ${a?.sku===s.sku?"selected":""}>${s.sku} — ${s.nome} (R$ ${f2(s.custo)})</option>`).join("");
+  document.getElementById("modal-custo").style.display="flex";
 }
-function renderModalLista(){
-  const q=(document.getElementById("modal-search")?.value||"").toLowerCase();
-  const list=Object.values(skus).filter(s=>!q||s.sku.toLowerCase().includes(q)||s.nome.toLowerCase().includes(q));
-  document.getElementById("modal-lista").innerHTML=list.slice(0,100).map(s=>`
-    <div class="mitem ${modalSkuSel===s.sku?"sel":""}" onclick="selModalSku('${s.sku}')">
-      <div style="flex:1;min-width:0">
-        <div style="font-weight:500">${s.sku}</div>
-        <div style="font-size:11px;color:var(--tx3)">${s.nome} · Custo: ${fR(s.custo)} · Imp: ${s.impPct}%</div>
-      </div>
-    </div>`).join("");
+function preencherDeSKU(){
+  const sku=document.getElementById("mc_sku_sel").value;
+  if(!sku||!skus[sku])return;
+  document.getElementById("mc_custo").value=skus[sku].custo;
+  document.getElementById("mc_imp").value=skus[sku].impPct;
 }
-function selModalSku(sku){document.querySelectorAll(".mitem").forEach(el=>el.classList.remove("sel"));document.querySelector(`[onclick="selModalSku('${sku}')"]`)?.classList.add("sel");modalSkuSel=sku;}
-function confirmarSkuVinculo(){
-  if(!modalSkuSel||!modalMlb)return;
-  const a=anuncios.find(x=>x.mlb===modalMlb);if(!a)return;
-  a.sku=modalSkuSel;calcMCAnuncio(a);
-  // Propagar para par vinculado (ambas as direções)
-  const parMlb=vinculos[modalMlb]||Object.entries(vinculos).find(([s,p])=>p===modalMlb)?.[0];
-  if(parMlb){const par=anuncios.find(x=>x.mlb===parMlb);if(par){par.sku=modalSkuSel;calcMCAnuncio(par);}}
-  save();renderAnuncios();renderSKUTable();fecharModal();
+function salvarCustoAnuncio(){
+  if(!modalCustoMlb)return;
+  const custo=parseFloat(document.getElementById("mc_custo").value)||0;
+  const impPct=parseFloat(document.getElementById("mc_imp").value)||0;
+  const skuSel=document.getElementById("mc_sku_sel").value;
+  custosAnuncio[modalCustoMlb]={custo,impPct};
+  // Vincular SKU se selecionado
+  const a=anuncios.find(x=>x.mlb===modalCustoMlb);
+  if(a&&skuSel){a.sku=skuSel;}
+  // Propagar para par vinculado
+  const parMlb=vinculos[modalCustoMlb]||Object.entries(vinculos).find(([s,p])=>p===modalCustoMlb)?.[0];
+  if(parMlb){
+    custosAnuncio[parMlb]={custo,impPct};
+    const par=anuncios.find(x=>x.mlb===parMlb);
+    if(par&&skuSel&&!par.sku)par.sku=skuSel;
+  }
+  save();renderAnuncios();renderSKUTable();fecharModalCusto();
 }
-function fecharModal(){document.getElementById("modal-sku").style.display="none";modalMlb=null;modalSkuSel=null;}
+function fecharModalCusto(){document.getElementById("modal-custo").style.display="none";modalCustoMlb=null;}
 
-// ---- FECHAMENTO ----
-function buildVendasLista(){
-  const el=document.getElementById("vendas-lista");if(!el)return;
-  if(!anuncios.length){el.innerHTML='<p style="color:var(--tx3);font-size:13px">Sincronize os anúncios primeiro.</p>';return;}
-  el.innerHTML=anuncios.map(a=>`
-    <div style="display:flex;align-items:center;gap:11px;background:var(--sur);border:1px solid var(--bor);border-radius:7px;padding:9px 13px;margin-bottom:7px;flex-wrap:wrap">
-      <div style="flex:1;min-width:0">
-        <div style="font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.nome}</div>
-        <div style="font-size:11px;color:var(--tx3)">${contaNames[a.conta]} · ${a.sku||"sem SKU"} · MC: ${fR(a.mc)} (${fP(a.mcp)})</div>
-      </div>
-      <div class="fg" style="max-width:120px;margin-bottom:0"><label>Qtd. vendida</label><input type="number" id="qtd_${a.mlb}" min="0" value="0" oninput="calcFechamento()"/></div>
-      <div style="min-width:100px;text-align:right">
-        <div style="font-size:10px;color:var(--tx3)">MC total</div>
-        <div style="font-size:14px;font-weight:600" id="mctot_${a.mlb}">${fR(0)}</div>
-      </div>
-    </div>`).join("");
+// ---- COLETA DE DADOS REAIS ----
+// MC real = unit_price*qty - sale_fee - shipment.base_cost - custo - imposto
+async function coletarDados(){
+  const mes=parseInt(document.getElementById("f_mes").value);
+  const ano=parseInt(document.getElementById("f_ano").value);
+  clearLog("coleta-log");
+  document.getElementById("coleta-resultado").innerHTML="";
+  const from=`${ano}-${String(mes).padStart(2,"0")}-01T00:00:00.000-03:00`;
+  const lastDay=new Date(ano,mes,0).getDate();
+  const to=`${ano}-${String(mes).padStart(2,"0")}-${lastDay}T23:59:59.000-03:00`;
+  // Reset fechData
+  CONTAS.forEach(c=>{fechData[c.id]={mc:0,rec:0,ads:n_v(c.id+"_ads"),full:n_v(c.id+"_full"),dev:n_v(c.id+"_dev")};});
+  
+  const resumo={}; // por mlb: {receita, tarifas, frete, qtd}
+  
+  for(const c of CONTAS){
+    const token=await getToken(c.id);const uid=userids[c.id];
+    if(!token||!uid){addLog("coleta-log",`${contaNames[c.id]}: sem token`,"err");continue;}
+    addLog("coleta-log",`${contaNames[c.id]}: buscando ordens...`,"info");
+    try{
+      let allOrders=[],off=0;
+      while(true){
+        const r=await fetch(`${PROXY}/orders/search?seller=${uid}&order.status=paid&order.date_created.from=${encodeURIComponent(from)}&order.date_created.to=${encodeURIComponent(to)}&offset=${off}&limit=50`,{headers:{Authorization:"Bearer "+token}});
+        const d=await r.json();const orders=d.results||[];
+        // Buscar frete real de cada order via shipment
+        for(const order of orders){
+          let frete=0;
+          if(order.shipping?.id){
+            try{const sr=await fetch(`${PROXY}/shipments/${order.shipping.id}`,{headers:{Authorization:"Bearer "+token}});const sd=await sr.json();frete=sd.base_cost||0;}catch(e){}
+          }
+          for(const oi of order.order_items||[]){
+            const mlb=oi.item?.id;if(!mlb)continue;
+            if(!resumo[mlb])resumo[mlb]={conta:c.id,receita:0,tarifas:0,frete:0,qtd:0};
+            const qtd=oi.quantity||1;
+            resumo[mlb].receita+=((oi.unit_price||0)*qtd);
+            resumo[mlb].tarifas+=(oi.sale_fee||0);
+            resumo[mlb].frete+=frete; // frete por ordem
+            resumo[mlb].qtd+=qtd;
+          }
+        }
+        allOrders=[...allOrders,...orders];
+        if(orders.length<50)break;off+=50;
+      }
+      addLog("coleta-log",`${contaNames[c.id]}: ${allOrders.length} pedidos processados`,"ok");
+    }catch(e){addLog("coleta-log",`${contaNames[c.id]}: ${e.message}`,"err");}
+  }
+
+  // Calcular MC real por anúncio
+  let rows="";
+  for(const [mlb,r] of Object.entries(resumo)){
+    const a=anuncios.find(x=>x.mlb===mlb);
+    const conta=a?.conta||r.conta;
+    const custoObj=getCustoAnuncio(mlb,a?.sku);
+    const custoTotal=custoObj?(custoObj.custo*r.qtd):0;
+    const impTotal=custoObj?(r.receita*(custoObj.impPct/100)):0;
+    const mc=r.receita-r.tarifas-r.frete-custoTotal-impTotal;
+    const mcp=r.receita>0?mc/r.receita*100:0;
+    fechData[conta].mc+=mc;fechData[conta].rec+=r.receita;
+    if(!custoObj){
+      rows+=`<div style="background:var(--yw-bg);border:1px solid #f0d080;border-radius:7px;padding:8px 12px;margin-bottom:6px;font-size:12px;display:flex;justify-content:space-between;align-items:center">
+        <span><i class="ti ti-alert-triangle" style="color:var(--yw)"></i> <b>${mlb}</b> — ${a?.nome||"?"} — sem custo definido (${r.qtd} vendas, receita ${fR(r.receita)})</span>
+        <button class="btn btn-sm" onclick="abrirModalCusto('${mlb}')"><i class="ti ti-coin"></i> Definir custo</button>
+      </div>`;
+    }
+  }
+  
+  const totalAnuncios=Object.keys(resumo).length;
+  const semCusto=Object.entries(resumo).filter(([mlb])=>!getCustoAnuncio(mlb,anuncios.find(a=>a.mlb===mlb)?.sku)).length;
+  addLog("coleta-log",`${totalAnuncios} anúncios com vendas · ${semCusto} sem custo definido`,"ok");
+  
+  if(rows){
+    document.getElementById("coleta-resultado").innerHTML=
+      `<div class="slabel">Anúncios sem custo (MC = 0)</div>${rows}`;
+  }
+  recalc();
 }
+
+function n_v(id){return parseFloat(document.getElementById(id)?.value)||0;}
 
 function buildCustosAdicionais(){
   const el=document.getElementById("custos-adicionais");if(!el)return;
@@ -799,41 +763,11 @@ function buildCustosAdicionais(){
     <div class="card" style="margin-bottom:10px">
       <div style="font-size:13px;font-weight:600;margin-bottom:11px">${contaNames[c.id]}</div>
       <div class="frow">
-        <div class="fg"><label>ADS (R$)</label><div class="pw"><span>R$</span><input type="number" id="${c.id}_ads" min="0" placeholder="0,00" oninput="calcFechamento()"/></div></div>
-        <div class="fg"><label>Armazenamento Full (R$)</label><div class="pw"><span>R$</span><input type="number" id="${c.id}_full" min="0" placeholder="0,00" oninput="calcFechamento()"/></div></div>
-        <div class="fg"><label>Devoluções (R$)</label><div class="pw"><span>R$</span><input type="number" id="${c.id}_dev" min="0" placeholder="0,00" oninput="calcFechamento()"/></div></div>
+        <div class="fg"><label>ADS (R$)</label><div class="pw"><span>R$</span><input type="number" id="${c.id}_ads" min="0" placeholder="0,00" oninput="recalc()"/></div></div>
+        <div class="fg"><label>Armazenamento Full (R$)</label><div class="pw"><span>R$</span><input type="number" id="${c.id}_full" min="0" placeholder="0,00" oninput="recalc()"/></div></div>
+        <div class="fg"><label>Devoluções (R$)</label><div class="pw"><span>R$</span><input type="number" id="${c.id}_dev" min="0" placeholder="0,00" oninput="recalc()"/></div></div>
       </div>
     </div>`).join("");
-}
-
-async function buscarVendas(){
-  const mes=parseInt(document.getElementById("f_mes").value);
-  const ano=parseInt(document.getElementById("f_ano").value);
-  clearLog("vendas-log");
-  const from=`${ano}-${String(mes).padStart(2,"0")}-01T00:00:00.000-03:00`;
-  const lastDay=new Date(ano,mes,0).getDate();
-  const to=`${ano}-${String(mes).padStart(2,"0")}-${lastDay}T23:59:59.000-03:00`;
-  for(const c of CONTAS){
-    const token=await getToken(c.id),uid=userids[c.id];
-    if(!token||!uid){addLog("vendas-log",`${contaNames[c.id]}: sem token — conecte na aba Contas ML`,"err");continue;}
-    addLog("vendas-log",`${contaNames[c.id]}: buscando...`,"info");
-    try{
-      let allOrders=[],off=0;
-      while(true){
-        const r=await fetch(`${PROXY}/orders/search?seller=${uid}&order.status=paid&order.date_created.from=${encodeURIComponent(from)}&order.date_created.to=${encodeURIComponent(to)}&offset=${off}&limit=50`,{headers:{Authorization:"Bearer "+token}});
-        const d=await r.json();const orders=d.results||[];
-        allOrders=[...allOrders,...orders];
-        if(orders.length<50)break;off+=50;
-      }
-      addLog("vendas-log",`${contaNames[c.id]}: ${allOrders.length} pedidos`,"ok");
-      anuncios.filter(a=>a.conta===c.id).forEach(a=>{
-        let qtd=0;
-        allOrders.forEach(o=>(o.order_items||[]).forEach(oi=>{if(oi.item?.id===a.mlb)qtd+=oi.quantity||0;}));
-        const el=document.getElementById("qtd_"+a.mlb);if(el)el.value=qtd;
-      });
-    }catch(e){addLog("vendas-log",`${contaNames[c.id]}: ${e.message}`,"err");}
-  }
-  calcFechamento();
 }
 
 async function buscarCustosML(){
@@ -842,7 +776,7 @@ async function buscarCustosML(){
   const key=`${ano}-${String(mes).padStart(2,"0")}-01`;
   clearLog("custos-log");
   for(const c of CONTAS){
-    const token=await getToken(c.id);if(!token){addLog("custos-log",`${contaNames[c.id]}: sem token — conecte na aba Contas ML`,"err");continue;}
+    const token=await getToken(c.id);if(!token){addLog("custos-log",`${contaNames[c.id]}: sem token`,"err");continue;}
     addLog("custos-log",`${contaNames[c.id]}: buscando...`,"info");
     try{
       const r=await fetch(`${PROXY}/billing/integration/periods/key/${key}/summary?group=ML`,{headers:{Authorization:"Bearer "+token}});
@@ -854,31 +788,24 @@ async function buscarCustosML(){
       addLog("custos-log",`${contaNames[c.id]}: ADS ${fR(ads)} · Full ${fR(full)} · Dev ${fR(dev)}`,"ok");
     }catch(e){addLog("custos-log",`${contaNames[c.id]}: ${e.message}`,"err");}
   }
-  calcFechamento();
+  recalc();
 }
 
 function calcFechamento(){
-  CONTAS.forEach(c=>{fechData[c.id]={mc:0,rec:0,ads:nv(c.id+"_ads"),full:nv(c.id+"_full"),dev:nv(c.id+"_dev")};});
-  anuncios.forEach(a=>{
-    const qtd=parseInt(document.getElementById("qtd_"+a.mlb)?.value)||0;
-    const mcT=a.mc*qtd,recT=a.preco*qtd;
-    const el=document.getElementById("mctot_"+a.mlb);
-    if(el){el.textContent=fR(mcT);el.style.color=mcT>=0?"var(--gr)":"var(--rd)";}
-    fechData[a.conta].mc+=mcT;fechData[a.conta].rec+=recT;
-  });
+  CONTAS.forEach(c=>{fechData[c.id].ads=n_v(c.id+"_ads");fechData[c.id].full=n_v(c.id+"_full");fechData[c.id].dev=n_v(c.id+"_dev");});
   recalc();
 }
 
 function recalc(){
-  const opT=nv("op_folha")+nv("op_aluguel")+nv("op_embalagens")+nv("op_sistemas")+nv("op_outros");
+  const opT=n_v("op_folha")+n_v("op_aluguel")+n_v("op_embalagens")+n_v("op_sistemas")+n_v("op_outros");
   setText("op_total","- "+fR(opT));
-  const rat=[nv("op_r1")/100,nv("op_r2")/100,nv("op_r3")/100];
+  const rat=[n_v("op_r1")/100,n_v("op_r2")/100,n_v("op_r3")/100];
   let totRec=0,totMC=0,totML=0;
   const res=CONTAS.map((c,i)=>{
-    const d=fechData[c.id];const ml=d.ads+d.full+d.dev,op=opT*rat[i],liq=d.mc-ml-op;
+    const d=fechData[c.id];const ml=(d.ads||0)+(d.full||0)+(d.dev||0),op=opT*rat[i],liq=d.mc-ml-op;
     const mcp=d.rec>0?d.mc/d.rec*100:0,marg=d.rec>0?liq/d.rec*100:0;
     totRec+=d.rec;totMC+=d.mc;totML+=ml;
-    return {name:contaNames[c.id],rec:d.rec,mc:d.mc,mcp,ml,op,liq,marg};
+    return{name:contaNames[c.id],rec:d.rec,mc:d.mc,mcp,ml,op,liq,marg};
   });
   const totLiq=totMC-totML-opT;
   const totMarg=totRec>0?totLiq/totRec*100:0,totMCP=totRec>0?totMC/totRec*100:0;
@@ -906,18 +833,64 @@ function recalc(){
 }
 
 function exportCSVRes(){
-  const opT=nv("op_folha")+nv("op_aluguel")+nv("op_embalagens")+nv("op_sistemas")+nv("op_outros");
-  const rat=[nv("op_r1")/100,nv("op_r2")/100,nv("op_r3")/100];
+  const opT=n_v("op_folha")+n_v("op_aluguel")+n_v("op_embalagens")+n_v("op_sistemas")+n_v("op_outros");
+  const rat=[n_v("op_r1")/100,n_v("op_r2")/100,n_v("op_r3")/100];
   let csv="Conta,Receita,MC,MC%,ADS,Full,Dev,Rateio Op,Resultado\n";
-  CONTAS.forEach((c,i)=>{const d=fechData[c.id];const ml=d.ads+d.full+d.dev;const op=opT*rat[i];const liq=d.mc-ml-op;csv+=[contaNames[c.id],d.rec.toFixed(2),d.mc.toFixed(2),(d.rec>0?d.mc/d.rec*100:0).toFixed(1)+"%",d.ads.toFixed(2),d.full.toFixed(2),d.dev.toFixed(2),op.toFixed(2),liq.toFixed(2)].join(",")+"\n";});
+  CONTAS.forEach((c,i)=>{const d=fechData[c.id];const ml=(d.ads||0)+(d.full||0)+(d.dev||0);const op=opT*rat[i];const liq=d.mc-ml-op;csv+=[contaNames[c.id],d.rec.toFixed(2),d.mc.toFixed(2),(d.rec>0?d.mc/d.rec*100:0).toFixed(1)+"%",(d.ads||0).toFixed(2),(d.full||0).toFixed(2),(d.dev||0).toFixed(2),op.toFixed(2),liq.toFixed(2)].join(",")+"\n";});
   const a=document.createElement("a");a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);a.download="fechamento_ml.csv";a.click();
 }
 
+// ---- WEBHOOK QUEUE ----
+async function checkQueue(){
+  try{const r=await fetch(`${WORKER_URL}/queue`);const q=await r.json();if(!Array.isArray(q))return;
+    const n=q.length;const bdg=document.getElementById("bdg-anuncios");
+    if(bdg)bdg.style.background=n>0?"var(--yw)":"var(--ac)";
+    const banner=document.getElementById("queue-banner");
+    if(banner){banner.style.display=n>0?"flex":"none";if(n>0){const t=document.getElementById("queue-txt");if(t)t.textContent=n+" anúncio(s) novo(s) ou alterado(s) detectado(s).";}}
+  }catch(e){}
+}
+async function syncQueue(){
+  const r=await fetch(`${WORKER_URL}/queue`);const q=await r.json();
+  if(!Array.isArray(q)||!q.length){alert("Nenhum anúncio pendente.");return;}
+  addLog("sync-log",`Sincronizando ${q.length} anúncio(s) da fila...`,"info");
+  document.getElementById("sync-log").style.display="block";
+  for(const item of q){
+    const mlbId=item.mlb;
+    const c=CONTAS.find(c=>userids[c.id]===item.userId)||CONTAS.find(c=>tokens[c.id]);
+    if(!c)continue;
+    const token=await getToken(c.id);if(!token)continue;
+    const hdr={headers:{Authorization:"Bearer "+token}};
+    try{
+      const r1=await fetch(`${PROXY}/items/${mlbId}`,hdr);const body=await r1.json();
+      if(body.error||body.status!=="active"){anuncios=anuncios.filter(a=>a.mlb!==mlbId);addLog("sync-log",`${mlbId}: removido`,"info");continue;}
+      const preco=body.price||0,isCatalog=body.catalog_listing===true;
+      const skuField=(body.seller_custom_field||"").trim();
+      const isFull=(body.tags||[]).includes("fulfillment");
+      const freeFrete=body.shipping?.free_shipping===true;
+      const imgUrl=body.pictures?.[0]?.url||body.thumbnail||null;
+      let comPct=0,comVal=0,fixedFee=0;
+      try{const r2=await fetch(`${PROXY}/sites/MLB/listing_prices?price=${preco}&category_id=${body.category_id}&listing_type_id=${body.listing_type_id}`,hdr);const lp=await r2.json();const entry=Array.isArray(lp)?lp[0]:lp;comPct=entry?.sale_fee_details?.percentage_fee||0;fixedFee=entry?.sale_fee_details?.fixed_fee||0;comVal=preco*(comPct/100)+fixedFee;}catch(e){}
+      let freteEst=0;if(!freeFrete){try{const r3=await fetch(`${PROXY}/items/${mlbId}/shipping_options?zip_code=01310100`,hdr);const so=await r3.json();const opt=(so?.options||[]).find(o=>o.display==="recommended")||(so?.options||[])[0];freteEst=opt?.list_cost||0;}catch(e){}}
+      let relatedId=null;try{const r4=await fetch(`${PROXY}/public/buybox/sync/${mlbId}`,hdr);const sy=await r4.json();if(sy?.relations?.length)relatedId=sy.relations[0];}catch(e){}
+      const skuCode=skuField&&skus[skuField]?skuField:(anuncios.find(a=>a.mlb===mlbId)?.sku||null);
+      const novo={mlb:mlbId,nome:body.title||mlbId,conta:c.id,preco,comPct,comVal,fixedFee,freteEst,freeFrete,sku:skuCode,isCatalog,isFull,relatedId,catId:body.category_id,listType:body.listing_type_id,imgUrl};
+      const idx=anuncios.findIndex(a=>a.mlb===mlbId);
+      if(idx>=0)anuncios[idx]=novo;else anuncios.push(novo);
+      addLog("sync-log",`${mlbId}: atualizado${skuCode?" — SKU: "+skuCode:""}`,skuCode?"ok":"info");
+    }catch(e){addLog("sync-log",`${mlbId}: erro`,"err");}
+  }
+  await fetch(`${WORKER_URL}/queue`,{method:"DELETE"});
+  save();renderAnuncios();setText("bdg-anuncios",anuncios.length);
+  const banner=document.getElementById("queue-banner");if(banner)banner.style.display="none";
+  addLog("sync-log","Fila processada!","ok");
+}
+
 // INIT
-load();buildContas();updateRatioLabels();renderSKUTable();renderAnuncios();buildVendasLista();buildCustosAdicionais();recalc();
+load();buildContas();updateRatioLabels();renderSKUTable();renderAnuncios();buildCustosAdicionais();recalc();
 const now=new Date();
 const cm=document.getElementById("f_mes");if(cm)cm.value=now.getMonth()+1;
 const cy=document.getElementById("f_ano");if(cy)cy.value=now.getFullYear();
+checkQueue();setInterval(checkQueue,60000);
 </script>
 </body>
 </html>
