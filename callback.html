@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alpha Scanner - Autorizando</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -20,15 +19,13 @@ p { font-size: 13px; color: #8B949E; line-height: 1.6; }
 <div class="card">
   <div class="dot" id="dot"></div>
   <h2 id="title">Autorizando...</h2>
-  <p id="desc">Aguarde enquanto trocamos o codigo pelo token.</p>
-  <div class="st" id="status">Iniciando...</div>
+  <p id="desc">Retornando ao app.</p>
+  <div class="st" id="status">Aguarde...</div>
 </div>
 <script>
-(async()=>{
+(()=>{
   const p=new URLSearchParams(location.search);
-  const code=p.get('code'),error=p.get('error'),stateRaw=p.get('state')||'';
-  let wu='',ci='';
-  try{const decoded=JSON.parse(atob(decodeURIComponent(stateRaw)));wu=decoded.w||'';ci=decoded.c||'';}catch(e){}
+  const code=p.get('code'),error=p.get('error');
   const T=i=>document.getElementById(i);
   function fail(m){
     T('dot').style.cssText='background:#FF4444;box-shadow:0 0 10px #FF4444;animation:none;width:10px;height:10px;border-radius:50%;margin:0 auto 20px';
@@ -36,22 +33,17 @@ p { font-size: 13px; color: #8B949E; line-height: 1.6; }
     if(window.opener)window.opener.postMessage({type:'ML_AUTH_ERROR',message:m},'*');
   }
   if(error){fail('ML retornou: '+error);return;}
-  if(!code){fail('Codigo nao encontrado.');return;}
-  if(!wu){fail('Worker URL nao encontrado. Feche e tente novamente.');return;}
-  T('status').textContent='Comunicando com o Worker...';
-  try{
-    const r=await fetch(wu+'/oauth/token',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({grant_type:'authorization_code',code,redirect_uri:location.origin+location.pathname,client_id:ci})});
-    if(!r.ok){const t=await r.text();throw new Error('Worker '+r.status+': '+t);}
-    const d=await r.json();
-    if(!d.access_token)throw new Error('Token nao retornado.');
-    T('status').textContent='Token obtido!';
-    T('dot').style.animation='none';
-    T('title').textContent='Autorizado!';
-    T('desc').textContent='Esta janela vai fechar automaticamente.';
-    if(window.opener)window.opener.postMessage({type:'ML_AUTH_SUCCESS',access_token:d.access_token,user_id:d.user_id,expires_in:d.expires_in},'*');
-    setTimeout(()=>window.close(),800);
-  }catch(e){fail(e.message);}
+  if(!code){fail('Codigo nao encontrado na URL.');return;}
+  T('status').textContent='Codigo recebido! Retornando ao app...';
+  T('dot').style.animation='none';
+  T('title').textContent='Quase la!';
+  // Envia apenas o code de volta — o app troca pelo token via Worker
+  if(window.opener){
+    window.opener.postMessage({type:'ML_AUTH_CODE',code:code},'*');
+    setTimeout(()=>window.close(),600);
+  } else {
+    T('desc').textContent='Popup fechado. Copie o codigo: '+code;
+  }
 })();
 </script>
 </body>
