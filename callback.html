@@ -26,9 +26,9 @@ p { font-size: 13px; color: #8B949E; line-height: 1.6; }
 <script>
 (async()=>{
   const p=new URLSearchParams(location.search);
-  const code=p.get('code'),error=p.get('error');
+  const code=p.get('code'),error=p.get('error'),stateRaw=p.get('state')||'';
   let wu='',ci='';
-  try{wu=localStorage.getItem('ml_worker_url')||'';ci=localStorage.getItem('ml_client_id')||'';}catch(e){}
+  try{const decoded=JSON.parse(atob(decodeURIComponent(stateRaw)));wu=decoded.w||'';ci=decoded.c||'';}catch(e){}
   const T=i=>document.getElementById(i);
   function fail(m){
     T('dot').style.cssText='background:#FF4444;box-shadow:0 0 10px #FF4444;animation:none;width:10px;height:10px;border-radius:50%;margin:0 auto 20px';
