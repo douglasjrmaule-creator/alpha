@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha Scanner — Autorizando...</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0D1117;
+    color: #E6EDF3;
+    font-family: 'Inter', system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-size: 14px;
+  }
+  .card {
+    background: #161B22;
+    border: 1px solid #30363D;
+    border-radius: 12px;
+    padding: 36px 40px;
+    text-align: center;
+    max-width: 380px;
+    width: 90%;
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #00C853;
+    box-shadow: 0 0 10px #00C853;
+    margin: 0 auto 20px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+  h2 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  p  { font-size: 13px; color: #8B949E; line-height: 1.6; }
+  .status { margin-top: 20px; font-size: 12px; font-family: 'JetBrains Mono', monospace; color: #00C853; }
+  .error  { color: #FF4444; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="dot" id="dot"></div>
+  <h2 id="title">Autorizando...</h2>
+  <p id="desc">Trocando código de autorização pelo token de acesso.</p>
+  <div class="status" id="status">Aguarde...</div>
+</div>
+
+<script>
+(async () => {
+  const params = new URLSearchParams(window.location.search);
+  const code   = params.get('code');
+  const error  = params.get('error');
+  const stateRaw = params.get('state') || '{}';
+
+  // workerUrl e clientId vieram no state
+  let workerUrl = '', clientId = '';
+  try {
+    const st = JSON.parse(decodeURIComponent(stateRaw));
+    workerUrl = st.workerUrl || '';
+    clientId  = st.clientId  || '';
+  } catch(_) {}
+
+  const title  = document.getElementById('title');
+  const desc   = document.getElementById('desc');
+  const status = document.getElementById('status');
+  const dot    = document.getElementById('dot');
+
+  function fail(msg) {
+    dot.style.background = '#FF4444';
+    dot.style.boxShadow  = '0 0 10px #FF4444';
+    dot.style.animation  = 'none';
+    title.textContent  = 'Erro na autorização';
+    desc.textContent   = msg;
+    status.textContent = '';
+    status.className   = 'status error';
+    if (window.opener) {
+      window.opener.postMessage({ type: 'ML_AUTH_ERROR', message: msg }, '*');
+    }
+  }
+
+  if (error) { fail('O Mercado Livre retornou: ' + error); return; }
+  if (!code)  { fail('Código de autorização não encontrado na URL.'); return; }
+  if (!workerUrl) { fail('Worker URL não encontrado no state. Feche e tente novamente.'); return; }
+
+  status.textContent = 'Código recebido. Comunicando com o Worker...';
+
+  try {
+    status.textContent = 'Trocando código por token...';
+
+    const resp = await fetch(workerUrl + '/oauth/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        grant_type:   'authorization_code',
+        code:         code,
+        redirect_uri: window.location.origin + window.location.pathname,
+        client_id:    clientId,
+      })
+    });
+
+    if (!resp.ok) {
+      const txt = await resp.text();
+      throw new Error(`Worker ${resp.status}: ${txt}`);
+    }
+
+    const data = await resp.json();
+    if (!data.access_token) throw new Error('Token não retornado: ' + JSON.stringify(data));
+
+    status.textContent = 'Token obtido! Retornando ao app...';
+    dot.style.animation = 'none';
+    dot.style.opacity   = '1';
+    title.textContent   = 'Autorizado!';
+    desc.textContent    = 'Esta janela vai fechar automaticamente.';
+
+    // Envia token + user_id de volta para o app
+    if (window.opener) {
+      window.opener.postMessage({
+        type:         'ML_AUTH_SUCCESS',
+        access_token: data.access_token,
+        user_id:      data.user_id,
+        expires_in:   data.expires_in,
+      }, '*');
+    }
+
+    setTimeout(() => window.close(), 800);
+
+  } catch(e) {
+    fail(e.message);
+  }
+})();
+</script>
+</body>
+</html>
