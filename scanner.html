@@ -1434,23 +1434,42 @@ async function loadVisitsData() {
     if (!ids.length) throw new Error('Nenhuma publicação carregada. Execute a varredura principal primeiro.');
 
     DATA.visits = [];
-    // Busca em lotes de 20
-    for (let i = 0; i < ids.length; i += 20) {
-      const chunk = ids.slice(i, i + 20).join(',');
-      const r = await api(`/items/visits?ids=${chunk}&date_from=${dateFrom}&date_to=${dateTo}`);
-      if (r && r.data_by_date !== undefined) {
-        // Resposta de item único
-        const item = DATA.items.find(x => x.id === ids[i]) || {};
-        const total = (r.data_by_date || []).reduce((s, d) => s + (d.total || 0), 0);
-        DATA.visits.push({ id: ids[i], title: item.title || '', total_visits: total, avg_daily: total/days, permalink: item.permalink || '', data_by_date: r.data_by_date || [] });
-      } else if (Array.isArray(r)) {
-        r.forEach(entry => {
-          const item = DATA.items.find(x => x.id === entry.id) || {};
+    const visitMap = {};
+    let processed = 0;
+
+    // /items/visits aceita 1 ID por vez
+    for (const id of ids) {
+      try {
+        const r = await api(`/items/visits?ids=${id}&date_from=${dateFrom}&date_to=${dateTo}`);
+        // ML retorna objeto único ou array com 1 elemento
+        const entry = Array.isArray(r) ? r[0] : r;
+        if (entry) {
           const total = (entry.data_by_date || []).reduce((s, d) => s + (d.total || 0), 0);
-          DATA.visits.push({ id: entry.id, title: item.title || '', total_visits: total, avg_daily: total/days, permalink: item.permalink || '', data_by_date: entry.data_by_date || [] });
-        });
+          visitMap[id] = { total, data_by_date: entry.data_by_date || [] };
+        }
+      } catch(_) { /* ignora erros individuais */ }
+      processed++;
+      // Atualiza progresso a cada 10 items
+      if (processed % 10 === 0) {
+        document.getElementById('table-visits').innerHTML =
+          `<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Buscando visitas... ${processed}/${ids.length}</div>`;
       }
+      await sleep(150); // respeita rate limit
     }
+
+    // Monta DATA.visits com info dos items
+    ids.forEach(id => {
+      const item = DATA.items.find(x => x.id === id) || {};
+      const v = visitMap[id] || { total: 0, data_by_date: [] };
+      DATA.visits.push({
+        id,
+        title: item.title || '',
+        permalink: item.permalink || '',
+        total_visits: v.total,
+        avg_daily: v.total / days,
+        data_by_date: v.data_by_date,
+      });
+    });
 
     DATA.visits.sort((a,b) => b.total_visits - a.total_visits);
     renderVisitsSummary(days);
@@ -1578,30 +1597,34 @@ async function loadCompetitors() {
   document.getElementById('competitors-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Analisando mercado...</div>';
 
   try {
-    // Detecta se é category ID (MLB + números) ou texto livre
+    // Detecta category ID (MLB + números) ou texto livre
     const isCategory = /^MLB\d+$/i.test(query);
-    const url = isCategory
-      ? `/sites/MLB/search?category=${query}&sort=${sort}&limit=20`
-      : `/sites/MLB/search?q=${encodeURIComponent(query)}&sort=${sort}&limit=20`;
+    const base = isCategory
+      ? `/sites/MLB/search?category=${query}`
+      : `/sites/MLB/search?q=${encodeURIComponent(query)}`;
+    const url = `${base}&sort=${sort}&limit=20&attributes=id,title,price,sold_quantity,permalink,seller,shipping,condition`;
 
     const r = await api(url);
     const results = r.results || [];
     DATA.competitors = results;
 
     if (!results.length) {
-      document.getElementById('competitors-container').innerHTML = '<div class="state-msg"><div class="state-icon">🔍</div>Nenhum resultado encontrado.</div>';
+      document.getElementById('competitors-container').innerHTML = '<div class="state-msg"><div class="state-icon">🔍</div>Nenhum resultado encontrado. Tente outra busca.</div>';
       return;
     }
 
     const totalSold = results.reduce((s,x) => s + (x.sold_quantity||0), 0);
-    const avgPrice  = results.reduce((s,x) => s + (x.price||0), 0) / results.length;
+    const prices    = results.map(x => x.price||0).filter(p => p > 0);
+    const avgPrice  = prices.length ? prices.reduce((a,b) => a+b,0) / prices.length : 0;
+    const minPrice  = prices.length ? Math.min(...prices) : 0;
+    const maxPrice  = prices.length ? Math.max(...prices) : 0;
     const freeShip  = results.filter(x => x.shipping?.free_shipping).length;
 
     const summary = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px;">
-      <div class="rep-card"><div class="rep-card-label">Vendas totais (top 20)</div><div class="rep-card-value">${totalSold.toLocaleString('pt-BR')}</div></div>
-      <div class="rep-card"><div class="rep-card-label">Preço médio</div><div class="rep-card-value">R$ ${avgPrice.toFixed(2).replace('.',',')}</div></div>
-      <div class="rep-card ${freeShip >= 15 ? 'alert-orange' : 'alert-green'}"><div class="rep-card-label">Com frete grátis</div><div class="rep-card-value">${freeShip}/20</div></div>
-      <div class="rep-card"><div class="rep-card-label">Resultados</div><div class="rep-card-value">${(r.paging?.total||0).toLocaleString('pt-BR')}</div><div class="rep-card-sub">publicações encontradas</div></div>
+      <div class="rep-card"><div class="rep-card-label">Vendas (top 20)</div><div class="rep-card-value">${totalSold.toLocaleString('pt-BR')}</div></div>
+      <div class="rep-card"><div class="rep-card-label">Preço médio</div><div class="rep-card-value">R$ ${avgPrice.toFixed(2).replace('.',',')}</div><div class="rep-card-sub">R$ ${minPrice.toFixed(0)} – R$ ${maxPrice.toFixed(0)}</div></div>
+      <div class="rep-card ${freeShip >= 15 ? 'alert-orange' : 'alert-green'}"><div class="rep-card-label">Frete grátis</div><div class="rep-card-value">${freeShip}/20</div></div>
+      <div class="rep-card"><div class="rep-card-label">Total encontrado</div><div class="rep-card-value">${(r.paging?.total||0).toLocaleString('pt-BR')}</div><div class="rep-card-sub">publicações</div></div>
     </div>`;
 
     const html = summary + `<div class="table-wrap"><table>
@@ -1609,21 +1632,21 @@ async function loadCompetitors() {
         <th>#</th><th>Vendedor</th><th>Título</th>
         <th style="text-align:right;">Preço</th>
         <th style="text-align:right;">Vendas</th>
-        <th>Frete</th><th>Reputação</th>
+        <th>Frete</th><th>Cond.</th>
       </tr></thead>
       <tbody>${results.map((x,i) => {
-        const rep = x.seller?.seller_reputation;
-        const repLevel = rep?.level_id || '';
-        const repClass = repLevel === '5_green' ? 'ib-ok' : repLevel === '4_light_green' ? 'ib-ok' : repLevel === '3_yellow' ? 'ib-info' : repLevel ? 'ib-warn' : 'ib-info';
-        const repLabel = { '5_green':'Verde','4_light_green':'V. Claro','3_yellow':'Amarelo','2_orange':'Laranja','1_red':'Vermelho' }[repLevel] || '—';
+        const cond = x.condition === 'new' ? '<span class="icon-badge ib-ok">Novo</span>' : '<span class="icon-badge ib-info">Usado</span>';
+        const frete = x.shipping?.free_shipping ? '<span class="icon-badge ib-ok">Grátis</span>' : '<span class="icon-badge ib-info">Pago</span>';
+        const sold = x.sold_quantity || 0;
+        const soldCls = sold > 100 ? 'score-good' : sold > 10 ? 'score-medium' : 'score-unknown';
         return `<tr>
           <td style="font-family:var(--mono);color:var(--muted);font-size:12px;">${i+1}</td>
-          <td style="font-size:12px;max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${x.seller?.nickname||'—'}</td>
+          <td style="font-size:12px;max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${x.seller?.nickname||''}">${x.seller?.nickname||'—'}</td>
           <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title}</a></td>
           <td style="text-align:right;font-family:var(--mono);font-weight:500;">R$ ${(x.price||0).toFixed(2).replace('.',',')}</td>
-          <td style="text-align:right;font-family:var(--mono);">${(x.sold_quantity||0).toLocaleString('pt-BR')}</td>
-          <td>${x.shipping?.free_shipping ? '<span class="icon-badge ib-ok">Grátis</span>' : '<span class="icon-badge ib-info">Pago</span>'}</td>
-          <td><span class="icon-badge ${repClass}">${repLabel}</span></td>
+          <td style="text-align:right;"><span class="score-pill ${soldCls}" style="width:auto;padding:2px 8px;">${sold.toLocaleString('pt-BR')}</span></td>
+          <td>${frete}</td>
+          <td>${cond}</td>
         </tr>`;
       }).join('')}</tbody>
     </table></div>`;
