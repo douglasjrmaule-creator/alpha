@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alpha Scanner — Qualidade & Reputação</title>
+<title>Alpha Scanner â Qualidade & ReputaÃ§Ã£o</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -37,7 +37,7 @@
     min-height: 100vh;
   }
 
-  /* ── Header ── */
+  /* ââ Header ââ */
   .header {
     background: var(--bg2);
     border-bottom: 1px solid var(--border);
@@ -112,7 +112,7 @@
   .btn-ghost { background: var(--bg3); color: var(--text); border: 1px solid var(--border); }
   .btn-ghost:hover:not(:disabled) { background: #262D36; }
 
-  /* ── Auth panel ── */
+  /* ââ Auth panel ââ */
   .auth-panel {
     max-width: 520px;
     margin: 80px auto;
@@ -153,7 +153,7 @@
   }
   .field input:focus, .field select:focus { border-color: var(--green); }
 
-  /* ── Health bar (signature element) ── */
+  /* ââ Health bar (signature element) ââ */
   .health-bar-wrap {
     padding: 20px 24px;
     background: var(--bg2);
@@ -203,7 +203,7 @@
   }
   .health-stat span { color: var(--text); font-weight: 500; }
 
-  /* ── Reputation card ── */
+  /* ââ Reputation card ââ */
   .rep-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -241,7 +241,7 @@
     margin-top: 2px;
   }
 
-  /* ── Protection alert ── */
+  /* ââ Protection alert ââ */
   .protection-banner {
     display: none;
     margin: 12px 24px 0;
@@ -255,7 +255,7 @@
   .protection-banner.visible { display: flex; align-items: flex-start; gap: 10px; }
   .protection-banner svg { flex-shrink: 0; margin-top: 1px; }
 
-  /* ── Tabs ── */
+  /* ââ Tabs ââ */
   .tabs-wrap {
     padding: 0 24px;
     border-bottom: 1px solid var(--border);
@@ -292,12 +292,12 @@
   }
   .tab.active .tab-count { background: var(--green-dim); color: var(--green); border-color: #00C85340; }
 
-  /* ── Content ── */
+  /* ââ Content ââ */
   .content { padding: 20px 24px; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  /* ── Table ── */
+  /* ââ Table ââ */
   .table-wrap {
     background: var(--bg2);
     border: 1px solid var(--border);
@@ -505,7 +505,7 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- ══════════════ AUTH PANEL ══════════════ -->
+<!-- ââââââââââââââ AUTH PANEL ââââââââââââââ -->
 <div id="auth-screen">
   <div class="header">
     <div class="header-brand">
@@ -518,7 +518,7 @@
     <!-- Tela de login -->
     <div id="step-login">
       <h2>Conectar ao Mercado Livre</h2>
-      <p>Clique abaixo para autorizar o acesso. Uma janela do Mercado Livre abrirá — após autorizar, ela fecha automaticamente e a varredura inicia.</p>
+      <p>Clique abaixo para autorizar o acesso. Uma janela do Mercado Livre abrirÃ¡ â apÃ³s autorizar, ela fecha automaticamente e a varredura inicia.</p>
       <div class="field">
         <label>Worker URL</label>
         <input id="worker-url" type="text"
@@ -542,10 +542,10 @@
       </button>
     </div>
 
-    <!-- Aguardando autorização -->
+    <!-- Aguardando autorizaÃ§Ã£o -->
     <div id="step-waiting" style="display:none;text-align:center;padding:8px 0;">
       <div class="spinner" style="width:32px;height:32px;border-width:3px;margin:0 auto 20px;"></div>
-      <p style="font-weight:500;font-size:15px;margin-bottom:8px;" id="waiting-msg">Aguardando autorização...</p>
+      <p style="font-weight:500;font-size:15px;margin-bottom:8px;" id="waiting-msg">Aguardando autorizaÃ§Ã£o...</p>
       <p style="font-size:12px;color:var(--muted);margin-bottom:24px;">Autorize na janela do Mercado Livre que abriu.</p>
       <button class="btn btn-ghost" onclick="cancelLogin()" style="font-size:12px;">Cancelar</button>
     </div>
@@ -553,20 +553,21 @@
   </div>
 </div>
 
-<!-- ══════════════ MAIN DASHBOARD ══════════════ -->
+<!-- ââââââââââââââ MAIN DASHBOARD ââââââââââââââ -->
 <div id="main-screen" style="display:none;">
 
   <div class="header">
     <div class="header-brand">
       <div class="brand-dot"></div>
       <span class="brand-name">ALPHA SCANNER</span>
-      <span class="brand-tag">QUALIDADE & REPUTAÇÃO</span>
+      <span class="brand-tag">QUALIDADE & REPUTAÃÃO</span>
     </div>
     <div class="header-right">
-      <span class="account-badge" id="hdr-account">—</span>
+      <span class="account-badge" id="hdr-account">â</span>
+      <button class="btn btn-ghost" id="btn-whatsapp" onclick="sendWhatsAppReport()" style="font-size:13px;background:#25D366;color:#fff;border:none;">📱 Relatório</button>
       <button class="btn btn-ghost" onclick="rescan()" id="btn-rescan">
         <span class="spinner" id="scan-spinner" style="display:none;"></span>
-        <span id="scan-label">↺ Atualizar</span>
+        <span id="scan-label">âº Atualizar</span>
       </button>
       <button class="btn btn-ghost" onclick="logout()">Sair</button>
     </div>
@@ -575,8 +576,8 @@
   <!-- Health bar -->
   <div class="health-bar-wrap">
     <div class="health-bar-header">
-      <span class="health-label">Saúde geral da operação</span>
-      <span class="health-score" id="health-score-val">—</span>
+      <span class="health-label">SaÃºde geral da operaÃ§Ã£o</span>
+      <span class="health-score" id="health-score-val">â</span>
     </div>
     <div class="health-bar-track">
       <div class="health-bar-fill" id="health-bar-fill"></div>
@@ -599,7 +600,7 @@
   <!-- Progress bar -->
   <div class="progress-wrap" id="progress-wrap">
     <div class="progress-label">
-      <span id="progress-label-text">Carregando publicações...</span>
+      <span id="progress-label-text">Carregando publicaÃ§Ãµes...</span>
       <span id="progress-pct">0%</span>
     </div>
     <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
@@ -611,25 +612,25 @@
       Score de performance <span class="tab-count" id="cnt-performance">0</span>
     </button>
     <button class="tab" onclick="switchTab('unhealthy')" id="tab-unhealthy">
-      Publicações doentes <span class="tab-count" id="cnt-unhealthy">0</span>
+      PublicaÃ§Ãµes doentes <span class="tab-count" id="cnt-unhealthy">0</span>
     </button>
     <button class="tab" onclick="switchTab('gtin')" id="tab-gtin">
       Sem GTIN <span class="tab-count" id="cnt-gtin">0</span>
     </button>
     <button class="tab" onclick="switchTab('visits')" id="tab-visits">
-      📊 Visitas <span class="tab-count" id="cnt-visits">0</span>
+      ð Visitas <span class="tab-count" id="cnt-visits">0</span>
     </button>
     <button class="tab" onclick="switchTab('trends')" id="tab-trends">
-      🔥 Tendências
+      ð¥ TendÃªncias
     </button>
     <button class="tab" onclick="switchTab('competitors')" id="tab-competitors">
-      🏆 Concorrentes
+      ð Concorrentes
     </button>
     <button class="tab" onclick="switchTab('catalog')" id="tab-catalog">
-      📋 Catálogo <span class="tab-count" id="cnt-catalog">0</span>
+      ð CatÃ¡logo <span class="tab-count" id="cnt-catalog">0</span>
     </button>
     <button class="tab" onclick="switchTab('exposure')" id="tab-exposure">
-      📡 Exposição
+      ð¡ ExposiÃ§Ã£o
     </button>
   </div>
 
@@ -640,11 +641,11 @@
     <div class="tab-panel active" id="panel-performance">
       <div class="table-wrap">
         <div class="table-toolbar">
-          <input class="search-input" id="search-performance" placeholder="Filtrar por título ou MLB..." oninput="filterTable('performance')">
-          <button class="btn btn-ghost" onclick="exportCSV('performance')" style="font-size:12px;">⬇ CSV</button>
+          <input class="search-input" id="search-performance" placeholder="Filtrar por tÃ­tulo ou MLB..." oninput="filterTable('performance')">
+          <button class="btn btn-ghost" onclick="exportCSV('performance')" style="font-size:12px;">â¬ CSV</button>
         </div>
         <div id="table-performance">
-          <div class="state-msg"><div class="state-icon">📋</div>Aguardando varredura...</div>
+          <div class="state-msg"><div class="state-icon">ð</div>Aguardando varredura...</div>
         </div>
       </div>
     </div>
@@ -653,11 +654,11 @@
     <div class="tab-panel" id="panel-unhealthy">
       <div class="table-wrap">
         <div class="table-toolbar">
-          <input class="search-input" id="search-unhealthy" placeholder="Filtrar por título ou MLB..." oninput="filterTable('unhealthy')">
-          <button class="btn btn-ghost" onclick="exportCSV('unhealthy')" style="font-size:12px;">⬇ CSV</button>
+          <input class="search-input" id="search-unhealthy" placeholder="Filtrar por tÃ­tulo ou MLB..." oninput="filterTable('unhealthy')">
+          <button class="btn btn-ghost" onclick="exportCSV('unhealthy')" style="font-size:12px;">â¬ CSV</button>
         </div>
         <div id="table-unhealthy">
-          <div class="state-msg"><div class="state-icon">🩺</div>Aguardando varredura...</div>
+          <div class="state-msg"><div class="state-icon">ð©º</div>Aguardando varredura...</div>
         </div>
       </div>
     </div>
@@ -666,11 +667,11 @@
     <div class="tab-panel" id="panel-gtin">
       <div class="table-wrap">
         <div class="table-toolbar">
-          <input class="search-input" id="search-gtin" placeholder="Filtrar por título ou MLB..." oninput="filterTable('gtin')">
-          <button class="btn btn-ghost" onclick="exportCSV('gtin')" style="font-size:12px;">⬇ CSV</button>
+          <input class="search-input" id="search-gtin" placeholder="Filtrar por tÃ­tulo ou MLB..." oninput="filterTable('gtin')">
+          <button class="btn btn-ghost" onclick="exportCSV('gtin')" style="font-size:12px;">â¬ CSV</button>
         </div>
         <div id="table-gtin">
-          <div class="state-msg"><div class="state-icon">🔖</div>Aguardando varredura...</div>
+          <div class="state-msg"><div class="state-icon">ð</div>Aguardando varredura...</div>
         </div>
       </div>
     </div>
@@ -680,27 +681,27 @@
     <div class="tab-panel" id="panel-visits">
       <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
         <div style="display:flex;align-items:center;gap:8px;">
-          <label style="font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em;">Período</label>
+          <label style="font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em;">PerÃ­odo</label>
           <select id="visits-period" class="search-input" style="width:auto;">
-            <option value="7">Últimos 7 dias</option>
-            <option value="30" selected>Últimos 30 dias</option>
-            <option value="60">Últimos 60 dias</option>
-            <option value="90">Últimos 90 dias</option>
+            <option value="7">Ãltimos 7 dias</option>
+            <option value="30" selected>Ãltimos 30 dias</option>
+            <option value="60">Ãltimos 60 dias</option>
+            <option value="90">Ãltimos 90 dias</option>
           </select>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
           <label style="font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em;">Top</label>
           <select id="visits-limit" class="search-input" style="width:auto;">
-            <option value="30">30 anúncios</option>
-            <option value="50" selected>50 anúncios</option>
-            <option value="100">100 anúncios</option>
-            <option value="200">200 anúncios</option>
+            <option value="30">30 anÃºncios</option>
+            <option value="50" selected>50 anÃºncios</option>
+            <option value="100">100 anÃºncios</option>
+            <option value="200">200 anÃºncios</option>
           </select>
         </div>
-        <input class="search-input" id="search-visits" placeholder="Filtrar por título ou MLB..." oninput="filterTable('visits')">
-        <button class="btn btn-primary" onclick="loadVisitsData()" id="btn-load-visits" style="font-size:13px;">📊 Carregar visitas</button>
-        <button class="btn btn-ghost" onclick="loadStoreVisits()" id="btn-store-visits" style="font-size:12px;">🏪 Visitas da loja</button>
-        <button class="btn btn-ghost" onclick="exportCSV('visits')" style="font-size:12px;">⬇ CSV</button>
+        <input class="search-input" id="search-visits" placeholder="Filtrar por tÃ­tulo ou MLB..." oninput="filterTable('visits')">
+        <button class="btn btn-primary" onclick="loadVisitsData()" id="btn-load-visits" style="font-size:13px;">ð Carregar visitas</button>
+        <button class="btn btn-ghost" onclick="loadStoreVisits()" id="btn-store-visits" style="font-size:12px;">ðª Visitas da loja</button>
+        <button class="btn btn-ghost" onclick="exportCSV('visits')" style="font-size:12px;">â¬ CSV</button>
       </div>
       <!-- Visitas da loja -->
       <div id="store-visits-wrap" style="display:none;margin-bottom:16px;"></div>
@@ -708,19 +709,19 @@
       <div id="visits-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px;"></div>
       <div class="table-wrap">
         <div id="table-visits">
-          <div class="state-msg"><div class="state-icon">📊</div>Selecione o período e clique em "Carregar visitas".</div>
+          <div class="state-msg"><div class="state-icon">ð</div>Selecione o perÃ­odo e clique em "Carregar visitas".</div>
         </div>
       </div>
     </div>
 
-    <!-- Tab: Tendências -->
+    <!-- Tab: TendÃªncias -->
     <div class="tab-panel" id="panel-trends">
       <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
-        <button class="btn btn-primary" onclick="loadTrends()" id="btn-load-trends" style="font-size:13px;">🔥 Buscar tendências agora</button>
+        <button class="btn btn-primary" onclick="loadTrends()" id="btn-load-trends" style="font-size:13px;">ð¥ Buscar tendÃªncias agora</button>
         <span style="font-size:12px;color:var(--muted);">Retorna os termos mais buscados no ML Brasil no momento.</span>
       </div>
       <div id="trends-container">
-        <div class="state-msg"><div class="state-icon">🔥</div>Clique para ver o que está em alta agora.</div>
+        <div class="state-msg"><div class="state-icon">ð¥</div>Clique para ver o que estÃ¡ em alta agora.</div>
       </div>
     </div>
 
@@ -730,43 +731,43 @@
         <input class="search-input" id="competitors-query" placeholder="Buscar produto ou categoria (ex: furadeira, MLB271481)..." style="flex:1;min-width:260px;" onkeydown="if(event.key==='Enter')loadCompetitors()">
         <select id="competitors-sort" class="search-input" style="width:auto;">
           <option value="sold_quantity_desc">Mais vendidos</option>
-          <option value="price_asc">Menor preço</option>
-          <option value="price_desc">Maior preço</option>
+          <option value="price_asc">Menor preÃ§o</option>
+          <option value="price_desc">Maior preÃ§o</option>
         </select>
-        <button class="btn btn-primary" onclick="loadCompetitors()" id="btn-load-competitors">🏆 Analisar</button>
-        <button class="btn btn-ghost" onclick="predictCategory()" id="btn-predict" style="font-size:12px;">🔮 Prever categoria</button>
+        <button class="btn btn-primary" onclick="loadCompetitors()" id="btn-load-competitors">ð Analisar</button>
+        <button class="btn btn-ghost" onclick="predictCategory()" id="btn-predict" style="font-size:12px;">ð® Prever categoria</button>
       </div>
       <!-- Resultado do preditor -->
       <div id="category-prediction" style="display:none;margin-bottom:16px;"></div>
       <div id="competitors-container">
-        <div class="state-msg"><div class="state-icon">🏆</div>Digite um produto ou ID de categoria para analisar a concorrência.</div>
+        <div class="state-msg"><div class="state-icon">ð</div>Digite um produto ou ID de categoria para analisar a concorrÃªncia.</div>
       </div>
     </div>
 
-    <!-- Tab: Catálogo -->
+    <!-- Tab: CatÃ¡logo -->
     <div class="tab-panel" id="panel-catalog">
-      <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">Verifica PI (identificadores de produto), ficha técnica e atributos obrigatórios. Itens com baixa qualidade perdem ranqueamento no catálogo.</div>
+      <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">Verifica PI (identificadores de produto), ficha tÃ©cnica e atributos obrigatÃ³rios. Itens com baixa qualidade perdem ranqueamento no catÃ¡logo.</div>
       <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
-        <input class="search-input" id="search-catalog" placeholder="Filtrar por título ou MLB..." oninput="filterTable('catalog')">
-        <button class="btn btn-ghost" onclick="exportCSV('catalog')" style="font-size:12px;">⬇ CSV</button>
-        <button class="btn btn-ghost" onclick="loadCatalogQuality()" style="font-size:12px;" id="btn-load-catalog">↺ Verificar catálogo</button>
+        <input class="search-input" id="search-catalog" placeholder="Filtrar por tÃ­tulo ou MLB..." oninput="filterTable('catalog')">
+        <button class="btn btn-ghost" onclick="exportCSV('catalog')" style="font-size:12px;">â¬ CSV</button>
+        <button class="btn btn-ghost" onclick="loadCatalogQuality()" style="font-size:12px;" id="btn-load-catalog">âº Verificar catÃ¡logo</button>
       </div>
       <div class="table-wrap">
         <div id="table-catalog">
-          <div class="state-msg"><div class="state-icon">📋</div>Clique em "Verificar catálogo" para analisar a qualidade das publicações.</div>
+          <div class="state-msg"><div class="state-icon">ð</div>Clique em "Verificar catÃ¡logo" para analisar a qualidade das publicaÃ§Ãµes.</div>
         </div>
       </div>
     </div>
 
-    <!-- Tab: Exposição -->
+    <!-- Tab: ExposiÃ§Ã£o -->
     <div class="tab-panel" id="panel-exposure">
-      <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">Compara o impacto no posicionamento de busca (priority_in_search) entre os tipos de anúncio Classic e Premium para cada categoria.</div>
+      <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">Compara o impacto no posicionamento de busca (priority_in_search) entre os tipos de anÃºncio Classic e Premium para cada categoria.</div>
       <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
         <input class="search-input" id="exposure-category" placeholder="Categoria (ex: MLB271481) ou deixe em branco para usar suas categorias..." style="flex:1;min-width:260px;">
-        <button class="btn btn-primary" onclick="loadExposures()" id="btn-load-exposure">📡 Analisar exposição</button>
+        <button class="btn btn-primary" onclick="loadExposures()" id="btn-load-exposure">ð¡ Analisar exposiÃ§Ã£o</button>
       </div>
       <div id="exposure-container">
-        <div class="state-msg"><div class="state-icon">📡</div>Clique para comparar Classic vs Premium nas suas categorias principais.</div>
+        <div class="state-msg"><div class="state-icon">ð¡</div>Clique para comparar Classic vs Premium nas suas categorias principais.</div>
       </div>
     </div>
 
@@ -774,7 +775,7 @@
 </div>
 
 <script>
-// ── Config ──────────────────────────────────────────────
+// ââ Config ââââââââââââââââââââââââââââââââââââââââââââââ
 let CFG = { workerUrl: '', clientId: '', sellerId: '', token: '' };
 let DATA = {
   items: [],           // todos os itens ativos
@@ -783,14 +784,14 @@ let DATA = {
   gtinMissing: [],     // itens sem GTIN
   reputation: null,
   visits: [],          // visitas por item (30d)
-  trends: [],          // tendências de busca /trends/MLB
-  competitors: [],     // análise de concorrentes por categoria
-  catalogQuality: [],  // qualidade de catálogo
-  exposures: [],       // exposição por tipo de anúncio
+  trends: [],          // tendÃªncias de busca /trends/MLB
+  competitors: [],     // anÃ¡lise de concorrentes por categoria
+  catalogQuality: [],  // qualidade de catÃ¡logo
+  exposures: [],       // exposiÃ§Ã£o por tipo de anÃºncio
   storeVisits: null,   // visitas agregadas da loja
 };
 
-// ── Helpers ─────────────────────────────────────────────
+// ââ Helpers âââââââââââââââââââââââââââââââââââââââââââââ
 function api(path, opts = {}) {
   const url = CFG.workerUrl + '/ml' + path;
   return fetch(url, {
@@ -801,7 +802,7 @@ function api(path, opts = {}) {
       ...(opts.headers || {})
     }
   }).then(r => {
-    if (!r.ok) throw new Error(`HTTP ${r.status} — ${path}`);
+    if (!r.ok) throw new Error(`HTTP ${r.status} â ${path}`);
     return r.json();
   });
 }
@@ -827,11 +828,11 @@ function hideProgress() {
 
 function setScanState(loading) {
   document.getElementById('scan-spinner').style.display = loading ? 'inline-block' : 'none';
-  document.getElementById('scan-label').textContent = loading ? 'Varrendo...' : '↺ Atualizar';
+  document.getElementById('scan-label').textContent = loading ? 'Varrendo...' : 'âº Atualizar';
   document.getElementById('btn-rescan').disabled = loading;
 }
 
-// ── Auth — OAuth popup automático ────────────────────────
+// ââ Auth â OAuth popup automÃ¡tico ââââââââââââââââââââââââ
 const CALLBACK_URL = 'https://douglasjrmaule-creator.github.io/alpha/callback.html';
 let _authPopup   = null;
 let _authTimeout = null;
@@ -844,8 +845,8 @@ function loginML() {
   CFG.workerUrl = workerUrl;
   CFG.clientId  = clientId;
 
-  // Passa workerUrl e clientId no parâmetro state como Base64 (sem JSON cru na URL).
-  // O ML aceita state como string opaca — Base64 evita caracteres especiais.
+  // Passa workerUrl e clientId no parÃ¢metro state como Base64 (sem JSON cru na URL).
+  // O ML aceita state como string opaca â Base64 evita caracteres especiais.
   const stateObj = btoa(JSON.stringify({ w: workerUrl, c: clientId }));
 
   const authUrl = 'https://auth.mercadolivre.com.br/authorization'
@@ -871,7 +872,7 @@ function loginML() {
   // Timeout de 5 minutos
   _authTimeout = setTimeout(() => {
     cleanupAuth();
-    toast('Tempo de autorização expirou. Tente novamente.');
+    toast('Tempo de autorizaÃ§Ã£o expirou. Tente novamente.');
     resetLoginScreen();
   }, 5 * 60 * 1000);
 
@@ -892,7 +893,7 @@ async function onAuthMessage(event) {
   const msg = event.data;
   if (!msg || !msg.type) return;
 
-  // Callback envia apenas o code — o app troca pelo token via Worker
+  // Callback envia apenas o code â o app troca pelo token via Worker
   if (msg.type === 'ML_AUTH_CODE') {
     cleanupAuth();
     document.getElementById('waiting-msg').textContent = 'Obtendo token...';
@@ -909,7 +910,7 @@ async function onAuthMessage(event) {
       });
       if (!resp.ok) { const t = await resp.text(); throw new Error('Worker ' + resp.status + ': ' + t); }
       const data = await resp.json();
-      if (!data.access_token) throw new Error('Token não retornado.');
+      if (!data.access_token) throw new Error('Token nÃ£o retornado.');
 
       CFG.token    = data.access_token;
       CFG.sellerId = String(data.user_id || '256258529');
@@ -942,7 +943,7 @@ async function onAuthMessage(event) {
 
   if (msg.type === 'ML_AUTH_ERROR') {
     cleanupAuth();
-    toast('Erro na autorização: ' + msg.message);
+    toast('Erro na autorizaÃ§Ã£o: ' + msg.message);
     resetLoginScreen();
   }
 }
@@ -975,20 +976,20 @@ function logout() {
 
 function rescan() { runFullScan(); }
 
-// ── Main scan ─────────────────────────────────────────────
+// ââ Main scan âââââââââââââââââââââââââââââââââââââââââââââ
 async function runFullScan() {
   setScanState(true);
   try {
-    // 1. Reputação
-    setProgress(2, 'Buscando reputação...');
+    // 1. ReputaÃ§Ã£o
+    setProgress(2, 'Buscando reputaÃ§Ã£o...');
     await loadReputation();
 
     // 2. Itens ativos (paginado)
-    setProgress(10, 'Listando publicações ativas...');
+    setProgress(10, 'Listando publicaÃ§Ãµes ativas...');
     await loadAllItems();
 
     // 3. Unhealthy
-    setProgress(30, 'Identificando publicações doentes...');
+    setProgress(30, 'Identificando publicaÃ§Ãµes doentes...');
     await loadUnhealthy();
 
     // 4. GTIN missing
@@ -1009,7 +1010,7 @@ async function runFullScan() {
   setScanState(false);
 }
 
-// ── Reputação ────────────────────────────────────────────
+// ââ ReputaÃ§Ã£o ââââââââââââââââââââââââââââââââââââââââââââ
 async function loadReputation() {
   const data = await api('/users/' + CFG.sellerId);
   DATA.reputation = data.seller_reputation || null;
@@ -1058,9 +1059,9 @@ function renderReputation() {
     const days = Math.ceil((end - new Date()) / 864e5);
     const realLbl = levelLabel(rep.real_level);
     banner.classList.add('visible');
-    ptxt.innerHTML = `<strong>Conta em período de proteção</strong> — reputação real: <strong>${realLbl}</strong>. 
-      Proteção expira em ${end.toLocaleDateString('pt-BR')} (${days > 0 ? days + ' dias' : 'expirado'}).
-      Corrija as métricas antes do prazo para evitar queda visível de reputação.`;
+    ptxt.innerHTML = `<strong>Conta em perÃ­odo de proteÃ§Ã£o</strong> â reputaÃ§Ã£o real: <strong>${realLbl}</strong>. 
+      ProteÃ§Ã£o expira em ${end.toLocaleDateString('pt-BR')} (${days > 0 ? days + ' dias' : 'expirado'}).
+      Corrija as mÃ©tricas antes do prazo para evitar queda visÃ­vel de reputaÃ§Ã£o.`;
   } else {
     banner.classList.remove('visible');
   }
@@ -1069,15 +1070,15 @@ function renderReputation() {
   const effectiveLevel = rep.level_id;
   const cards = [
     {
-      label: 'Reputação exibida',
+      label: 'ReputaÃ§Ã£o exibida',
       value: levelLabel(effectiveLevel),
-      sub: rep.power_seller_status ? rep.power_seller_status.charAt(0).toUpperCase() + rep.power_seller_status.slice(1) : '—',
+      sub: rep.power_seller_status ? rep.power_seller_status.charAt(0).toUpperCase() + rep.power_seller_status.slice(1) : 'â',
       cls: repColor(effectiveLevel)
     },
     {
-      label: 'Reclamações (60d)',
+      label: 'ReclamaÃ§Ãµes (60d)',
       value: fmt_pct(claims.rate),
-      sub: `${claims.value || 0} reclam. / ${sales.completed || '—'} vendas`,
+      sub: `${claims.value || 0} reclam. / ${sales.completed || 'â'} vendas`,
       cls: claimsColor(claims.rate)
     },
     {
@@ -1097,9 +1098,9 @@ function renderReputation() {
   // Se protegido, adiciona card de real_level
   if (rep.real_level) {
     cards.unshift({
-      label: '⚠ Nível real (protegido)',
+      label: 'â  NÃ­vel real (protegido)',
       value: levelLabel(rep.real_level),
-      sub: 'Visível só via API',
+      sub: 'VisÃ­vel sÃ³ via API',
       cls: repColor(rep.real_level)
     });
   }
@@ -1114,7 +1115,7 @@ function renderReputation() {
 }
 
 function fmt_pct(v) {
-  if (v === undefined || v === null) return '—';
+  if (v === undefined || v === null) return 'â';
   return (v * 100).toFixed(1) + '%';
 }
 
@@ -1139,7 +1140,7 @@ function cancelColor(r) {
   return 'alert-red';
 }
 
-// ── Items ────────────────────────────────────────────────
+// ââ Items ââââââââââââââââââââââââââââââââââââââââââââââââ
 async function loadAllItems() {
   let offset = 0;
   const limit = 100;
@@ -1157,11 +1158,11 @@ async function loadAllItems() {
     offset += limit;
     if (ids.length < limit) break;
     const total = r.paging?.total || 0;
-    setProgress(10 + 20 * (offset / Math.max(total, 1)), `Carregando publicações... ${DATA.items.length}/${total}`);
+    setProgress(10 + 20 * (offset / Math.max(total, 1)), `Carregando publicaÃ§Ãµes... ${DATA.items.length}/${total}`);
   }
 }
 
-// ── Unhealthy ────────────────────────────────────────────
+// ââ Unhealthy ââââââââââââââââââââââââââââââââââââââââââââ
 async function loadUnhealthy() {
   const r = await api(`/users/${CFG.sellerId}/items/search?reputation_health_gauge=unhealthy&limit=100`);
   const warn = await api(`/users/${CFG.sellerId}/items/search?reputation_health_gauge=warning&limit=100`);
@@ -1182,7 +1183,7 @@ async function loadUnhealthy() {
   }
 }
 
-// ── GTIN ─────────────────────────────────────────────────
+// ââ GTIN âââââââââââââââââââââââââââââââââââââââââââââââââ
 async function loadGtinMissing() {
   let offset = 0;
   DATA.gtinMissing = [];
@@ -1200,9 +1201,9 @@ async function loadGtinMissing() {
   }
 }
 
-// ── Performance (batch) ──────────────────────────────────
+// ââ Performance (batch) ââââââââââââââââââââââââââââââââââ
 async function loadPerformanceBatch() {
-  // Usa os itens já carregados; limita a 200 para não sobrecarregar
+  // Usa os itens jÃ¡ carregados; limita a 200 para nÃ£o sobrecarregar
   const ids = DATA.items.slice(0, 200).map(i => i.id);
   DATA.performance = [];
   const total = ids.length;
@@ -1222,23 +1223,23 @@ async function loadPerformanceBatch() {
         buckets: r.buckets || [],
       });
     } catch(_) {
-      // item sem performance calculado ainda — ignora
+      // item sem performance calculado ainda â ignora
     }
-    // Rate limit: 100 RPM → ~17ms mínimo, usamos 650ms para segurança
+    // Rate limit: 100 RPM â ~17ms mÃ­nimo, usamos 650ms para seguranÃ§a
     await sleep(650);
   }
 }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-// ── Health score ─────────────────────────────────────────
+// ââ Health score âââââââââââââââââââââââââââââââââââââââââ
 function calcHealthScore() {
   if (!DATA.performance.length) return null;
   const avg = DATA.performance.reduce((s, x) => s + (x.score || 0), 0) / DATA.performance.length;
   return Math.round(avg);
 }
 
-// ── Render all ───────────────────────────────────────────
+// ââ Render all âââââââââââââââââââââââââââââââââââââââââââ
 function renderAll() {
   renderHealthBar();
   renderPerformanceTable();
@@ -1251,7 +1252,7 @@ function renderHealthBar() {
   const score = calcHealthScore();
   const el    = document.getElementById('health-score-val');
   const bar   = document.getElementById('health-bar-fill');
-  if (score === null) { el.textContent = '—'; return; }
+  if (score === null) { el.textContent = 'â'; return; }
 
   el.textContent = score;
   bar.style.width = score + '%';
@@ -1268,11 +1269,11 @@ function renderHealthBar() {
   const bad    = DATA.performance.filter(x => x.score < 45).length;
 
   document.getElementById('health-meta').innerHTML = `
-    <span class="health-stat"><span style="color:#00C853">${good}</span> profissional (≥70)</span>
-    <span class="health-stat"><span style="color:#FFD700">${medium}</span> satisfatório (45–69)</span>
-    <span class="health-stat"><span style="color:#FF4444">${bad}</span> básico (&lt;45)</span>
+    <span class="health-stat"><span style="color:#00C853">${good}</span> profissional (â¥70)</span>
+    <span class="health-stat"><span style="color:#FFD700">${medium}</span> satisfatÃ³rio (45â69)</span>
+    <span class="health-stat"><span style="color:#FF4444">${bad}</span> bÃ¡sico (&lt;45)</span>
     <span class="health-stat"><span>${DATA.performance.length}</span> analisados</span>
-    <span class="health-stat"><span>${DATA.unhealthy.length}</span> com problemas de reputação</span>
+    <span class="health-stat"><span>${DATA.unhealthy.length}</span> com problemas de reputaÃ§Ã£o</span>
     <span class="health-stat"><span>${DATA.gtinMissing.length}</span> sem GTIN</span>
   `;
 }
@@ -1285,7 +1286,7 @@ function updateCounts() {
   document.getElementById('cnt-catalog').textContent     = DATA.catalogQuality.length;
 }
 
-// ── Tabela Performance ───────────────────────────────────
+// ââ Tabela Performance âââââââââââââââââââââââââââââââââââ
 function renderPerformanceTable(filter = '') {
   const rows = DATA.performance.filter(x =>
     !filter || x.title.toLowerCase().includes(filter) || x.id.toLowerCase().includes(filter)
@@ -1293,7 +1294,7 @@ function renderPerformanceTable(filter = '') {
 
   if (!rows.length) {
     document.getElementById('table-performance').innerHTML =
-      `<div class="state-msg"><div class="state-icon">✅</div>${filter ? 'Nenhum resultado.' : 'Nenhuma publicação encontrada.'}</div>`;
+      `<div class="state-msg"><div class="state-icon">â</div>${filter ? 'Nenhum resultado.' : 'Nenhuma publicaÃ§Ã£o encontrada.'}</div>`;
     return;
   }
 
@@ -1301,9 +1302,9 @@ function renderPerformanceTable(filter = '') {
     <thead><tr>
       <th>Score</th>
       <th>MLB</th>
-      <th>Título</th>
-      <th>Nível</th>
-      <th>Pendências</th>
+      <th>TÃ­tulo</th>
+      <th>NÃ­vel</th>
+      <th>PendÃªncias</th>
     </tr></thead>
     <tbody>${rows.map(x => {
       const cls  = x.score >= 70 ? 'score-good' : x.score >= 45 ? 'score-medium' : 'score-bad';
@@ -1316,10 +1317,10 @@ function renderPerformanceTable(filter = '') {
         ? pending.map(k => `<span class="icon-badge ib-warn">${pendingLabel(k)}</span>`).join(' ')
         : `<span class="icon-badge ib-ok">Completo</span>`;
       return `<tr>
-        <td><span class="score-pill ${cls}">${x.score ?? '—'}</span></td>
+        <td><span class="score-pill ${cls}">${x.score ?? 'â'}</span></td>
         <td class="td-id">${x.id}</td>
         <td class="td-title"><a href="${x.permalink}" target="_blank">${x.title}</a></td>
-        <td><span class="icon-badge ${lvCls}">${x.level_wording || x.level || '—'}</span></td>
+        <td><span class="icon-badge ${lvCls}">${x.level_wording || x.level || 'â'}</span></td>
         <td>${pendHtml}</td>
       </tr>`;
     }).join('')}</tbody>
@@ -1330,14 +1331,14 @@ function renderPerformanceTable(filter = '') {
 function pendingLabel(key) {
   const map = {
     GTIN: 'GTIN', PICTURES: 'Fotos', PICTURES_QUANTITY_MIN: 'Fotos',
-    TITLE: 'Título', FREE_SHIPPING: 'Frete grátis',
-    DESCRIPTION: 'Descrição', WARRANTY: 'Garantia',
+    TITLE: 'TÃ­tulo', FREE_SHIPPING: 'Frete grÃ¡tis',
+    DESCRIPTION: 'DescriÃ§Ã£o', WARRANTY: 'Garantia',
     BRAND: 'Marca', COLOR: 'Cor', SIZE: 'Tamanho',
   };
   return map[key] || key;
 }
 
-// ── Tabela Unhealthy ─────────────────────────────────────
+// ââ Tabela Unhealthy âââââââââââââââââââââââââââââââââââââ
 function renderUnhealthyTable(filter = '') {
   const rows = DATA.unhealthy.filter(x =>
     !filter || (x.title || '').toLowerCase().includes(filter) || (x.id || '').toLowerCase().includes(filter)
@@ -1345,7 +1346,7 @@ function renderUnhealthyTable(filter = '') {
 
   if (!rows.length) {
     document.getElementById('table-unhealthy').innerHTML =
-      `<div class="state-msg"><div class="state-icon">✅</div>${filter ? 'Nenhum resultado.' : 'Nenhuma publicação com problema de reputação.'}</div>`;
+      `<div class="state-msg"><div class="state-icon">â</div>${filter ? 'Nenhum resultado.' : 'Nenhuma publicaÃ§Ã£o com problema de reputaÃ§Ã£o.'}</div>`;
     return;
   }
 
@@ -1353,17 +1354,17 @@ function renderUnhealthyTable(filter = '') {
     <thead><tr>
       <th>Status</th>
       <th>MLB</th>
-      <th>Título</th>
+      <th>TÃ­tulo</th>
       <th>Health</th>
     </tr></thead>
     <tbody>${rows.map(x => {
       const gaugeCls = x._gauge === 'unhealthy' ? 'ib-warn' : 'ib-info';
-      const gaugeLabel = x._gauge === 'unhealthy' ? '🔴 Perdendo exposição' : '🟡 Em risco';
-      const healthPct = x.health !== undefined ? Math.round(x.health * 100) + '%' : '—';
+      const gaugeLabel = x._gauge === 'unhealthy' ? 'ð´ Perdendo exposiÃ§Ã£o' : 'ð¡ Em risco';
+      const healthPct = x.health !== undefined ? Math.round(x.health * 100) + '%' : 'â';
       return `<tr>
         <td><span class="icon-badge ${gaugeCls}">${gaugeLabel}</span></td>
         <td class="td-id">${x.id}</td>
-        <td class="td-title"><a href="${x.permalink || '#'}" target="_blank">${x.title || '—'}</a></td>
+        <td class="td-title"><a href="${x.permalink || '#'}" target="_blank">${x.title || 'â'}</a></td>
         <td><span class="score-pill ${x.health >= 0.7 ? 'score-good' : x.health >= 0.4 ? 'score-medium' : 'score-bad'}">${healthPct}</span></td>
       </tr>`;
     }).join('')}</tbody>
@@ -1371,7 +1372,7 @@ function renderUnhealthyTable(filter = '') {
   document.getElementById('table-unhealthy').innerHTML = html;
 }
 
-// ── Tabela GTIN ──────────────────────────────────────────
+// ââ Tabela GTIN ââââââââââââââââââââââââââââââââââââââââââ
 function renderGtinTable(filter = '') {
   const rows = DATA.gtinMissing.filter(x =>
     !filter || (x.title || '').toLowerCase().includes(filter) || (x.id || '').toLowerCase().includes(filter)
@@ -1379,28 +1380,28 @@ function renderGtinTable(filter = '') {
 
   if (!rows.length) {
     document.getElementById('table-gtin').innerHTML =
-      `<div class="state-msg"><div class="state-icon">✅</div>${filter ? 'Nenhum resultado.' : 'Todas as publicações têm identificador de produto.'}</div>`;
+      `<div class="state-msg"><div class="state-icon">â</div>${filter ? 'Nenhum resultado.' : 'Todas as publicaÃ§Ãµes tÃªm identificador de produto.'}</div>`;
     return;
   }
 
   const html = `<table>
     <thead><tr>
       <th>MLB</th>
-      <th>Título</th>
+      <th>TÃ­tulo</th>
       <th>Categoria</th>
-      <th>Ação</th>
+      <th>AÃ§Ã£o</th>
     </tr></thead>
     <tbody>${rows.map(x => `<tr>
       <td class="td-id">${x.id}</td>
-      <td class="td-title"><a href="${x.permalink || '#'}" target="_blank">${x.title || '—'}</a></td>
-      <td class="td-id">${x.category_id || '—'}</td>
+      <td class="td-title"><a href="${x.permalink || '#'}" target="_blank">${x.title || 'â'}</a></td>
+      <td class="td-id">${x.category_id || 'â'}</td>
       <td><span class="icon-badge ib-warn">Adicionar GTIN/EAN</span></td>
     </tr>`).join('')}</tbody>
   </table>`;
   document.getElementById('table-gtin').innerHTML = html;
 }
 
-// ── Tab switching ────────────────────────────────────────
+// ââ Tab switching ââââââââââââââââââââââââââââââââââââââââ
 function switchTab(name) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -1408,7 +1409,7 @@ function switchTab(name) {
   document.getElementById('panel-' + name).classList.add('active');
 }
 
-// ── Filter ───────────────────────────────────────────────
+// ââ Filter âââââââââââââââââââââââââââââââââââââââââââââââ
 function filterTable(name) {
   const q = document.getElementById('search-' + name).value.toLowerCase();
   if (name === 'performance') renderPerformanceTable(q);
@@ -1418,27 +1419,27 @@ function filterTable(name) {
   if (name === 'catalog')     renderCatalogTable(q);
 }
 
-// ── CSV Export ───────────────────────────────────────────
+// ââ CSV Export âââââââââââââââââââââââââââââââââââââââââââ
 function exportCSV(name) {
   let rows = [], headers = [];
   if (name === 'performance') {
-    headers = ['ID', 'Título', 'Score', 'Nível', 'Pendências'];
+    headers = ['ID', 'TÃ­tulo', 'Score', 'NÃ­vel', 'PendÃªncias'];
     rows = DATA.performance.map(x => [
       x.id, x.title, x.score,
       x.level_wording || x.level,
       (x.buckets || []).flatMap(b => b.variables || []).filter(v => v.status === 'PENDING').map(v => v.key).join('; ')
     ]);
   } else if (name === 'unhealthy') {
-    headers = ['ID', 'Título', 'Status', 'Health'];
+    headers = ['ID', 'TÃ­tulo', 'Status', 'Health'];
     rows = DATA.unhealthy.map(x => [x.id, x.title, x._gauge, x.health]);
   } else if (name === 'gtin') {
-    headers = ['ID', 'Título', 'Categoria'];
+    headers = ['ID', 'TÃ­tulo', 'Categoria'];
     rows = DATA.gtinMissing.map(x => [x.id, x.title, x.category_id]);
   } else if (name === 'visits') {
-    headers = ['ID', 'Título', 'Visitas Total', 'Média Diária'];
+    headers = ['ID', 'TÃ­tulo', 'Visitas Total', 'MÃ©dia DiÃ¡ria'];
     rows = DATA.visits.map(x => [x.id, x.title, x.total_visits, x.avg_daily?.toFixed(1)]);
   } else if (name === 'catalog') {
-    headers = ['ID', 'Título', 'Score Qualidade', 'Problemas'];
+    headers = ['ID', 'TÃ­tulo', 'Score Qualidade', 'Problemas'];
     rows = DATA.catalogQuality.map(x => [x.id, x.title, x.quality_score, (x.issues || []).join('; ')]);
   }
   const csv = [headers, ...rows].map(r => r.map(v => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')).join('\n');
@@ -1449,7 +1450,7 @@ function exportCSV(name) {
   a.click();
 }
 
-// ── VISITAS ────────────────────────────────────────────────────────────────
+// ââ VISITAS ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 async function loadVisitsData() {
   const btn = document.getElementById('btn-load-visits');
   const days = parseInt(document.getElementById('visits-period').value);
@@ -1464,7 +1465,7 @@ async function loadVisitsData() {
     const limit = parseInt(document.getElementById('visits-limit')?.value || 50);
     const ids = DATA.items.slice(0, limit).map(i => i.id);
 
-    if (!ids.length) throw new Error('Nenhuma publicação carregada. Execute a varredura principal primeiro.');
+    if (!ids.length) throw new Error('Nenhuma publicaÃ§Ã£o carregada. Execute a varredura principal primeiro.');
 
     DATA.visits = [];
     const visitMap = {};
@@ -1474,7 +1475,7 @@ async function loadVisitsData() {
     for (const id of ids) {
       try {
         const r = await api(`/items/visits?ids=${id}&date_from=${dateFrom}&date_to=${dateTo}`);
-        // ML retorna objeto único ou array com 1 elemento
+        // ML retorna objeto Ãºnico ou array com 1 elemento
         const entry = Array.isArray(r) ? r[0] : r;
         if (entry) {
           const total = (entry.data_by_date || []).reduce((s, d) => s + (d.total || 0), 0);
@@ -1509,10 +1510,10 @@ async function loadVisitsData() {
     renderVisitsTable();
     document.getElementById('cnt-visits').textContent = DATA.visits.length;
   } catch(e) {
-    document.getElementById('table-visits').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">⚠️</div>${e.message}</div>`;
+    document.getElementById('table-visits').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">â ï¸</div>${e.message}</div>`;
   }
   btn.disabled = false;
-  btn.textContent = '↺ Carregar visitas';
+  btn.textContent = 'âº Carregar visitas';
 }
 
 function renderVisitsSummary(days) {
@@ -1527,19 +1528,19 @@ function renderVisitsSummary(days) {
       <div class="rep-card-value" style="font-size:26px;">${total.toLocaleString('pt-BR')}</div>
     </div>
     <div class="rep-card">
-      <div class="rep-card-label">Média por anúncio</div>
+      <div class="rep-card-label">MÃ©dia por anÃºncio</div>
       <div class="rep-card-value">${avg.toLocaleString('pt-BR')}</div>
       <div class="rep-card-sub">${(avg/days).toFixed(1)}/dia</div>
     </div>
     <div class="rep-card ${zero > 0 ? 'alert-orange' : 'alert-green'}">
-      <div class="rep-card-label">Sem visitas no período</div>
+      <div class="rep-card-label">Sem visitas no perÃ­odo</div>
       <div class="rep-card-value">${zero}</div>
-      <div class="rep-card-sub">de ${DATA.visits.length} anúncios</div>
+      <div class="rep-card-sub">de ${DATA.visits.length} anÃºncios</div>
     </div>
     <div class="rep-card">
       <div class="rep-card-label">Mais visitado</div>
-      <div class="rep-card-value" style="font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${top.total_visits?.toLocaleString('pt-BR') || '—'}</div>
-      <div class="rep-card-sub" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">${top.title || '—'}</div>
+      <div class="rep-card-value" style="font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${top.total_visits?.toLocaleString('pt-BR') || 'â'}</div>
+      <div class="rep-card-sub" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">${top.title || 'â'}</div>
     </div>`;
 }
 
@@ -1549,24 +1550,24 @@ function renderVisitsTable(filter = '') {
   );
 
   if (!rows.length) {
-    document.getElementById('table-visits').innerHTML = `<div class="state-msg"><div class="state-icon">✅</div>${filter ? 'Nenhum resultado.' : 'Nenhum dado de visitas.'}</div>`;
+    document.getElementById('table-visits').innerHTML = `<div class="state-msg"><div class="state-icon">â</div>${filter ? 'Nenhum resultado.' : 'Nenhum dado de visitas.'}</div>`;
     return;
   }
 
   const maxV = rows[0]?.total_visits || 1;
   const html = `<table>
     <thead><tr>
-      <th>MLB</th><th>Título</th>
+      <th>MLB</th><th>TÃ­tulo</th>
       <th style="text-align:right;">Total</th>
-      <th style="text-align:right;">Média/dia</th>
-      <th style="min-width:120px;">Distribuição</th>
+      <th style="text-align:right;">MÃ©dia/dia</th>
+      <th style="min-width:120px;">DistribuiÃ§Ã£o</th>
     </tr></thead>
     <tbody>${rows.map(x => {
       const pct = Math.round((x.total_visits / maxV) * 100);
       const cls = x.total_visits === 0 ? 'score-bad' : x.total_visits < 10 ? 'score-medium' : 'score-good';
       return `<tr>
         <td class="td-id">${x.id}</td>
-        <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title||'—'}</a></td>
+        <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title||'â'}</a></td>
         <td style="text-align:right;font-family:var(--mono);font-size:13px;"><span class="score-pill ${cls}" style="width:auto;padding:2px 8px;">${x.total_visits.toLocaleString('pt-BR')}</span></td>
         <td style="text-align:right;font-family:var(--mono);font-size:12px;color:var(--muted);">${x.avg_daily?.toFixed(1)}</td>
         <td><div style="height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:var(--green);border-radius:4px;transition:width .4s;"></div></div></td>
@@ -1576,22 +1577,22 @@ function renderVisitsTable(filter = '') {
   document.getElementById('table-visits').innerHTML = html;
 }
 
-// ── TENDÊNCIAS ─────────────────────────────────────────────────────────────
+// ââ TENDÃNCIAS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 async function loadTrends() {
   const btn = document.getElementById('btn-load-trends');
   btn.disabled = true;
-  btn.textContent = '⏳ Buscando...';
-  document.getElementById('trends-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Consultando tendências...</div>';
+  btn.textContent = 'â³ Buscando...';
+  document.getElementById('trends-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Consultando tendÃªncias...</div>';
 
   try {
     const r = await api('/trends/MLB');
     DATA.trends = Array.isArray(r) ? r : (r.keywords || []);
 
-    if (!DATA.trends.length) throw new Error('Nenhuma tendência retornada pela API.');
+    if (!DATA.trends.length) throw new Error('Nenhuma tendÃªncia retornada pela API.');
 
     const html = `
       <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">
-        ${DATA.trends.length} termos em alta agora no Mercado Livre Brasil. Clique para analisar concorrência.
+        ${DATA.trends.length} termos em alta agora no Mercado Livre Brasil. Clique para analisar concorrÃªncia.
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;">
         ${DATA.trends.map((t, i) => {
@@ -1603,34 +1604,34 @@ async function loadTrends() {
             onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
             <span style="font-family:var(--mono);font-size:11px;color:${color};font-weight:600;min-width:20px;">#${rank}</span>
             <span style="font-size:13px;">${term}</span>
-            <span style="font-size:10px;color:var(--muted);">→ ver concorrentes</span>
+            <span style="font-size:10px;color:var(--muted);">â ver concorrentes</span>
           </div>`;
         }).join('')}
       </div>`;
     document.getElementById('trends-container').innerHTML = html;
   } catch(e) {
-    document.getElementById('trends-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">⚠️</div>${e.message}</div>`;
+    document.getElementById('trends-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">â ï¸</div>${e.message}</div>`;
   }
   btn.disabled = false;
-  btn.textContent = '🔥 Buscar tendências agora';
+  btn.textContent = 'ð¥ Buscar tendÃªncias agora';
 }
 
 function searchTrendCompetitors(term) {
   document.getElementById('competitors-query').value = term;
 }
 
-// ── CONCORRENTES ───────────────────────────────────────────────────────────
+// ââ CONCORRENTES âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 async function loadCompetitors() {
   const query = document.getElementById('competitors-query').value.trim();
   const sort  = document.getElementById('competitors-sort').value;
   const btn   = document.getElementById('btn-load-competitors');
   if (!query) { toast('Digite um produto ou ID de categoria.'); return; }
 
-  btn.disabled = true; btn.textContent = '⏳ Analisando...';
+  btn.disabled = true; btn.textContent = 'â³ Analisando...';
   document.getElementById('competitors-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Analisando mercado...</div>';
 
   try {
-    // Detecta category ID (MLB + números) ou texto livre
+    // Detecta category ID (MLB + nÃºmeros) ou texto livre
     const isCategory = /^MLB\d+$/i.test(query);
     const base = isCategory
       ? `/sites/MLB/search?category=${query}`
@@ -1642,7 +1643,7 @@ async function loadCompetitors() {
     DATA.competitors = results;
 
     if (!results.length) {
-      document.getElementById('competitors-container').innerHTML = '<div class="state-msg"><div class="state-icon">🔍</div>Nenhum resultado encontrado. Tente outra busca.</div>';
+      document.getElementById('competitors-container').innerHTML = '<div class="state-msg"><div class="state-icon">ð</div>Nenhum resultado encontrado. Tente outra busca.</div>';
       return;
     }
 
@@ -1655,26 +1656,26 @@ async function loadCompetitors() {
 
     const summary = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px;">
       <div class="rep-card"><div class="rep-card-label">Vendas (top 20)</div><div class="rep-card-value">${totalSold.toLocaleString('pt-BR')}</div></div>
-      <div class="rep-card"><div class="rep-card-label">Preço médio</div><div class="rep-card-value">R$ ${avgPrice.toFixed(2).replace('.',',')}</div><div class="rep-card-sub">R$ ${minPrice.toFixed(0)} – R$ ${maxPrice.toFixed(0)}</div></div>
-      <div class="rep-card ${freeShip >= 15 ? 'alert-orange' : 'alert-green'}"><div class="rep-card-label">Frete grátis</div><div class="rep-card-value">${freeShip}/20</div></div>
-      <div class="rep-card"><div class="rep-card-label">Total encontrado</div><div class="rep-card-value">${(r.paging?.total||0).toLocaleString('pt-BR')}</div><div class="rep-card-sub">publicações</div></div>
+      <div class="rep-card"><div class="rep-card-label">PreÃ§o mÃ©dio</div><div class="rep-card-value">R$ ${avgPrice.toFixed(2).replace('.',',')}</div><div class="rep-card-sub">R$ ${minPrice.toFixed(0)} â R$ ${maxPrice.toFixed(0)}</div></div>
+      <div class="rep-card ${freeShip >= 15 ? 'alert-orange' : 'alert-green'}"><div class="rep-card-label">Frete grÃ¡tis</div><div class="rep-card-value">${freeShip}/20</div></div>
+      <div class="rep-card"><div class="rep-card-label">Total encontrado</div><div class="rep-card-value">${(r.paging?.total||0).toLocaleString('pt-BR')}</div><div class="rep-card-sub">publicaÃ§Ãµes</div></div>
     </div>`;
 
     const html = summary + `<div class="table-wrap"><table>
       <thead><tr>
-        <th>#</th><th>Vendedor</th><th>Título</th>
-        <th style="text-align:right;">Preço</th>
+        <th>#</th><th>Vendedor</th><th>TÃ­tulo</th>
+        <th style="text-align:right;">PreÃ§o</th>
         <th style="text-align:right;">Vendas</th>
         <th>Frete</th><th>Cond.</th>
       </tr></thead>
       <tbody>${results.map((x,i) => {
         const cond = x.condition === 'new' ? '<span class="icon-badge ib-ok">Novo</span>' : '<span class="icon-badge ib-info">Usado</span>';
-        const frete = x.shipping?.free_shipping ? '<span class="icon-badge ib-ok">Grátis</span>' : '<span class="icon-badge ib-info">Pago</span>';
+        const frete = x.shipping?.free_shipping ? '<span class="icon-badge ib-ok">GrÃ¡tis</span>' : '<span class="icon-badge ib-info">Pago</span>';
         const sold = x.sold_quantity || 0;
         const soldCls = sold > 100 ? 'score-good' : sold > 10 ? 'score-medium' : 'score-unknown';
         return `<tr>
           <td style="font-family:var(--mono);color:var(--muted);font-size:12px;">${i+1}</td>
-          <td style="font-size:12px;max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${x.seller?.nickname||''}">${x.seller?.nickname||'—'}</td>
+          <td style="font-size:12px;max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${x.seller?.nickname||''}">${x.seller?.nickname||'â'}</td>
           <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title}</a></td>
           <td style="text-align:right;font-family:var(--mono);font-weight:500;">R$ ${(x.price||0).toFixed(2).replace('.',',')}</td>
           <td style="text-align:right;"><span class="score-pill ${soldCls}" style="width:auto;padding:2px 8px;">${sold.toLocaleString('pt-BR')}</span></td>
@@ -1685,20 +1686,20 @@ async function loadCompetitors() {
     </table></div>`;
     document.getElementById('competitors-container').innerHTML = html;
   } catch(e) {
-    document.getElementById('competitors-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">⚠️</div>${e.message}</div>`;
+    document.getElementById('competitors-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">â ï¸</div>${e.message}</div>`;
   }
-  btn.disabled = false; btn.textContent = '🏆 Analisar';
+  btn.disabled = false; btn.textContent = 'ð Analisar';
 }
 
-// ── QUALIDADE DE CATÁLOGO ──────────────────────────────────────────────────
+// ââ QUALIDADE DE CATÃLOGO ââââââââââââââââââââââââââââââââââââââââââââââââââ
 async function loadCatalogQuality() {
   const btn = document.getElementById('btn-load-catalog');
   btn.disabled = true; btn.textContent = 'Verificando...';
-  document.getElementById('table-catalog').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Verificando qualidade dos anúncios...</div>';
+  document.getElementById('table-catalog').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Verificando qualidade dos anÃºncios...</div>';
 
   try {
     const ids = DATA.items.slice(0,100).map(i => i.id);
-    if (!ids.length) throw new Error('Nenhuma publicação carregada. Execute a varredura principal primeiro.');
+    if (!ids.length) throw new Error('Nenhuma publicaÃ§Ã£o carregada. Execute a varredura principal primeiro.');
 
     DATA.catalogQuality = [];
     let done = 0;
@@ -1717,16 +1718,16 @@ async function loadCatalogQuality() {
             if (!c.fulfilled) { issues.push(c.name || c.id); score -= 10; }
           });
         }
-        if (r.status === 'inactive') issues.push('Inativo no catálogo');
+        if (r.status === 'inactive') issues.push('Inativo no catÃ¡logo');
 
         DATA.catalogQuality.push({
           id, title: item.title||'', permalink: item.permalink||'',
           quality_score: Math.max(0, score),
-          status: r.status||'—',
+          status: r.status||'â',
           issues,
           raw: r
         });
-      } catch(_) { /* item sem catálogo — ignora */ }
+      } catch(_) { /* item sem catÃ¡logo â ignora */ }
       done++;
       if (done % 10 === 0) {
         document.getElementById('table-catalog').innerHTML = `<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Verificando... ${done}/${ids.length}</div>`;
@@ -1738,9 +1739,9 @@ async function loadCatalogQuality() {
     document.getElementById('cnt-catalog').textContent = DATA.catalogQuality.length;
     renderCatalogTable();
   } catch(e) {
-    document.getElementById('table-catalog').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">⚠️</div>${e.message}</div>`;
+    document.getElementById('table-catalog').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">â ï¸</div>${e.message}</div>`;
   }
-  btn.disabled = false; btn.textContent = '↺ Verificar catálogo';
+  btn.disabled = false; btn.textContent = 'âº Verificar catÃ¡logo';
 }
 
 function renderCatalogTable(filter = '') {
@@ -1749,13 +1750,13 @@ function renderCatalogTable(filter = '') {
   );
 
   if (!rows.length) {
-    document.getElementById('table-catalog').innerHTML = `<div class="state-msg"><div class="state-icon">✅</div>${filter ? 'Nenhum resultado.' : 'Nenhum dado. Clique em "Verificar catálogo".'}</div>`;
+    document.getElementById('table-catalog').innerHTML = `<div class="state-msg"><div class="state-icon">â</div>${filter ? 'Nenhum resultado.' : 'Nenhum dado. Clique em "Verificar catÃ¡logo".'}</div>`;
     return;
   }
 
   const html = `<table>
     <thead><tr>
-      <th>Score</th><th>MLB</th><th>Título</th><th>Status</th><th>Problemas</th>
+      <th>Score</th><th>MLB</th><th>TÃ­tulo</th><th>Status</th><th>Problemas</th>
     </tr></thead>
     <tbody>${rows.map(x => {
       const cls = x.quality_score >= 70 ? 'score-good' : x.quality_score >= 40 ? 'score-medium' : 'score-bad';
@@ -1765,7 +1766,7 @@ function renderCatalogTable(filter = '') {
       return `<tr>
         <td><span class="score-pill ${cls}">${x.quality_score}</span></td>
         <td class="td-id">${x.id}</td>
-        <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title||'—'}</a></td>
+        <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title||'â'}</a></td>
         <td><span class="icon-badge ib-info">${x.status}</span></td>
         <td style="max-width:300px;">${issueHtml}</td>
       </tr>`;
@@ -1773,11 +1774,11 @@ function renderCatalogTable(filter = '') {
   </table>`;
   document.getElementById('table-catalog').innerHTML = html;
 }
-// ── VISITAS DA LOJA ────────────────────────────────────────────────────────
+// ââ VISITAS DA LOJA ââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 async function loadStoreVisits() {
   const btn = document.getElementById('btn-store-visits');
   const days = parseInt(document.getElementById('visits-period').value);
-  btn.disabled = true; btn.textContent = '⏳ Buscando...';
+  btn.disabled = true; btn.textContent = 'â³ Buscando...';
   document.getElementById('store-visits-wrap').style.display = 'none';
 
   try {
@@ -1808,10 +1809,10 @@ async function loadStoreVisits() {
     DATA.storeVisits = { total: totalVisits, byDate, days };
     renderStoreVisits();
   } catch(e) {
-    document.getElementById('store-visits-wrap').innerHTML = `<div style="background:var(--red-dim);border:1px solid var(--red);border-radius:8px;padding:12px 16px;color:var(--red);font-size:13px;">⚠️ ${e.message}</div>`;
+    document.getElementById('store-visits-wrap').innerHTML = `<div style="background:var(--red-dim);border:1px solid var(--red);border-radius:8px;padding:12px 16px;color:var(--red);font-size:13px;">â ï¸ ${e.message}</div>`;
     document.getElementById('store-visits-wrap').style.display = 'block';
   }
-  btn.disabled = false; btn.textContent = '🏪 Visitas da loja';
+  btn.disabled = false; btn.textContent = 'ðª Visitas da loja';
 }
 
 function renderStoreVisits() {
@@ -1836,24 +1837,24 @@ function renderStoreVisits() {
         <div style="font-family:var(--mono);font-size:28px;font-weight:500;color:var(--green);">${d.total.toLocaleString('pt-BR')}</div>
       </div>
       <div>
-        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Média diária</div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">MÃ©dia diÃ¡ria</div>
         <div style="font-family:var(--mono);font-size:28px;font-weight:500;">${avgDay.toLocaleString('pt-BR')}</div>
       </div>
       <div style="flex:1;min-width:200px;">
-        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Evolução</div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">EvoluÃ§Ã£o</div>
         ${sparkline}
       </div>
     </div>`;
   document.getElementById('store-visits-wrap').style.display = 'block';
 }
 
-// ── PREDITOR DE CATEGORIA ──────────────────────────────────────────────────
+// ââ PREDITOR DE CATEGORIA ââââââââââââââââââââââââââââââââââââââââââââââââââ
 async function predictCategory() {
   const query = document.getElementById('competitors-query').value.trim();
   const btn   = document.getElementById('btn-predict');
-  if (!query) { toast('Digite o título do produto no campo ao lado.'); return; }
+  if (!query) { toast('Digite o tÃ­tulo do produto no campo ao lado.'); return; }
 
-  btn.disabled = true; btn.textContent = '⏳ Prevendo...';
+  btn.disabled = true; btn.textContent = 'â³ Prevendo...';
   document.getElementById('category-prediction').style.display = 'none';
 
   try {
@@ -1872,41 +1873,41 @@ async function predictCategory() {
             <div style="font-size:13px;font-weight:500;">${c.domain_name || c.category_name || c.category_id}</div>
             <div style="font-size:11px;color:var(--muted);font-family:var(--mono);">${c.category_id}</div>
           </div>
-          <span style="font-size:11px;color:var(--muted);">→ analisar</span>
+          <span style="font-size:11px;color:var(--muted);">â analisar</span>
         </div>`).join('');
       document.getElementById('category-prediction').innerHTML = `
-        <div style="margin-bottom:8px;font-size:12px;color:var(--muted);">🔮 Categorias sugeridas para "<strong style="color:var(--text);">${query}</strong>" — clique para analisar concorrentes:</div>
+        <div style="margin-bottom:8px;font-size:12px;color:var(--muted);">ð® Categorias sugeridas para "<strong style="color:var(--text);">${query}</strong>" â clique para analisar concorrentes:</div>
         <div style="display:flex;flex-direction:column;gap:6px;">${rows}</div>`;
     }
     document.getElementById('category-prediction').style.display = 'block';
   } catch(e) {
-    document.getElementById('category-prediction').innerHTML = `<div style="color:var(--red);font-size:13px;">⚠️ ${e.message}</div>`;
+    document.getElementById('category-prediction').innerHTML = `<div style="color:var(--red);font-size:13px;">â ï¸ ${e.message}</div>`;
     document.getElementById('category-prediction').style.display = 'block';
   }
-  btn.disabled = false; btn.textContent = '🔮 Prever categoria';
+  btn.disabled = false; btn.textContent = 'ð® Prever categoria';
 }
 
-// ── EXPOSIÇÃO POR TIPO DE ANÚNCIO ──────────────────────────────────────────
+// ââ EXPOSIÃÃO POR TIPO DE ANÃNCIO ââââââââââââââââââââââââââââââââââââââââââ
 async function loadExposures() {
   const btn       = document.getElementById('btn-load-exposure');
   const inputCat  = document.getElementById('exposure-category').value.trim();
-  btn.disabled = true; btn.textContent = '⏳ Analisando...';
-  document.getElementById('exposure-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Consultando exposição...</div>';
+  btn.disabled = true; btn.textContent = 'â³ Analisando...';
+  document.getElementById('exposure-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Consultando exposiÃ§Ã£o...</div>';
 
   try {
-    // Se não informou categoria, usa as categorias dos próprios itens
+    // Se nÃ£o informou categoria, usa as categorias dos prÃ³prios itens
     let categories = [];
     if (inputCat && /^MLB\d+$/i.test(inputCat)) {
       categories = [inputCat];
     } else if (DATA.items.length) {
-      // Pega categorias únicas dos itens carregados
+      // Pega categorias Ãºnicas dos itens carregados
       const catSet = new Set(DATA.items.slice(0,50).map(x => x.category_id).filter(Boolean));
       categories = [...catSet].slice(0, 8);
     }
 
     if (!categories.length) throw new Error('Digite uma categoria ou execute a varredura principal para detectar suas categorias automaticamente.');
 
-    // Busca exposição para cada categoria
+    // Busca exposiÃ§Ã£o para cada categoria
     const results = [];
     for (const catId of categories) {
       try {
@@ -1927,19 +1928,19 @@ async function loadExposures() {
     DATA.exposures = results;
     renderExposures();
   } catch(e) {
-    document.getElementById('exposure-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">⚠️</div>${e.message}</div>`;
+    document.getElementById('exposure-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">â ï¸</div>${e.message}</div>`;
   }
-  btn.disabled = false; btn.textContent = '📡 Analisar exposição';
+  btn.disabled = false; btn.textContent = 'ð¡ Analisar exposiÃ§Ã£o';
 }
 
 function renderExposures() {
   if (!DATA.exposures.length) {
-    document.getElementById('exposure-container').innerHTML = '<div class="state-msg"><div class="state-icon">📡</div>Nenhum dado de exposição encontrado.</div>';
+    document.getElementById('exposure-container').innerHTML = '<div class="state-msg"><div class="state-icon">ð¡</div>Nenhum dado de exposiÃ§Ã£o encontrado.</div>';
     return;
   }
 
   const typeOrder = ['gold_special', 'gold_pro', 'gold', 'silver', 'bronze', 'free'];
-  const typeLabel = { gold_special: 'Premium', gold_pro: 'Ouro Pro', gold: 'Ouro', silver: 'Prata', bronze: 'Bronze', free: 'Grátis' };
+  const typeLabel = { gold_special: 'Premium', gold_pro: 'Ouro Pro', gold: 'Ouro', silver: 'Prata', bronze: 'Bronze', free: 'GrÃ¡tis' };
   const typeColor = { gold_special: 'var(--green)', gold_pro: '#66FF99', gold: 'var(--yellow)', silver: '#8B949E', bronze: '#CD7F32', free: 'var(--muted)' };
 
   const html = DATA.exposures.map(({ catId, catName, exposures }) => {
@@ -1959,7 +1960,7 @@ function renderExposures() {
             <div style="height:100%;width:${pct}%;background:${color};border-radius:4px;"></div>
           </div>
         </td>
-        <td style="font-size:11px;color:var(--muted);">${e.buying_modes?.join(', ')||'—'}</td>
+        <td style="font-size:11px;color:var(--muted);">${e.buying_modes?.join(', ')||'â'}</td>
       </tr>`;
     }).join('');
 
@@ -1977,9 +1978,11 @@ function renderExposures() {
 
   document.getElementById('exposure-container').innerHTML = `
     <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">
-      <strong style="color:var(--text);">Priority in search</strong>: quanto maior, mais alto o anúncio aparece nas buscas. Premium (gold_special) geralmente lidera.
+      <strong style="color:var(--text);">Priority in search</strong>: quanto maior, mais alto o anÃºncio aparece nas buscas. Premium (gold_special) geralmente lidera.
     </div>${html}`;
 }
+
+async function sendWhatsAppReport(){const btn=document.getElementById('btn-whatsapp');btn.disabled=true;btn.textContent='⏳ Gerando...';try{const now=new Date(),today=now.toISOString().slice(0,10);const from=today+'T00:00:00.000-03:00',to=now.toISOString().slice(0,19)+'-03:00';const ord=await api('/orders/search?seller='+CFG.sellerId+'&order.status=paid&order.date_created.from='+encodeURIComponent(from)+'&order.date_created.to='+encodeURIComponent(to)+'&limit=50');const orders=ord.results||[];let rev=0,fees=0,units=0;orders.forEach(o=>{rev+=o.total_amount||0;fees+=o.sale_fee||0;units+=(o.order_items||[]).reduce((s,i)=>s+(i.quantity||0),0);});let ads=0;try{const ar=await api('/advertising/product_ads/advertisers/'+CFG.sellerId+'/campaigns?date_from='+today+'&date_to='+today);ads=(ar.results||[]).reduce((s,c)=>s+(c.cost||0),0);}catch(e2){}let claims=0,pend=0;try{const rep=DATA.reputation||await api('/users/'+CFG.sellerId+'/seller_reputation');claims=rep?.metrics?.claims?.value||0;}catch(e3){}try{const p=await api('/orders/search?seller='+CFG.sellerId+'&order.status=paid&shipping.status=ready_to_ship&limit=1');pend=p?.paging?.total||0;}catch(e4){}const gm=rev-fees-ads,mp=rev>0?((gm/rev)*100).toFixed(1):'0.0';const fmt=v=>v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});const me=gm>0?(parseFloat(mp)>20?'🟢':'🟡'):'🔴';const ds=now.toLocaleDateString('pt-BR'),ts=now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});const al=[];if(claims>0)al.push('⚠ '+claims+' reclamacao');if(pend>0)al.push('📦 '+pend+' aguardando envio');const msg=['🏪 *ALPHA ELETRONIC*','📅 '+ds+' as '+ts,'','💰 *FATURAMENTO*','Receita:   R$ '+fmt(rev),'Pedidos:   '+orders.length,'Unidades:  '+units,'','📊 *RESULTADO*','Taxa ML:   -R$ '+fmt(fees),'Publicid.: -R$ '+fmt(ads),me+' *Margem: R$ '+fmt(gm)+' ('+mp+'%)*','',al.length?'🔔 *ALERTAS*\n'+al.join('\n'):'✅ Sem alertas','','_Gerado via Alpha Scanner_'].join('\n');btn.textContent='⏳ Enviando...';const r=await fetch(CFG.workerUrl+'/send-whatsapp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg})});if(!r.ok)throw new Error('Worker '+r.status);toast('✅ Relatorio enviado!');}catch(e){toast('❌ '+e.message);}btn.disabled=false;btn.textContent='📱 Relatorio';}
 </script>
 </body>
 </html>
