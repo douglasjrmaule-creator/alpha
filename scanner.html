@@ -628,6 +628,9 @@
     <button class="tab" onclick="switchTab('catalog')" id="tab-catalog">
       📋 Catálogo <span class="tab-count" id="cnt-catalog">0</span>
     </button>
+    <button class="tab" onclick="switchTab('exposure')" id="tab-exposure">
+      📡 Exposição
+    </button>
   </div>
 
   <!-- Content -->
@@ -678,22 +681,34 @@
       <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
         <div style="display:flex;align-items:center;gap:8px;">
           <label style="font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em;">Período</label>
-          <select id="visits-period" class="search-input" style="width:auto;" onchange="loadVisitsData()">
+          <select id="visits-period" class="search-input" style="width:auto;">
             <option value="7">Últimos 7 dias</option>
             <option value="30" selected>Últimos 30 dias</option>
             <option value="60">Últimos 60 dias</option>
             <option value="90">Últimos 90 dias</option>
           </select>
         </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <label style="font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em;">Top</label>
+          <select id="visits-limit" class="search-input" style="width:auto;">
+            <option value="30">30 anúncios</option>
+            <option value="50" selected>50 anúncios</option>
+            <option value="100">100 anúncios</option>
+            <option value="200">200 anúncios</option>
+          </select>
+        </div>
         <input class="search-input" id="search-visits" placeholder="Filtrar por título ou MLB..." oninput="filterTable('visits')">
+        <button class="btn btn-primary" onclick="loadVisitsData()" id="btn-load-visits" style="font-size:13px;">📊 Carregar visitas</button>
+        <button class="btn btn-ghost" onclick="loadStoreVisits()" id="btn-store-visits" style="font-size:12px;">🏪 Visitas da loja</button>
         <button class="btn btn-ghost" onclick="exportCSV('visits')" style="font-size:12px;">⬇ CSV</button>
-        <button class="btn btn-ghost" onclick="loadVisitsData()" style="font-size:12px;" id="btn-load-visits">↺ Carregar visitas</button>
       </div>
+      <!-- Visitas da loja -->
+      <div id="store-visits-wrap" style="display:none;margin-bottom:16px;"></div>
       <!-- Cards de resumo -->
       <div id="visits-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px;"></div>
       <div class="table-wrap">
         <div id="table-visits">
-          <div class="state-msg"><div class="state-icon">📊</div>Clique em "Carregar visitas" para buscar os dados.</div>
+          <div class="state-msg"><div class="state-icon">📊</div>Selecione o período e clique em "Carregar visitas".</div>
         </div>
       </div>
     </div>
@@ -719,7 +734,10 @@
           <option value="price_desc">Maior preço</option>
         </select>
         <button class="btn btn-primary" onclick="loadCompetitors()" id="btn-load-competitors">🏆 Analisar</button>
+        <button class="btn btn-ghost" onclick="predictCategory()" id="btn-predict" style="font-size:12px;">🔮 Prever categoria</button>
       </div>
+      <!-- Resultado do preditor -->
+      <div id="category-prediction" style="display:none;margin-bottom:16px;"></div>
       <div id="competitors-container">
         <div class="state-msg"><div class="state-icon">🏆</div>Digite um produto ou ID de categoria para analisar a concorrência.</div>
       </div>
@@ -740,6 +758,18 @@
       </div>
     </div>
 
+    <!-- Tab: Exposição -->
+    <div class="tab-panel" id="panel-exposure">
+      <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">Compara o impacto no posicionamento de busca (priority_in_search) entre os tipos de anúncio Classic e Premium para cada categoria.</div>
+      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
+        <input class="search-input" id="exposure-category" placeholder="Categoria (ex: MLB271481) ou deixe em branco para usar suas categorias..." style="flex:1;min-width:260px;">
+        <button class="btn btn-primary" onclick="loadExposures()" id="btn-load-exposure">📡 Analisar exposição</button>
+      </div>
+      <div id="exposure-container">
+        <div class="state-msg"><div class="state-icon">📡</div>Clique para comparar Classic vs Premium nas suas categorias principais.</div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -756,6 +786,8 @@ let DATA = {
   trends: [],          // tendências de busca /trends/MLB
   competitors: [],     // análise de concorrentes por categoria
   catalogQuality: [],  // qualidade de catálogo
+  exposures: [],       // exposição por tipo de anúncio
+  storeVisits: null,   // visitas agregadas da loja
 };
 
 // ── Helpers ─────────────────────────────────────────────
@@ -935,7 +967,7 @@ function resetLoginScreen() {
 function logout() {
   cleanupAuth();
   CFG  = { workerUrl: '', clientId: '', sellerId: '', token: '' };
-  DATA = { items: [], performance: [], unhealthy: [], gtinMissing: [], reputation: null };
+  DATA = { items: [], performance: [], unhealthy: [], gtinMissing: [], reputation: null, visits: [], trends: [], competitors: [], catalogQuality: [], exposures: [], storeVisits: null };
   resetLoginScreen();
   document.getElementById('main-screen').style.display = 'none';
   document.getElementById('auth-screen').style.display = 'block';
@@ -1429,7 +1461,8 @@ async function loadVisitsData() {
   try {
     const dateTo   = new Date().toISOString().slice(0,10);
     const dateFrom = new Date(Date.now() - days*86400000).toISOString().slice(0,10);
-    const ids = DATA.items.slice(0,200).map(i => i.id);
+    const limit = parseInt(document.getElementById('visits-limit')?.value || 50);
+    const ids = DATA.items.slice(0, limit).map(i => i.id);
 
     if (!ids.length) throw new Error('Nenhuma publicação carregada. Execute a varredura principal primeiro.');
 
@@ -1739,6 +1772,213 @@ function renderCatalogTable(filter = '') {
     }).join('')}</tbody>
   </table>`;
   document.getElementById('table-catalog').innerHTML = html;
+}
+// ── VISITAS DA LOJA ────────────────────────────────────────────────────────
+async function loadStoreVisits() {
+  const btn = document.getElementById('btn-store-visits');
+  const days = parseInt(document.getElementById('visits-period').value);
+  btn.disabled = true; btn.textContent = '⏳ Buscando...';
+  document.getElementById('store-visits-wrap').style.display = 'none';
+
+  try {
+    const dateTo   = new Date().toISOString().slice(0,10);
+    const dateFrom = new Date(Date.now() - days*86400000).toISOString().slice(0,10);
+
+    // Busca IDs em lotes de 50 (endpoint agrega bem)
+    const ids = DATA.items.slice(0,200).map(i => i.id);
+    if (!ids.length) throw new Error('Execute a varredura principal primeiro.');
+
+    let totalVisits = 0;
+    let byDate = {};
+
+    for (let i = 0; i < ids.length; i += 50) {
+      const chunk = ids.slice(i, i + 50).join(',');
+      try {
+        const r = await api(`/visits/items?ids=${chunk}&date_from=${dateFrom}&date_to=${dateTo}`);
+        const entries = Array.isArray(r) ? r : (r ? [r] : []);
+        entries.forEach(e => {
+          (e.data_by_date || []).forEach(d => {
+            byDate[d.date] = (byDate[d.date] || 0) + (d.total || 0);
+            totalVisits += (d.total || 0);
+          });
+        });
+      } catch(_) {}
+    }
+
+    DATA.storeVisits = { total: totalVisits, byDate, days };
+    renderStoreVisits();
+  } catch(e) {
+    document.getElementById('store-visits-wrap').innerHTML = `<div style="background:var(--red-dim);border:1px solid var(--red);border-radius:8px;padding:12px 16px;color:var(--red);font-size:13px;">⚠️ ${e.message}</div>`;
+    document.getElementById('store-visits-wrap').style.display = 'block';
+  }
+  btn.disabled = false; btn.textContent = '🏪 Visitas da loja';
+}
+
+function renderStoreVisits() {
+  const d = DATA.storeVisits;
+  if (!d) return;
+  const avgDay = Math.round(d.total / d.days);
+  const dates  = Object.keys(d.byDate).sort();
+  const vals   = dates.map(k => d.byDate[k]);
+  const maxV   = Math.max(...vals, 1);
+
+  // Mini sparkline SVG
+  const W = 300, H = 40;
+  const pts = vals.map((v,i) => `${Math.round(i/(vals.length-1||1)*W)},${H - Math.round(v/maxV*H)}`).join(' ');
+  const sparkline = vals.length > 1
+    ? `<svg width="${W}" height="${H}" style="display:block;margin-top:8px;"><polyline points="${pts}" fill="none" stroke="var(--green)" stroke-width="2" stroke-linejoin="round"/></svg>`
+    : '';
+
+  document.getElementById('store-visits-wrap').innerHTML = `
+    <div style="background:var(--bg2);border:1px solid var(--green);border-radius:10px;padding:16px 20px;display:flex;gap:32px;flex-wrap:wrap;align-items:center;">
+      <div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Visitas totais (${d.days}d)</div>
+        <div style="font-family:var(--mono);font-size:28px;font-weight:500;color:var(--green);">${d.total.toLocaleString('pt-BR')}</div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Média diária</div>
+        <div style="font-family:var(--mono);font-size:28px;font-weight:500;">${avgDay.toLocaleString('pt-BR')}</div>
+      </div>
+      <div style="flex:1;min-width:200px;">
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Evolução</div>
+        ${sparkline}
+      </div>
+    </div>`;
+  document.getElementById('store-visits-wrap').style.display = 'block';
+}
+
+// ── PREDITOR DE CATEGORIA ──────────────────────────────────────────────────
+async function predictCategory() {
+  const query = document.getElementById('competitors-query').value.trim();
+  const btn   = document.getElementById('btn-predict');
+  if (!query) { toast('Digite o título do produto no campo ao lado.'); return; }
+
+  btn.disabled = true; btn.textContent = '⏳ Prevendo...';
+  document.getElementById('category-prediction').style.display = 'none';
+
+  try {
+    const r = await api(`/sites/MLB/domain_discovery/search?q=${encodeURIComponent(query)}&limit=5`);
+    const cats = Array.isArray(r) ? r : [];
+
+    if (!cats.length) {
+      document.getElementById('category-prediction').innerHTML = '<div style="color:var(--muted);font-size:13px;">Nenhuma categoria sugerida.</div>';
+    } else {
+      const rows = cats.map((c, i) => `
+        <div onclick="document.getElementById('competitors-query').value='${c.category_id}';document.getElementById('category-prediction').style.display='none';"
+          style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:border-color .15s;"
+          onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+          <span style="font-family:var(--mono);font-size:11px;color:${i===0?'var(--green)':'var(--muted)'};min-width:20px;font-weight:600;">#${i+1}</span>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:500;">${c.domain_name || c.category_name || c.category_id}</div>
+            <div style="font-size:11px;color:var(--muted);font-family:var(--mono);">${c.category_id}</div>
+          </div>
+          <span style="font-size:11px;color:var(--muted);">→ analisar</span>
+        </div>`).join('');
+      document.getElementById('category-prediction').innerHTML = `
+        <div style="margin-bottom:8px;font-size:12px;color:var(--muted);">🔮 Categorias sugeridas para "<strong style="color:var(--text);">${query}</strong>" — clique para analisar concorrentes:</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">${rows}</div>`;
+    }
+    document.getElementById('category-prediction').style.display = 'block';
+  } catch(e) {
+    document.getElementById('category-prediction').innerHTML = `<div style="color:var(--red);font-size:13px;">⚠️ ${e.message}</div>`;
+    document.getElementById('category-prediction').style.display = 'block';
+  }
+  btn.disabled = false; btn.textContent = '🔮 Prever categoria';
+}
+
+// ── EXPOSIÇÃO POR TIPO DE ANÚNCIO ──────────────────────────────────────────
+async function loadExposures() {
+  const btn       = document.getElementById('btn-load-exposure');
+  const inputCat  = document.getElementById('exposure-category').value.trim();
+  btn.disabled = true; btn.textContent = '⏳ Analisando...';
+  document.getElementById('exposure-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Consultando exposição...</div>';
+
+  try {
+    // Se não informou categoria, usa as categorias dos próprios itens
+    let categories = [];
+    if (inputCat && /^MLB\d+$/i.test(inputCat)) {
+      categories = [inputCat];
+    } else if (DATA.items.length) {
+      // Pega categorias únicas dos itens carregados
+      const catSet = new Set(DATA.items.slice(0,50).map(x => x.category_id).filter(Boolean));
+      categories = [...catSet].slice(0, 8);
+    }
+
+    if (!categories.length) throw new Error('Digite uma categoria ou execute a varredura principal para detectar suas categorias automaticamente.');
+
+    // Busca exposição para cada categoria
+    const results = [];
+    for (const catId of categories) {
+      try {
+        const r = await api(`/sites/MLB/listing_exposures?category_id=${catId}`);
+        const exposures = Array.isArray(r) ? r : (r?.listing_exposures || []);
+        if (exposures.length) {
+          // Busca nome da categoria
+          let catName = catId;
+          try {
+            const cat = await api(`/categories/${catId}`);
+            catName = cat.name || catId;
+          } catch(_) {}
+          results.push({ catId, catName, exposures });
+        }
+      } catch(_) {}
+    }
+
+    DATA.exposures = results;
+    renderExposures();
+  } catch(e) {
+    document.getElementById('exposure-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">⚠️</div>${e.message}</div>`;
+  }
+  btn.disabled = false; btn.textContent = '📡 Analisar exposição';
+}
+
+function renderExposures() {
+  if (!DATA.exposures.length) {
+    document.getElementById('exposure-container').innerHTML = '<div class="state-msg"><div class="state-icon">📡</div>Nenhum dado de exposição encontrado.</div>';
+    return;
+  }
+
+  const typeOrder = ['gold_special', 'gold_pro', 'gold', 'silver', 'bronze', 'free'];
+  const typeLabel = { gold_special: 'Premium', gold_pro: 'Ouro Pro', gold: 'Ouro', silver: 'Prata', bronze: 'Bronze', free: 'Grátis' };
+  const typeColor = { gold_special: 'var(--green)', gold_pro: '#66FF99', gold: 'var(--yellow)', silver: '#8B949E', bronze: '#CD7F32', free: 'var(--muted)' };
+
+  const html = DATA.exposures.map(({ catId, catName, exposures }) => {
+    const sorted = [...exposures].sort((a,b) => (b.priority_in_search||0) - (a.priority_in_search||0));
+    const maxPrio = sorted[0]?.priority_in_search || 1;
+
+    const rows = sorted.map(e => {
+      const lbl   = typeLabel[e.listing_type_id] || e.listing_type_id;
+      const color = typeColor[e.listing_type_id] || 'var(--muted)';
+      const prio  = e.priority_in_search || 0;
+      const pct   = Math.round(prio / maxPrio * 100);
+      return `<tr>
+        <td><span style="font-weight:600;color:${color};">${lbl}</span></td>
+        <td style="font-family:var(--mono);text-align:right;">${prio.toFixed(2)}</td>
+        <td style="min-width:120px;">
+          <div style="height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;">
+            <div style="height:100%;width:${pct}%;background:${color};border-radius:4px;"></div>
+          </div>
+        </td>
+        <td style="font-size:11px;color:var(--muted);">${e.buying_modes?.join(', ')||'—'}</td>
+      </tr>`;
+    }).join('');
+
+    return `<div class="table-wrap" style="margin-bottom:16px;">
+      <div class="table-toolbar">
+        <span style="font-size:13px;font-weight:500;">${catName}</span>
+        <span style="font-family:var(--mono);font-size:11px;color:var(--muted);">${catId}</span>
+      </div>
+      <table>
+        <thead><tr><th>Tipo</th><th style="text-align:right;">Priority in search</th><th>Comparativo</th><th>Modalidades</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+  }).join('');
+
+  document.getElementById('exposure-container').innerHTML = `
+    <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">
+      <strong style="color:var(--text);">Priority in search</strong>: quanto maior, mais alto o anúncio aparece nas buscas. Premium (gold_special) geralmente lidera.
+    </div>${html}`;
 }
 </script>
 </body>
