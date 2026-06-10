@@ -616,6 +616,18 @@
     <button class="tab" onclick="switchTab('gtin')" id="tab-gtin">
       Sem GTIN <span class="tab-count" id="cnt-gtin">0</span>
     </button>
+    <button class="tab" onclick="switchTab('visits')" id="tab-visits">
+      📊 Visitas <span class="tab-count" id="cnt-visits">0</span>
+    </button>
+    <button class="tab" onclick="switchTab('trends')" id="tab-trends">
+      🔥 Tendências
+    </button>
+    <button class="tab" onclick="switchTab('competitors')" id="tab-competitors">
+      🏆 Concorrentes
+    </button>
+    <button class="tab" onclick="switchTab('catalog')" id="tab-catalog">
+      📋 Catálogo <span class="tab-count" id="cnt-catalog">0</span>
+    </button>
   </div>
 
   <!-- Content -->
@@ -660,6 +672,74 @@
       </div>
     </div>
 
+
+    <!-- Tab: Visitas -->
+    <div class="tab-panel" id="panel-visits">
+      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <label style="font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em;">Período</label>
+          <select id="visits-period" class="search-input" style="width:auto;" onchange="loadVisitsData()">
+            <option value="7">Últimos 7 dias</option>
+            <option value="30" selected>Últimos 30 dias</option>
+            <option value="60">Últimos 60 dias</option>
+            <option value="90">Últimos 90 dias</option>
+          </select>
+        </div>
+        <input class="search-input" id="search-visits" placeholder="Filtrar por título ou MLB..." oninput="filterTable('visits')">
+        <button class="btn btn-ghost" onclick="exportCSV('visits')" style="font-size:12px;">⬇ CSV</button>
+        <button class="btn btn-ghost" onclick="loadVisitsData()" style="font-size:12px;" id="btn-load-visits">↺ Carregar visitas</button>
+      </div>
+      <!-- Cards de resumo -->
+      <div id="visits-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px;"></div>
+      <div class="table-wrap">
+        <div id="table-visits">
+          <div class="state-msg"><div class="state-icon">📊</div>Clique em "Carregar visitas" para buscar os dados.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Tendências -->
+    <div class="tab-panel" id="panel-trends">
+      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
+        <button class="btn btn-primary" onclick="loadTrends()" id="btn-load-trends" style="font-size:13px;">🔥 Buscar tendências agora</button>
+        <span style="font-size:12px;color:var(--muted);">Retorna os termos mais buscados no ML Brasil no momento.</span>
+      </div>
+      <div id="trends-container">
+        <div class="state-msg"><div class="state-icon">🔥</div>Clique para ver o que está em alta agora.</div>
+      </div>
+    </div>
+
+    <!-- Tab: Concorrentes -->
+    <div class="tab-panel" id="panel-competitors">
+      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
+        <input class="search-input" id="competitors-query" placeholder="Buscar produto ou categoria (ex: furadeira, MLB271481)..." style="flex:1;min-width:260px;" onkeydown="if(event.key==='Enter')loadCompetitors()">
+        <select id="competitors-sort" class="search-input" style="width:auto;">
+          <option value="sold_quantity_desc">Mais vendidos</option>
+          <option value="price_asc">Menor preço</option>
+          <option value="price_desc">Maior preço</option>
+        </select>
+        <button class="btn btn-primary" onclick="loadCompetitors()" id="btn-load-competitors">🏆 Analisar</button>
+      </div>
+      <div id="competitors-container">
+        <div class="state-msg"><div class="state-icon">🏆</div>Digite um produto ou ID de categoria para analisar a concorrência.</div>
+      </div>
+    </div>
+
+    <!-- Tab: Catálogo -->
+    <div class="tab-panel" id="panel-catalog">
+      <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">Verifica PI (identificadores de produto), ficha técnica e atributos obrigatórios. Itens com baixa qualidade perdem ranqueamento no catálogo.</div>
+      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+        <input class="search-input" id="search-catalog" placeholder="Filtrar por título ou MLB..." oninput="filterTable('catalog')">
+        <button class="btn btn-ghost" onclick="exportCSV('catalog')" style="font-size:12px;">⬇ CSV</button>
+        <button class="btn btn-ghost" onclick="loadCatalogQuality()" style="font-size:12px;" id="btn-load-catalog">↺ Verificar catálogo</button>
+      </div>
+      <div class="table-wrap">
+        <div id="table-catalog">
+          <div class="state-msg"><div class="state-icon">📋</div>Clique em "Verificar catálogo" para analisar a qualidade das publicações.</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -672,6 +752,10 @@ let DATA = {
   unhealthy: [],       // unhealthy items
   gtinMissing: [],     // itens sem GTIN
   reputation: null,
+  visits: [],          // visitas por item (30d)
+  trends: [],          // tendências de busca /trends/MLB
+  competitors: [],     // análise de concorrentes por categoria
+  catalogQuality: [],  // qualidade de catálogo
 };
 
 // ── Helpers ─────────────────────────────────────────────
@@ -1165,6 +1249,8 @@ function updateCounts() {
   document.getElementById('cnt-performance').textContent = DATA.performance.length;
   document.getElementById('cnt-unhealthy').textContent   = DATA.unhealthy.length;
   document.getElementById('cnt-gtin').textContent        = DATA.gtinMissing.length;
+  document.getElementById('cnt-visits').textContent      = DATA.visits.length;
+  document.getElementById('cnt-catalog').textContent     = DATA.catalogQuality.length;
 }
 
 // ── Tabela Performance ───────────────────────────────────
@@ -1296,6 +1382,8 @@ function filterTable(name) {
   if (name === 'performance') renderPerformanceTable(q);
   if (name === 'unhealthy')   renderUnhealthyTable(q);
   if (name === 'gtin')        renderGtinTable(q);
+  if (name === 'visits')      renderVisitsTable(q);
+  if (name === 'catalog')     renderCatalogTable(q);
 }
 
 // ── CSV Export ───────────────────────────────────────────
@@ -1314,6 +1402,12 @@ function exportCSV(name) {
   } else if (name === 'gtin') {
     headers = ['ID', 'Título', 'Categoria'];
     rows = DATA.gtinMissing.map(x => [x.id, x.title, x.category_id]);
+  } else if (name === 'visits') {
+    headers = ['ID', 'Título', 'Visitas Total', 'Média Diária'];
+    rows = DATA.visits.map(x => [x.id, x.title, x.total_visits, x.avg_daily?.toFixed(1)]);
+  } else if (name === 'catalog') {
+    headers = ['ID', 'Título', 'Score Qualidade', 'Problemas'];
+    rows = DATA.catalogQuality.map(x => [x.id, x.title, x.quality_score, (x.issues || []).join('; ')]);
   }
   const csv = [headers, ...rows].map(r => r.map(v => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')).join('\n');
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
@@ -1321,6 +1415,307 @@ function exportCSV(name) {
   a.href = URL.createObjectURL(blob);
   a.download = `alpha-scanner-${name}-${new Date().toISOString().slice(0,10)}.csv`;
   a.click();
+}
+
+// ── VISITAS ────────────────────────────────────────────────────────────────
+async function loadVisitsData() {
+  const btn = document.getElementById('btn-load-visits');
+  const days = parseInt(document.getElementById('visits-period').value);
+  btn.disabled = true;
+  btn.textContent = 'Carregando...';
+  document.getElementById('table-visits').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Buscando visitas...</div>';
+  document.getElementById('visits-summary').innerHTML = '';
+
+  try {
+    const dateTo   = new Date().toISOString().slice(0,10);
+    const dateFrom = new Date(Date.now() - days*86400000).toISOString().slice(0,10);
+    const ids = DATA.items.slice(0,200).map(i => i.id);
+
+    if (!ids.length) throw new Error('Nenhuma publicação carregada. Execute a varredura principal primeiro.');
+
+    DATA.visits = [];
+    // Busca em lotes de 20
+    for (let i = 0; i < ids.length; i += 20) {
+      const chunk = ids.slice(i, i + 20).join(',');
+      const r = await api(`/items/visits?ids=${chunk}&date_from=${dateFrom}&date_to=${dateTo}`);
+      if (r && r.data_by_date !== undefined) {
+        // Resposta de item único
+        const item = DATA.items.find(x => x.id === ids[i]) || {};
+        const total = (r.data_by_date || []).reduce((s, d) => s + (d.total || 0), 0);
+        DATA.visits.push({ id: ids[i], title: item.title || '', total_visits: total, avg_daily: total/days, permalink: item.permalink || '', data_by_date: r.data_by_date || [] });
+      } else if (Array.isArray(r)) {
+        r.forEach(entry => {
+          const item = DATA.items.find(x => x.id === entry.id) || {};
+          const total = (entry.data_by_date || []).reduce((s, d) => s + (d.total || 0), 0);
+          DATA.visits.push({ id: entry.id, title: item.title || '', total_visits: total, avg_daily: total/days, permalink: item.permalink || '', data_by_date: entry.data_by_date || [] });
+        });
+      }
+    }
+
+    DATA.visits.sort((a,b) => b.total_visits - a.total_visits);
+    renderVisitsSummary(days);
+    renderVisitsTable();
+    document.getElementById('cnt-visits').textContent = DATA.visits.length;
+  } catch(e) {
+    document.getElementById('table-visits').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">⚠️</div>${e.message}</div>`;
+  }
+  btn.disabled = false;
+  btn.textContent = '↺ Carregar visitas';
+}
+
+function renderVisitsSummary(days) {
+  const total = DATA.visits.reduce((s,x) => s + x.total_visits, 0);
+  const top = DATA.visits[0] || {};
+  const zero = DATA.visits.filter(x => x.total_visits === 0).length;
+  const avg = DATA.visits.length ? Math.round(total / DATA.visits.length) : 0;
+
+  document.getElementById('visits-summary').innerHTML = `
+    <div class="rep-card alert-green" style="text-align:center;">
+      <div class="rep-card-label">Total de visitas (${days}d)</div>
+      <div class="rep-card-value" style="font-size:26px;">${total.toLocaleString('pt-BR')}</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-card-label">Média por anúncio</div>
+      <div class="rep-card-value">${avg.toLocaleString('pt-BR')}</div>
+      <div class="rep-card-sub">${(avg/days).toFixed(1)}/dia</div>
+    </div>
+    <div class="rep-card ${zero > 0 ? 'alert-orange' : 'alert-green'}">
+      <div class="rep-card-label">Sem visitas no período</div>
+      <div class="rep-card-value">${zero}</div>
+      <div class="rep-card-sub">de ${DATA.visits.length} anúncios</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-card-label">Mais visitado</div>
+      <div class="rep-card-value" style="font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${top.total_visits?.toLocaleString('pt-BR') || '—'}</div>
+      <div class="rep-card-sub" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">${top.title || '—'}</div>
+    </div>`;
+}
+
+function renderVisitsTable(filter = '') {
+  const rows = DATA.visits.filter(x =>
+    !filter || (x.title||'').toLowerCase().includes(filter) || (x.id||'').toLowerCase().includes(filter)
+  );
+
+  if (!rows.length) {
+    document.getElementById('table-visits').innerHTML = `<div class="state-msg"><div class="state-icon">✅</div>${filter ? 'Nenhum resultado.' : 'Nenhum dado de visitas.'}</div>`;
+    return;
+  }
+
+  const maxV = rows[0]?.total_visits || 1;
+  const html = `<table>
+    <thead><tr>
+      <th>MLB</th><th>Título</th>
+      <th style="text-align:right;">Total</th>
+      <th style="text-align:right;">Média/dia</th>
+      <th style="min-width:120px;">Distribuição</th>
+    </tr></thead>
+    <tbody>${rows.map(x => {
+      const pct = Math.round((x.total_visits / maxV) * 100);
+      const cls = x.total_visits === 0 ? 'score-bad' : x.total_visits < 10 ? 'score-medium' : 'score-good';
+      return `<tr>
+        <td class="td-id">${x.id}</td>
+        <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title||'—'}</a></td>
+        <td style="text-align:right;font-family:var(--mono);font-size:13px;"><span class="score-pill ${cls}" style="width:auto;padding:2px 8px;">${x.total_visits.toLocaleString('pt-BR')}</span></td>
+        <td style="text-align:right;font-family:var(--mono);font-size:12px;color:var(--muted);">${x.avg_daily?.toFixed(1)}</td>
+        <td><div style="height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:var(--green);border-radius:4px;transition:width .4s;"></div></div></td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table>`;
+  document.getElementById('table-visits').innerHTML = html;
+}
+
+// ── TENDÊNCIAS ─────────────────────────────────────────────────────────────
+async function loadTrends() {
+  const btn = document.getElementById('btn-load-trends');
+  btn.disabled = true;
+  btn.textContent = '⏳ Buscando...';
+  document.getElementById('trends-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Consultando tendências...</div>';
+
+  try {
+    const r = await api('/trends/MLB');
+    DATA.trends = Array.isArray(r) ? r : (r.keywords || []);
+
+    if (!DATA.trends.length) throw new Error('Nenhuma tendência retornada pela API.');
+
+    const html = `
+      <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">
+        ${DATA.trends.length} termos em alta agora no Mercado Livre Brasil. Clique para analisar concorrência.
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        ${DATA.trends.map((t, i) => {
+          const term = typeof t === 'string' ? t : (t.keyword || t.name || JSON.stringify(t));
+          const rank = i + 1;
+          const color = rank <= 3 ? 'var(--green)' : rank <= 10 ? 'var(--yellow)' : 'var(--muted)';
+          return `<div onclick="searchTrendCompetitors('${term.replace(/'/g,"\\'")}');switchTab('competitors');"
+            style="display:inline-flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 14px;cursor:pointer;transition:border-color .15s;"
+            onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+            <span style="font-family:var(--mono);font-size:11px;color:${color};font-weight:600;min-width:20px;">#${rank}</span>
+            <span style="font-size:13px;">${term}</span>
+            <span style="font-size:10px;color:var(--muted);">→ ver concorrentes</span>
+          </div>`;
+        }).join('')}
+      </div>`;
+    document.getElementById('trends-container').innerHTML = html;
+  } catch(e) {
+    document.getElementById('trends-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">⚠️</div>${e.message}</div>`;
+  }
+  btn.disabled = false;
+  btn.textContent = '🔥 Buscar tendências agora';
+}
+
+function searchTrendCompetitors(term) {
+  document.getElementById('competitors-query').value = term;
+}
+
+// ── CONCORRENTES ───────────────────────────────────────────────────────────
+async function loadCompetitors() {
+  const query = document.getElementById('competitors-query').value.trim();
+  const sort  = document.getElementById('competitors-sort').value;
+  const btn   = document.getElementById('btn-load-competitors');
+  if (!query) { toast('Digite um produto ou ID de categoria.'); return; }
+
+  btn.disabled = true; btn.textContent = '⏳ Analisando...';
+  document.getElementById('competitors-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Analisando mercado...</div>';
+
+  try {
+    // Detecta se é category ID (MLB + números) ou texto livre
+    const isCategory = /^MLB\d+$/i.test(query);
+    const url = isCategory
+      ? `/sites/MLB/search?category=${query}&sort=${sort}&limit=20`
+      : `/sites/MLB/search?q=${encodeURIComponent(query)}&sort=${sort}&limit=20`;
+
+    const r = await api(url);
+    const results = r.results || [];
+    DATA.competitors = results;
+
+    if (!results.length) {
+      document.getElementById('competitors-container').innerHTML = '<div class="state-msg"><div class="state-icon">🔍</div>Nenhum resultado encontrado.</div>';
+      return;
+    }
+
+    const totalSold = results.reduce((s,x) => s + (x.sold_quantity||0), 0);
+    const avgPrice  = results.reduce((s,x) => s + (x.price||0), 0) / results.length;
+    const freeShip  = results.filter(x => x.shipping?.free_shipping).length;
+
+    const summary = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px;">
+      <div class="rep-card"><div class="rep-card-label">Vendas totais (top 20)</div><div class="rep-card-value">${totalSold.toLocaleString('pt-BR')}</div></div>
+      <div class="rep-card"><div class="rep-card-label">Preço médio</div><div class="rep-card-value">R$ ${avgPrice.toFixed(2).replace('.',',')}</div></div>
+      <div class="rep-card ${freeShip >= 15 ? 'alert-orange' : 'alert-green'}"><div class="rep-card-label">Com frete grátis</div><div class="rep-card-value">${freeShip}/20</div></div>
+      <div class="rep-card"><div class="rep-card-label">Resultados</div><div class="rep-card-value">${(r.paging?.total||0).toLocaleString('pt-BR')}</div><div class="rep-card-sub">publicações encontradas</div></div>
+    </div>`;
+
+    const html = summary + `<div class="table-wrap"><table>
+      <thead><tr>
+        <th>#</th><th>Vendedor</th><th>Título</th>
+        <th style="text-align:right;">Preço</th>
+        <th style="text-align:right;">Vendas</th>
+        <th>Frete</th><th>Reputação</th>
+      </tr></thead>
+      <tbody>${results.map((x,i) => {
+        const rep = x.seller?.seller_reputation;
+        const repLevel = rep?.level_id || '';
+        const repClass = repLevel === '5_green' ? 'ib-ok' : repLevel === '4_light_green' ? 'ib-ok' : repLevel === '3_yellow' ? 'ib-info' : repLevel ? 'ib-warn' : 'ib-info';
+        const repLabel = { '5_green':'Verde','4_light_green':'V. Claro','3_yellow':'Amarelo','2_orange':'Laranja','1_red':'Vermelho' }[repLevel] || '—';
+        return `<tr>
+          <td style="font-family:var(--mono);color:var(--muted);font-size:12px;">${i+1}</td>
+          <td style="font-size:12px;max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${x.seller?.nickname||'—'}</td>
+          <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title}</a></td>
+          <td style="text-align:right;font-family:var(--mono);font-weight:500;">R$ ${(x.price||0).toFixed(2).replace('.',',')}</td>
+          <td style="text-align:right;font-family:var(--mono);">${(x.sold_quantity||0).toLocaleString('pt-BR')}</td>
+          <td>${x.shipping?.free_shipping ? '<span class="icon-badge ib-ok">Grátis</span>' : '<span class="icon-badge ib-info">Pago</span>'}</td>
+          <td><span class="icon-badge ${repClass}">${repLabel}</span></td>
+        </tr>`;
+      }).join('')}</tbody>
+    </table></div>`;
+    document.getElementById('competitors-container').innerHTML = html;
+  } catch(e) {
+    document.getElementById('competitors-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">⚠️</div>${e.message}</div>`;
+  }
+  btn.disabled = false; btn.textContent = '🏆 Analisar';
+}
+
+// ── QUALIDADE DE CATÁLOGO ──────────────────────────────────────────────────
+async function loadCatalogQuality() {
+  const btn = document.getElementById('btn-load-catalog');
+  btn.disabled = true; btn.textContent = 'Verificando...';
+  document.getElementById('table-catalog').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Verificando qualidade dos anúncios...</div>';
+
+  try {
+    const ids = DATA.items.slice(0,100).map(i => i.id);
+    if (!ids.length) throw new Error('Nenhuma publicação carregada. Execute a varredura principal primeiro.');
+
+    DATA.catalogQuality = [];
+    let done = 0;
+    for (const id of ids) {
+      try {
+        const r = await api(`/catalog_quality/status?item_id=${id}&v=3`);
+        const item = DATA.items.find(x => x.id === id) || {};
+        const issues = [];
+        let score = 100;
+
+        if (r.health !== undefined) {
+          score = Math.round((r.health || 0) * 100);
+        }
+        if (r.criteria) {
+          r.criteria.forEach(c => {
+            if (!c.fulfilled) { issues.push(c.name || c.id); score -= 10; }
+          });
+        }
+        if (r.status === 'inactive') issues.push('Inativo no catálogo');
+
+        DATA.catalogQuality.push({
+          id, title: item.title||'', permalink: item.permalink||'',
+          quality_score: Math.max(0, score),
+          status: r.status||'—',
+          issues,
+          raw: r
+        });
+      } catch(_) { /* item sem catálogo — ignora */ }
+      done++;
+      if (done % 10 === 0) {
+        document.getElementById('table-catalog').innerHTML = `<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Verificando... ${done}/${ids.length}</div>`;
+      }
+      await sleep(200);
+    }
+
+    DATA.catalogQuality.sort((a,b) => a.quality_score - b.quality_score);
+    document.getElementById('cnt-catalog').textContent = DATA.catalogQuality.length;
+    renderCatalogTable();
+  } catch(e) {
+    document.getElementById('table-catalog').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">⚠️</div>${e.message}</div>`;
+  }
+  btn.disabled = false; btn.textContent = '↺ Verificar catálogo';
+}
+
+function renderCatalogTable(filter = '') {
+  const rows = DATA.catalogQuality.filter(x =>
+    !filter || (x.title||'').toLowerCase().includes(filter) || (x.id||'').toLowerCase().includes(filter)
+  );
+
+  if (!rows.length) {
+    document.getElementById('table-catalog').innerHTML = `<div class="state-msg"><div class="state-icon">✅</div>${filter ? 'Nenhum resultado.' : 'Nenhum dado. Clique em "Verificar catálogo".'}</div>`;
+    return;
+  }
+
+  const html = `<table>
+    <thead><tr>
+      <th>Score</th><th>MLB</th><th>Título</th><th>Status</th><th>Problemas</th>
+    </tr></thead>
+    <tbody>${rows.map(x => {
+      const cls = x.quality_score >= 70 ? 'score-good' : x.quality_score >= 40 ? 'score-medium' : 'score-bad';
+      const issueHtml = x.issues.length
+        ? x.issues.map(i => `<span class="icon-badge ib-warn" style="margin:2px;">${i}</span>`).join(' ')
+        : '<span class="icon-badge ib-ok">OK</span>';
+      return `<tr>
+        <td><span class="score-pill ${cls}">${x.quality_score}</span></td>
+        <td class="td-id">${x.id}</td>
+        <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title||'—'}</a></td>
+        <td><span class="icon-badge ib-info">${x.status}</span></td>
+        <td style="max-width:300px;">${issueHtml}</td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table>`;
+  document.getElementById('table-catalog').innerHTML = html;
 }
 </script>
 </body>
