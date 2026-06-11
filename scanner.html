@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alpha Scanner â Qualidade & ReputaÃ§Ã£o</title>
+<title>Alpha Scanner Ã¢ÂÂ Qualidade & ReputaÃÂ§ÃÂ£o</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -37,7 +37,7 @@
     min-height: 100vh;
   }
 
-  /* ââ Header ââ */
+  /* Ã¢ÂÂÃ¢ÂÂ Header Ã¢ÂÂÃ¢ÂÂ */
   .header {
     background: var(--bg2);
     border-bottom: 1px solid var(--border);
@@ -112,7 +112,7 @@
   .btn-ghost { background: var(--bg3); color: var(--text); border: 1px solid var(--border); }
   .btn-ghost:hover:not(:disabled) { background: #262D36; }
 
-  /* ââ Auth panel ââ */
+  /* Ã¢ÂÂÃ¢ÂÂ Auth panel Ã¢ÂÂÃ¢ÂÂ */
   .auth-panel {
     max-width: 520px;
     margin: 80px auto;
@@ -153,7 +153,7 @@
   }
   .field input:focus, .field select:focus { border-color: var(--green); }
 
-  /* ââ Health bar (signature element) ââ */
+  /* Ã¢ÂÂÃ¢ÂÂ Health bar (signature element) Ã¢ÂÂÃ¢ÂÂ */
   .health-bar-wrap {
     padding: 20px 24px;
     background: var(--bg2);
@@ -203,7 +203,7 @@
   }
   .health-stat span { color: var(--text); font-weight: 500; }
 
-  /* ââ Reputation card ââ */
+  /* Ã¢ÂÂÃ¢ÂÂ Reputation card Ã¢ÂÂÃ¢ÂÂ */
   .rep-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -241,7 +241,7 @@
     margin-top: 2px;
   }
 
-  /* ââ Protection alert ââ */
+  /* Ã¢ÂÂÃ¢ÂÂ Protection alert Ã¢ÂÂÃ¢ÂÂ */
   .protection-banner {
     display: none;
     margin: 12px 24px 0;
@@ -255,7 +255,7 @@
   .protection-banner.visible { display: flex; align-items: flex-start; gap: 10px; }
   .protection-banner svg { flex-shrink: 0; margin-top: 1px; }
 
-  /* ââ Tabs ââ */
+  /* Ã¢ÂÂÃ¢ÂÂ Tabs Ã¢ÂÂÃ¢ÂÂ */
   .tabs-wrap {
     padding: 0 24px;
     border-bottom: 1px solid var(--border);
@@ -292,12 +292,12 @@
   }
   .tab.active .tab-count { background: var(--green-dim); color: var(--green); border-color: #00C85340; }
 
-  /* ââ Content ââ */
+  /* Ã¢ÂÂÃ¢ÂÂ Content Ã¢ÂÂÃ¢ÂÂ */
   .content { padding: 20px 24px; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  /* ââ Table ââ */
+  /* Ã¢ÂÂÃ¢ÂÂ Table Ã¢ÂÂÃ¢ÂÂ */
   .table-wrap {
     background: var(--bg2);
     border: 1px solid var(--border);
@@ -505,7 +505,7 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- ââââââââââââââ AUTH PANEL ââââââââââââââ -->
+<!-- Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ AUTH PANEL Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ -->
 <div id="auth-screen">
   <div class="header">
     <div class="header-brand">
@@ -518,7 +518,7 @@
     <!-- Tela de login -->
     <div id="step-login">
       <h2>Conectar ao Mercado Livre</h2>
-      <p>Clique abaixo para autorizar o acesso. Uma janela do Mercado Livre abrirÃ¡ â apÃ³s autorizar, ela fecha automaticamente e a varredura inicia.</p>
+      <p>Clique abaixo para autorizar o acesso. Uma janela do Mercado Livre abrirÃÂ¡ Ã¢ÂÂ apÃÂ³s autorizar, ela fecha automaticamente e a varredura inicia.</p>
       <div class="field">
         <label>Worker URL</label>
         <input id="worker-url" type="text"
@@ -542,10 +542,10 @@
       </button>
     </div>
 
-    <!-- Aguardando autorizaÃ§Ã£o -->
+    <!-- Aguardando autorizaÃÂ§ÃÂ£o -->
     <div id="step-waiting" style="display:none;text-align:center;padding:8px 0;">
       <div class="spinner" style="width:32px;height:32px;border-width:3px;margin:0 auto 20px;"></div>
-      <p style="font-weight:500;font-size:15px;margin-bottom:8px;" id="waiting-msg">Aguardando autorizaÃ§Ã£o...</p>
+      <p style="font-weight:500;font-size:15px;margin-bottom:8px;" id="waiting-msg">Aguardando autorizaÃÂ§ÃÂ£o...</p>
       <p style="font-size:12px;color:var(--muted);margin-bottom:24px;">Autorize na janela do Mercado Livre que abriu.</p>
       <button class="btn btn-ghost" onclick="cancelLogin()" style="font-size:12px;">Cancelar</button>
     </div>
@@ -553,23 +553,23 @@
   </div>
 </div>
 
-<!-- ââââââââââââââ MAIN DASHBOARD ââââââââââââââ -->
+<!-- Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ MAIN DASHBOARD Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ -->
 <div id="main-screen" style="display:none;">
 
   <div class="header">
     <div class="header-brand">
       <div class="brand-dot"></div>
       <span class="brand-name">ALPHA SCANNER</span>
-      <span class="brand-tag">QUALIDADE & REPUTAÃÃO</span>
+      <span class="brand-tag">QUALIDADE & REPUTAÃÂÃÂO</span>
     </div>
     <div class="header-right">
-      <span class="account-badge" id="hdr-account">â</span>
-      <button class="btn btn-ghost" id="btn-whatsapp" onclick="sendWhatsAppReport()" style="font-size:13px;background:#25D366;color:#fff;border:none;" title="Enviar relatÃ³rio no WhatsApp">
-        ð± RelatÃ³rio
+      <span class="account-badge" id="hdr-account">Ã¢ÂÂ</span>
+      <button class="btn btn-ghost" id="btn-whatsapp" onclick="sendWhatsAppReport()" style="font-size:13px;background:#25D366;color:#fff;border:none;" title="Enviar relatÃÂ³rio no WhatsApp">
+        Ã°ÂÂÂ± RelatÃÂ³rio
       </button>
       <button class="btn btn-ghost" onclick="rescan()" id="btn-rescan">
         <span class="spinner" id="scan-spinner" style="display:none;"></span>
-        <span id="scan-label">âº Atualizar</span>
+        <span id="scan-label">Ã¢ÂÂº Atualizar</span>
       </button>
       <button class="btn btn-ghost" onclick="logout()">Sair</button>
     </div>
@@ -578,13 +578,14 @@
   <!-- Health bar -->
   <div class="health-bar-wrap">
     <div class="health-bar-header">
-      <span class="health-label">SaÃºde geral da operaÃ§Ã£o</span>
-      <span class="health-score" id="health-score-val">â</span>
+      <span class="health-label">SaÃÂºde geral da operaÃÂ§ÃÂ£o</span>
+      <span class="health-score" id="health-score-val">Ã¢ÂÂ</span>
     </div>
     <div class="health-bar-track">
       <div class="health-bar-fill" id="health-bar-fill"></div>
     </div>
     <div class="health-meta" id="health-meta"></div>
+    <div id="history-sparkline" style="display:none;margin-top:10px;"></div>
   </div>
 
   <!-- Protection banner -->
@@ -602,7 +603,7 @@
   <!-- Progress bar -->
   <div class="progress-wrap" id="progress-wrap">
     <div class="progress-label">
-      <span id="progress-label-text">Carregando publicaÃ§Ãµes...</span>
+      <span id="progress-label-text">Carregando publicaÃÂ§ÃÂµes...</span>
       <span id="progress-pct">0%</span>
     </div>
     <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
@@ -614,25 +615,25 @@
       Score de performance <span class="tab-count" id="cnt-performance">0</span>
     </button>
     <button class="tab" onclick="switchTab('unhealthy')" id="tab-unhealthy">
-      PublicaÃ§Ãµes doentes <span class="tab-count" id="cnt-unhealthy">0</span>
+      PublicaÃÂ§ÃÂµes doentes <span class="tab-count" id="cnt-unhealthy">0</span>
     </button>
     <button class="tab" onclick="switchTab('gtin')" id="tab-gtin">
       Sem GTIN <span class="tab-count" id="cnt-gtin">0</span>
     </button>
     <button class="tab" onclick="switchTab('visits')" id="tab-visits">
-      ð Visitas <span class="tab-count" id="cnt-visits">0</span>
+      Ã°ÂÂÂ Visitas <span class="tab-count" id="cnt-visits">0</span>
     </button>
     <button class="tab" onclick="switchTab('trends')" id="tab-trends">
-      ð¥ TendÃªncias
+      Ã°ÂÂÂ¥ TendÃÂªncias
     </button>
     <button class="tab" onclick="switchTab('competitors')" id="tab-competitors">
-      ð Concorrentes
+      Ã°ÂÂÂ Concorrentes
     </button>
     <button class="tab" onclick="switchTab('catalog')" id="tab-catalog">
-      ð CatÃ¡logo <span class="tab-count" id="cnt-catalog">0</span>
+      Ã°ÂÂÂ CatÃÂ¡logo <span class="tab-count" id="cnt-catalog">0</span>
     </button>
     <button class="tab" onclick="switchTab('exposure')" id="tab-exposure">
-      ð¡ ExposiÃ§Ã£o
+      Ã°ÂÂÂ¡ ExposiÃÂ§ÃÂ£o
     </button>
   </div>
 
@@ -643,11 +644,11 @@
     <div class="tab-panel active" id="panel-performance">
       <div class="table-wrap">
         <div class="table-toolbar">
-          <input class="search-input" id="search-performance" placeholder="Filtrar por tÃ­tulo ou MLB..." oninput="filterTable('performance')">
-          <button class="btn btn-ghost" onclick="exportCSV('performance')" style="font-size:12px;">â¬ CSV</button>
+          <input class="search-input" id="search-performance" placeholder="Filtrar por tÃÂ­tulo ou MLB..." oninput="filterTable('performance')">
+          <button class="btn btn-ghost" onclick="exportCSV('performance')" style="font-size:12px;">Ã¢Â¬Â CSV</button>
         </div>
         <div id="table-performance">
-          <div class="state-msg"><div class="state-icon">ð</div>Aguardando varredura...</div>
+          <div class="state-msg"><div class="state-icon">Ã°ÂÂÂ</div>Aguardando varredura...</div>
         </div>
       </div>
     </div>
@@ -656,11 +657,11 @@
     <div class="tab-panel" id="panel-unhealthy">
       <div class="table-wrap">
         <div class="table-toolbar">
-          <input class="search-input" id="search-unhealthy" placeholder="Filtrar por tÃ­tulo ou MLB..." oninput="filterTable('unhealthy')">
-          <button class="btn btn-ghost" onclick="exportCSV('unhealthy')" style="font-size:12px;">â¬ CSV</button>
+          <input class="search-input" id="search-unhealthy" placeholder="Filtrar por tÃÂ­tulo ou MLB..." oninput="filterTable('unhealthy')">
+          <button class="btn btn-ghost" onclick="exportCSV('unhealthy')" style="font-size:12px;">Ã¢Â¬Â CSV</button>
         </div>
         <div id="table-unhealthy">
-          <div class="state-msg"><div class="state-icon">ð©º</div>Aguardando varredura...</div>
+          <div class="state-msg"><div class="state-icon">Ã°ÂÂ©Âº</div>Aguardando varredura...</div>
         </div>
       </div>
     </div>
@@ -669,11 +670,11 @@
     <div class="tab-panel" id="panel-gtin">
       <div class="table-wrap">
         <div class="table-toolbar">
-          <input class="search-input" id="search-gtin" placeholder="Filtrar por tÃ­tulo ou MLB..." oninput="filterTable('gtin')">
-          <button class="btn btn-ghost" onclick="exportCSV('gtin')" style="font-size:12px;">â¬ CSV</button>
+          <input class="search-input" id="search-gtin" placeholder="Filtrar por tÃÂ­tulo ou MLB..." oninput="filterTable('gtin')">
+          <button class="btn btn-ghost" onclick="exportCSV('gtin')" style="font-size:12px;">Ã¢Â¬Â CSV</button>
         </div>
         <div id="table-gtin">
-          <div class="state-msg"><div class="state-icon">ð</div>Aguardando varredura...</div>
+          <div class="state-msg"><div class="state-icon">Ã°ÂÂÂ</div>Aguardando varredura...</div>
         </div>
       </div>
     </div>
@@ -683,27 +684,27 @@
     <div class="tab-panel" id="panel-visits">
       <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
         <div style="display:flex;align-items:center;gap:8px;">
-          <label style="font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em;">PerÃ­odo</label>
+          <label style="font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em;">PerÃÂ­odo</label>
           <select id="visits-period" class="search-input" style="width:auto;">
-            <option value="7">Ãltimos 7 dias</option>
-            <option value="30" selected>Ãltimos 30 dias</option>
-            <option value="60">Ãltimos 60 dias</option>
-            <option value="90">Ãltimos 90 dias</option>
+            <option value="7">ÃÂltimos 7 dias</option>
+            <option value="30" selected>ÃÂltimos 30 dias</option>
+            <option value="60">ÃÂltimos 60 dias</option>
+            <option value="90">ÃÂltimos 90 dias</option>
           </select>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
           <label style="font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em;">Top</label>
           <select id="visits-limit" class="search-input" style="width:auto;">
-            <option value="30">30 anÃºncios</option>
-            <option value="50" selected>50 anÃºncios</option>
-            <option value="100">100 anÃºncios</option>
-            <option value="200">200 anÃºncios</option>
+            <option value="30">30 anÃÂºncios</option>
+            <option value="50" selected>50 anÃÂºncios</option>
+            <option value="100">100 anÃÂºncios</option>
+            <option value="200">200 anÃÂºncios</option>
           </select>
         </div>
-        <input class="search-input" id="search-visits" placeholder="Filtrar por tÃ­tulo ou MLB..." oninput="filterTable('visits')">
-        <button class="btn btn-primary" onclick="loadVisitsData()" id="btn-load-visits" style="font-size:13px;">ð Carregar visitas</button>
-        <button class="btn btn-ghost" onclick="loadStoreVisits()" id="btn-store-visits" style="font-size:12px;">ðª Visitas da loja</button>
-        <button class="btn btn-ghost" onclick="exportCSV('visits')" style="font-size:12px;">â¬ CSV</button>
+        <input class="search-input" id="search-visits" placeholder="Filtrar por tÃÂ­tulo ou MLB..." oninput="filterTable('visits')">
+        <button class="btn btn-primary" onclick="loadVisitsData()" id="btn-load-visits" style="font-size:13px;">Ã°ÂÂÂ Carregar visitas</button>
+        <button class="btn btn-ghost" onclick="loadStoreVisits()" id="btn-store-visits" style="font-size:12px;">Ã°ÂÂÂª Visitas da loja</button>
+        <button class="btn btn-ghost" onclick="exportCSV('visits')" style="font-size:12px;">Ã¢Â¬Â CSV</button>
       </div>
       <!-- Visitas da loja -->
       <div id="store-visits-wrap" style="display:none;margin-bottom:16px;"></div>
@@ -711,19 +712,19 @@
       <div id="visits-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px;"></div>
       <div class="table-wrap">
         <div id="table-visits">
-          <div class="state-msg"><div class="state-icon">ð</div>Selecione o perÃ­odo e clique em "Carregar visitas".</div>
+          <div class="state-msg"><div class="state-icon">Ã°ÂÂÂ</div>Selecione o perÃÂ­odo e clique em "Carregar visitas".</div>
         </div>
       </div>
     </div>
 
-    <!-- Tab: TendÃªncias -->
+    <!-- Tab: TendÃÂªncias -->
     <div class="tab-panel" id="panel-trends">
       <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
-        <button class="btn btn-primary" onclick="loadTrends()" id="btn-load-trends" style="font-size:13px;">ð¥ Buscar tendÃªncias agora</button>
+        <button class="btn btn-primary" onclick="loadTrends()" id="btn-load-trends" style="font-size:13px;">Ã°ÂÂÂ¥ Buscar tendÃÂªncias agora</button>
         <span style="font-size:12px;color:var(--muted);">Retorna os termos mais buscados no ML Brasil no momento.</span>
       </div>
       <div id="trends-container">
-        <div class="state-msg"><div class="state-icon">ð¥</div>Clique para ver o que estÃ¡ em alta agora.</div>
+        <div class="state-msg"><div class="state-icon">Ã°ÂÂÂ¥</div>Clique para ver o que estÃÂ¡ em alta agora.</div>
       </div>
     </div>
 
@@ -733,51 +734,66 @@
         <input class="search-input" id="competitors-query" placeholder="Buscar produto ou categoria (ex: furadeira, MLB271481)..." style="flex:1;min-width:260px;" onkeydown="if(event.key==='Enter')loadCompetitors()">
         <select id="competitors-sort" class="search-input" style="width:auto;">
           <option value="sold_quantity_desc">Mais vendidos</option>
-          <option value="price_asc">Menor preÃ§o</option>
-          <option value="price_desc">Maior preÃ§o</option>
+          <option value="price_asc">Menor preÃÂ§o</option>
+          <option value="price_desc">Maior preÃÂ§o</option>
         </select>
-        <button class="btn btn-primary" onclick="loadCompetitors()" id="btn-load-competitors">ð Analisar</button>
-        <button class="btn btn-ghost" onclick="predictCategory()" id="btn-predict" style="font-size:12px;">ð® Prever categoria</button>
+        <button class="btn btn-primary" onclick="loadCompetitors()" id="btn-load-competitors">Ã°ÂÂÂ Analisar</button>
+        <button class="btn btn-ghost" onclick="predictCategory()" id="btn-predict" style="font-size:12px;">Ã°ÂÂÂ® Prever categoria</button>
       </div>
       <!-- Resultado do preditor -->
       <div id="category-prediction" style="display:none;margin-bottom:16px;"></div>
       <div id="competitors-container">
-        <div class="state-msg"><div class="state-icon">ð</div>Digite um produto ou ID de categoria para analisar a concorrÃªncia.</div>
+        <div class="state-msg"><div class="state-icon">Ã°ÂÂÂ</div>Digite um produto ou ID de categoria para analisar a concorrÃÂªncia.</div>
       </div>
     </div>
 
-    <!-- Tab: CatÃ¡logo -->
+    <!-- Tab: CatÃÂ¡logo -->
     <div class="tab-panel" id="panel-catalog">
-      <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">Verifica PI (identificadores de produto), ficha tÃ©cnica e atributos obrigatÃ³rios. Itens com baixa qualidade perdem ranqueamento no catÃ¡logo.</div>
+      <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">Verifica PI (identificadores de produto), ficha tÃÂ©cnica e atributos obrigatÃÂ³rios. Itens com baixa qualidade perdem ranqueamento no catÃÂ¡logo.</div>
       <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
-        <input class="search-input" id="search-catalog" placeholder="Filtrar por tÃ­tulo ou MLB..." oninput="filterTable('catalog')">
-        <button class="btn btn-ghost" onclick="exportCSV('catalog')" style="font-size:12px;">â¬ CSV</button>
-        <button class="btn btn-ghost" onclick="loadCatalogQuality()" style="font-size:12px;" id="btn-load-catalog">âº Verificar catÃ¡logo</button>
+        <input class="search-input" id="search-catalog" placeholder="Filtrar por tÃÂ­tulo ou MLB..." oninput="filterTable('catalog')">
+        <button class="btn btn-ghost" onclick="exportCSV('catalog')" style="font-size:12px;">Ã¢Â¬Â CSV</button>
+        <button class="btn btn-ghost" onclick="loadCatalogQuality()" style="font-size:12px;" id="btn-load-catalog">Ã¢ÂÂº Verificar catÃÂ¡logo</button>
       </div>
       <div class="table-wrap">
         <div id="table-catalog">
-          <div class="state-msg"><div class="state-icon">ð</div>Clique em "Verificar catÃ¡logo" para analisar a qualidade das publicaÃ§Ãµes.</div>
+          <div class="state-msg"><div class="state-icon">Ã°ÂÂÂ</div>Clique em "Verificar catÃÂ¡logo" para analisar a qualidade das publicaÃÂ§ÃÂµes.</div>
         </div>
       </div>
     </div>
 
-    <!-- Tab: ExposiÃ§Ã£o -->
+    <!-- Tab: ExposiÃÂ§ÃÂ£o -->
     <div class="tab-panel" id="panel-exposure">
-      <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">Compara o impacto no posicionamento de busca (priority_in_search) entre os tipos de anÃºncio Classic e Premium para cada categoria.</div>
+      <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">Compara o impacto no posicionamento de busca (priority_in_search) entre os tipos de anÃÂºncio Classic e Premium para cada categoria.</div>
       <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
         <input class="search-input" id="exposure-category" placeholder="Categoria (ex: MLB271481) ou deixe em branco para usar suas categorias..." style="flex:1;min-width:260px;">
-        <button class="btn btn-primary" onclick="loadExposures()" id="btn-load-exposure">ð¡ Analisar exposiÃ§Ã£o</button>
+        <button class="btn btn-primary" onclick="loadExposures()" id="btn-load-exposure">Ã°ÂÂÂ¡ Analisar exposiÃÂ§ÃÂ£o</button>
       </div>
       <div id="exposure-container">
-        <div class="state-msg"><div class="state-icon">ð¡</div>Clique para comparar Classic vs Premium nas suas categorias principais.</div>
+        <div class="state-msg"><div class="state-icon">Ã°ÂÂÂ¡</div>Clique para comparar Classic vs Premium nas suas categorias principais.</div>
       </div>
+    </div>
+
+    <!-- Tab: Pedidos -->
+    <div class="tab-panel" id="panel-orders">
+      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
+        <label style="font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em;">Período</label>
+        <select id="orders-period" class="search-input" style="width:auto;" onchange="loadOrders()">
+          <option value="today">Hoje</option>
+          <option value="7d">Últimos 7 dias</option>
+          <option value="30d">Últimos 30 dias</option>
+        </select>
+        <button class="btn btn-ghost" onclick="exportCSV('orders')" style="font-size:12px;">⬇ CSV</button>
+      </div>
+      <div id="orders-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px;"></div>
+      <div class="table-wrap"><div id="table-orders"><div class="state-msg"><div class="state-icon">📦</div>Carregando...</div></div></div>
     </div>
 
   </div>
 </div>
 
 <script>
-// ââ Config ââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Config Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 let CFG = { workerUrl: '', clientId: '', sellerId: '', token: '' };
 let DATA = {
   items: [],           // todos os itens ativos
@@ -786,14 +802,16 @@ let DATA = {
   gtinMissing: [],     // itens sem GTIN
   reputation: null,
   visits: [],          // visitas por item (30d)
-  trends: [],          // tendÃªncias de busca /trends/MLB
-  competitors: [],     // anÃ¡lise de concorrentes por categoria
-  catalogQuality: [],  // qualidade de catÃ¡logo
-  exposures: [],       // exposiÃ§Ã£o por tipo de anÃºncio
+  trends: [],          // tendÃÂªncias de busca /trends/MLB
+  competitors: [],     // anÃÂ¡lise de concorrentes por categoria
+  catalogQuality: [],  // qualidade de catÃÂ¡logo
+  exposures: [],       // exposiÃÂ§ÃÂ£o por tipo de anÃÂºncio
   storeVisits: null,   // visitas agregadas da loja
+  orders: [],          // pedidos
+  history: [],         // snapshots historicos (KV)
 };
 
-// ââ Helpers âââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Helpers Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function api(path, opts = {}) {
   const url = CFG.workerUrl + '/ml' + path;
   return fetch(url, {
@@ -804,7 +822,7 @@ function api(path, opts = {}) {
       ...(opts.headers || {})
     }
   }).then(r => {
-    if (!r.ok) throw new Error(`HTTP ${r.status} â ${path}`);
+    if (!r.ok) throw new Error(`HTTP ${r.status} Ã¢ÂÂ ${path}`);
     return r.json();
   });
 }
@@ -830,11 +848,11 @@ function hideProgress() {
 
 function setScanState(loading) {
   document.getElementById('scan-spinner').style.display = loading ? 'inline-block' : 'none';
-  document.getElementById('scan-label').textContent = loading ? 'Varrendo...' : 'âº Atualizar';
+  document.getElementById('scan-label').textContent = loading ? 'Varrendo...' : 'Ã¢ÂÂº Atualizar';
   document.getElementById('btn-rescan').disabled = loading;
 }
 
-// ââ Auth â OAuth popup automÃ¡tico ââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Auth Ã¢ÂÂ OAuth popup automÃÂ¡tico Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 const CALLBACK_URL = 'https://douglasjrmaule-creator.github.io/alpha/callback.html';
 let _authPopup   = null;
 let _authTimeout = null;
@@ -847,8 +865,8 @@ function loginML() {
   CFG.workerUrl = workerUrl;
   CFG.clientId  = clientId;
 
-  // Passa workerUrl e clientId no parÃ¢metro state como Base64 (sem JSON cru na URL).
-  // O ML aceita state como string opaca â Base64 evita caracteres especiais.
+  // Passa workerUrl e clientId no parÃÂ¢metro state como Base64 (sem JSON cru na URL).
+  // O ML aceita state como string opaca Ã¢ÂÂ Base64 evita caracteres especiais.
   const stateObj = btoa(JSON.stringify({ w: workerUrl, c: clientId }));
 
   const authUrl = 'https://auth.mercadolivre.com.br/authorization'
@@ -874,7 +892,7 @@ function loginML() {
   // Timeout de 5 minutos
   _authTimeout = setTimeout(() => {
     cleanupAuth();
-    toast('Tempo de autorizaÃ§Ã£o expirou. Tente novamente.');
+    toast('Tempo de autorizaÃÂ§ÃÂ£o expirou. Tente novamente.');
     resetLoginScreen();
   }, 5 * 60 * 1000);
 
@@ -895,7 +913,7 @@ async function onAuthMessage(event) {
   const msg = event.data;
   if (!msg || !msg.type) return;
 
-  // Callback envia apenas o code â o app troca pelo token via Worker
+  // Callback envia apenas o code Ã¢ÂÂ o app troca pelo token via Worker
   if (msg.type === 'ML_AUTH_CODE') {
     cleanupAuth();
     document.getElementById('waiting-msg').textContent = 'Obtendo token...';
@@ -912,7 +930,7 @@ async function onAuthMessage(event) {
       });
       if (!resp.ok) { const t = await resp.text(); throw new Error('Worker ' + resp.status + ': ' + t); }
       const data = await resp.json();
-      if (!data.access_token) throw new Error('Token nÃ£o retornado.');
+      if (!data.access_token) throw new Error('Token nÃÂ£o retornado.');
 
       CFG.token    = data.access_token;
       CFG.sellerId = String(data.user_id || '256258529');
@@ -922,6 +940,7 @@ async function onAuthMessage(event) {
         document.getElementById('auth-screen').style.display = 'none';
         document.getElementById('main-screen').style.display = 'block';
         document.getElementById('hdr-account').textContent   = 'ID ' + CFG.sellerId;
+        loadHistoryFromKV();
         runFullScan();
       }, 400);
     } catch(e) {
@@ -945,7 +964,7 @@ async function onAuthMessage(event) {
 
   if (msg.type === 'ML_AUTH_ERROR') {
     cleanupAuth();
-    toast('Erro na autorizaÃ§Ã£o: ' + msg.message);
+    toast('Erro na autorizaÃÂ§ÃÂ£o: ' + msg.message);
     resetLoginScreen();
   }
 }
@@ -970,7 +989,7 @@ function resetLoginScreen() {
 function logout() {
   cleanupAuth();
   CFG  = { workerUrl: '', clientId: '', sellerId: '', token: '' };
-  DATA = { items: [], performance: [], unhealthy: [], gtinMissing: [], reputation: null, visits: [], trends: [], competitors: [], catalogQuality: [], exposures: [], storeVisits: null };
+  DATA = { items: [], performance: [], unhealthy: [], gtinMissing: [], reputation: null, visits: [], trends: [], competitors: [], catalogQuality: [], exposures: [], storeVisits: null, orders: [], history: [] };
   resetLoginScreen();
   document.getElementById('main-screen').style.display = 'none';
   document.getElementById('auth-screen').style.display = 'block';
@@ -978,20 +997,20 @@ function logout() {
 
 function rescan() { runFullScan(); }
 
-// ââ Main scan âââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Main scan Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function runFullScan() {
   setScanState(true);
   try {
-    // 1. ReputaÃ§Ã£o
-    setProgress(2, 'Buscando reputaÃ§Ã£o...');
+    // 1. ReputaÃÂ§ÃÂ£o
+    setProgress(2, 'Buscando reputaÃÂ§ÃÂ£o...');
     await loadReputation();
 
     // 2. Itens ativos (paginado)
-    setProgress(10, 'Listando publicaÃ§Ãµes ativas...');
+    setProgress(10, 'Listando publicaÃÂ§ÃÂµes ativas...');
     await loadAllItems();
 
     // 3. Unhealthy
-    setProgress(30, 'Identificando publicaÃ§Ãµes doentes...');
+    setProgress(30, 'Identificando publicaÃÂ§ÃÂµes doentes...');
     await loadUnhealthy();
 
     // 4. GTIN missing
@@ -1003,6 +1022,8 @@ async function runFullScan() {
 
     hideProgress();
     renderAll();
+    autoLoadBackground();
+    saveSnapshotToKV();
 
   } catch(e) {
     hideProgress();
@@ -1012,7 +1033,7 @@ async function runFullScan() {
   setScanState(false);
 }
 
-// ââ ReputaÃ§Ã£o ââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ ReputaÃÂ§ÃÂ£o Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function loadReputation() {
   const data = await api('/users/' + CFG.sellerId);
   DATA.reputation = data.seller_reputation || null;
@@ -1061,9 +1082,9 @@ function renderReputation() {
     const days = Math.ceil((end - new Date()) / 864e5);
     const realLbl = levelLabel(rep.real_level);
     banner.classList.add('visible');
-    ptxt.innerHTML = `<strong>Conta em perÃ­odo de proteÃ§Ã£o</strong> â reputaÃ§Ã£o real: <strong>${realLbl}</strong>. 
-      ProteÃ§Ã£o expira em ${end.toLocaleDateString('pt-BR')} (${days > 0 ? days + ' dias' : 'expirado'}).
-      Corrija as mÃ©tricas antes do prazo para evitar queda visÃ­vel de reputaÃ§Ã£o.`;
+    ptxt.innerHTML = `<strong>Conta em perÃÂ­odo de proteÃÂ§ÃÂ£o</strong> Ã¢ÂÂ reputaÃÂ§ÃÂ£o real: <strong>${realLbl}</strong>. 
+      ProteÃÂ§ÃÂ£o expira em ${end.toLocaleDateString('pt-BR')} (${days > 0 ? days + ' dias' : 'expirado'}).
+      Corrija as mÃÂ©tricas antes do prazo para evitar queda visÃÂ­vel de reputaÃÂ§ÃÂ£o.`;
   } else {
     banner.classList.remove('visible');
   }
@@ -1072,15 +1093,15 @@ function renderReputation() {
   const effectiveLevel = rep.level_id;
   const cards = [
     {
-      label: 'ReputaÃ§Ã£o exibida',
+      label: 'ReputaÃÂ§ÃÂ£o exibida',
       value: levelLabel(effectiveLevel),
-      sub: rep.power_seller_status ? rep.power_seller_status.charAt(0).toUpperCase() + rep.power_seller_status.slice(1) : 'â',
+      sub: rep.power_seller_status ? rep.power_seller_status.charAt(0).toUpperCase() + rep.power_seller_status.slice(1) : 'Ã¢ÂÂ',
       cls: repColor(effectiveLevel)
     },
     {
-      label: 'ReclamaÃ§Ãµes (60d)',
+      label: 'ReclamaÃÂ§ÃÂµes (60d)',
       value: fmt_pct(claims.rate),
-      sub: `${claims.value || 0} reclam. / ${sales.completed || 'â'} vendas`,
+      sub: `${claims.value || 0} reclam. / ${sales.completed || 'Ã¢ÂÂ'} vendas`,
       cls: claimsColor(claims.rate)
     },
     {
@@ -1100,9 +1121,9 @@ function renderReputation() {
   // Se protegido, adiciona card de real_level
   if (rep.real_level) {
     cards.unshift({
-      label: 'â  NÃ­vel real (protegido)',
+      label: 'Ã¢ÂÂ  NÃÂ­vel real (protegido)',
       value: levelLabel(rep.real_level),
-      sub: 'VisÃ­vel sÃ³ via API',
+      sub: 'VisÃÂ­vel sÃÂ³ via API',
       cls: repColor(rep.real_level)
     });
   }
@@ -1117,7 +1138,7 @@ function renderReputation() {
 }
 
 function fmt_pct(v) {
-  if (v === undefined || v === null) return 'â';
+  if (v === undefined || v === null) return 'Ã¢ÂÂ';
   return (v * 100).toFixed(1) + '%';
 }
 
@@ -1142,7 +1163,7 @@ function cancelColor(r) {
   return 'alert-red';
 }
 
-// ââ Items ââââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Items Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function loadAllItems() {
   let offset = 0;
   const limit = 100;
@@ -1160,11 +1181,11 @@ async function loadAllItems() {
     offset += limit;
     if (ids.length < limit) break;
     const total = r.paging?.total || 0;
-    setProgress(10 + 20 * (offset / Math.max(total, 1)), `Carregando publicaÃ§Ãµes... ${DATA.items.length}/${total}`);
+    setProgress(10 + 20 * (offset / Math.max(total, 1)), `Carregando publicaÃÂ§ÃÂµes... ${DATA.items.length}/${total}`);
   }
 }
 
-// ââ Unhealthy ââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Unhealthy Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function loadUnhealthy() {
   const r = await api(`/users/${CFG.sellerId}/items/search?reputation_health_gauge=unhealthy&limit=100`);
   const warn = await api(`/users/${CFG.sellerId}/items/search?reputation_health_gauge=warning&limit=100`);
@@ -1185,7 +1206,7 @@ async function loadUnhealthy() {
   }
 }
 
-// ââ GTIN âââââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ GTIN Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function loadGtinMissing() {
   let offset = 0;
   DATA.gtinMissing = [];
@@ -1203,7 +1224,7 @@ async function loadGtinMissing() {
   }
 }
 
-// ââ Performance (batch) ââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Performance (batch) Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function loadPerformanceBatch() {
   // Filtragem inteligente: pula itens com health >= 0.95 (ja saudaveis)
   // Itens doentes entram na frente da fila
@@ -1259,14 +1280,14 @@ async function loadPerformanceBatch() {
 }
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-// ââ Health score âââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Health score Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function calcHealthScore() {
   if (!DATA.performance.length) return null;
   const avg = DATA.performance.reduce((s, x) => s + (x.score || 0), 0) / DATA.performance.length;
   return Math.round(avg);
 }
 
-// ââ Render all âââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Render all Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function renderAll() {
   renderHealthBar();
   renderPerformanceTable();
@@ -1279,7 +1300,7 @@ function renderHealthBar() {
   const score = calcHealthScore();
   const el    = document.getElementById('health-score-val');
   const bar   = document.getElementById('health-bar-fill');
-  if (score === null) { el.textContent = 'â'; return; }
+  if (score === null) { el.textContent = 'Ã¢ÂÂ'; return; }
 
   el.textContent = score;
   bar.style.width = score + '%';
@@ -1296,11 +1317,11 @@ function renderHealthBar() {
   const bad    = DATA.performance.filter(x => x.score < 45).length;
 
   document.getElementById('health-meta').innerHTML = `
-    <span class="health-stat"><span style="color:#00C853">${good}</span> profissional (â¥70)</span>
-    <span class="health-stat"><span style="color:#FFD700">${medium}</span> satisfatÃ³rio (45â69)</span>
-    <span class="health-stat"><span style="color:#FF4444">${bad}</span> bÃ¡sico (&lt;45)</span>
+    <span class="health-stat"><span style="color:#00C853">${good}</span> profissional (Ã¢ÂÂ¥70)</span>
+    <span class="health-stat"><span style="color:#FFD700">${medium}</span> satisfatÃÂ³rio (45Ã¢ÂÂ69)</span>
+    <span class="health-stat"><span style="color:#FF4444">${bad}</span> bÃÂ¡sico (&lt;45)</span>
     <span class="health-stat"><span>${DATA.performance.length}</span> analisados</span>
-    <span class="health-stat"><span>${DATA.unhealthy.length}</span> com problemas de reputaÃ§Ã£o</span>
+    <span class="health-stat"><span>${DATA.unhealthy.length}</span> com problemas de reputaÃÂ§ÃÂ£o</span>
     <span class="health-stat"><span>${DATA.gtinMissing.length}</span> sem GTIN</span>
   `;
 }
@@ -1311,9 +1332,10 @@ function updateCounts() {
   document.getElementById('cnt-gtin').textContent        = DATA.gtinMissing.length;
   document.getElementById('cnt-visits').textContent      = DATA.visits.length;
   document.getElementById('cnt-catalog').textContent     = DATA.catalogQuality.length;
+  document.getElementById('cnt-orders').textContent       = DATA.orders.length;
 }
 
-// ââ Tabela Performance âââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Tabela Performance Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function renderPerformanceTable(filter = '') {
   const rows = DATA.performance.filter(x =>
     !filter || x.title.toLowerCase().includes(filter) || x.id.toLowerCase().includes(filter)
@@ -1321,7 +1343,7 @@ function renderPerformanceTable(filter = '') {
 
   if (!rows.length) {
     document.getElementById('table-performance').innerHTML =
-      `<div class="state-msg"><div class="state-icon">â</div>${filter ? 'Nenhum resultado.' : 'Nenhuma publicaÃ§Ã£o encontrada.'}</div>`;
+      `<div class="state-msg"><div class="state-icon">Ã¢ÂÂ</div>${filter ? 'Nenhum resultado.' : 'Nenhuma publicaÃÂ§ÃÂ£o encontrada.'}</div>`;
     return;
   }
 
@@ -1329,9 +1351,9 @@ function renderPerformanceTable(filter = '') {
     <thead><tr>
       <th>Score</th>
       <th>MLB</th>
-      <th>TÃ­tulo</th>
-      <th>NÃ­vel</th>
-      <th>PendÃªncias</th>
+      <th>TÃÂ­tulo</th>
+      <th>NÃÂ­vel</th>
+      <th>PendÃÂªncias</th>
     </tr></thead>
     <tbody>${rows.map(x => {
       const cls  = x.score >= 70 ? 'score-good' : x.score >= 45 ? 'score-medium' : 'score-bad';
@@ -1344,10 +1366,10 @@ function renderPerformanceTable(filter = '') {
         ? pending.map(k => `<span class="icon-badge ib-warn">${pendingLabel(k)}</span>`).join(' ')
         : `<span class="icon-badge ib-ok">Completo</span>`;
       return `<tr>
-        <td><span class="score-pill ${cls}">${x.score ?? 'â'}</span></td>
+        <td><span class="score-pill ${cls}">${x.score ?? 'Ã¢ÂÂ'}</span></td>
         <td class="td-id">${x.id}</td>
         <td class="td-title"><a href="${x.permalink}" target="_blank">${x.title}</a></td>
-        <td><span class="icon-badge ${lvCls}">${x.level_wording || x.level || 'â'}</span></td>
+        <td><span class="icon-badge ${lvCls}">${x.level_wording || x.level || 'Ã¢ÂÂ'}</span></td>
         <td>${pendHtml}</td>
       </tr>`;
     }).join('')}</tbody>
@@ -1358,14 +1380,14 @@ function renderPerformanceTable(filter = '') {
 function pendingLabel(key) {
   const map = {
     GTIN: 'GTIN', PICTURES: 'Fotos', PICTURES_QUANTITY_MIN: 'Fotos',
-    TITLE: 'TÃ­tulo', FREE_SHIPPING: 'Frete grÃ¡tis',
-    DESCRIPTION: 'DescriÃ§Ã£o', WARRANTY: 'Garantia',
+    TITLE: 'TÃÂ­tulo', FREE_SHIPPING: 'Frete grÃÂ¡tis',
+    DESCRIPTION: 'DescriÃÂ§ÃÂ£o', WARRANTY: 'Garantia',
     BRAND: 'Marca', COLOR: 'Cor', SIZE: 'Tamanho',
   };
   return map[key] || key;
 }
 
-// ââ Tabela Unhealthy âââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Tabela Unhealthy Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function renderUnhealthyTable(filter = '') {
   const rows = DATA.unhealthy.filter(x =>
     !filter || (x.title || '').toLowerCase().includes(filter) || (x.id || '').toLowerCase().includes(filter)
@@ -1373,7 +1395,7 @@ function renderUnhealthyTable(filter = '') {
 
   if (!rows.length) {
     document.getElementById('table-unhealthy').innerHTML =
-      `<div class="state-msg"><div class="state-icon">â</div>${filter ? 'Nenhum resultado.' : 'Nenhuma publicaÃ§Ã£o com problema de reputaÃ§Ã£o.'}</div>`;
+      `<div class="state-msg"><div class="state-icon">Ã¢ÂÂ</div>${filter ? 'Nenhum resultado.' : 'Nenhuma publicaÃÂ§ÃÂ£o com problema de reputaÃÂ§ÃÂ£o.'}</div>`;
     return;
   }
 
@@ -1381,17 +1403,17 @@ function renderUnhealthyTable(filter = '') {
     <thead><tr>
       <th>Status</th>
       <th>MLB</th>
-      <th>TÃ­tulo</th>
+      <th>TÃÂ­tulo</th>
       <th>Health</th>
     </tr></thead>
     <tbody>${rows.map(x => {
       const gaugeCls = x._gauge === 'unhealthy' ? 'ib-warn' : 'ib-info';
-      const gaugeLabel = x._gauge === 'unhealthy' ? 'ð´ Perdendo exposiÃ§Ã£o' : 'ð¡ Em risco';
-      const healthPct = x.health !== undefined ? Math.round(x.health * 100) + '%' : 'â';
+      const gaugeLabel = x._gauge === 'unhealthy' ? 'Ã°ÂÂÂ´ Perdendo exposiÃÂ§ÃÂ£o' : 'Ã°ÂÂÂ¡ Em risco';
+      const healthPct = x.health !== undefined ? Math.round(x.health * 100) + '%' : 'Ã¢ÂÂ';
       return `<tr>
         <td><span class="icon-badge ${gaugeCls}">${gaugeLabel}</span></td>
         <td class="td-id">${x.id}</td>
-        <td class="td-title"><a href="${x.permalink || '#'}" target="_blank">${x.title || 'â'}</a></td>
+        <td class="td-title"><a href="${x.permalink || '#'}" target="_blank">${x.title || 'Ã¢ÂÂ'}</a></td>
         <td><span class="score-pill ${x.health >= 0.7 ? 'score-good' : x.health >= 0.4 ? 'score-medium' : 'score-bad'}">${healthPct}</span></td>
       </tr>`;
     }).join('')}</tbody>
@@ -1399,7 +1421,7 @@ function renderUnhealthyTable(filter = '') {
   document.getElementById('table-unhealthy').innerHTML = html;
 }
 
-// ââ Tabela GTIN ââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Tabela GTIN Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function renderGtinTable(filter = '') {
   const rows = DATA.gtinMissing.filter(x =>
     !filter || (x.title || '').toLowerCase().includes(filter) || (x.id || '').toLowerCase().includes(filter)
@@ -1407,36 +1429,37 @@ function renderGtinTable(filter = '') {
 
   if (!rows.length) {
     document.getElementById('table-gtin').innerHTML =
-      `<div class="state-msg"><div class="state-icon">â</div>${filter ? 'Nenhum resultado.' : 'Todas as publicaÃ§Ãµes tÃªm identificador de produto.'}</div>`;
+      `<div class="state-msg"><div class="state-icon">Ã¢ÂÂ</div>${filter ? 'Nenhum resultado.' : 'Todas as publicaÃÂ§ÃÂµes tÃÂªm identificador de produto.'}</div>`;
     return;
   }
 
   const html = `<table>
     <thead><tr>
       <th>MLB</th>
-      <th>TÃ­tulo</th>
+      <th>TÃÂ­tulo</th>
       <th>Categoria</th>
-      <th>AÃ§Ã£o</th>
+      <th>AÃÂ§ÃÂ£o</th>
     </tr></thead>
     <tbody>${rows.map(x => `<tr>
       <td class="td-id">${x.id}</td>
-      <td class="td-title"><a href="${x.permalink || '#'}" target="_blank">${x.title || 'â'}</a></td>
-      <td class="td-id">${x.category_id || 'â'}</td>
+      <td class="td-title"><a href="${x.permalink || '#'}" target="_blank">${x.title || 'Ã¢ÂÂ'}</a></td>
+      <td class="td-id">${x.category_id || 'Ã¢ÂÂ'}</td>
       <td><span class="icon-badge ib-warn">Adicionar GTIN/EAN</span></td>
     </tr>`).join('')}</tbody>
   </table>`;
   document.getElementById('table-gtin').innerHTML = html;
 }
 
-// ââ Tab switching ââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Tab switching Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function switchTab(name) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   document.getElementById('panel-' + name).classList.add('active');
+  if (name === 'orders' && CFG.token && !DATA.orders.length) loadOrders();
 }
 
-// ââ Filter âââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Filter Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function filterTable(name) {
   const q = document.getElementById('search-' + name).value.toLowerCase();
   if (name === 'performance') renderPerformanceTable(q);
@@ -1446,27 +1469,27 @@ function filterTable(name) {
   if (name === 'catalog')     renderCatalogTable(q);
 }
 
-// ââ CSV Export âââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ CSV Export Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function exportCSV(name) {
   let rows = [], headers = [];
   if (name === 'performance') {
-    headers = ['ID', 'TÃ­tulo', 'Score', 'NÃ­vel', 'PendÃªncias'];
+    headers = ['ID', 'TÃÂ­tulo', 'Score', 'NÃÂ­vel', 'PendÃÂªncias'];
     rows = DATA.performance.map(x => [
       x.id, x.title, x.score,
       x.level_wording || x.level,
       (x.buckets || []).flatMap(b => b.variables || []).filter(v => v.status === 'PENDING').map(v => v.key).join('; ')
     ]);
   } else if (name === 'unhealthy') {
-    headers = ['ID', 'TÃ­tulo', 'Status', 'Health'];
+    headers = ['ID', 'TÃÂ­tulo', 'Status', 'Health'];
     rows = DATA.unhealthy.map(x => [x.id, x.title, x._gauge, x.health]);
   } else if (name === 'gtin') {
-    headers = ['ID', 'TÃ­tulo', 'Categoria'];
+    headers = ['ID', 'TÃÂ­tulo', 'Categoria'];
     rows = DATA.gtinMissing.map(x => [x.id, x.title, x.category_id]);
   } else if (name === 'visits') {
-    headers = ['ID', 'TÃ­tulo', 'Visitas Total', 'MÃ©dia DiÃ¡ria'];
+    headers = ['ID', 'TÃÂ­tulo', 'Visitas Total', 'MÃÂ©dia DiÃÂ¡ria'];
     rows = DATA.visits.map(x => [x.id, x.title, x.total_visits, x.avg_daily?.toFixed(1)]);
   } else if (name === 'catalog') {
-    headers = ['ID', 'TÃ­tulo', 'Score Qualidade', 'Problemas'];
+    headers = ['ID', 'TÃÂ­tulo', 'Score Qualidade', 'Problemas'];
     rows = DATA.catalogQuality.map(x => [x.id, x.title, x.quality_score, (x.issues || []).join('; ')]);
   }
   const csv = [headers, ...rows].map(r => r.map(v => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')).join('\n');
@@ -1477,7 +1500,7 @@ function exportCSV(name) {
   a.click();
 }
 
-// ââ VISITAS ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ VISITAS Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function loadVisitsData() {
   const btn = document.getElementById('btn-load-visits');
   const days = parseInt(document.getElementById('visits-period').value);
@@ -1492,7 +1515,7 @@ async function loadVisitsData() {
     const limit = parseInt(document.getElementById('visits-limit')?.value || 50);
     const ids = DATA.items.slice(0, limit).map(i => i.id);
 
-    if (!ids.length) throw new Error('Nenhuma publicaÃ§Ã£o carregada. Execute a varredura principal primeiro.');
+    if (!ids.length) throw new Error('Nenhuma publicaÃÂ§ÃÂ£o carregada. Execute a varredura principal primeiro.');
 
     DATA.visits = [];
     const visitMap = {};
@@ -1502,7 +1525,7 @@ async function loadVisitsData() {
     for (const id of ids) {
       try {
         const r = await api(`/items/visits?ids=${id}&date_from=${dateFrom}&date_to=${dateTo}`);
-        // ML retorna objeto Ãºnico ou array com 1 elemento
+        // ML retorna objeto ÃÂºnico ou array com 1 elemento
         const entry = Array.isArray(r) ? r[0] : r;
         if (entry) {
           const total = (entry.data_by_date || []).reduce((s, d) => s + (d.total || 0), 0);
@@ -1537,10 +1560,10 @@ async function loadVisitsData() {
     renderVisitsTable();
     document.getElementById('cnt-visits').textContent = DATA.visits.length;
   } catch(e) {
-    document.getElementById('table-visits').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">â ï¸</div>${e.message}</div>`;
+    document.getElementById('table-visits').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">Ã¢ÂÂ Ã¯Â¸Â</div>${e.message}</div>`;
   }
   btn.disabled = false;
-  btn.textContent = 'âº Carregar visitas';
+  btn.textContent = 'Ã¢ÂÂº Carregar visitas';
 }
 
 function renderVisitsSummary(days) {
@@ -1555,19 +1578,19 @@ function renderVisitsSummary(days) {
       <div class="rep-card-value" style="font-size:26px;">${total.toLocaleString('pt-BR')}</div>
     </div>
     <div class="rep-card">
-      <div class="rep-card-label">MÃ©dia por anÃºncio</div>
+      <div class="rep-card-label">MÃÂ©dia por anÃÂºncio</div>
       <div class="rep-card-value">${avg.toLocaleString('pt-BR')}</div>
       <div class="rep-card-sub">${(avg/days).toFixed(1)}/dia</div>
     </div>
     <div class="rep-card ${zero > 0 ? 'alert-orange' : 'alert-green'}">
-      <div class="rep-card-label">Sem visitas no perÃ­odo</div>
+      <div class="rep-card-label">Sem visitas no perÃÂ­odo</div>
       <div class="rep-card-value">${zero}</div>
-      <div class="rep-card-sub">de ${DATA.visits.length} anÃºncios</div>
+      <div class="rep-card-sub">de ${DATA.visits.length} anÃÂºncios</div>
     </div>
     <div class="rep-card">
       <div class="rep-card-label">Mais visitado</div>
-      <div class="rep-card-value" style="font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${top.total_visits?.toLocaleString('pt-BR') || 'â'}</div>
-      <div class="rep-card-sub" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">${top.title || 'â'}</div>
+      <div class="rep-card-value" style="font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${top.total_visits?.toLocaleString('pt-BR') || 'Ã¢ÂÂ'}</div>
+      <div class="rep-card-sub" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">${top.title || 'Ã¢ÂÂ'}</div>
     </div>`;
 }
 
@@ -1577,24 +1600,24 @@ function renderVisitsTable(filter = '') {
   );
 
   if (!rows.length) {
-    document.getElementById('table-visits').innerHTML = `<div class="state-msg"><div class="state-icon">â</div>${filter ? 'Nenhum resultado.' : 'Nenhum dado de visitas.'}</div>`;
+    document.getElementById('table-visits').innerHTML = `<div class="state-msg"><div class="state-icon">Ã¢ÂÂ</div>${filter ? 'Nenhum resultado.' : 'Nenhum dado de visitas.'}</div>`;
     return;
   }
 
   const maxV = rows[0]?.total_visits || 1;
   const html = `<table>
     <thead><tr>
-      <th>MLB</th><th>TÃ­tulo</th>
+      <th>MLB</th><th>TÃÂ­tulo</th>
       <th style="text-align:right;">Total</th>
-      <th style="text-align:right;">MÃ©dia/dia</th>
-      <th style="min-width:120px;">DistribuiÃ§Ã£o</th>
+      <th style="text-align:right;">MÃÂ©dia/dia</th>
+      <th style="min-width:120px;">DistribuiÃÂ§ÃÂ£o</th>
     </tr></thead>
     <tbody>${rows.map(x => {
       const pct = Math.round((x.total_visits / maxV) * 100);
       const cls = x.total_visits === 0 ? 'score-bad' : x.total_visits < 10 ? 'score-medium' : 'score-good';
       return `<tr>
         <td class="td-id">${x.id}</td>
-        <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title||'â'}</a></td>
+        <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title||'Ã¢ÂÂ'}</a></td>
         <td style="text-align:right;font-family:var(--mono);font-size:13px;"><span class="score-pill ${cls}" style="width:auto;padding:2px 8px;">${x.total_visits.toLocaleString('pt-BR')}</span></td>
         <td style="text-align:right;font-family:var(--mono);font-size:12px;color:var(--muted);">${x.avg_daily?.toFixed(1)}</td>
         <td><div style="height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:var(--green);border-radius:4px;transition:width .4s;"></div></div></td>
@@ -1604,22 +1627,22 @@ function renderVisitsTable(filter = '') {
   document.getElementById('table-visits').innerHTML = html;
 }
 
-// ââ TENDÃNCIAS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ TENDÃÂNCIAS Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function loadTrends() {
   const btn = document.getElementById('btn-load-trends');
   btn.disabled = true;
-  btn.textContent = 'â³ Buscando...';
-  document.getElementById('trends-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Consultando tendÃªncias...</div>';
+  btn.textContent = 'Ã¢ÂÂ³ Buscando...';
+  document.getElementById('trends-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Consultando tendÃÂªncias...</div>';
 
   try {
     const r = await api('/trends/MLB');
     DATA.trends = Array.isArray(r) ? r : (r.keywords || []);
 
-    if (!DATA.trends.length) throw new Error('Nenhuma tendÃªncia retornada pela API.');
+    if (!DATA.trends.length) throw new Error('Nenhuma tendÃÂªncia retornada pela API.');
 
     const html = `
       <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">
-        ${DATA.trends.length} termos em alta agora no Mercado Livre Brasil. Clique para analisar concorrÃªncia.
+        ${DATA.trends.length} termos em alta agora no Mercado Livre Brasil. Clique para analisar concorrÃÂªncia.
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;">
         ${DATA.trends.map((t, i) => {
@@ -1631,34 +1654,34 @@ async function loadTrends() {
             onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
             <span style="font-family:var(--mono);font-size:11px;color:${color};font-weight:600;min-width:20px;">#${rank}</span>
             <span style="font-size:13px;">${term}</span>
-            <span style="font-size:10px;color:var(--muted);">â ver concorrentes</span>
+            <span style="font-size:10px;color:var(--muted);">Ã¢ÂÂ ver concorrentes</span>
           </div>`;
         }).join('')}
       </div>`;
     document.getElementById('trends-container').innerHTML = html;
   } catch(e) {
-    document.getElementById('trends-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">â ï¸</div>${e.message}</div>`;
+    document.getElementById('trends-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">Ã¢ÂÂ Ã¯Â¸Â</div>${e.message}</div>`;
   }
   btn.disabled = false;
-  btn.textContent = 'ð¥ Buscar tendÃªncias agora';
+  btn.textContent = 'Ã°ÂÂÂ¥ Buscar tendÃÂªncias agora';
 }
 
 function searchTrendCompetitors(term) {
   document.getElementById('competitors-query').value = term;
 }
 
-// ââ CONCORRENTES âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ CONCORRENTES Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function loadCompetitors() {
   const query = document.getElementById('competitors-query').value.trim();
   const sort  = document.getElementById('competitors-sort').value;
   const btn   = document.getElementById('btn-load-competitors');
   if (!query) { toast('Digite um produto ou ID de categoria.'); return; }
 
-  btn.disabled = true; btn.textContent = 'â³ Analisando...';
+  btn.disabled = true; btn.textContent = 'Ã¢ÂÂ³ Analisando...';
   document.getElementById('competitors-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Analisando mercado...</div>';
 
   try {
-    // Detecta category ID (MLB + nÃºmeros) ou texto livre
+    // Detecta category ID (MLB + nÃÂºmeros) ou texto livre
     const isCategory = /^MLB\d+$/i.test(query);
     const base = isCategory
       ? `/sites/MLB/search?category=${query}`
@@ -1670,7 +1693,7 @@ async function loadCompetitors() {
     DATA.competitors = results;
 
     if (!results.length) {
-      document.getElementById('competitors-container').innerHTML = '<div class="state-msg"><div class="state-icon">ð</div>Nenhum resultado encontrado. Tente outra busca.</div>';
+      document.getElementById('competitors-container').innerHTML = '<div class="state-msg"><div class="state-icon">Ã°ÂÂÂ</div>Nenhum resultado encontrado. Tente outra busca.</div>';
       return;
     }
 
@@ -1683,26 +1706,26 @@ async function loadCompetitors() {
 
     const summary = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px;">
       <div class="rep-card"><div class="rep-card-label">Vendas (top 20)</div><div class="rep-card-value">${totalSold.toLocaleString('pt-BR')}</div></div>
-      <div class="rep-card"><div class="rep-card-label">PreÃ§o mÃ©dio</div><div class="rep-card-value">R$ ${avgPrice.toFixed(2).replace('.',',')}</div><div class="rep-card-sub">R$ ${minPrice.toFixed(0)} â R$ ${maxPrice.toFixed(0)}</div></div>
-      <div class="rep-card ${freeShip >= 15 ? 'alert-orange' : 'alert-green'}"><div class="rep-card-label">Frete grÃ¡tis</div><div class="rep-card-value">${freeShip}/20</div></div>
-      <div class="rep-card"><div class="rep-card-label">Total encontrado</div><div class="rep-card-value">${(r.paging?.total||0).toLocaleString('pt-BR')}</div><div class="rep-card-sub">publicaÃ§Ãµes</div></div>
+      <div class="rep-card"><div class="rep-card-label">PreÃÂ§o mÃÂ©dio</div><div class="rep-card-value">R$ ${avgPrice.toFixed(2).replace('.',',')}</div><div class="rep-card-sub">R$ ${minPrice.toFixed(0)} Ã¢ÂÂ R$ ${maxPrice.toFixed(0)}</div></div>
+      <div class="rep-card ${freeShip >= 15 ? 'alert-orange' : 'alert-green'}"><div class="rep-card-label">Frete grÃÂ¡tis</div><div class="rep-card-value">${freeShip}/20</div></div>
+      <div class="rep-card"><div class="rep-card-label">Total encontrado</div><div class="rep-card-value">${(r.paging?.total||0).toLocaleString('pt-BR')}</div><div class="rep-card-sub">publicaÃÂ§ÃÂµes</div></div>
     </div>`;
 
     const html = summary + `<div class="table-wrap"><table>
       <thead><tr>
-        <th>#</th><th>Vendedor</th><th>TÃ­tulo</th>
-        <th style="text-align:right;">PreÃ§o</th>
+        <th>#</th><th>Vendedor</th><th>TÃÂ­tulo</th>
+        <th style="text-align:right;">PreÃÂ§o</th>
         <th style="text-align:right;">Vendas</th>
         <th>Frete</th><th>Cond.</th>
       </tr></thead>
       <tbody>${results.map((x,i) => {
         const cond = x.condition === 'new' ? '<span class="icon-badge ib-ok">Novo</span>' : '<span class="icon-badge ib-info">Usado</span>';
-        const frete = x.shipping?.free_shipping ? '<span class="icon-badge ib-ok">GrÃ¡tis</span>' : '<span class="icon-badge ib-info">Pago</span>';
+        const frete = x.shipping?.free_shipping ? '<span class="icon-badge ib-ok">GrÃÂ¡tis</span>' : '<span class="icon-badge ib-info">Pago</span>';
         const sold = x.sold_quantity || 0;
         const soldCls = sold > 100 ? 'score-good' : sold > 10 ? 'score-medium' : 'score-unknown';
         return `<tr>
           <td style="font-family:var(--mono);color:var(--muted);font-size:12px;">${i+1}</td>
-          <td style="font-size:12px;max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${x.seller?.nickname||''}">${x.seller?.nickname||'â'}</td>
+          <td style="font-size:12px;max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${x.seller?.nickname||''}">${x.seller?.nickname||'Ã¢ÂÂ'}</td>
           <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title}</a></td>
           <td style="text-align:right;font-family:var(--mono);font-weight:500;">R$ ${(x.price||0).toFixed(2).replace('.',',')}</td>
           <td style="text-align:right;"><span class="score-pill ${soldCls}" style="width:auto;padding:2px 8px;">${sold.toLocaleString('pt-BR')}</span></td>
@@ -1713,20 +1736,20 @@ async function loadCompetitors() {
     </table></div>`;
     document.getElementById('competitors-container').innerHTML = html;
   } catch(e) {
-    document.getElementById('competitors-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">â ï¸</div>${e.message}</div>`;
+    document.getElementById('competitors-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">Ã¢ÂÂ Ã¯Â¸Â</div>${e.message}</div>`;
   }
-  btn.disabled = false; btn.textContent = 'ð Analisar';
+  btn.disabled = false; btn.textContent = 'Ã°ÂÂÂ Analisar';
 }
 
-// ââ QUALIDADE DE CATÃLOGO ââââââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ QUALIDADE DE CATÃÂLOGO Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function loadCatalogQuality() {
   const btn = document.getElementById('btn-load-catalog');
   btn.disabled = true; btn.textContent = 'Verificando...';
-  document.getElementById('table-catalog').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Verificando qualidade dos anÃºncios...</div>';
+  document.getElementById('table-catalog').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Verificando qualidade dos anÃÂºncios...</div>';
 
   try {
     const ids = DATA.items.slice(0,100).map(i => i.id);
-    if (!ids.length) throw new Error('Nenhuma publicaÃ§Ã£o carregada. Execute a varredura principal primeiro.');
+    if (!ids.length) throw new Error('Nenhuma publicaÃÂ§ÃÂ£o carregada. Execute a varredura principal primeiro.');
 
     DATA.catalogQuality = [];
     let done = 0;
@@ -1745,16 +1768,16 @@ async function loadCatalogQuality() {
             if (!c.fulfilled) { issues.push(c.name || c.id); score -= 10; }
           });
         }
-        if (r.status === 'inactive') issues.push('Inativo no catÃ¡logo');
+        if (r.status === 'inactive') issues.push('Inativo no catÃÂ¡logo');
 
         DATA.catalogQuality.push({
           id, title: item.title||'', permalink: item.permalink||'',
           quality_score: Math.max(0, score),
-          status: r.status||'â',
+          status: r.status||'Ã¢ÂÂ',
           issues,
           raw: r
         });
-      } catch(_) { /* item sem catÃ¡logo â ignora */ }
+      } catch(_) { /* item sem catÃÂ¡logo Ã¢ÂÂ ignora */ }
       done++;
       if (done % 10 === 0) {
         document.getElementById('table-catalog').innerHTML = `<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Verificando... ${done}/${ids.length}</div>`;
@@ -1766,9 +1789,9 @@ async function loadCatalogQuality() {
     document.getElementById('cnt-catalog').textContent = DATA.catalogQuality.length;
     renderCatalogTable();
   } catch(e) {
-    document.getElementById('table-catalog').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">â ï¸</div>${e.message}</div>`;
+    document.getElementById('table-catalog').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">Ã¢ÂÂ Ã¯Â¸Â</div>${e.message}</div>`;
   }
-  btn.disabled = false; btn.textContent = 'âº Verificar catÃ¡logo';
+  btn.disabled = false; btn.textContent = 'Ã¢ÂÂº Verificar catÃÂ¡logo';
 }
 
 function renderCatalogTable(filter = '') {
@@ -1777,13 +1800,13 @@ function renderCatalogTable(filter = '') {
   );
 
   if (!rows.length) {
-    document.getElementById('table-catalog').innerHTML = `<div class="state-msg"><div class="state-icon">â</div>${filter ? 'Nenhum resultado.' : 'Nenhum dado. Clique em "Verificar catÃ¡logo".'}</div>`;
+    document.getElementById('table-catalog').innerHTML = `<div class="state-msg"><div class="state-icon">Ã¢ÂÂ</div>${filter ? 'Nenhum resultado.' : 'Nenhum dado. Clique em "Verificar catÃÂ¡logo".'}</div>`;
     return;
   }
 
   const html = `<table>
     <thead><tr>
-      <th>Score</th><th>MLB</th><th>TÃ­tulo</th><th>Status</th><th>Problemas</th>
+      <th>Score</th><th>MLB</th><th>TÃÂ­tulo</th><th>Status</th><th>Problemas</th>
     </tr></thead>
     <tbody>${rows.map(x => {
       const cls = x.quality_score >= 70 ? 'score-good' : x.quality_score >= 40 ? 'score-medium' : 'score-bad';
@@ -1793,7 +1816,7 @@ function renderCatalogTable(filter = '') {
       return `<tr>
         <td><span class="score-pill ${cls}">${x.quality_score}</span></td>
         <td class="td-id">${x.id}</td>
-        <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title||'â'}</a></td>
+        <td class="td-title"><a href="${x.permalink||'#'}" target="_blank">${x.title||'Ã¢ÂÂ'}</a></td>
         <td><span class="icon-badge ib-info">${x.status}</span></td>
         <td style="max-width:300px;">${issueHtml}</td>
       </tr>`;
@@ -1801,11 +1824,11 @@ function renderCatalogTable(filter = '') {
   </table>`;
   document.getElementById('table-catalog').innerHTML = html;
 }
-// ââ VISITAS DA LOJA ââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ VISITAS DA LOJA Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function loadStoreVisits() {
   const btn = document.getElementById('btn-store-visits');
   const days = parseInt(document.getElementById('visits-period').value);
-  btn.disabled = true; btn.textContent = 'â³ Buscando...';
+  btn.disabled = true; btn.textContent = 'Ã¢ÂÂ³ Buscando...';
   document.getElementById('store-visits-wrap').style.display = 'none';
 
   try {
@@ -1836,10 +1859,10 @@ async function loadStoreVisits() {
     DATA.storeVisits = { total: totalVisits, byDate, days };
     renderStoreVisits();
   } catch(e) {
-    document.getElementById('store-visits-wrap').innerHTML = `<div style="background:var(--red-dim);border:1px solid var(--red);border-radius:8px;padding:12px 16px;color:var(--red);font-size:13px;">â ï¸ ${e.message}</div>`;
+    document.getElementById('store-visits-wrap').innerHTML = `<div style="background:var(--red-dim);border:1px solid var(--red);border-radius:8px;padding:12px 16px;color:var(--red);font-size:13px;">Ã¢ÂÂ Ã¯Â¸Â ${e.message}</div>`;
     document.getElementById('store-visits-wrap').style.display = 'block';
   }
-  btn.disabled = false; btn.textContent = 'ðª Visitas da loja';
+  btn.disabled = false; btn.textContent = 'Ã°ÂÂÂª Visitas da loja';
 }
 
 function renderStoreVisits() {
@@ -1864,24 +1887,24 @@ function renderStoreVisits() {
         <div style="font-family:var(--mono);font-size:28px;font-weight:500;color:var(--green);">${d.total.toLocaleString('pt-BR')}</div>
       </div>
       <div>
-        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">MÃ©dia diÃ¡ria</div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">MÃÂ©dia diÃÂ¡ria</div>
         <div style="font-family:var(--mono);font-size:28px;font-weight:500;">${avgDay.toLocaleString('pt-BR')}</div>
       </div>
       <div style="flex:1;min-width:200px;">
-        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">EvoluÃ§Ã£o</div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">EvoluÃÂ§ÃÂ£o</div>
         ${sparkline}
       </div>
     </div>`;
   document.getElementById('store-visits-wrap').style.display = 'block';
 }
 
-// ââ PREDITOR DE CATEGORIA ââââââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ PREDITOR DE CATEGORIA Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function predictCategory() {
   const query = document.getElementById('competitors-query').value.trim();
   const btn   = document.getElementById('btn-predict');
-  if (!query) { toast('Digite o tÃ­tulo do produto no campo ao lado.'); return; }
+  if (!query) { toast('Digite o tÃÂ­tulo do produto no campo ao lado.'); return; }
 
-  btn.disabled = true; btn.textContent = 'â³ Prevendo...';
+  btn.disabled = true; btn.textContent = 'Ã¢ÂÂ³ Prevendo...';
   document.getElementById('category-prediction').style.display = 'none';
 
   try {
@@ -1900,41 +1923,41 @@ async function predictCategory() {
             <div style="font-size:13px;font-weight:500;">${c.domain_name || c.category_name || c.category_id}</div>
             <div style="font-size:11px;color:var(--muted);font-family:var(--mono);">${c.category_id}</div>
           </div>
-          <span style="font-size:11px;color:var(--muted);">â analisar</span>
+          <span style="font-size:11px;color:var(--muted);">Ã¢ÂÂ analisar</span>
         </div>`).join('');
       document.getElementById('category-prediction').innerHTML = `
-        <div style="margin-bottom:8px;font-size:12px;color:var(--muted);">ð® Categorias sugeridas para "<strong style="color:var(--text);">${query}</strong>" â clique para analisar concorrentes:</div>
+        <div style="margin-bottom:8px;font-size:12px;color:var(--muted);">Ã°ÂÂÂ® Categorias sugeridas para "<strong style="color:var(--text);">${query}</strong>" Ã¢ÂÂ clique para analisar concorrentes:</div>
         <div style="display:flex;flex-direction:column;gap:6px;">${rows}</div>`;
     }
     document.getElementById('category-prediction').style.display = 'block';
   } catch(e) {
-    document.getElementById('category-prediction').innerHTML = `<div style="color:var(--red);font-size:13px;">â ï¸ ${e.message}</div>`;
+    document.getElementById('category-prediction').innerHTML = `<div style="color:var(--red);font-size:13px;">Ã¢ÂÂ Ã¯Â¸Â ${e.message}</div>`;
     document.getElementById('category-prediction').style.display = 'block';
   }
-  btn.disabled = false; btn.textContent = 'ð® Prever categoria';
+  btn.disabled = false; btn.textContent = 'Ã°ÂÂÂ® Prever categoria';
 }
 
-// ââ EXPOSIÃÃO POR TIPO DE ANÃNCIO ââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ EXPOSIÃÂÃÂO POR TIPO DE ANÃÂNCIO Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function loadExposures() {
   const btn       = document.getElementById('btn-load-exposure');
   const inputCat  = document.getElementById('exposure-category').value.trim();
-  btn.disabled = true; btn.textContent = 'â³ Analisando...';
-  document.getElementById('exposure-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Consultando exposiÃ§Ã£o...</div>';
+  btn.disabled = true; btn.textContent = 'Ã¢ÂÂ³ Analisando...';
+  document.getElementById('exposure-container').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Consultando exposiÃÂ§ÃÂ£o...</div>';
 
   try {
-    // Se nÃ£o informou categoria, usa as categorias dos prÃ³prios itens
+    // Se nÃÂ£o informou categoria, usa as categorias dos prÃÂ³prios itens
     let categories = [];
     if (inputCat && /^MLB\d+$/i.test(inputCat)) {
       categories = [inputCat];
     } else if (DATA.items.length) {
-      // Pega categorias Ãºnicas dos itens carregados
+      // Pega categorias ÃÂºnicas dos itens carregados
       const catSet = new Set(DATA.items.slice(0,50).map(x => x.category_id).filter(Boolean));
       categories = [...catSet].slice(0, 8);
     }
 
     if (!categories.length) throw new Error('Digite uma categoria ou execute a varredura principal para detectar suas categorias automaticamente.');
 
-    // Busca exposiÃ§Ã£o para cada categoria
+    // Busca exposiÃÂ§ÃÂ£o para cada categoria
     const results = [];
     for (const catId of categories) {
       try {
@@ -1955,19 +1978,19 @@ async function loadExposures() {
     DATA.exposures = results;
     renderExposures();
   } catch(e) {
-    document.getElementById('exposure-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">â ï¸</div>${e.message}</div>`;
+    document.getElementById('exposure-container').innerHTML = `<div class="state-msg" style="color:var(--red)"><div class="state-icon">Ã¢ÂÂ Ã¯Â¸Â</div>${e.message}</div>`;
   }
-  btn.disabled = false; btn.textContent = 'ð¡ Analisar exposiÃ§Ã£o';
+  btn.disabled = false; btn.textContent = 'Ã°ÂÂÂ¡ Analisar exposiÃÂ§ÃÂ£o';
 }
 
 function renderExposures() {
   if (!DATA.exposures.length) {
-    document.getElementById('exposure-container').innerHTML = '<div class="state-msg"><div class="state-icon">ð¡</div>Nenhum dado de exposiÃ§Ã£o encontrado.</div>';
+    document.getElementById('exposure-container').innerHTML = '<div class="state-msg"><div class="state-icon">Ã°ÂÂÂ¡</div>Nenhum dado de exposiÃÂ§ÃÂ£o encontrado.</div>';
     return;
   }
 
   const typeOrder = ['gold_special', 'gold_pro', 'gold', 'silver', 'bronze', 'free'];
-  const typeLabel = { gold_special: 'Premium', gold_pro: 'Ouro Pro', gold: 'Ouro', silver: 'Prata', bronze: 'Bronze', free: 'GrÃ¡tis' };
+  const typeLabel = { gold_special: 'Premium', gold_pro: 'Ouro Pro', gold: 'Ouro', silver: 'Prata', bronze: 'Bronze', free: 'GrÃÂ¡tis' };
   const typeColor = { gold_special: 'var(--green)', gold_pro: '#66FF99', gold: 'var(--yellow)', silver: '#8B949E', bronze: '#CD7F32', free: 'var(--muted)' };
 
   const html = DATA.exposures.map(({ catId, catName, exposures }) => {
@@ -1987,7 +2010,7 @@ function renderExposures() {
             <div style="height:100%;width:${pct}%;background:${color};border-radius:4px;"></div>
           </div>
         </td>
-        <td style="font-size:11px;color:var(--muted);">${e.buying_modes?.join(', ')||'â'}</td>
+        <td style="font-size:11px;color:var(--muted);">${e.buying_modes?.join(', ')||'Ã¢ÂÂ'}</td>
       </tr>`;
     }).join('');
 
@@ -2005,13 +2028,13 @@ function renderExposures() {
 
   document.getElementById('exposure-container').innerHTML = `
     <div style="margin-bottom:12px;font-size:12px;color:var(--muted);">
-      <strong style="color:var(--text);">Priority in search</strong>: quanto maior, mais alto o anÃºncio aparece nas buscas. Premium (gold_special) geralmente lidera.
+      <strong style="color:var(--text);">Priority in search</strong>: quanto maior, mais alto o anÃÂºncio aparece nas buscas. Premium (gold_special) geralmente lidera.
     </div>${html}`;
 }
-// ââ RELATÃRIO WHATSAPP âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ RELATÃÂRIO WHATSAPP Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function sendWhatsAppReport() {
   const btn = document.getElementById('btn-whatsapp');
-  btn.disabled = true; btn.textContent = 'â³ Gerando...';
+  btn.disabled = true; btn.textContent = 'Ã¢ÂÂ³ Gerando...';
 
   try {
     const now     = new Date();
@@ -2019,8 +2042,8 @@ async function sendWhatsAppReport() {
     const from    = today + 'T00:00:00.000-03:00';
     const to      = now.toISOString().slice(0,19) + '-03:00';
 
-    // ââ Pedidos do dia ââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-    btn.textContent = 'â³ Buscando pedidos...';
+    // Ã¢ÂÂÃ¢ÂÂ Pedidos do dia Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+    btn.textContent = 'Ã¢ÂÂ³ Buscando pedidos...';
     const ordersResp = await api(
       `/orders/search?seller=${CFG.sellerId}&order.status=paid` +
       `&order.date_created.from=${encodeURIComponent(from)}` +
@@ -2035,15 +2058,15 @@ async function sendWhatsAppReport() {
       unitsSold += (o.order_items || []).reduce((s,i) => s + (i.quantity||0), 0);
     });
 
-    // ââ Publicidade âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-    btn.textContent = 'â³ Buscando publicidade...';
+    // Ã¢ÂÂÃ¢ÂÂ Publicidade Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+    btn.textContent = 'Ã¢ÂÂ³ Buscando publicidade...';
     let adSpend = 0;
     try {
       const ads = await api(`/advertising/product_ads/advertisers/${CFG.sellerId}/campaigns?date_from=${today}&date_to=${today}`);
       adSpend = (ads.results||[]).reduce((s,c) => s + (c.cost||0), 0);
     } catch(_) {}
 
-    // ââ ReputaÃ§Ã£o / alertas âââââââââââââââââââââââââââââââââââââââââââââââââ
+    // Ã¢ÂÂÃ¢ÂÂ ReputaÃÂ§ÃÂ£o / alertas Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
     let complaints = 0, pendingShip = 0;
     try {
       const rep = DATA.reputation || await api(`/users/${CFG.sellerId}/seller_reputation`);
@@ -2054,39 +2077,39 @@ async function sendWhatsAppReport() {
       pendingShip = pend?.paging?.total || 0;
     } catch(_) {}
 
-    // ââ CÃ¡lculo âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+    // Ã¢ÂÂÃ¢ÂÂ CÃÂ¡lculo Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
     const grossMargin = revenue - mlFees - adSpend;
     const marginPct   = revenue > 0 ? ((grossMargin / revenue) * 100).toFixed(1) : '0.0';
     const fmt = v => v.toLocaleString('pt-BR', { minimumFractionDigits:2, maximumFractionDigits:2 });
-    const me  = grossMargin > 0 ? (parseFloat(marginPct) > 20 ? 'ð¢' : 'ð¡') : 'ð´';
+    const me  = grossMargin > 0 ? (parseFloat(marginPct) > 20 ? 'Ã°ÂÂÂ¢' : 'Ã°ÂÂÂ¡') : 'Ã°ÂÂÂ´';
 
     const ds = now.toLocaleDateString('pt-BR');
     const ts = now.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
     const al = [];
-    if (complaints  > 0) al.push(`â ï¸ ${complaints} reclamaÃ§Ã£o(Ãµes) ativa(s)`);
-    if (pendingShip > 0) al.push(`ð¦ ${pendingShip} pedido(s) aguardando envio`);
+    if (complaints  > 0) al.push(`Ã¢ÂÂ Ã¯Â¸Â ${complaints} reclamaÃÂ§ÃÂ£o(ÃÂµes) ativa(s)`);
+    if (pendingShip > 0) al.push(`Ã°ÂÂÂ¦ ${pendingShip} pedido(s) aguardando envio`);
 
     const message = [
-      `ðª *ALPHA ELETRONIC*`,
-      `ð ${ds} Ã s ${ts}`,
+      `Ã°ÂÂÂª *ALPHA ELETRONIC*`,
+      `Ã°ÂÂÂ ${ds} ÃÂ s ${ts}`,
       ``,
-      `ð° *FATURAMENTO*`,
+      `Ã°ÂÂÂ° *FATURAMENTO*`,
       `Receita:   R$ ${fmt(revenue)}`,
       `Pedidos:   ${orders.length}`,
       `Unidades:  ${unitsSold}`,
       ``,
-      `ð *RESULTADO*`,
+      `Ã°ÂÂÂ *RESULTADO*`,
       `Taxa ML:   -R$ ${fmt(mlFees)}`,
       `Publicid.: -R$ ${fmt(adSpend)}`,
       `${me} *Margem: R$ ${fmt(grossMargin)} (${marginPct}%)*`,
       ``,
-      al.length ? `ð *ALERTAS*\n${al.join('\n')}` : `â Sem alertas`,
+      al.length ? `Ã°ÂÂÂ *ALERTAS*\n${al.join('\n')}` : `Ã¢ÂÂ Sem alertas`,
       ``,
       `_Gerado via Alpha Scanner_`,
     ].join('\n');
 
-    // ââ Envia via Worker ââââââââââââââââââââââââââââââââââââââââââââââââââââ
-    btn.textContent = 'â³ Enviando...';
+    // Ã¢ÂÂÃ¢ÂÂ Envia via Worker Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+    btn.textContent = 'Ã¢ÂÂ³ Enviando...';
     const resp = await fetch(`${CFG.workerUrl}/send-whatsapp`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -2094,11 +2117,156 @@ async function sendWhatsAppReport() {
     });
 
     if (!resp.ok) throw new Error(`Worker retornou ${resp.status}`);
-    toast('â RelatÃ³rio enviado no WhatsApp!');
+    toast('Ã¢ÂÂ RelatÃÂ³rio enviado no WhatsApp!');
   } catch(e) {
-    toast(`â Erro: ${e.message}`);
+    toast(`Ã¢ÂÂ Erro: ${e.message}`);
   }
-  btn.disabled = false; btn.textContent = 'ð± RelatÃ³rio';
+  btn.disabled = false; btn.textContent = 'Ã°ÂÂÂ± RelatÃÂ³rio';
+}
+
+// ── PEDIDOS ────────────────────────────────────────────────────────────────
+async function loadOrders() {
+  const period = document.getElementById('orders-period')?.value || 'today';
+  const now = new Date();
+  let dateFrom;
+  const dateTo = now.toISOString().slice(0,19) + '-03:00';
+  if (period === 'today') {
+    dateFrom = now.toISOString().slice(0,10) + 'T00:00:00.000-03:00';
+  } else if (period === '7d') {
+    dateFrom = new Date(Date.now()-7*86400000).toISOString().slice(0,10) + 'T00:00:00.000-03:00';
+  } else {
+    dateFrom = new Date(Date.now()-30*86400000).toISOString().slice(0,10) + 'T00:00:00.000-03:00';
+  }
+  document.getElementById('table-orders').innerHTML = '<div class="state-msg"><div class="spinner" style="margin:0 auto 12px;width:28px;height:28px;border-width:3px;"></div>Buscando pedidos...</div>';
+  document.getElementById('orders-summary').innerHTML = '';
+  try {
+    const r = await api('/orders/search?seller=' + CFG.sellerId + '&order.status=paid&order.date_created.from=' + encodeURIComponent(dateFrom) + '&order.date_created.to=' + encodeURIComponent(dateTo) + '&limit=50&sort=date_desc');
+    DATA.orders = r.results || [];
+    document.getElementById('cnt-orders').textContent = DATA.orders.length;
+    renderOrdersSummary();
+    renderOrdersTable();
+  } catch(e) {
+    document.getElementById('table-orders').innerHTML = '<div class="state-msg" style="color:var(--red)"><div class="state-icon">⚠️</div>' + e.message + '</div>';
+  }
+}
+
+function renderOrdersSummary() {
+  let revenue = 0, fees = 0, units = 0;
+  DATA.orders.forEach(o => { revenue += o.total_amount||0; fees += o.sale_fee||0; units += (o.order_items||[]).reduce((s,i) => s+(i.quantity||0),0); });
+  const margin = revenue - fees;
+  const pct = revenue > 0 ? ((margin/revenue)*100).toFixed(1) : '0.0';
+  const ticket = DATA.orders.length ? revenue/DATA.orders.length : 0;
+  const fmt = v => 'R$ ' + v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const mc = margin > 0 ? (parseFloat(pct)>20 ? 'alert-green' : 'alert-yellow') : 'alert-red';
+  document.getElementById('orders-summary').innerHTML =
+    '<div class="rep-card alert-green"><div class="rep-card-label">Receita</div><div class="rep-card-value" style="font-size:20px;">' + fmt(revenue) + '</div><div class="rep-card-sub">' + DATA.orders.length + ' pedidos · ' + units + ' unid.</div></div>' +
+    '<div class="rep-card"><div class="rep-card-label">Taxa ML</div><div class="rep-card-value" style="font-size:20px;color:var(--red);">-' + fmt(fees) + '</div></div>' +
+    '<div class="rep-card ' + mc + '"><div class="rep-card-label">Margem bruta</div><div class="rep-card-value" style="font-size:20px;">' + fmt(margin) + '</div><div class="rep-card-sub">' + pct + '% da receita</div></div>' +
+    '<div class="rep-card"><div class="rep-card-label">Ticket médio</div><div class="rep-card-value" style="font-size:20px;">' + (DATA.orders.length ? fmt(ticket) : '&mdash;') + '</div></div>';
+}
+
+function renderOrdersTable() {
+  if (!DATA.orders.length) { document.getElementById('table-orders').innerHTML = '<div class="state-msg"><div class="state-icon">📦</div>Nenhum pedido no período.</div>'; return; }
+  const stMap = { paid:'<span class="icon-badge ib-ok">Pago</span>', shipped:'<span class="icon-badge ib-ok">Enviado</span>', delivered:'<span class="icon-badge ib-ok">Entregue</span>', cancelled:'<span class="icon-badge ib-warn">Cancelado</span>' };
+  let rows = '';
+  DATA.orders.forEach(o => {
+    const dt = new Date(o.date_created).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+    const its = (o.order_items||[]).map(i => i.quantity + '× ' + ((i.item&&i.item.title)?i.item.title.slice(0,40):'&mdash;')).join(', ');
+    const fv = v => (v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+    const st = stMap[o.status] || '<span class="icon-badge ib-info">' + o.status + '</span>';
+    rows += '<tr><td style="font-family:var(--mono);font-size:12px;white-space:nowrap;">' + dt + '</td><td class="td-id">' + o.id + '</td><td style="font-size:12px;max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="' + its + '">' + its + '</td><td style="text-align:right;font-family:var(--mono);font-weight:500;">R$ ' + fv(o.total_amount) + '</td><td style="text-align:right;font-family:var(--mono);color:var(--red);">-R$ ' + fv(o.sale_fee) + '</td><td>' + st + '</td></tr>';
+  });
+  document.getElementById('table-orders').innerHTML = '<table><thead><tr><th>Data</th><th>Pedido</th><th>Produto(s)</th><th style="text-align:right;">Valor</th><th style="text-align:right;">Taxa ML</th><th>Status</th></tr></thead><tbody>' + rows + '</tbody></table>';
+}
+
+// ── AUTO-LOAD BACKGROUND ───────────────────────────────────────────────────
+async function autoLoadBackground() {
+  try {
+    const days = 30;
+    const dateTo   = new Date().toISOString().slice(0,10);
+    const dateFrom = new Date(Date.now()-days*86400000).toISOString().slice(0,10);
+    const ids = DATA.items.slice(0,50).map(i => i.id);
+    DATA.visits = [];
+    for (const id of ids) {
+      try {
+        const r = await api('/items/visits?ids=' + id + '&date_from=' + dateFrom + '&date_to=' + dateTo);
+        const e = Array.isArray(r)?r[0]:r;
+        const total = (e&&e.data_by_date||[]).reduce((s,d)=>s+(d.total||0),0);
+        const item = DATA.items.find(x=>x.id===id)||{};
+        DATA.visits.push({id,title:item.title||'',permalink:item.permalink||'',total_visits:total,avg_daily:total/days,data_by_date:(e&&e.data_by_date)||[]});
+      } catch(_){}
+      await sleep(150);
+    }
+    DATA.visits.sort((a,b)=>b.total_visits-a.total_visits);
+    renderVisitsSummary(days);
+    renderVisitsTable();
+    document.getElementById('cnt-visits').textContent = DATA.visits.length;
+  } catch(_){}
+  try {
+    const ids = DATA.items.slice(0,100).map(i=>i.id);
+    DATA.catalogQuality = [];
+    for (const id of ids) {
+      try {
+        const r = await api('/catalog_quality/status?item_id='+id+'&v=3');
+        const item = DATA.items.find(x=>x.id===id)||{};
+        const issues = [];
+        let score = r.health!==undefined ? Math.round((r.health||0)*100) : 100;
+        if (r.criteria) r.criteria.forEach(c=>{if(!c.fulfilled)issues.push(c.name||c.id);});
+        if (r.status==='inactive') issues.push('Inativo');
+        DATA.catalogQuality.push({id,title:item.title||'',permalink:item.permalink||'',quality_score:Math.max(0,score),status:r.status||'&mdash;',issues});
+      } catch(_){}
+      await sleep(200);
+    }
+    DATA.catalogQuality.sort((a,b)=>a.quality_score-b.quality_score);
+    document.getElementById('cnt-catalog').textContent = DATA.catalogQuality.length;
+    renderCatalogTable();
+  } catch(_){}
+}
+
+// ── HISTÓRICO KV ───────────────────────────────────────────────────────────
+async function saveSnapshotToKV() {
+  if (!CFG.token||!DATA.performance.length) return;
+  try {
+    await fetch(CFG.workerUrl+'/kv/snapshot',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+CFG.token,'Content-Type':'application/json'},
+      body:JSON.stringify({date:new Date().toISOString().slice(0,10),score:calcHealthScore(),unhealthy:DATA.unhealthy.length,gtin:DATA.gtinMissing.length,total:DATA.items.length,ts:Date.now()})
+    });
+    await loadHistoryFromKV();
+  } catch(_){}
+}
+
+async function loadHistoryFromKV() {
+  if (!CFG.token||!CFG.workerUrl) return;
+  try {
+    const r = await fetch(CFG.workerUrl+'/kv/history?days=7',{headers:{'Authorization':'Bearer '+CFG.token}});
+    if (!r.ok) return;
+    DATA.history = await r.json();
+    renderHistorySparkline();
+  } catch(_){}
+}
+
+function renderHistorySparkline() {
+  const el = document.getElementById('history-sparkline');
+  if (!el||DATA.history.length<2) return;
+  const sorted = [...DATA.history].sort((a,b)=>a.ts-b.ts);
+  const scores = sorted.map(s=>s.score||0);
+  const dates  = sorted.map(s=>s.date?s.date.slice(5):'');
+  const maxS   = Math.max(...scores,1);
+  const W=300,H=36;
+  const pts = scores.map((v,i)=>Math.round(i/(scores.length-1||1)*W)+','+Math.round(H-(v/maxS)*H)).join(' ');
+  const dots = scores.map((v,i)=>{
+    const x=Math.round(i/(scores.length-1||1)*W),y=Math.round(H-(v/maxS)*H);
+    const c=v>=70?'#00C853':v>=45?'#FFD700':'#FF4444';
+    return '<circle cx="'+x+'" cy="'+y+'" r="3" fill="'+c+'"/>';
+  }).join('');
+  el.style.display='block';
+  el.innerHTML='<div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;">Histórico 7 dias</div>'+
+    '<svg width="'+W+'" height="'+H+'" style="display:block;overflow:visible;">'+
+    '<polyline points="'+pts+'" fill="none" stroke="#30363D" stroke-width="1"/>'+
+    '<polyline points="'+pts+'" fill="none" stroke="var(--green)" stroke-width="1.5" stroke-linejoin="round"/>'+
+    dots+'</svg>'+
+    '<div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:2px;"><span>'+dates[0]+'</span><span>'+dates[dates.length-1]+'</span></div>';
 }
 </script>
 </body>
