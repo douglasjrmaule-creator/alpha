@@ -1522,7 +1522,7 @@ function exportCSV(name) {
     headers = ['ID', 'Título', 'Score Qualidade', 'Problemas'];
     rows = DATA.catalogQuality.map(x => [x.id, x.title, x.quality_score, (x.issues || []).join('; ')]);
   }
-  } else if (name === 'payments') {
+  if (name === 'payments') {
     headers = ['Data','ID Pagamento','Pedido','Status','Bruto','Taxa ML','Líquido'];
     rows = DATA.payments.map(x => {
       const bruto = x.total_amount||x.gross_amount||x.amount||0;
